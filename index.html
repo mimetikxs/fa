@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<title>Home</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link href="https://fonts.googleapis.com/css?family=Oswald:300,400,700" rel="stylesheet">
+		<link rel="stylesheet" href="css/app.css">
+	</head>
+
+	<body>
+
+		<div id="introMessage" class="block">
+			<div class="message centered">
+
+			</div>
+		</div>
+		<div id="typed-strings">
+			<p>Located 25km away from Damascus</p>
+			<p>the <strong>Saidnaya</strong> prison is one of the most notorious</p>
+			<p>Neither human rights observers nor journalists</p>
+			<p>have been able to visit Saidnaya since 2011</p>
+			<p>the prison is a <strong>black hole</strong></p>
+			<p>This is as close to Saidnaya as we can get</p>
+		</div>
+
+		<div id="layer-gl"></div>
+		<div id="layer-labels"></div>
+		<div id="layer-cell"></div>
+
+		<div id="layer-video">
+			<div class="player"></div>
+			<!-- <div class="controls"> -->
+				<div class="btn-next">NEXT STORY</div>
+				<div class="btn-exit">BACK</div>
+			<!-- </div> -->
+		</div>
+
+		<div id="header">
+			<div class="logos">
+				<span class="ai"></span><span class="fa"></span>
+			</div>
+			<div id="mainNav">
+				<span class="active">Home</span><span>More</span><span>Take Action</span>
+			</div>
+		</div>
+
+		<!-- Scripts -->
+
+		<script src="js/lib/jquery-3.0.0.min.js"></script>
+		<script src="js/lib/dat.gui.js"></script>
+		<script src="js/lib/Stats.js"></script>
+
+		<script src="js/lib/player.min.js"></script>
+		<script src="js/lib/typed.js"></script>
+		<script src="js/lib/threejs/three.js"></script>
+		<script src="js/lib/threejs/OBJLoader.js"></script>
+        <script src="js/lib/threejs/OrbitControls.js"></script>
+
+		<script src="js/src/FA.js"></script>
+		<script src="js/src/Room.js"></script>
+		<!-- <script src="js/src/Label.js"></script> -->
+		<script src="js/src/BufferLoader.js"></script>
+		<script src="js/src/StateIdle.js"></script>
+		<script src="js/src/StatePreload.js"></script>
+		<script src="js/src/StateVideo.js"></script>
+		<script src="js/src/StateVideo2.js"></script>
+		<script src="js/src/StateHome.js"></script>
+		<script src="js/src/StateCell.js"></script>
+		<script src="js/src/App.js"></script>
+
+	</body>
+
+</html>

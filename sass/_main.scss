@@ -1,0 +1,254 @@
+@mixin clearfix {
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+$header-height: 50px;
+
+
+//
+
+
+body {
+    background-color: #EEEFF3;
+    overflow: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-family: 'Roboto', sans-serif;
+    background-color: #666666;
+}
+
+#layer-cell,
+#layer-labels,
+#layer-gl {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    right: 0;
+    opacity: 0;
+    transition: opacity 1000ms ease-out;
+}
+
+#layer-cell{
+    visibility: hidden;
+}
+.labels {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    right: 0;
+
+    .label {
+        position: absolute;
+        font-family: 'Oswald', sans-serif;
+        text-transform: uppercase;
+        white-space: nowrap;
+        background-color: #333;
+        color: white;
+        padding: 5px 8px;
+        transition: background-color 500ms;
+        cursor: pointer;
+
+        &:hover {
+            background-color: #e31d1a;
+        }
+    }
+}
+
+#layer-labels {
+    //http://stackoverflow.com/questions/3680429/click-through-a-div-to-underlying-elements
+    pointer-events: none;
+    background: url('your_transparent.png');
+
+    .label {
+        position: absolute;
+        opacity: 0.7;
+
+        .line {
+            position: absolute;
+            height: 30px;
+            width: 30px;
+            bottom:0;
+            left: 15px;
+            border-left: 2px solid black;
+            -moz-transform: skew(-40deg);
+            -webkit-transform: skew(-40deg);
+            transform: skew(-40deg);
+        }
+        .tag {
+            position: absolute;
+            bottom: 30px;
+            left: 28px;
+            font-size: 12px;
+            background-color: #000;
+            color: #fff;
+            padding: 4px 8px;
+            font-family: 'Oswald', sans-serif;
+            text-transform: uppercase;
+            white-space: nowrap;
+            // -webkit-transform: scale(1);
+            // transform: scale(1);
+        }
+    }
+
+}
+
+#header {
+    position: absolute;
+    height: $header-height;
+    width: 100%;
+    background-color: white;
+    position: absolute;
+    top: -$header-height;
+    transition: top 500ms ease-out;
+}
+
+.logos {
+    height: 100%;
+    display: inline-block;
+
+    & > span {
+        height: 100%;
+        display: inline-block;
+        background-size: auto 100%;
+        background-repeat: no-repeat;
+        cursor: pointer;
+    }
+    .ai {
+        background-image: url('../assets/logo-amnesty-yellow.png');
+        width: 118px;
+    }
+    .fa {
+        background-image: url('../assets/logo-FA-red.jpg');
+        width: 120px;
+    }
+}
+
+#mainNav {
+    float: right;
+    color: #000;
+    height: 100%;
+    margin-right: 20px;
+    @include clearfix;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 14px;
+
+    & > span {
+        display: inline-block;
+        height: 100%;
+        line-height: $header-height;
+        padding: 0 15px;
+        cursor: pointer;
+        transition: all 300ms ease-out;
+
+        &:hover,
+        &.active {
+            background-color: #ccc;
+            color: #000;
+        }
+    }
+}
+
+// This parent can be any width and height
+.block {
+    text-align: center;
+    // May want to do this if there is risk the container may be narrower than the element inside
+    white-space: nowrap;
+
+    // The ghost, nudged to maintain perfect centering
+    &:before {
+        content: '';
+        display: inline-block;
+        height: 100%;
+        vertical-align: middle;
+        margin-right: -0.25em; // Adjusts for spacing
+    }
+}
+
+// The element to be centered, can also be of any width and height
+.centered {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+
+#introMessage {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    font-size: 30px;
+    font-family: 'Oswald', sans-serif;
+
+    .message {
+        margin: 0;
+        padding: 10px 15px;
+        background-color: white;
+        text-transform: uppercase;
+    }
+}
+
+#typed-strings {
+    visibility: hidden;
+}
+
+#layer-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: black;
+    opacity: 0;
+    transition: opacity 500ms;
+}
+
+// #layer-nodes {
+//   -webkit-transform: translate3d(0,0,0);
+//   -moz-transform: translate3d(0,0,0);
+//   -ms-transform: translate3d(0,0,0);
+//   -o-transform: translate3d(0,0,0);
+//   transform: translate3d(0,0,0);
+// }
+
+// buttons cellModel and video
+.btn-next,
+.btn-exit {
+    position: absolute;
+    right: 0;
+    color: white;
+    background-color: #000;
+    padding: 10px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background-color 500ms;
+
+    &:hover {
+        background-color: #e31d1a;
+    }
+}
+
+.btn-exit {
+    top: 65px;
+}
+
+.btn-next {
+    top: 110px;
+}
+
+
+
+// stats and gui
+.dg.ac {
+    top: 60px !important;
+}
+
+#stats {
+    top: 60px !important;
+    left: 10px;
+}
