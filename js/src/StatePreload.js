@@ -10,9 +10,10 @@ FA.StatePreload = function( app ) {
         // audio
         context, // TODO: move to App.context
         bufferLoader,
-        gainNode;
+        gainNode,
 
-    var manager;
+        // 3d loader manager
+        manager;
 
 
     function initSound() {
@@ -63,118 +64,182 @@ FA.StatePreload = function( app ) {
     }
 
 
-     function loadResources() {
+    function loadData() {
 
-         var manager = new THREE.LoadingManager();
-         manager.onProgress = function ( item, loaded, total ) {
-             console.log( item, loaded, total );
-         };
+        $.ajax({
+            dataType: 'json',
+            url : "http://localhost:8888/saydnaya/data/data.json",
+            success : function( result ) {
 
-         manager.onLoad = function() {
-             loaded = true;
-         }
+                app.data = new FA.Data( result );
 
-        // main building model
+                loadResources();
+            }
+        });
+    }
+
+
+    function loadResources() {
+
+        manager = new THREE.LoadingManager();
+        manager.onProgress = function ( item, loaded, total ) {
+            console.log( item, loaded, total );
+        };
+
+        manager.onLoad = function() {
+            loaded = true;
+            scaleGeometries();
+        }
+
+        loadBuildingModel();
+        loadTerrain();
+        loadRooms();
+        loadCell360();
+
+    }
+
+
+    function loadBuildingModel() {
+
+        // Main building model
         var loader = new THREE.JSONLoader( manager );
+        loader.setTexturePath( 'obj/building/maps/' )
         loader.load(
-            // 'obj/prision/D-building_2ndfloor.js',
-            'obj/building/D-building.js',
+            'obj/building/building.js',
             function ( geometry, materials ) {
                 var material = new THREE.MultiMaterial( materials );
-                var object = new THREE.Mesh( geometry, material );
-
-                // solid
-                app.prisionModel = object;
-
-                // wireframe
-                app.helper = new THREE.EdgesHelper( object, 0x000000, 80 );
-                app.helper.material.transparent = true;
-                app.helper.material.opacity = 0.2;
-                app.helper.material.linewidth = 1;
+                for (var i = 0; i < materials.length; i++) {
+                    materials[ i ].transparent = true;
+                }
+                app.buildingMesh = new THREE.Mesh( geometry, material );
+                app.buildingMesh.geometry.computeBoundingSphere();
             },
             onProgress,
             onError
         );
 
-        // terrain
-        // var loader = new THREE.JSONLoader( manager );
-        // loader.load(
-        //     //'obj/building/D-groupCellSample.js',
-        //     'obj/terrain/terrain.js',
-        //     function ( geometry, materials ) {
-        //         var material = new THREE.MultiMaterial( materials );
-        //         var object = new THREE.Mesh( geometry, material );
-        //
-        //         // solid
-        //         app.terrainModel = object;
-        //     },
-        //     onProgress,
-        //     onError
-        // );
+        // Main building roof
+        var loader = new THREE.JSONLoader( manager );
+        loader.load(
+            'obj/building/building-roof.js',
+            function ( geometry, materials ) {
+                var material = new THREE.MultiMaterial( materials );
+                for (var i = 0; i < materials.length; i++) {
+                    materials[ i ] = new THREE.MeshPhongMaterial( {
+                        color : 0xffffff,
+                        transparent : true,
+                        polygonOffset : true,
+                        polygonOffsetFactor : 1, // positive value pushes polygon further away
+                        polygonOffsetUnits : 1
+                    } );
+                }
+                app.buildingRoofMesh = new THREE.Mesh( geometry, material );
+            },
+            onProgress,
+            onError
+        );
 
-        // rooms
-        var roomData = [
-            { file: 'buttoncorridor', name: 'Corridor', slug: 'corridor'  },
-            { file: 'buttongroupcell1', name: 'Group cell 1', slug: 'cell1'  },
-            { file: 'buttongroupcell2', name: 'Group cell 2', slug: 'cell2'  },
-            { file: 'buttonvisitingroom', name: 'Visiting room', slug: 'visit'  },
-            { file: 'buttonwelcomeparty', name: 'Welcome party', slug: 'welcome'  },
-            { file: 'buttosolitary', name: 'Solitary confinement', slug: 'solitary'  }
-        ];
-        for (var i = 0; i < roomData.length; i++) {
+    }
+
+
+    function loadRooms() {
+
+        var roomData = app.data.locations;
+
+        for ( var i = 0; i < roomData.length; i++ ) {
             loadRoom( roomData[ i ] );
         }
 
-        // cell
-        // instantiate a loader
+        function loadRoom( data ) {
+            var name = data.name,
+                slug = data.slug,
+                loader = new THREE.JSONLoader( manager );
+
+            loader.load(
+                data.obj,
+                function ( geometry, materials ) {
+                    var room = new FA.Room( geometry, name, slug );
+
+                    app.rooms.push( room );
+                },
+                onProgress,
+                onError
+            );
+        }
+
+    }
+
+
+    function loadTerrain() {
+
         var loader = new THREE.JSONLoader( manager );
-        loader.setTexturePath( 'obj/groupCell/maps/' )
+        loader.setTexturePath( 'obj/terrain/maps/' )
+        loader.load(
+            'obj/terrain/terrain.js',
+            function ( geometry, materials ) {
+                for (var i = 0; i < materials.length; i++) {
+                    materials[ i ].transparent = true;
+                }
+                var material = new THREE.MultiMaterial( materials );
+
+                app.terrainMesh = new THREE.Mesh( geometry, material );;
+            },
+            onProgress,
+            onError
+        );
+
+    }
+
+
+    function scaleGeometries() {
+
+        // centers the imported models into the scene
+        var transform = new THREE.Matrix4(),
+            scale = new THREE.Matrix4(),
+            translate = new THREE.Matrix4();
+        scale.makeScale( 0.2, 0.2, 0.2 );
+        translate.makeTranslation( 32.57, 0, 30 );
+        transform.multiplyMatrices( scale, translate );
+
+        app.buildingMesh.geometry.applyMatrix( transform );
+
+        app.buildingRoofMesh.geometry.applyMatrix( transform );
+
+        var rooms = app.rooms;
+        for ( var i = 0; i < rooms.length; i++ ) {
+            rooms[ i ].object3D.geometry.applyMatrix( transform );
+        }
+
+        app.terrainMesh.geometry.applyMatrix( transform );
+
+    }
+
+
+    function loadCell360() {
+
+        var loader = new THREE.JSONLoader( manager );
+        loader.setTexturePath( 'obj/groupCell/maps/' );
         loader.load(
             'obj/groupCell/groupCell.js',
             function ( geometry, materials ) {
                 var material = new THREE.MultiMaterial( materials );
-                var object = new THREE.Mesh( geometry, material );
-                app.cellModel = object;
+
+                app.cellMesh = new THREE.Mesh( geometry, material );
             }
         );
 
-     }
+    }
 
 
-     function loadRoom( data ) {
-
-         var name = data.name,
-             slug = data.slug,
-             loader = new THREE.JSONLoader( manager );
-
-         loader.load(
-             'obj/rooms/' + data.file + '.js',
-             function ( geometry, materials ) {
-                 var room = new FA.Room( geometry, name, slug );
-                 app.rooms.push( room );
-
-                 //test: remove labels of labels not centered
-                 if ( slug === 'corridor' || slug === 'welcome' ){
-                     room.hideLabel();
-                 }
-             },
-             onProgress,
-             onError
-         );
-
-     }
+    function onProgress( xhr ) {
+        if ( xhr.lengthComputable ) {
+            var percentComplete = xhr.loaded / xhr.total * 100;
+            console.log( Math.round(percentComplete, 2) + '% downloaded' );
+        }
+    };
 
 
-     function onProgress( xhr ) {
-         if ( xhr.lengthComputable ) {
-             var percentComplete = xhr.loaded / xhr.total * 100;
-             console.log( Math.round(percentComplete, 2) + '% downloaded' );
-         }
-     };
-
-
-     function onError( xhr ) {
-     };
+    function onError( xhr ) {};
 
 
     function goToNext() {
@@ -188,14 +253,15 @@ FA.StatePreload = function( app ) {
     }
 
 
-    /******************
-     * Public
-     ******************/
+    //        //
+    // Public //
+    //        //
 
 
     this.enter = function() {
 
-        loadResources();
+        //loadResources();
+        loadData();
 
         // initSound();
         //
@@ -216,7 +282,7 @@ FA.StatePreload = function( app ) {
         if (loaded) {
             $( '#layer-video' ).fadeOut();
             $( '#introMessage' ).fadeOut();
-            app.changeState( new FA.StateHome( app ) );
+            app.changeState( new FA.StateExplore( app ) );
         }
 
     }

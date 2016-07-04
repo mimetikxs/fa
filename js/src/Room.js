@@ -1,13 +1,9 @@
 FA.Room = function( geometry, name, slug ) {
 
-    var name = name,
-        slug = slug,
-
-        material = null,
-        object3D = null,
+    var object3D = null,
         center = null,
 
-        $label = null;  // dom element
+        $label = null;  // refernce to dom element associated with this room
 
 
     build3D();
@@ -17,7 +13,7 @@ FA.Room = function( geometry, name, slug ) {
 
     function build3D() {
 
-        material = new THREE.MeshPhongMaterial( {
+        var material = new THREE.MeshPhongMaterial( {
             color : 0xffffff,
             polygonOffset : true,
             polygonOffsetFactor : -1, // positive value pushes polygon further away
@@ -32,7 +28,7 @@ FA.Room = function( geometry, name, slug ) {
 
     function buildLabel() {
 
-        $label = $( '<div class="label">' +
+        $label = $( '<div class="label" data-id=' + slug + '>' +
             '<div class="line"></div>' +
             '<div class="tag">' + name + '</div>' +
         '</div>' );
@@ -49,7 +45,7 @@ FA.Room = function( geometry, name, slug ) {
             geometry.boundingBox.min,
             geometry.boundingBox.max
         );
-        center.divideScalar( 2 ).add( object3D.position ); // center in world space
+        center.divideScalar( 2 );
 
     }
 
@@ -76,6 +72,20 @@ FA.Room = function( geometry, name, slug ) {
     }
 
 
+    function mark() {
+
+        object3D.material.emissive.setHex( 0xff0000 );
+
+    }
+
+
+    function unmark() {
+
+        object3D.material.emissive.setHex( 0x000000 );
+
+    }
+
+
     //        //
     // Reveal //
     //        //
@@ -83,7 +93,6 @@ FA.Room = function( geometry, name, slug ) {
 
     return {
 
-        material  : material,
         object3D  : object3D,
         $label    : $label,
 
@@ -91,9 +100,8 @@ FA.Room = function( geometry, name, slug ) {
         getName   : getName,
         getSlug   : getSlug,
 
-        hideLabel : function() {
-            $label.css( 'opacity', 0 );
-        }
+        mark : mark,
+        unmark : unmark
 
     }
 

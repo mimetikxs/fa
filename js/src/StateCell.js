@@ -58,21 +58,19 @@ FA.StateCell = function( app ) {
         pointLight = new THREE.PointLight( 0xffffff, 1, 50 );
         scene.add( pointLight );
 
-
         // model
 
         // center on scene
-        app.cellModel.position.x = -3;
-        app.cellModel.position.y = -2;
-        app.cellModel.position.z = -4;
+        app.cellMesh.position.x = -3;
+        app.cellMesh.position.y = -2;
+        app.cellMesh.position.z = -4;
 
-        scene.add( app.cellModel );
+        scene.add( app.cellMesh );
 
         renderer = new THREE.WebGLRenderer();
         renderer.setPixelRatio( window.devicePixelRatio );
         renderer.setSize( window.innerWidth, window.innerHeight );
         $layer.append( renderer.domElement );
-
 
         // add dummi item
         var geometry = new THREE.BoxGeometry( 0.05, 0.05, 0.05 );
@@ -81,8 +79,6 @@ FA.StateCell = function( app ) {
         cube.position.x = 4;
         cube.position.y = -1;
         scene.add( cube );
-
-
 
         // events
 
@@ -129,9 +125,7 @@ FA.StateCell = function( app ) {
 
         // label test
         label = $( '<div class="labels">' +
-            // '<div class="label">' +
                 '<div class="label">INTERACTIVE ITEM</div>' +
-            // '</div>' +
         '</div>');
         $('#layer-cell').after( label );// controls
 
@@ -147,11 +141,7 @@ FA.StateCell = function( app ) {
 
         // events
         $('.btn-exit').on('click', function(){
-            app.changeState( new FA.StateHome( app ) );
-        });
-
-        $('.btn-next').on('click', function(){
-            app.changeState( new FA.StateVideo2( app ) ); // back to home after this video
+            app.changeState( new FA.StateExplore( app ) );
         });
 
         $('.label').on('click', function(){
@@ -159,6 +149,14 @@ FA.StateCell = function( app ) {
         });
 
         $( '#header' ).css( 'top', 0 );
+
+        $('.btn-next, .btn-prev').hide();
+
+        // testing remove text Navigation ////////////////////////
+        $('#title').text('Group cell 1');
+
+        $('.menu-type').hide();
+        //////////////////////////////////////////////////////
 
     }
 

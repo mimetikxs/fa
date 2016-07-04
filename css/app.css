@@ -357,7 +357,6 @@ th {
   padding: 0; }
 
 body {
-  background-color: #EEEFF3;
   overflow: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -373,7 +372,13 @@ body {
   top: 0;
   right: 0;
   opacity: 0;
-  transition: opacity 1000ms ease-out; }
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  transition: opacity 500ms ease-out; }
 
 #layer-cell {
   visibility: hidden; }
@@ -391,48 +396,57 @@ body {
     white-space: nowrap;
     background-color: #333;
     color: white;
-    padding: 5px 8px;
-    transition: background-color 500ms;
-    cursor: pointer; }
-    .labels .label:hover {
-      background-color: #e31d1a; }
+    padding: 5px 8px; }
 
-#layer-labels {
-  pointer-events: none;
-  background: url("your_transparent.png"); }
-  #layer-labels .label {
+#layer-labels .label {
+  position: absolute;
+  opacity: 0.8; }
+  #layer-labels .label .line {
     position: absolute;
-    opacity: 0.7; }
-    #layer-labels .label .line {
-      position: absolute;
-      height: 30px;
-      width: 30px;
-      bottom: 0;
-      left: 15px;
-      border-left: 2px solid black;
-      -moz-transform: skew(-40deg);
-      -webkit-transform: skew(-40deg);
-      transform: skew(-40deg); }
-    #layer-labels .label .tag {
-      position: absolute;
-      bottom: 30px;
-      left: 28px;
-      font-size: 12px;
-      background-color: #000;
-      color: #fff;
-      padding: 4px 8px;
-      font-family: 'Oswald', sans-serif;
-      text-transform: uppercase;
-      white-space: nowrap; }
+    height: 30px;
+    width: 30px;
+    bottom: 0;
+    left: 15px;
+    border-left: 2px solid black;
+    -moz-transform: skew(-40deg);
+    -webkit-transform: skew(-40deg);
+    transform: skew(-40deg); }
+  #layer-labels .label .tag {
+    position: absolute;
+    bottom: 30px;
+    left: 28px;
+    font-size: 12px;
+    background-color: #000;
+    color: #fff;
+    padding: 4px 8px;
+    font-family: 'Oswald', sans-serif;
+    text-transform: uppercase;
+    white-space: nowrap;
+    cursor: default;
+    transition: background-color 200ms ease-out; }
+  #layer-labels .label.selected .tag {
+    background-color: #e00606; }
+  #layer-labels .label.selected .line {
+    border-color: red; }
+  #layer-labels .label.over:not(.selected) .tag {
+    background-color: #640606; }
+  #layer-labels .label.over:not(.selected) .line {
+    border-color: #640606; }
 
 #header {
   position: absolute;
   height: 50px;
   width: 100%;
-  background-color: white;
+  background-color: black;
   position: absolute;
   top: -50px;
-  transition: top 500ms ease-out; }
+  transition: top 500ms ease-out;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none; }
 
 .logos {
   height: 100%;
@@ -468,7 +482,8 @@ body {
     line-height: 50px;
     padding: 0 15px;
     cursor: pointer;
-    transition: all 300ms ease-out; }
+    transition: all 300ms ease-out;
+    color: white; }
     #mainNav > span:hover, #mainNav > span.active {
       background-color: #ccc;
       color: #000; }
@@ -492,7 +507,13 @@ body {
   width: 100%;
   height: 100%;
   font-size: 30px;
-  font-family: 'Oswald', sans-serif; }
+  font-family: 'Oswald', sans-serif;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none; }
   #introMessage .message {
     margin: 0;
     padding: 10px 15px;
@@ -513,24 +534,148 @@ body {
   transition: opacity 500ms; }
 
 .btn-next,
+.btn-prev,
 .btn-exit {
   position: absolute;
-  right: 0;
+  right: 20px;
   color: white;
-  background-color: #000;
-  padding: 10px;
+  padding: 14px;
   text-transform: uppercase;
   cursor: pointer;
-  transition: background-color 500ms; }
+  font-family: 'Oswald', sans-serif;
+  border: 1px solid white;
+  transition: background-color 500ms, color 500ms; }
   .btn-next:hover,
+  .btn-prev:hover,
   .btn-exit:hover {
-    background-color: #e31d1a; }
+    background-color: white;
+    color: black; }
 
 .btn-exit {
-  top: 65px; }
+  top: 80px; }
+
+.btn-prev,
+.btn-next {
+  max-width: 150px;
+  top: 50%;
+  border: none; }
+
+.btn-prev {
+  left: 20px;
+  right: auto; }
 
 .btn-next {
-  top: 110px; }
+  text-align: right; }
+
+#left-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  margin-left: 30px;
+  font-family: 'Oswald', sans-serif;
+  text-transform: uppercase;
+  color: white;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none; }
+
+#title {
+  font-size: 38px;
+  border-bottom: 1px solid #999;
+  padding: 10px 0;
+  margin-top: 65px; }
+
+#navigation {
+  font-family: 'Oswald', sans-serif;
+  text-transform: uppercase;
+  font-size: 12px;
+  color: white;
+  height: 100%;
+  overflow: hidden; }
+  #navigation .menu-type {
+    padding: 17px 0;
+    border-bottom: 1px solid #999; }
+    #navigation .menu-type span {
+      display: inline-block;
+      padding: 3px 7px;
+      cursor: pointer;
+      border: solid 1px #999;
+      color: #999; }
+      #navigation .menu-type span.selected {
+        color: white;
+        border: solid 1px white; }
+      #navigation .menu-type span:first-child {
+        margin-right: 10px;
+        margin-left: 3px; }
+  #navigation .container {
+    margin: 40px 0 0 0;
+    overflow: hidden; }
+  #navigation ul, #navigation li {
+    list-style: none;
+    padding: 0;
+    margin: 0; }
+  #navigation ul.menu-witness,
+  #navigation ul.menu-location {
+    cursor: pointer; }
+    #navigation ul.menu-witness > li > .folder,
+    #navigation ul.menu-location > li > .folder {
+      display: block;
+      padding: 10px 13px;
+      margin-bottom: 10px;
+      background-color: rgba(0, 0, 0, 0.65);
+      transition: background-color 200ms ease-out; }
+      #navigation ul.menu-witness > li > .folder .icon,
+      #navigation ul.menu-location > li > .folder .icon {
+        font-family: 'simple-line-icons';
+        speak: none;
+        font-style: normal;
+        font-weight: normal;
+        font-variant: normal;
+        text-transform: none;
+        line-height: 1;
+        /* Better Font Rendering =========== */
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        position: relative;
+        font-size: 13px;
+        margin-right: 8px; }
+        #navigation ul.menu-witness > li > .folder .icon:before,
+        #navigation ul.menu-location > li > .folder .icon:before {
+          content: "\e095"; }
+      #navigation ul.menu-witness > li > .folder:hover,
+      #navigation ul.menu-location > li > .folder:hover {
+        background-color: rgba(100, 6, 6, 0.65); }
+    #navigation ul.menu-witness > li:last-child > .folder,
+    #navigation ul.menu-location > li:last-child > .folder {
+      margin-bottom: 0; }
+    #navigation ul.menu-witness > li > ul,
+    #navigation ul.menu-location > li > ul {
+      overflow: hidden;
+      height: 0;
+      transition: height 500ms; }
+      #navigation ul.menu-witness > li > ul > li,
+      #navigation ul.menu-location > li > ul > li {
+        display: block;
+        padding: 5px 10px;
+        margin: 0 7px 10px 7px;
+        background-color: rgba(153, 153, 153, 0.7);
+        transition: background-color 300ms ease-out; }
+        #navigation ul.menu-witness > li > ul > li:hover,
+        #navigation ul.menu-location > li > ul > li:hover {
+          background-color: #999999; }
+    #navigation ul.menu-witness > li.selected .folder,
+    #navigation ul.menu-location > li.selected .folder {
+      background-color: rgba(224, 6, 6, 0.65); }
+      #navigation ul.menu-witness > li.selected .folder .icon:before,
+      #navigation ul.menu-location > li.selected .folder .icon:before {
+        content: "\e615"; }
+    #navigation ul.menu-witness > li.over:not(.selected) .folder,
+    #navigation ul.menu-location > li.over:not(.selected) .folder {
+      background-color: rgba(100, 6, 6, 0.65); }
 
 .dg.ac {
   top: 60px !important; }

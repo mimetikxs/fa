@@ -1,12 +1,17 @@
 /*
- * State machine and main loop
+ * State machine + main loop + data model
  * Resources are loaded/initialized during StatePreload
  */
 
 
 FA.App = (function() {
 
-    var currentState = new FA.StateIdle();
+    var currentState = new FA.StateIdle(),
+
+        prevLocation = null,
+        activeLocation = null,            // slug of the current location
+        prevOverLocation = null,
+        overLocation = null;
 
 
     update();
@@ -32,6 +37,35 @@ FA.App = (function() {
     }
 
 
+    function getActiveLocation() { return activeLocation; }
+    function setActiveLocation( slug ) {
+
+        if (slug === activeLocation) {
+            return;
+        }
+
+        prevLocation = activeLocation;
+        activeLocation = slug;
+
+        this.fire( 'activeLocationChange', { current: activeLocation, prev: prevLocation } );
+
+    }
+
+    function getOverLocation() { return overLocation; }
+    function setOverLocation( slug ) {
+
+        if (slug === overLocation) {
+            return;
+        }
+
+        prevOverLocation = overLocation;
+        overLocation = slug;
+
+        this.fire( 'overLocationChange', { location: overLocation, prev: prevOverLocation } );
+
+    }
+
+
     //        //
     // Public //
     //        //
@@ -39,22 +73,35 @@ FA.App = (function() {
 
     return {
 
-        // home
-        prisionModel : null,
-        helper       : null,
-        rooms        : [ ],
-        terrainModel : null,
-        interactiveNode : new THREE.Object3D(),  // container to place meshes to be picked
+        data : null,
+
+        // mesh + texture data
+        buildingMesh     : null,
+        buildingRoofMesh : null,
+        terrainMesh      : null,
+        rooms            : [ ],  // FA.Room
+
+        // views
+        buildingView : null,
 
         // cell
-        cellModel : null, // cached model + textures
+        cellMesh : null,
 
         // public methods
-        changeState : changeState
+        changeState : changeState,
+
+        getActiveLocation : getActiveLocation,
+        setActiveLocation : setActiveLocation,
+        getOverLocation : getOverLocation,
+        setOverLocation : setOverLocation
+
 
     }
 
 })(); // App entry point (singleton)
 
+// make publisher
+FA.utils.makePublisher( FA.App );
 
-FA.App.changeState( new FA.StatePreload( FA.App ) );    // initial state
+// set inital state
+FA.App.changeState( new FA.StatePreload( FA.App ) );

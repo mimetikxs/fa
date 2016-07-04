@@ -5,6 +5,9 @@
 		<title>Home</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="css/simple-line-icons.css">
+		<!-- <link rel="stylesheet" href="css/pe-icon-7-stroke.css"> -->
+		<link rel="stylesheet" href="css/font-awesome.css">
 		<link href="https://fonts.googleapis.com/css?family=Oswald:300,400,700" rel="stylesheet">
 		<link rel="stylesheet" href="css/app.css">
 	</head>
@@ -29,20 +32,36 @@
 		<div id="layer-labels"></div>
 		<div id="layer-cell"></div>
 
+		<div id="layer-nav"></div>
+
 		<div id="layer-video">
 			<div class="player"></div>
 			<!-- <div class="controls"> -->
-				<div class="btn-next">NEXT STORY</div>
-				<div class="btn-exit">BACK</div>
+				<div class="btn-next">Guards shortening their sticks<span class="pe-7s-angle-right icon"></span></div>
+				<div class="btn-prev"><span class="pe-7s-angle-left icon"></span>No echo, cells full of people</div>
+				<div class="btn-exit">Close</div>
 			<!-- </div> -->
 		</div>
+
+		<div id="left-bar">
+			<div id="title">Sednaya Prison</div>
+			<div id="navigation">
+				<div class="menu-type">
+					<span data-type="location">Explore by location</span>
+					<span data-type="witness">Explore by witness</span>
+				</div>
+				<div class="container">
+				</div>
+			</div>
+		</div>
+
 
 		<div id="header">
 			<div class="logos">
 				<span class="ai"></span><span class="fa"></span>
 			</div>
 			<div id="mainNav">
-				<span class="active">Home</span><span>More</span><span>Take Action</span>
+				<span class="active">Explore</span><span>About</span><span>Take Action</span>
 			</div>
 		</div>
 
@@ -59,14 +78,18 @@
         <script src="js/lib/threejs/OrbitControls.js"></script>
 
 		<script src="js/src/FA.js"></script>
+		<script src="js/src/Utils.js"></script>
+		<script src="js/src/Data.js"></script>
 		<script src="js/src/Room.js"></script>
-		<!-- <script src="js/src/Label.js"></script> -->
+		<script src="js/src/LabelsView.js"></script>
+		<script src="js/src/BuildingView.js"></script>
+		<script src="js/src/MenuView.js"></script>
 		<script src="js/src/BufferLoader.js"></script>
 		<script src="js/src/StateIdle.js"></script>
 		<script src="js/src/StatePreload.js"></script>
 		<script src="js/src/StateVideo.js"></script>
 		<script src="js/src/StateVideo2.js"></script>
-		<script src="js/src/StateHome.js"></script>
+		<script src="js/src/StateExplore.js"></script>
 		<script src="js/src/StateCell.js"></script>
 		<script src="js/src/App.js"></script>
 

@@ -9,6 +9,7 @@ FA.StateVideo2 = function( app, stateName ) {
 
 
     function refreshVideoSize() {
+
         var holderWidth = $(window).width(),
             holderHeight = $(window).height(),
             holderRatio = holderWidth / holderHeight,
@@ -37,18 +38,26 @@ FA.StateVideo2 = function( app, stateName ) {
             'margin-top'  : -targetH / 2,
             'margin-left' : -targetW / 2
         } );
+
     }
 
 
-
     function goToNext() {
-        console.log(stateName);
-        if (stateName === undefined) {
-            app.changeState( new FA.StateHome( app ) );
-        }
-        else if (stateName === "cell") {
-            app.changeState( new FA.StateCell( app ) );
-        }
+
+        player.unload().then(function() {
+            // the video was unloaded
+            console.log('video unloaded');
+
+            if (stateName === undefined) {
+                app.changeState( new FA.StateExplore( app ) );
+            }
+            else if (stateName === "cell") {
+                app.changeState( new FA.StateCell( app ) );
+            }
+        }).catch(function(error) {
+            console.log(error);
+        });
+
     }
 
     /*******************
@@ -64,21 +73,11 @@ FA.StateVideo2 = function( app, stateName ) {
         });
 
         // TODO: fix, not working at the moment
-        $('.btn-next').on('click', function(){
-            //app.changeState( new FA.StateVideo2( app, stateName ) );
-        });
+        // $('.btn-next').on('click', function(){
+        //     //app.changeState( new FA.StateVideo2( app, stateName ) );
+        // });
 
         $('.btn-exit').show();
-
-        if (stateName === "cell") {
-            $('.btn-next').hide();
-        } else {
-            $('.btn-next').show();
-        }
-
-
-
-
 
 
         $('#layer-video .player').html(
@@ -105,16 +104,21 @@ FA.StateVideo2 = function( app, stateName ) {
             goToNext()
         } );
 
-        $( window ).resize( refreshVideoSize );
+        $( window ).on( 'resize', refreshVideoSize );
 
-        // $('#layer-video').css({
-        //     opacity : 1
-        // });
         $( '#layer-video' ).css( {
             display : 'block',
             opacity : 1
         } );
-        $( '#header' ).css( 'top', -50 );
+        //$( '#header' ).css( 'top', -50 );
+
+
+
+        // testing remove text Navigation ////////////////////////
+
+        //TODO:: build video player interface
+
+        //////////////////////////////////////////////////////
 
 
         player.setVolume(1);
@@ -131,16 +135,9 @@ FA.StateVideo2 = function( app, stateName ) {
 
     this.exit = function() {
 
-        $( '#layer-video' ).fadeOut( 1000 );
+        $( '#layer-video' ).fadeOut( 0 );
 
-        $( window ).off( 'resize' );
-
-        player.unload().then(function() {
-            // the video was unloaded
-            console.log('video unloaded');
-        }).catch(function(error) {
-            console.log(error);
-        });
+        $( window ).off( 'resize', refreshVideoSize );
 
         $('.btn-exit').off();
         $('.btn-next').off();
