@@ -4,6 +4,10 @@
 
 FA.StateExplore = function( app ) {
 
+    // TODO: change opacity of model if mouse over left menu
+    // opacity returns to the value of the slider after mouse leave
+
+
     var $layerGl = $('#layer-gl'),
         $layerLabels = $('#layer-labels'),
 
@@ -14,33 +18,31 @@ FA.StateExplore = function( app ) {
         labelsView,
         menuView,
 
-        gui,
+        slider,
 
         // mouse picking
         mouse = new THREE.Vector2(),
         isMouseDown = false;
 
 
-    function buildGui() {
 
-        // stats = new Stats();
-		// stats.domElement.style.position = 'absolute';
-		// stats.domElement.style.top = '0px';
-        // document.body.appendChild( stats.domElement );
+var roomOnDown = null;
 
-        gui = new dat.GUI( { width: 250 } );
 
-        gui.add( FA.parameters, 'opacity', 0.0, 1.0 ).onChange( setOpacity );
-        // gui.close();
+    function buildSlider() {
 
-        // set initial values
-        FA.parameters.opacity = 0.3;
-        buildingView.setOpacity( 0.3 );
+        slider = new FA.Slider();
+        slider.onChange( setOpacity );
+        slider.setPercent( 30 ); // 30%
+        $('body').append( slider.$dom );
 
-        // Iterate over all controllers
-        for (var i in gui.__controllers) {
-            gui.__controllers[ i ].updateDisplay();
-        }
+    }
+
+
+    function destroySlider() {
+
+        slider.destroy();
+        slider.$dom.remove();
 
     }
 
@@ -58,8 +60,6 @@ FA.StateExplore = function( app ) {
         sceneWidth = $layerGl.width();
         sceneHeight = $layerGl.height();
 
-        console.log(sceneWidth, sceneHeight );
-
         buildingView.setSize( sceneWidth, sceneHeight );
         labelsView.setSize( sceneWidth, sceneHeight )
 
@@ -68,24 +68,38 @@ FA.StateExplore = function( app ) {
 
     function onMouseMove( e ) {
 
+        // local
+        mouse.x = e.clientX;
+        mouse.y = e.clientY - 50; // header height is 50px
+
         //  mouse position in normalized device coordinates (-1 to +1) for both components
-    	mouse.x = ( e.clientX / sceneWidth ) * 2 - 1;
-    	mouse.y = - ( e.clientY / sceneHeight ) * 2 + 1;
+    	mouse.x = (mouse.x / sceneWidth ) * 2 - 1;
+    	mouse.y = - ( mouse.y / sceneHeight ) * 2 + 1;
+
+        var target = $( e.target );
+
+        labelUnderMouse = ( target.is( '.tag' ) ) ? target.parent().data('id') : null;
 
         if ( isMouseDown ) {
-            return;
+            // app.setOverLocation( null );
+        } else {
+            app.setOverLocation( getRoomUnderMouse( mouse ) );
         }
 
-        var target = $(e.target),
-            labelUnderMouse = ( target.is( '.tag' ) ) ? target.parent().data('id') : null;
+    }
+
+
+    function getRoomUnderMouse( mouse ) {
 
         if ( !labelUnderMouse ) {
             var intersectingRoom = buildingView.getIntersectingRoom( mouse );
             if ( intersectingRoom ) {
-                app.setOverLocation( intersectingRoom.name );
+                return intersectingRoom.name;
             } else  {
-                app.setOverLocation( null );
+                return null;
             }
+        } else {
+            return labelUnderMouse;
         }
 
     }
@@ -95,6 +109,8 @@ FA.StateExplore = function( app ) {
 
         isMouseDown = true;
 
+        roomOnDown = getRoomUnderMouse( mouse );
+
     }
 
 
@@ -102,26 +118,24 @@ FA.StateExplore = function( app ) {
 
         isMouseDown = false;
 
+        var roomOnUp = getRoomUnderMouse( mouse );
+        if ( roomOnUp === roomOnDown  &&  roomOnUp !== null ) {
+            goToRoom( roomOnUp );
+        }
+
+        if (!roomOnUp) {
+            app.setOverLocation( null );
+        }
+
     }
 
 
     function goToRoom( slug ) {
 
+        //app.setActiveLocation( slug );
+
         app.changeState( new FA.StateCell( app ) );
 
-    }
-
-
-    var count = 0;
-    var color = new THREE.Color( 0,0,0 );
-    var black = new THREE.Color( 0,0,0 );
-    var red = new THREE.Color( 1,0,0 );
-    function animateRoom() {
-        count += 0.05;
-        var val = ( 1 + Math.sin( count ) ) * 0.5;
-        color.copy(black);
-        color.lerp(red, val);
-        // app.rooms[0].material.emissive.setHex(color.getHex());
     }
 
 
@@ -132,10 +146,7 @@ FA.StateExplore = function( app ) {
 
     this.enter = function() {
 
-        // views if they don't already exist
-        // the object won't be destroyed to keep the state
-        // of the view (camera position, etc)
-        // this also speeds up transitions from sub-views
+        // initilise the objects only the first time
         app.buildingView = app.buildingView || new FA.BuildingView( app );
         app.menuView = app.menuView || new FA.MenuView( app )
 
@@ -143,7 +154,7 @@ FA.StateExplore = function( app ) {
         labelsView = new FA.LabelsView( app );
         menuView = app.menuView;
 
-        buildGui();
+        buildSlider();
 
         buildingView.setOpacity( 0.3 );
 
@@ -160,40 +171,26 @@ FA.StateExplore = function( app ) {
         $layerGl.css( 'opacity', 1 );
         $layerLabels.css( 'opacity', 1 );
         $( '#header' ).css( 'top', 0 );
-
-        $('#title').text('SEDNAYA PRISON');
         menuView.show();
         //////////////////////////////////////////////////////
+
+        console.log(app.getActiveLocation(), app.getOverLocation());
 
     }
 
 
     this.update = function() {
 
-        // stats.begin();
-
         menuView.update();
 
-        buildingView.render();
+        buildingView.update();
 
         labelsView.update( buildingView.getCamera() );
-
-        // stats.end();
 
     }
 
 
     this.exit = function() {
-
-        //buildingView.destroy();
-        //menuView.destroy();
-        menuView.hide();
-        labelsView.destroy();
-
-        // menu
-
-        // gui
-        gui.destroy();
 
         // remove listeners
         $(window).off( 'resize', onWindowResize );
@@ -202,9 +199,16 @@ FA.StateExplore = function( app ) {
             .off( 'mousedown', onMouseDown )
             .off( 'mouseup', onMouseUp );
 
-        // stats
-        // $('#stats').remove();
-        // stats = null;
+        app.setOverLocation( null );
+        // app.setActiveLocation( null );
+
+        //buildingView.destroy();
+        menuView.hide();
+        labelsView.destroy();
+
+        // slider.hide();
+        destroySlider();
+
 
     }
 

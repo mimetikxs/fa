@@ -123,7 +123,7 @@ FA.LabelsView = function( app ) {
             room.$label.css( {
                 'transform' : 'translate3d(' + screenCoord.x  + 'px,' + screenCoord.y + 'px,0px)',
                 'opacity' : opacity,
-                'z-index' : Math.round(pct * 100)
+                'z-index' : Math.floor(pct * 100)
             } );
 
         }

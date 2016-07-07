@@ -123,40 +123,38 @@ FA.StateCell = function( app ) {
         $layer.css( 'visibility', 'visible' );
         $layer.css( 'opacity', 1 );
 
+        $('.btn-exit-360').css('opacity', 1);
+
         // label test
         label = $( '<div class="labels">' +
-                '<div class="label">INTERACTIVE ITEM</div>' +
-        '</div>');
+                    '<div class="label">INTERACTIVE ITEM</div>' +
+                '</div>');
         $('#layer-cell').after( label );// controls
 
         controls = new THREE.OrbitControls( camera, $('.labels')[0] );
         controls.enableDamping = true;
         controls.dampingFactor = 0.15;
-        controls.enableZoom = true;
+        controls.enableZoom = false;
         controls.scaleFactor = 0.08;
+        // controls.minDistance = 0;
+        // controls.maxDistance = 2;
 
         // add buttons
-        $('<div class="btn-exit">back</div>').appendTo(label);
-        $('<div class="btn-next">next story</div>').appendTo(label);
+        // $('<div class="btn-exit">back</div>').appendTo(label);
+        // $('<div class="btn-next">next story</div>').appendTo(label);
 
         // events
-        $('.btn-exit').on('click', function(){
+        $('.btn-exit-360').on('click', function(){
             app.changeState( new FA.StateExplore( app ) );
         });
 
         $('.label').on('click', function(){
-            app.changeState( new FA.StateVideo2( app, "cell" ) ); // back to cell after video
+            app.changeState( new FA.StateVideo2( app, "cell", {title: "interactive item"} ) ); // back to cell after video
         });
 
         $( '#header' ).css( 'top', 0 );
 
-        $('.btn-next, .btn-prev').hide();
-
-        // testing remove text Navigation ////////////////////////
-        $('#title').text('Group cell 1');
-
-        $('.menu-type').hide();
-        //////////////////////////////////////////////////////
+        //$('.btn-next, .btn-prev').hide();
 
     }
 
@@ -180,14 +178,16 @@ FA.StateCell = function( app ) {
 
         // remove listeners
         window.removeEventListener( 'resize', onWindowResize );
-        $('.btn-exit').off();
-        $('.btn-next').off();
+        $('.btn-exit-360').off();
+        // $('.btn-next').off();
         $('.label').off();
 
         // remove scene
         $layer.empty();
         $layer.css( 'visibility', 'hidden' );
         $layer.css( 'opacity', 0 );
+
+        $('.btn-exit-360').css('opacity', 0);
 
         label.remove();
 

@@ -22,15 +22,15 @@ FA.BuildingView = function( app ) {
 
         buildingMesh,
         roofMesh,
-        //roomMeshes = [],
         rooms,
         terrainMesh,
         roofEdgeHelper,
 
-
         controls,
 
-        raycaster;
+        raycaster,
+
+        roomUnderMouse;
 
 
     init();
@@ -38,6 +38,7 @@ FA.BuildingView = function( app ) {
 
     function init() {
 
+        // shortcuts
         buildingMesh = app.buildingMesh;
         roofMesh = app.buildingRoofMesh;
         terrainMesh = app.terrainMesh;
@@ -52,53 +53,9 @@ FA.BuildingView = function( app ) {
         addObjects();
         addControls();
 
-        //
         // listen to model changes
-        //
-
-        app.on( 'activeLocationChange', function( e ) {
-            var current = e.current;
-            for ( var i = 0; i < rooms.length; i++ ) {
-                var room = rooms[ i ],
-                    roomSlug = room.getSlug();
-
-                if ( room.getSlug() === current ) {
-                    room.$label.addClass( 'selected' );
-                    room.mark();
-
-                } else {
-                    room.$label.removeClass( 'selected' );
-                    if ( roomSlug !== app.getOverLocation() ) {
-                        room.unmark();
-                    }
-
-                }
-            }
-        } );
-
-        app.on( 'overLocationChange', function( e ) {
-            var location = e.location;
-
-            for ( var i = 0; i < rooms.length; i++ ) {
-                var room = rooms[ i ],
-                    roomSlug = room.getSlug();
-
-                if ( roomSlug === location ) {
-                    room.$label.addClass( 'over' );
-                    room.mark();
-
-                } else {
-                    room.$label.removeClass( 'over' );
-                    if ( roomSlug !== app.getActiveLocation() ) {
-                        room.unmark();
-                    }
-                }
-            }
-        } );
-
-
-        // TODO: change opacity of model if mouse over left menu
-        // opacity returns to the value of the slider after mouse leave
+        app.on( 'activeLocationChange', onModelActiveLocationChange );
+        app.on( 'overLocationChange', onModelOverLocationChange );
 
     }
 
@@ -110,14 +67,9 @@ FA.BuildingView = function( app ) {
         scene = new THREE.Scene();
 
         camera = new THREE.PerspectiveCamera( 40, sceneWidth / sceneHeight, 1, 300 );
-        camera.position.z = 2;
         camera.position.x = -26;
         camera.position.y = 16;
-        camera.position.z = 19;
-
-        // testing view offset
-        camera.setViewOffset( sceneWidth + sceneWidth/6, sceneHeight - sceneHeight/6, 0, 0, sceneWidth, sceneHeight );
-
+        camera.position.z = 14;
 
         renderer = new THREE.WebGLRenderer( { antialias: true } );
         renderer.setPixelRatio( window.devicePixelRatio );
@@ -188,13 +140,88 @@ FA.BuildingView = function( app ) {
         controls.enableDamping = true;
         controls.dampingFactor = 0.05;
         controls.enableZoom = true;
-        //controls.enablePan = false;
+        controls.zoomSpeed = 0.25;
+        controls.enablePan = false;
         controls.autoRotate = true;
-        controls.autoRotateSpeed = 0.01;
+        controls.autoRotateSpeed = 0.008;
         controls.maxPolarAngle = 1.1;
         controls.minPolarAngle = 0.7;
-        // controls.enableKeys = false;
+        controls.enableKeys = false;
+        controls.minDistance = 22;
+    	controls.maxDistance = 40;
 
+    }
+
+
+    function onModelActiveLocationChange( e ) {
+
+        var location = e.current;
+
+        for ( var i = 0; i < rooms.length; i++ ) {
+            var room = rooms[ i ],
+                roomSlug = room.getSlug();
+
+            if ( room.getSlug() === location ) {
+                room.$label.addClass( 'selected' );
+                room.mark();
+
+            } else {
+                room.$label.removeClass( 'selected' );
+                if ( roomSlug !== app.getOverLocation() ) {
+                    room.unmark();
+                }
+
+            }
+        }
+
+    }
+
+
+    function onModelOverLocationChange( e ) {
+
+        var location = e.location;
+
+        for ( var i = 0; i < rooms.length; i++ ) {
+            var room = rooms[ i ],
+                roomSlug = room.getSlug();
+
+            if ( roomSlug === location ) {
+                room.$label.addClass( 'over' );
+                room.mark();
+
+                // if ( roomSlug !== app.getActiveLocation() ) {
+                //     roomUnderMouse = room.object3D;
+                // }
+            } else {
+                room.$label.removeClass( 'over' );
+                if ( roomSlug !== app.getActiveLocation() ) {
+                    room.unmark();
+                }
+                // roomUnderMouse = null;
+            }
+        }
+
+    }
+
+
+
+
+    var count = 0;
+    var color = new THREE.Color( 0,0,0 );
+    var black = new THREE.Color( 0,0,0 );
+    var red = new THREE.Color( 1,0,0 );
+    function animateRoom() {
+        count += 0.1;
+
+        if ( !roomUnderMouse )
+            return;
+
+        var val = 0.5 * (1 + Math.sin( count )) * 0.5;
+
+        color.copy(black);
+        color.lerp(red, val);
+
+        roomUnderMouse.material.emissive.setHex(color.getHex());
     }
 
 
@@ -203,7 +230,9 @@ FA.BuildingView = function( app ) {
     //        //
 
 
-    this.render = function() {
+    this.update = function() {
+
+        // animateRoom();
 
         controls.update(); // required if controls.enableDamping = true, or if controls.autoRotate = true
 
@@ -235,10 +264,8 @@ FA.BuildingView = function( app ) {
         sceneHeight = height;
 
         camera.aspect = sceneWidth / sceneHeight;
+        camera.setViewOffset( (sceneWidth + sceneWidth/6), (sceneHeight - sceneHeight/4) , 0, 0, sceneWidth, sceneHeight );
         camera.updateProjectionMatrix();
-        // testing view offset
-        camera.setViewOffset( (sceneWidth + sceneWidth/6), (sceneHeight - sceneHeight/6) , 0, 0, sceneWidth, sceneHeight );
-
 
         renderer.setSize( sceneWidth, sceneHeight );
 
@@ -250,23 +277,23 @@ FA.BuildingView = function( app ) {
         // building
         var materials = buildingMesh.material.materials;
         for ( var i = 0; i < materials.length; i++ ) {
-            materials[ i ].opacity = val;
+            materials[ i ].opacity = 0.15 + val * ( 1 - 0.15 ); // remap from [0.0-1.0] to [0.1-1.0]
             materials[ i ].needsUpdate = true;
         }
 
         // roof
         materials = roofMesh.material.materials;
         for ( var i = 0; i < materials.length; i++ ) {
-            materials[ i ].opacity = val * val * 1.1;
+            materials[ i ].opacity = val * val * 1.1; // exponential curve
             materials[ i ].needsUpdate = true;
         }
-        roofEdgeHelper.material.opacity = val * val * 0.2;
+        roofEdgeHelper.material.opacity = val * val * 0.2;  // exponential curve
         roofEdgeHelper.material.needsUpdate = true;
 
         // terrain
         materials = terrainMesh.material.materials;
         for ( var i = 0; i < materials.length; i++ ) {
-            materials[ i ].opacity = val * val + 0.5;
+            materials[ i ].opacity = val * val + 0.2;   // exponential curve
             materials[ i ].needsUpdate = true;
         }
 
@@ -283,7 +310,9 @@ FA.BuildingView = function( app ) {
         $dom.empty();
         renderer = null;
 
-        // TODO remove app.listeners
+        // remove app.listeners
+        app.remove( 'activeLocationChange', onModelActiveLocationChange );
+        app.remove( 'overLocationChange', onModelOverLocationChange );
 
     }
 

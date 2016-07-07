@@ -158,6 +158,9 @@ FA.StatePreload = function( app ) {
             loader.load(
                 data.obj,
                 function ( geometry, materials ) {
+                    var bufferGeom = new THREE.BufferGeometry();
+                    bufferGeom.fromGeometry( geometry )
+
                     var room = new FA.Room( geometry, name, slug );
 
                     app.rooms.push( room );
@@ -281,8 +284,9 @@ FA.StatePreload = function( app ) {
         // bypass
         if (loaded) {
             $( '#layer-video' ).fadeOut();
-            $( '#introMessage' ).fadeOut();
+            // $( '#introMessage' ).fadeOut();
             app.changeState( new FA.StateExplore( app ) );
+            // app.changeState( new FA.StateVideo2( app ) );
         }
 
     }

@@ -105,3 +105,12 @@ FA.utils.makePublisher( FA.App );
 
 // set inital state
 FA.App.changeState( new FA.StatePreload( FA.App ) );
+
+
+//
+// global scope event listeners
+//
+
+$( window ).on( 'resize', function( e ) {
+    $( '#content' ).css( 'height', $(window).height() - 50 ); // header bar is 50px
+} ).trigger( 'resize' );

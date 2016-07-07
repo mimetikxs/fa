@@ -2,6 +2,7 @@ FA.Data = function( data ) {
 
 	var mediasByLocation = {},
 		mediasByWitness = {},
+		mediaById = {},
 
 	 	medias = data.media,
 		locations = data.locations,
@@ -35,12 +36,19 @@ FA.Data = function( data ) {
 		}
 	}
 
+	// create media lookup
+	for ( i = 0; i < medias.length; i++ ) {
+		media = medias[ i ];
+		mediaById[ media.id ] = media;
+	}
+
 	return {
 		locations : locations,
 		witnesses : witnesses,
 		medias : medias,
 		mediasByLocation : mediasByLocation,
-		mediasByWitness : mediasByWitness
+		mediasByWitness : mediasByWitness,
+		mediaById : mediaById
 	}
 
 }

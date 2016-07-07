@@ -356,12 +356,42 @@ td,
 th {
   padding: 0; }
 
+@font-face {
+  font-family: 'FontAwesome';
+  src: url("fonts/fontawesome-webfont.eot?v=4.6.3");
+  src: url("fonts/fontawesome-webfont.eot?#iefix&v=4.6.3") format("embedded-opentype"), url("fonts/fontawesome-webfont.woff2?v=4.6.3") format("woff2"), url("fonts/fontawesome-webfont.woff?v=4.6.3") format("woff"), url("fonts/fontawesome-webfont.ttf?v=4.6.3") format("truetype"), url("fonts/fontawesome-webfont.svg?v=4.6.3#fontawesomeregular") format("svg");
+  font-weight: normal;
+  font-style: normal; }
+@font-face {
+  font-family: 'simple-line-icons';
+  src: url("fonts/Simple-Line-Icons.eot?v=2.3.2");
+  src: url("fonts/Simple-Line-Icons.eot?v=2.3.2#iefix") format("embedded-opentype"), url("fonts/Simple-Line-Icons.woff2?v=2.3.2") format("woff2"), url("fonts/Simple-Line-Icons.ttf?v=2.3.2") format("truetype"), url("fonts/Simple-Line-Icons.woff?v=2.3.2") format("woff"), url("fonts/Simple-Line-Icons.svg?v=2.3.2#simple-line-icons") format("svg");
+  font-weight: normal;
+  font-style: normal; }
+@font-face {
+  font-family: 'AmnestyTradeGothic-BdCn20';
+  src: url("fonts/AmnestyTradeGothic-BdCn20.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal; }
+@font-face {
+  font-family: 'AmnestyTradeGothic-Cn18';
+  src: url("fonts/AmnestyTradeGothic-Cn18.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal; }
 body {
   overflow: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-family: 'Roboto', sans-serif;
-  background-color: #666666; }
+  background-color: #666666;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale; }
+
+#content {
+  position: absolute;
+  top: 50px;
+  left: 0;
+  width: 100%; }
 
 #layer-cell,
 #layer-labels,
@@ -369,9 +399,8 @@ body {
   position: absolute;
   width: 100%;
   height: 100%;
-  top: 0;
-  right: 0;
   opacity: 0;
+  overflow: hidden;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -khtml-user-select: none;
@@ -471,7 +500,8 @@ body {
   margin-right: 20px;
   text-transform: uppercase;
   font-weight: bold;
-  font-size: 14px; }
+  font-size: 16px;
+  font-family: 'AmnestyTradeGothic-BdCn20', sans-serif; }
   #mainNav:after {
     content: "";
     display: table;
@@ -487,6 +517,55 @@ body {
     #mainNav > span:hover, #mainNav > span.active {
       background-color: #ccc;
       color: #000; }
+
+#footer-desktop {
+  font-family: sans-serif;
+  position: absolute;
+  color: white;
+  bottom: 30px;
+  right: 30px;
+  font-family: 'AmnestyTradeGothic-BdCn20', sans-serif;
+  text-transform: uppercase;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none; }
+  #footer-desktop > span {
+    color: #ccc; }
+  #footer-desktop .label:after {
+    content: "";
+    border-right: 1px solid #999;
+    margin: 0 10px 0 10px; }
+  #footer-desktop .facebook {
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    margin-right: 10px;
+    font-size: 18px; }
+    #footer-desktop .facebook:before {
+      content: "\f082"; }
+  #footer-desktop .twitter {
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: 18px; }
+    #footer-desktop .twitter:before {
+      content: "\f099"; }
+  #footer-desktop .facebook,
+  #footer-desktop .twitter {
+    font-size: 20px;
+    cursor: pointer; }
+    #footer-desktop .facebook:hover,
+    #footer-desktop .twitter:hover {
+      color: white; }
 
 .block {
   text-align: center;
@@ -531,41 +610,133 @@ body {
   height: 100%;
   background: black;
   opacity: 0;
-  transition: opacity 500ms; }
+  transition: opacity 500ms;
+  background-color: gray;
+  font-family: 'AmnestyTradeGothic-BdCn20', sans-serif; }
+  #layer-video .controls {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    transition: opacity 300ms; }
+  #layer-video .info {
+    position: absolute;
+    color: white;
+    top: 30px;
+    left: 30px;
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 10px 20px; }
+    #layer-video .info > * {
+      line-height: 35px;
+      height: 35px;
+      display: inline-block;
+      float: left; }
+    #layer-video .info .title {
+      font-size: 28px;
+      text-transform: uppercase; }
+    #layer-video .info .location,
+    #layer-video .info .witness {
+      text-transform: uppercase;
+      font-size: 17px;
+      font-family: 'AmnestyTradeGothic-Cn18', sans-serif; }
+    #layer-video .info .separator {
+      margin: 0 10px;
+      font-size: 17px;
+      font-family: 'AmnestyTradeGothic-Cn18', sans-serif; }
+  #layer-video .info-arabic {
+    position: absolute;
+    color: white;
+    top: 92px;
+    left: 30px;
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 10px 20px; }
+  #layer-video .btn-next,
+  #layer-video .btn-prev,
+  #layer-video .btn-exit {
+    position: absolute;
+    text-transform: uppercase;
+    cursor: pointer;
+    color: white; }
+  #layer-video .btn-prev,
+  #layer-video .btn-next {
+    max-width: 150px;
+    top: 50%;
+    margin-top: -30px; }
+    #layer-video .btn-prev .arrow,
+    #layer-video .btn-next .arrow {
+      font-family: 'simple-line-icons';
+      speak: none;
+      font-style: normal;
+      font-weight: normal;
+      font-variant: normal;
+      text-transform: none;
+      line-height: 1;
+      /* Better Font Rendering =========== */
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      display: inline-block;
+      padding: 15px 12px;
+      font-size: 30px; }
+    #layer-video .btn-prev .label,
+    #layer-video .btn-next .label {
+      position: absolute;
+      top: 0;
+      width: 150px;
+      padding: 10px 15px;
+      opacity: 0;
+      pointer-events: none; }
+    #layer-video .btn-prev .arrow,
+    #layer-video .btn-prev .label,
+    #layer-video .btn-next .arrow,
+    #layer-video .btn-next .label {
+      transition: background-color 300ms, opacity 300ms, color 300ms;
+      background-color: rgba(0, 0, 0, 0.8); }
+    #layer-video .btn-prev:hover .label,
+    #layer-video .btn-prev:hover .arrow,
+    #layer-video .btn-next:hover .label,
+    #layer-video .btn-next:hover .arrow {
+      opacity: 1;
+      background-color: white;
+      color: black; }
+  #layer-video .btn-prev {
+    left: 20px;
+    right: auto; }
+    #layer-video .btn-prev .arrow:before {
+      content: "\e605"; }
+    #layer-video .btn-prev .label {
+      left: 60px; }
+  #layer-video .btn-next {
+    right: 20px;
+    text-align: right; }
+    #layer-video .btn-next .arrow:before {
+      content: "\e606"; }
+    #layer-video .btn-next .label {
+      right: 60px; }
+  #layer-video .btn-exit {
+    top: 30px;
+    right: 20px;
+    padding: 18px;
+    background-color: rgba(0, 0, 0, 0.8);
+    transition: background-color 300ms, color 300ms; }
+    #layer-video .btn-exit:hover {
+      background-color: white;
+      color: black; }
 
-.btn-next,
-.btn-prev,
-.btn-exit {
+.btn-exit-360 {
   position: absolute;
+  top: 30px;
   right: 20px;
+  padding: 18px;
   color: white;
-  padding: 14px;
   text-transform: uppercase;
-  cursor: pointer;
-  font-family: 'Oswald', sans-serif;
-  border: 1px solid white;
-  transition: background-color 500ms, color 500ms; }
-  .btn-next:hover,
-  .btn-prev:hover,
-  .btn-exit:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+  font-family: 'AmnestyTradeGothic-BdCn20', sans-serif;
+  transition: background-color 300ms, color 300ms;
+  opacity: 0;
+  cursor: pointer; }
+  .btn-exit-360:hover {
     background-color: white;
     color: black; }
-
-.btn-exit {
-  top: 80px; }
-
-.btn-prev,
-.btn-next {
-  max-width: 150px;
-  top: 50%;
-  border: none; }
-
-.btn-prev {
-  left: 20px;
-  right: auto; }
-
-.btn-next {
-  text-align: right; }
 
 #left-bar {
   position: absolute;
@@ -576,6 +747,7 @@ body {
   font-family: 'Oswald', sans-serif;
   text-transform: uppercase;
   color: white;
+  z-index: 1000;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -khtml-user-select: none;
@@ -584,24 +756,50 @@ body {
   user-select: none; }
 
 #title {
-  font-size: 38px;
-  border-bottom: 1px solid #999;
-  padding: 10px 0;
-  margin-top: 65px; }
+  position: absolute;
+  left: 30px;
+  top: 30px;
+  font-family: 'AmnestyTradeGothic-BdCn20', sans-serif;
+  color: #ddd;
+  cursor: default; }
+  #title > div {
+    display: inline-block; }
+  #title div:nth-child(1) {
+    font-size: 41px;
+    text-transform: uppercase;
+    float: left; }
+  #title div:nth-child(2) {
+    float: left;
+    padding: 2px 10px;
+    margin: 8px 0 0 15px;
+    font-size: 22px;
+    background-color: #ddd;
+    color: #666; }
 
 #navigation {
+  position: absolute;
+  top: 110px;
+  left: 30px;
+  height: 100%;
+  width: 265px;
   font-family: 'Oswald', sans-serif;
   text-transform: uppercase;
   font-size: 12px;
   color: white;
-  height: 100%;
-  overflow: hidden; }
+  overflow: hidden;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none; }
   #navigation .menu-type {
     padding: 17px 0;
+    border-top: 1px solid #999;
     border-bottom: 1px solid #999; }
     #navigation .menu-type span {
       display: inline-block;
-      padding: 3px 7px;
+      padding: 9px;
       cursor: pointer;
       border: solid 1px #999;
       color: #999; }
@@ -609,7 +807,7 @@ body {
         color: white;
         border: solid 1px white; }
       #navigation .menu-type span:first-child {
-        margin-right: 10px;
+        margin-right: 9px;
         margin-left: 3px; }
   #navigation .container {
     margin: 40px 0 0 0;
@@ -630,22 +828,19 @@ body {
       transition: background-color 200ms ease-out; }
       #navigation ul.menu-witness > li > .folder .icon,
       #navigation ul.menu-location > li > .folder .icon {
-        font-family: 'simple-line-icons';
-        speak: none;
-        font-style: normal;
-        font-weight: normal;
-        font-variant: normal;
-        text-transform: none;
-        line-height: 1;
-        /* Better Font Rendering =========== */
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-        position: relative;
-        font-size: 13px;
-        margin-right: 8px; }
+        font-family: 'Arial', 'Helvetica', sans-serif;
+        margin-right: 8px;
+        display: inline-block;
+        width: 15px;
+        height: 15px;
+        line-height: 15px;
+        text-align: center;
+        font-size: 18px; }
         #navigation ul.menu-witness > li > .folder .icon:before,
         #navigation ul.menu-location > li > .folder .icon:before {
-          content: "\e095"; }
+          content: '+';
+          top: 1px;
+          position: relative; }
       #navigation ul.menu-witness > li > .folder:hover,
       #navigation ul.menu-location > li > .folder:hover {
         background-color: rgba(100, 6, 6, 0.65); }
@@ -672,10 +867,64 @@ body {
       background-color: rgba(224, 6, 6, 0.65); }
       #navigation ul.menu-witness > li.selected .folder .icon:before,
       #navigation ul.menu-location > li.selected .folder .icon:before {
-        content: "\e615"; }
+        content: '-';
+        top: 0; }
     #navigation ul.menu-witness > li.over:not(.selected) .folder,
     #navigation ul.menu-location > li.over:not(.selected) .folder {
       background-color: rgba(100, 6, 6, 0.65); }
+
+.control-wrap {
+  position: absolute;
+  top: 90px;
+  right: 30px;
+  overflow: hidden;
+  width: 85px;
+  transition: width 400ms ease-in-out; }
+
+.control {
+  width: 210px; }
+  .control:after {
+    content: "";
+    display: table;
+    clear: both; }
+  .control .label {
+    color: #ccc;
+    font-family: 'Oswald', sans-serif;
+    text-transform: uppercase;
+    font-size: 12px;
+    z-index: 1;
+    float: left;
+    padding: 0 12px;
+    line-height: 34px;
+    height: 35px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-right: none;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: default; }
+  .control .slider {
+    float: left;
+    position: relative;
+    width: 120px;
+    height: 35px;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    cursor: ew-resize; }
+    .control .slider .bar {
+      position: relative;
+      top: 0px;
+      left: 0px;
+      height: 100%;
+      background-color: #ccc;
+      transition: background-color 300ms; }
+  .control:hover .bar {
+    background-color: white; }
 
 .dg.ac {
   top: 60px !important; }

@@ -1,61 +1,29 @@
-@import url(https://fonts.googleapis.com/css?family=Shadows+Into+Light);
 @font-face {
-  font-family: 'PFDinTextPro-ExtraBlack';
-  src: url("../font/294CD0_0_0.eot");
-  src: url("../font/294CD0_0_0.eot?#iefix") format("embedded-opentype"), url("../font/294CD0_0_0.woff") format("woff"), url("../font/294CD0_0_0.ttf") format("truetype"); }
+  font-family: 'FontAwesome';
+  src: url('fonts/fontawesome-webfont.eot?v=4.6.3');
+  src: url('fonts/fontawesome-webfont.eot?#iefix&v=4.6.3') format('embedded-opentype'), url('fonts/fontawesome-webfont.woff2?v=4.6.3') format('woff2'), url('fonts/fontawesome-webfont.woff?v=4.6.3') format('woff'), url('fonts/fontawesome-webfont.ttf?v=4.6.3') format('truetype'), url('fonts/fontawesome-webfont.svg?v=4.6.3#fontawesomeregular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
 @font-face {
-  font-family: 'PFDinTextPro-ExtraBlackItalic';
-  src: url("../font/294CD0_1_0.eot");
-  src: url("../font/294CD0_1_0.eot?#iefix") format("embedded-opentype"), url("../font/294CD0_1_0.woff") format("woff"), url("../font/294CD0_1_0.ttf") format("truetype"); }
+  font-family: 'simple-line-icons';
+  src: url('fonts/Simple-Line-Icons.eot?v=2.3.2');
+  src: url('fonts/Simple-Line-Icons.eot?v=2.3.2#iefix') format('embedded-opentype'), url('fonts/Simple-Line-Icons.woff2?v=2.3.2') format('woff2'), url('fonts/Simple-Line-Icons.ttf?v=2.3.2') format('truetype'), url('fonts/Simple-Line-Icons.woff?v=2.3.2') format('woff'), url('fonts/Simple-Line-Icons.svg?v=2.3.2#simple-line-icons') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
 @font-face {
-  font-family: 'PFDinTextPro-Regular';
-  src: url("../font/294CD0_2_0.eot");
-  src: url("../font/294CD0_2_0.eot?#iefix") format("embedded-opentype"), url("../font/294CD0_2_0.woff") format("woff"), url("../font/294CD0_2_0.ttf") format("truetype"); }
+    font-family: 'AmnestyTradeGothic-BdCn20';
+    src: url('fonts/AmnestyTradeGothic-BdCn20.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 @font-face {
-  font-family: 'PFDinTextPro-Medium';
-  src: url("../font/294CD0_3_0.eot");
-  src: url("../font/294CD0_3_0.eot?#iefix") format("embedded-opentype"), url("../font/294CD0_3_0.woff") format("woff"), url("../font/294CD0_3_0.ttf") format("truetype"); }
-@font-face {
-  font-family: 'PFDinTextPro-BoldItalic';
-  src: url("../font/294CD0_4_0.eot");
-  src: url("../font/294CD0_4_0.eot?#iefix") format("embedded-opentype"), url("../font/294CD0_4_0.woff") format("woff"), url("../font/294CD0_4_0.ttf") format("truetype"); }
-@font-face {
-  font-family: 'PFDinTextPro-MediumItalic';
-  src: url("../font/294CD0_5_0.eot");
-  src: url("../font/294CD0_5_0.eot?#iefix") format("embedded-opentype"), url("../font/294CD0_5_0.woff") format("woff"), url("../font/294CD0_5_0.ttf") format("truetype"); }
-@font-face {
-  font-family: 'PFDinTextPro-Italic';
-  src: url("../font/294CD0_6_0.eot");
-  src: url("../font/294CD0_6_0.eot?#iefix") format("embedded-opentype"), url("../font/294CD0_6_0.woff") format("woff"), url("../font/294CD0_6_0.ttf") format("truetype"); }
-@font-face {
-  font-family: 'PFDinTextPro-Bold';
-  src: url("../font/294CD0_7_0.eot");
-  src: url("../font/294CD0_7_0.eot?#iefix") format("embedded-opentype"), url("../font/294CD0_7_0.woff") format("woff"), url("../font/294CD0_7_0.ttf") format("truetype"); }
-@font-face {
-  font-family: 'PFDinTextPro-Thin';
-  src: url("../font/294CD0_8_0.eot");
-  src: url("../font/294CD0_8_0.eot?#iefix") format("embedded-opentype"), url("../font/294CD0_8_0.woff") format("woff"), url("../font/294CD0_8_0.ttf") format("truetype"); }
-@font-face {
-  font-family: 'PFDinTextPro-Light';
-  src: url("../font/294CD0_9_0.eot");
-  src: url("../font/294CD0_9_0.eot?#iefix") format("embedded-opentype"), url("../font/294CD0_9_0.woff") format("woff"), url("../font/294CD0_9_0.ttf") format("truetype"); }
-@font-face {
-  font-family: 'PFDinTextPro-ExtraThin';
-  src: url("../font/294CD0_A_0.eot");
-  src: url("../font/294CD0_A_0.eot?#iefix") format("embedded-opentype"), url("../font/294CD0_A_0.woff") format("woff"), url("../font/294CD0_A_0.ttf") format("truetype"); }
-@font-face {
-  font-family: 'PFDinTextPro-ThinItalic';
-  src: url("../font/294CD0_B_0.eot");
-  src: url("webfonts/294CD0_B_0.eot?#iefix") format("embedded-opentype"), url("webfonts/294CD0_B_0.woff") format("woff"), url("webfonts/294CD0_B_0.ttf") format("truetype"); }
-@font-face {
-  font-family: 'PFDinTextPro-ExtraThinItalic';
-  src: url("webfonts/294CD0_C_0.eot");
-  src: url("webfonts/294CD0_C_0.eot?#iefix") format("embedded-opentype"), url("webfonts/294CD0_C_0.woff") format("woff"), url("webfonts/294CD0_C_0.ttf") format("truetype"); }
-@font-face {
-  font-family: 'PFDinTextPro-LightItalic';
-  src: url("webfonts/294CD0_D_0.eot");
-  src: url("webfonts/294CD0_D_0.eot?#iefix") format("embedded-opentype"), url("webfonts/294CD0_D_0.woff") format("woff"), url("webfonts/294CD0_D_0.ttf") format("truetype"); }
-@font-face {
-  font-family: 'PFDinTextPro-Hairline';
-  src: url("webfonts/294CD0_E_0.eot");
-  src: url("webfonts/294CD0_E_0.eot?#iefix") format("embedded-opentype"), url("webfonts/294CD0_E_0.woff") format("woff"), url("webfonts/294CD0_E_0.ttf") format("truetype"); }
+    font-family: 'AmnestyTradeGothic-Cn18';
+    src: url('fonts/AmnestyTradeGothic-Cn18.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}

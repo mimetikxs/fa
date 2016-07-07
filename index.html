@@ -5,46 +5,38 @@
 		<title>Home</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-		<link rel="stylesheet" href="css/simple-line-icons.css">
-		<!-- <link rel="stylesheet" href="css/pe-icon-7-stroke.css"> -->
-		<link rel="stylesheet" href="css/font-awesome.css">
 		<link href="https://fonts.googleapis.com/css?family=Oswald:300,400,700" rel="stylesheet">
-		<link rel="stylesheet" href="css/app.css">
+		<link rel="stylesheet" href="css/app.css?v=2">
 	</head>
 
 	<body>
 
-		<div id="introMessage" class="block">
+		<!-- <div id="introMessage" class="block">
 			<div class="message centered">
 
 			</div>
-		</div>
-		<div id="typed-strings">
+		</div> -->
+		<!-- <div id="typed-strings">
 			<p>Located 25km away from Damascus</p>
 			<p>the <strong>Saidnaya</strong> prison is one of the most notorious</p>
 			<p>Neither human rights observers nor journalists</p>
 			<p>have been able to visit Saidnaya since 2011</p>
 			<p>the prison is a <strong>black hole</strong></p>
 			<p>This is as close to Saidnaya as we can get</p>
-		</div>
+		</div> -->
 
-		<div id="layer-gl"></div>
-		<div id="layer-labels"></div>
-		<div id="layer-cell"></div>
 
-		<div id="layer-nav"></div>
+		<div id="content">
 
-		<div id="layer-video">
-			<div class="player"></div>
-			<!-- <div class="controls"> -->
-				<div class="btn-next">Guards shortening their sticks<span class="pe-7s-angle-right icon"></span></div>
-				<div class="btn-prev"><span class="pe-7s-angle-left icon"></span>No echo, cells full of people</div>
-				<div class="btn-exit">Close</div>
-			<!-- </div> -->
-		</div>
+			<!-- main screen -->
+			<div id="layer-gl"></div>
+			<div id="layer-labels"></div>
 
-		<div id="left-bar">
-			<div id="title">Sednaya Prison</div>
+			<div id="title">
+				<div>Saydnaya Prison</div>
+				<div>صيدنايا</div>
+			</div>
+
 			<div id="navigation">
 				<div class="menu-type">
 					<span data-type="location">Explore by location</span>
@@ -53,7 +45,39 @@
 				<div class="container">
 				</div>
 			</div>
+
+			<!-- 360 view screen -->
+			<div id="layer-cell"></div>
+			<div class="btn-exit-360">Back</div>
+
+			<!-- video screen -->
+			<div id="layer-video">
+				<div class="player"></div>
+
+				<div class="controls">
+					<div class="info">
+						<span class="title">Measuring his face in cell door</span>
+						<!-- <span class="witness">Witness A</span>
+						<span class="separator">/</span>
+						<span class="location">Solitary 1</span> -->
+					</div>
+					<div class="info-arabic">
+						<span class="title">قياس وجهه على باب الزنزانة</span>
+					</div>
+					<div class="btn-next">
+						<div class="arrow"></div>
+						<div class="label">Guards shortening their sticks</div>
+					</div>
+					<div class="btn-prev">
+						<div class="arrow"></div>
+						<div class="label">No echo, cells full of people</div>
+					</div>
+					<div class="btn-exit">Close</div>
+				</div>
+			</div>
+
 		</div>
+
 
 
 		<div id="header">
@@ -61,8 +85,14 @@
 				<span class="ai"></span><span class="fa"></span>
 			</div>
 			<div id="mainNav">
-				<span class="active">Explore</span><span>About</span><span>Take Action</span>
+				<span class="active">Explore استكشف</span><span>About حول</span><span>Take Action بادر بالتحرك</span>
 			</div>
+		</div>
+
+		<div id="footer-desktop">
+			<span class="label">share</span>
+			<span class="facebook"></span>
+			<span class="twitter"></span>
 		</div>
 
 		<!-- Scripts -->
@@ -84,6 +114,7 @@
 		<script src="js/src/LabelsView.js"></script>
 		<script src="js/src/BuildingView.js"></script>
 		<script src="js/src/MenuView.js"></script>
+		<script src="js/src/Slider.js"></script>
 		<script src="js/src/BufferLoader.js"></script>
 		<script src="js/src/StateIdle.js"></script>
 		<script src="js/src/StatePreload.js"></script>

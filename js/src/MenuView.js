@@ -9,11 +9,13 @@ FA.MenuView = function( app ) {
         // auto scrolling
         localMouseY = 0,
         targetScroll = 0,
-        currentScroll = 0;
+        currentScroll = 0,
 
-    // wait a 500msecs before deselecting
-    var timeoutId = null,
-        timeoutDuration = 500;
+        // wait a 500msecs before deselecting
+        timeoutId = null,
+        timeoutDuration = 500,
+
+        isMouseDown = false;
 
 
 
@@ -24,9 +26,9 @@ FA.MenuView = function( app ) {
 
         build();
 
-        addListeners();
-
         onWindowResize();
+
+        addListeners();
 
         setNavMode( 'location' );
 
@@ -140,11 +142,12 @@ FA.MenuView = function( app ) {
             .find( '.selected' ).removeClass( 'selected' ).end()
             .find( '[data-type="' + mode + '"]' ).addClass( 'selected' );
 
-        // reset model's active location
+        // reset highlighted folders
         $container.find( '.selected' )
             .removeClass( 'selected' )
             .find( 'ul' ).css( 'height', 0 );
 
+        // reset model active location
         app.setActiveLocation( null );
 
         // add / remove listeners based on mode
@@ -167,7 +170,10 @@ FA.MenuView = function( app ) {
 
     function addListeners() {
 
-        $(window).on( 'resize', onWindowResize );
+        $(window)
+            .on( 'resize', onWindowResize )
+            .on( 'mousedown', onMouseDown )
+            .on( 'mouseup', onMouseUp );
 
         // type switcher
         $( '.menu-type' ).on( 'click', onTypeClick );
@@ -177,13 +183,17 @@ FA.MenuView = function( app ) {
             .on( 'mousemove', onMouseMove );
 
         app.on( 'overLocationChange', onModelOverLocationChange );
+        // app.on( 'activeLocationChange', onModelActiveLocationChange );
 
     }
 
 
     function removeListeners() {
 
-        $(window).off( 'resize', onWindowResize );
+        $(window)
+            .off( 'resize', onWindowResize )
+            .off( 'mousedown', onMouseDown )
+            .off( 'mouseup', onMouseUp );
 
         $( '.container' )
             .off( 'click', onClick )
@@ -194,6 +204,7 @@ FA.MenuView = function( app ) {
             .off( 'mouseleave', '.media', onMouseleaveMedia );
 
         app.remove( 'overLocationChange', onModelOverLocationChange );
+        // app.remove( 'activeLocationChange', onModelActiveLocationChange );
 
     }
 
@@ -211,6 +222,13 @@ FA.MenuView = function( app ) {
         el.removeClass( 'over' );
 
     }
+
+
+    // function onModelActiveLocationChange( e ) {
+    //
+    //
+    //
+    // }
 
 
     function onTypeClick( e ) {
@@ -233,7 +251,10 @@ FA.MenuView = function( app ) {
 
         var $target = $( e.target );
 
-        if ( $target.hasClass( 'folder' ) ) {
+        if ( $target.hasClass( 'folder' ) || $target.parent().hasClass( 'folder' ) ) {
+
+            // if we clicked the inner span, we need to point to the right element
+            $target = ( $target.parent().hasClass( 'folder' ) ) ? $target.parent() : $target;
 
             // if already selected
             if ( $target.parent().hasClass( 'selected' ) ) {
@@ -260,6 +281,7 @@ FA.MenuView = function( app ) {
                 // change active location
                 if ( $currentMenu.hasClass( 'menu-location' ) ) {
                     var slug = $target.parent().data( 'location' );
+
                     app.setActiveLocation( slug );
                 }
             }
@@ -269,7 +291,13 @@ FA.MenuView = function( app ) {
             // TODO
             // extract id of video
             // change state (pass video id, and next state type: eg. home or )
-            app.changeState( new FA.StateVideo2( app ) );
+
+            var id = $target.data( 'id' ),
+                mediaData = app.data.mediaById[ id ];
+
+                console.log(mediaData);
+
+            app.changeState( new FA.StateVideo2( app, 'home', mediaData ) );
 
         }
 
@@ -278,12 +306,18 @@ FA.MenuView = function( app ) {
 
     function onMouseMove( e ) {
 
+        if ( isMouseDown )
+            return;
+
         localMouseY = e.pageY - $container.offset().top;
 
     }
 
 
     function onMouseenterFolder( e ) {
+
+        if ( isMouseDown )
+            return;
 
         clearTimeout( timeoutId );
 
@@ -296,6 +330,9 @@ FA.MenuView = function( app ) {
 
     function onMouseleaveFolder( e ) {
 
+        if ( isMouseDown )
+            return;
+
         clearTimeout( timeoutId );
         timeoutId = setTimeout( function(){
 
@@ -307,6 +344,9 @@ FA.MenuView = function( app ) {
 
 
     function onMouseenterMedia( e ) {
+
+        if ( isMouseDown )
+            return;
 
         clearTimeout( timeoutId );
 
@@ -325,6 +365,20 @@ FA.MenuView = function( app ) {
             app.setActiveLocation( null );
 
         }, timeoutDuration );
+
+    }
+
+
+    function onMouseDown( e ) {
+
+        isMouseDown = true;
+
+    }
+
+
+    function onMouseUp( e ) {
+
+        isMouseDown = false;
 
     }
 
@@ -379,6 +433,11 @@ FA.MenuView = function( app ) {
         $('#left-bar').fadeOut(0);
 
         localMouseY = 0;
+
+        // close any open folder
+        // $currentMenu.find( '.selected' )
+        //     .removeClass( 'selected' )
+        //     .find('ul').height(0);
 
     }
 
