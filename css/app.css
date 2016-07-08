@@ -613,18 +613,24 @@ body {
   transition: opacity 500ms;
   background-color: gray;
   font-family: 'AmnestyTradeGothic-BdCn20', sans-serif; }
-  #layer-video .controls {
+  #layer-video .player {
     position: absolute;
     width: 100%;
-    height: 100%;
-    z-index: 100;
-    transition: opacity 300ms; }
+    height: 100%; }
+  #layer-video .controls.inactive {
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s linear 1000ms, opacity 1000ms; }
+  #layer-video .controls.active {
+    visibility: visible;
+    opacity: 1;
+    transition: visibility 0s linear 0s, opacity 1000ms; }
   #layer-video .info {
     position: absolute;
-    color: white;
     top: 30px;
     left: 30px;
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(255, 255, 255, 0.8);
+    color: black;
     padding: 10px 20px; }
     #layer-video .info > * {
       line-height: 35px;
@@ -696,7 +702,7 @@ body {
     #layer-video .btn-next:hover .label,
     #layer-video .btn-next:hover .arrow {
       opacity: 1;
-      background-color: white;
+      background-color: rgba(255, 255, 255, 0.8);
       color: black; }
   #layer-video .btn-prev {
     left: 20px;
@@ -932,5 +938,135 @@ body {
 #stats {
   top: 60px !important;
   left: 10px; }
+
+/*
+  Player Skin Designer for Video.js
+  http://videojs.com
+
+  To customize the player skin edit
+  the CSS below. Click "details"
+  below to add comments or questions.
+  This file uses some SCSS. Learn more
+  at http://sass-lang.com/guide)
+
+  This designer can be linked to at:
+  http://codepen.io/heff/pen/EarCt/left/?editors=010
+*/
+.video-js {
+  /* The base font size controls the size of everything, not just text.
+     All dimensions use em-based sizes so that the scale along with the font size.
+     Try increasing it to 15px and see what happens. */
+  font-size: 10px;
+  /* The main font color changes the ICON COLORS as well as the text */
+  color: #ccc; }
+
+/* The "Big Play Button" is the play button that shows before the video plays.
+   To center it set the align values to center and middle. The typical location
+   of the button is the center, but there is trend towards moving it to a corner
+   where it gets out of the way of valuable content in the poster image.*/
+.vjs-default-skin .vjs-big-play-button {
+  /* The font size is what makes the big play button...big.
+     All width/height values use ems, which are a multiple of the font size.
+     If the .video-js font-size is 10px, then 3em equals 30px.*/
+  font-size: 3em;
+  /* We're using SCSS vars here because the values are used in multiple places.
+     Now that font size is set, the following em values will be a multiple of the
+     new font size. If the font-size is 3em (30px), then setting any of
+     the following values to 3em would equal 30px. 3 * font-size. */
+  /* 1.5em = 45px default */
+  line-height: 2em;
+  height: 2em;
+  width: 2.5em;
+  /* 0.06666em = 2px default */
+  border: none;
+  /* 0.3em = 9px default */
+  border-radius: 0;
+  /* Align center */
+  left: 50%;
+  top: 50%;
+  margin-left: -1.25em;
+  margin-top: -1em;
+  margin-top: -1em; }
+  .vjs-default-skin .vjs-big-play-button:before {
+    top: -1px;
+    font-size: 1.3em; }
+
+.video-js:hover .vjs-big-play-button {
+  background-color: rgba(0, 0, 0, 0.8);
+  transition: background-color 300ms, color 300ms; }
+  .video-js:hover .vjs-big-play-button:hover {
+    background-color: rgba(255, 255, 255, 0.8);
+    color: black; }
+
+/* The default color of control backgrounds is mostly black but with a little
+   bit of blue so it can still be seen on all-black video frames, which are common. */
+.video-js .vjs-control-bar,
+.video-js .vjs-big-play-button,
+.video-js .vjs-menu-button .vjs-menu-content {
+  /* IE8 - has no alpha support */
+  background-color: #000;
+  /* Opacity: 1.0 = 100%, 0.0 = 0% */
+  background-color: rgba(0, 0, 0, 0.7); }
+
+/* Slider - used for Volume bar and Progress bar */
+.video-js .vjs-slider {
+  background-color: #000;
+  background-color: rgba(0, 0, 0, 0.7); }
+
+/* The slider bar color is used for the progress bar and the volume bar
+   (the first two can be removed after a fix that's coming) */
+.video-js .vjs-volume-level,
+.video-js .vjs-play-progress,
+.video-js .vjs-slider-bar {
+  background: #ccc; }
+
+/* The main progress bar also has a bar that shows how much has been loaded. */
+.video-js .vjs-load-progress {
+  /* For IE8 we'll lighten the color */
+  /* Otherwise we'll rely on stacked opacities */
+  background: #444444; }
+
+/* The load progress bar also has internal divs that represent
+   smaller disconnected loaded time ranges */
+.video-js .vjs-load-progress div {
+  /* For IE8 we'll lighten the color */
+  background: ligthen(#444, 50%);
+  /* Otherwise we'll rely on stacked opacities */
+  background: rgba(68, 68, 68, 0.75); }
+
+.video-js .vjs-progress-holder,
+.video-js .vjs-progress-holder .vjs-load-progress,
+.video-js .vjs-progress-holder .vjs-play-progress {
+  margin: 0; }
+
+.vjs-paused.vjs-has-started .vjs-big-play-button {
+  display: block; }
+
+.vjs-default-skin.vjs-has-started .vjs-control-bar {
+  bottom: 0;
+  transition: bottom 500ms; }
+
+.vjs-default-skin.vjs-has-started.vjs-user-inactive .vjs-control-bar {
+  display: flex;
+  visibility: inherit;
+  opacity: inherit;
+  bottom: -3em;
+  transition: bottom 500ms; }
+
+.video-js .vjs-progress-control:hover .vjs-time-tooltip,
+.video-js .vjs-progress-control:hover .vjs-mouse-display:after,
+.video-js .vjs-progress-control:hover .vjs-play-progress:after {
+  font-family: 'AmnestyTradeGothic-BdCn20', sans-serif !important;
+  font-size: 0.7em;
+  padding: 8px 8px 7px 8px; }
+
+.video-js {
+  font-family: 'AmnestyTradeGothic-BdCn20', sans-serif !important; }
+  .video-js .vjs-remaining-time {
+    font-size: 1.5em;
+    line-height: 1.9em; }
+  .video-js .vjs-play-control:before {
+    font-size: 2.5em;
+    line-height: 1.3; }
 
 /*# sourceMappingURL=app.css.map */

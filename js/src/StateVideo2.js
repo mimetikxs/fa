@@ -19,11 +19,11 @@ FA.StateVideo2 = function( app, stateName, data ) {
         // var holderWidth = $(window).width(),
         //     holderHeight = $(window).height(),
         var holderWidth = $('#layer-video').width(),
-            holderHeight = $('#layer-video').height() + 100,
+            holderHeight = $('#layer-video').height(), // used to hide videmo controls
             holderRatio = holderWidth / holderHeight,
             targetW, targetH;
 
-        if (holderRatio < videoRatio) {
+        if (holderRatio > videoRatio) {
             // fit vertical
             targetH = holderHeight;
             targetW = holderHeight * videoRatio;
@@ -81,7 +81,6 @@ FA.StateVideo2 = function( app, stateName, data ) {
 
 
     function checkIdleTime() {
-        console.log( IDLE_TIMEOUT - idleSecondsCounter );
 
         idleSecondsCounter++;
 
@@ -159,7 +158,7 @@ FA.StateVideo2 = function( app, stateName, data ) {
 
         // start idle checker
         intervalId = setInterval( checkIdleTime, 1000 );
-
+        $('#layer-video .controls').css( 'opacity', 1 );
 
 
 
