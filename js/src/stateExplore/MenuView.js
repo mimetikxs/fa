@@ -1,10 +1,10 @@
 FA.MenuView = function( app ) {
 
-    var $container = $( '.container' ),
+    var $container = $( '#layer-prison .navigation .container' ),
+        $menuType = $( '#layer-prison .navigation .menu-type' ),
         $locationMenu,
         $witnessMenu,
         $currentMenu,
-        $menuType = $( '.menu-type' ),
 
         // auto scrolling
         localMouseY = 0,
@@ -15,7 +15,9 @@ FA.MenuView = function( app ) {
         timeoutId = null,
         timeoutDuration = 500,
 
-        isMouseDown = false;
+        isMouseDown = false,
+
+        navMode = null;
 
 
 
@@ -121,6 +123,12 @@ FA.MenuView = function( app ) {
 
     function setNavMode( mode ) {
 
+        if ( navMode === mode ) {
+            return;
+        }
+
+        navMode = mode;
+
         var $menu;
 
         if ( mode === 'location' ) {
@@ -129,8 +137,8 @@ FA.MenuView = function( app ) {
             $menu = $witnessMenu;
         }
 
-        if ( $menu === $currentMenu )
-            return;
+        // if ( $menu === $currentMenu )
+        //     return;
 
         // swap divs
         if ( $currentMenu ) $currentMenu.detach();
@@ -176,9 +184,9 @@ FA.MenuView = function( app ) {
             .on( 'mouseup', onMouseUp );
 
         // type switcher
-        $( '.menu-type' ).on( 'click', onTypeClick );
+        $menuType.on( 'click', onTypeClick );
 
-        $( '.container' )
+        $container
             .on( 'click', onClick )
             .on( 'mousemove', onMouseMove );
 
@@ -195,7 +203,7 @@ FA.MenuView = function( app ) {
             .off( 'mousedown', onMouseDown )
             .off( 'mouseup', onMouseUp );
 
-        $( '.container' )
+        $container
             .off( 'click', onClick )
             .off( 'mousemove', onMouseMove )
             .off( 'mouseenter', '.folder', onMouseenterFolder )
@@ -294,8 +302,6 @@ FA.MenuView = function( app ) {
 
             var id = $target.data( 'id' ),
                 mediaData = app.data.mediaById[ id ];
-
-                console.log(mediaData);
 
             app.changeState( new FA.StateVideo2( app, 'home', mediaData ) );
 
@@ -423,7 +429,22 @@ FA.MenuView = function( app ) {
 
     this.show = function() {
 
-        $('#left-bar').fadeIn(300);
+        $('#left-bar').fadeIn( 300 );
+
+        // TODO: enable events on show
+
+        // add listeners
+        // addListeners();
+        //
+        // if ( navMode === 'location' ) {
+        //     $container
+        //         .on( 'mouseenter', '.folder', onMouseenterFolder )
+        //         .on( 'mouseleave', '.folder', onMouseleaveFolder );
+        // } else if ( navMode === 'witness' ) {
+        //     $container
+        //         .on( 'mouseenter', '.media', onMouseenterMedia )
+        //         .on( 'mouseleave', '.media', onMouseleaveMedia );
+        // }
 
     }
 
@@ -433,6 +454,11 @@ FA.MenuView = function( app ) {
         $('#left-bar').fadeOut(0);
 
         localMouseY = 0;
+
+        // TODO: disable event on hide
+
+        // removeListeners
+        // removeListeners();
 
         // close any open folder
         // $currentMenu.find( '.selected' )
@@ -446,7 +472,7 @@ FA.MenuView = function( app ) {
 
         removeListeners();
 
-        $( '.container' ).empty();
+        $container.empty();
 
     }
 

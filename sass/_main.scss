@@ -39,10 +39,8 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+
 $header-height: 50px;
-
-
-//
 
 
 body {
@@ -63,258 +61,281 @@ body {
     // height: 100%; // dinamically set (see App.js)
 }
 
-#layer-cell,
-#layer-labels,
-#layer-gl {
+#layer-prison,
+#layer-360 {
     position: absolute;;
     width: 100%;
     height: 100%;
-    opacity: 0;
     overflow: hidden;
     @include noselect;
-    transition: opacity 500ms ease-out;
+    // transition: opacity 300ms ease-out;
 }
 
-#layer-cell{
-    visibility: hidden;
-}
-.labels {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    right: 0;
+#layer-prison {
+    .gl,
+    .labels {
+        position: absolute;;
+        width: 100%;
+        height: 100%;
+    }
 
-    .label {
+    .labels {
+        transition: opacity 500ms ease-out;
+
+        .label {
+            position: absolute;
+            opacity: 0.8;
+
+            .line {
+                position: absolute;
+                height: 30px;
+                width: 30px;
+                bottom:0;
+                left: 15px;
+                border-left: 2px solid black;
+                -moz-transform: skew(-40deg);
+                -webkit-transform: skew(-40deg);
+                transform: skew(-40deg);
+            }
+            .tag {
+                position: absolute;
+                bottom: 30px;
+                left: 28px;
+                font-size: 12px;
+                background-color: #000;
+                color: #fff;
+                padding: 4px 8px;
+                font-family: 'Oswald', sans-serif;
+                text-transform: uppercase;
+                white-space: nowrap;
+                cursor: default;;
+                transition: background-color 200ms ease-out;
+            }
+
+            &.selected {
+                .tag {
+                    background-color: rgba(224,6,6, 1);
+                }
+                .line {
+                    border-color: rgb(255,0,0);
+                }
+            }
+
+            &.over:not(.selected) {
+                .tag {
+                    background-color: rgba(100,6,6, 1);
+                }
+                .line {
+                    border-color: rgb(100,6,6);
+                }
+            }
+        }
+    }
+
+    .title {
         position: absolute;
+        left: 30px;
+        top: 30px;
+        font-family: 'AmnestyTradeGothic-BdCn20', sans-serif;
+        color: #ddd;
+        cursor: default;
+
+        > div {
+            display: inline-block;
+        }
+
+        div:nth-child(1) {
+            font-size: 41px;
+            text-transform: uppercase;
+            float: left;
+        }
+
+        div:nth-child(2) {
+            float: left;
+            padding: 2px 10px;
+            margin: 8px 0 0 15px;
+            font-size: 22px;
+            background-color: #ddd;
+            color: #666;
+        }
+    }
+
+    .navigation {
+        position: absolute;
+        top: 110px;
+        left: 30px;
+        height: 100%;
+        width: 265px;
         font-family: 'Oswald', sans-serif;
         text-transform: uppercase;
-        white-space: nowrap;
-        background-color: #333;
+        font-size: 12px;
         color: white;
-        padding: 5px 8px;
-        // transition: background-color 500ms;
-        // cursor: pointer;
+        overflow: hidden;
+        @include noselect;
 
-        &:hover {
-            //background-color: #e31d1a;
+        .menu-type {
+            padding: 17px 0;
+            border-top: 1px solid #999;
+            border-bottom: 1px solid #999;
+
+            span {
+                display: inline-block;
+                padding: 9px;
+                cursor: pointer;
+                border: solid 1px #999;
+                color: #999;
+
+                &.selected {
+                    color: white;
+                    border: solid 1px white;
+                }
+
+                &:first-child {
+                    margin-right: 9px;
+                    margin-left: 3px;
+                }
+            }
         }
+
+        .container {
+            margin: 40px 0 0 0;
+            overflow: hidden;
+        }
+
+        ul, li {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        ul.menu-witness,
+        ul.menu-location {
+            cursor: pointer;
+
+            // first level li
+            & > li {
+
+                & > .folder {
+                    display: block;
+                    padding: 10px 13px;
+                    margin-bottom: 10px;
+                    background-color: rgba(0, 0, 0, 0.65);
+                    transition: background-color 200ms ease-out;
+
+                    .icon {
+                        display: inline-block;
+                        margin-right: 8px;
+                        width: 15px;
+                        height: 15px;
+                        line-height: 15px;
+                        text-align: center;
+                        font-family: 'Arial', 'Helvetica', sans-serif;
+                        font-size: 18px;
+
+                        &:before {
+                            content: '+';
+                            top: 1px;
+                            position: relative;
+                        }
+                    }
+
+                    &:hover {
+                        background-color: rgba(100,6,6,0.65);
+                    }
+                }
+
+                &:last-child > .folder {
+                    margin-bottom: 0;
+                }
+
+                // second level ul
+                & > ul {
+                    overflow: hidden;
+                    height: 0;
+                    transition: height 500ms;
+
+                    // second level li
+                    & > li {
+                        display: block;
+                        padding: 5px 10px;
+                        margin: 0 7px 10px 7px;
+                        background-color: rgba(153, 153, 153, 0.7);
+                        transition: background-color 300ms ease-out;
+
+                        &:hover {
+                            background-color: rgba(153, 153, 153, 1);
+                        }
+                    }
+                }
+
+                &.selected {
+                    .folder {
+                        background-color: rgba(224,6,6,0.65);
+
+                        .icon:before {
+                            content: '-';
+                            top: 0;
+                        }
+                    }
+                }
+
+                &.over:not(.selected) {
+                    .folder {
+                        background-color: rgba(100,6,6,0.65);
+                    }
+                }
+            }
+        }
+
     }
 }
 
-#layer-labels {
-    //http://stackoverflow.com/questions/3680429/click-through-a-div-to-underlying-elements
-    // pointer-events: none;
-    // background: url('your_transparent.png');
+#layer-360 {
+    visibility: hidden;
+    opacity: 0;
 
-    .label {
-        position: absolute;
-        opacity: 0.8;
+    .gl{
+        background-color: black;
+    }
 
-        .line {
+    .gl,
+    .labels {
+        position: absolute;;
+        width: 100%;
+        height: 100%;
+    }
+
+    .labels {
+        .label {
             position: absolute;
-            height: 30px;
-            width: 30px;
-            bottom:0;
-            left: 15px;
-            border-left: 2px solid black;
-            -moz-transform: skew(-40deg);
-            -webkit-transform: skew(-40deg);
-            transform: skew(-40deg);
-        }
-        .tag {
-            position: absolute;
-            bottom: 30px;
-            left: 28px;
-            font-size: 12px;
-            background-color: #000;
-            color: #fff;
-            padding: 4px 8px;
             font-family: 'Oswald', sans-serif;
             text-transform: uppercase;
             white-space: nowrap;
-            cursor: default;;
-            transition: background-color 200ms ease-out;
-        }
-
-        &.selected {
-            .tag {
-                background-color: rgba(224,6,6, 1);
-            }
-            .line {
-                border-color: rgb(255,0,0);
-            }
-        }
-
-        &.over:not(.selected) {
-            .tag {
-                background-color: rgba(100,6,6, 1);
-            }
-            .line {
-                border-color: rgb(100,6,6);
-            }
-        }
-    }
-}
-
-#header {
-    position: absolute;
-    height: $header-height;
-    width: 100%;
-    background-color: black;
-    position: absolute;
-    top: -$header-height;
-    transition: top 500ms ease-out;
-    @include noselect;
-}
-
-.logos {
-    height: 100%;
-    display: inline-block;
-
-    & > span {
-        height: 100%;
-        display: inline-block;
-        background-size: auto 100%;
-        background-repeat: no-repeat;
-        cursor: pointer;
-    }
-    .ai {
-        background-image: url('../assets/logo-amnesty-yellow.png');
-        width: 118px;
-    }
-    .fa {
-        background-image: url('../assets/logo-FA-red.jpg');
-        width: 120px;
-    }
-}
-
-#mainNav {
-    float: right;
-    color: #000;
-    height: 100%;
-    margin-right: 20px;
-    @include clearfix;
-    text-transform: uppercase;
-    font-weight: bold;
-    font-size: 16px;
-    font-family: 'AmnestyTradeGothic-BdCn20', sans-serif;
-
-    & > span {
-        display: inline-block;
-        height: 100%;
-        line-height: $header-height;
-        padding: 0 15px;
-        cursor: pointer;
-        transition: all 300ms ease-out;
-        color: white;
-
-        &:hover,
-        &.active {
-            background-color: #ccc;
-            color: #000;
-        }
-    }
-}
-
-#footer-desktop {
-    font-family: sans-serif;
-    position: absolute;
-    color: white;
-    bottom: 30px;
-    right: 30px;
-    font-family: 'AmnestyTradeGothic-BdCn20', sans-serif;
-    text-transform: uppercase;
-    @include noselect;
-
-    & > span {
-        color: #ccc;
-    }
-
-
-    .label {
-        &:after {
-            content: "";
-            border-right: 1px solid #999;
-            margin: 0 10px 0 10px;
-        }
-    }
-
-    .facebook {
-        @include fa-icon;
-        &:before {
-            content: "\f082";
-        }
-        margin-right: 10px;
-        font-size: 18px;
-    }
-
-    .twitter {
-        @include fa-icon;
-        &:before {
-            content: "\f099";
-        }
-        font-size: 18px;
-    }
-
-    .facebook,
-    .twitter {
-        font-size: 20px;
-        cursor: pointer;
-        &:hover{
+            background-color: #333;
             color: white;
+            padding: 5px 8px;
+            cursor: pointer;
+        }
+    }
+
+    .btn-exit {
+        position: absolute;
+        top: 30px;
+        right: 20px;
+        padding: 18px;
+        color: white;
+        background-color: rgba(0,0,0,0.8);
+        text-transform: uppercase;
+        font-family: 'AmnestyTradeGothic-BdCn20', sans-serif;
+        transition: background-color 300ms, color 300ms;
+        cursor: pointer;
+
+        &:hover {
+            background-color: rgba(255,255,255,1);
+            color: black;
         }
     }
 }
-
-
-
-// This parent can be any width and height
-.block {
-    text-align: center;
-    // May want to do this if there is risk the container may be narrower than the element inside
-    white-space: nowrap;
-
-    // The ghost, nudged to maintain perfect centering
-    &:before {
-        content: '';
-        display: inline-block;
-        height: 100%;
-        vertical-align: middle;
-        margin-right: -0.25em; // Adjusts for spacing
-    }
-}
-
-// The element to be centered, can also be of any width and height
-.centered {
-    display: inline-block;
-    vertical-align: middle;
-}
-
-
-#introMessage {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    font-size: 30px;
-    font-family: 'Oswald', sans-serif;
-    @include noselect;
-
-    .message {
-        margin: 0;
-        padding: 10px 15px;
-        background-color: white;
-        text-transform: uppercase;
-    }
-}
-
-#typed-strings {
-    visibility: hidden;
-}
-
-//
-// Video layer
-//
 
 #layer-video {
     position: absolute;
@@ -322,10 +343,9 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: black;
     opacity: 0;
     transition: opacity 500ms;
-    background-color: gray;
+    background-color: black;
     font-family: 'AmnestyTradeGothic-BdCn20', sans-serif;
 
     .player {
@@ -481,214 +501,154 @@ body {
     }
 }
 
-
-
-
-//
-// 360
-//
-
-.btn-exit-360 {
+#header {
     position: absolute;
-    top: 30px;
-    right: 20px;
-    padding: 18px;
-    color: white;
-    text-transform: uppercase;
-    background-color: rgba(0,0,0,0.8);
-    font-family: 'AmnestyTradeGothic-BdCn20', sans-serif;
-    transition: background-color 300ms, color 300ms;
-    opacity: 0;
-    cursor: pointer;
-
-    &:hover {
-        background-color: rgba(255,255,255,1);
-        color: black;
-    }
-}
-
-
-//
-// text navigation
-//
-
-
-#left-bar {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    margin-left: 30px;
-    font-family: 'Oswald', sans-serif;
-    text-transform: uppercase;
-    color: white;
-    z-index: 1000; // make sure this is over labels
+    height: $header-height;
+    width: 100%;
+    top: -$header-height;
+    background-color: black;
+    transition: top 500ms ease-out;
     @include noselect;
-}
 
-#title {
-    position: absolute;
-    left: 30px;
-    top: 30px;
-    font-family: 'AmnestyTradeGothic-BdCn20', sans-serif;
-    color: #ddd;
-    cursor: default;
-
-    > div {
+    .logos {
+        height: 100%;
         display: inline-block;
+
+        & > span {
+            height: 100%;
+            display: inline-block;
+            background-size: auto 100%;
+            background-repeat: no-repeat;
+            cursor: pointer;
+        }
+        .ai {
+            background-image: url('../assets/logo-amnesty-yellow.png');
+            width: 118px;
+        }
+        .fa {
+            background-image: url('../assets/logo-FA-red.jpg');
+            width: 120px;
+        }
     }
 
-    div:nth-child(1) {
-        font-size: 41px;
+    .mainNav {
+        float: right;
+        color: #000;
+        height: 100%;
+        @include clearfix;
         text-transform: uppercase;
-        float: left;
-    }
+        font-weight: bold;
+        font-size: 16px;
+        font-family: 'AmnestyTradeGothic-BdCn20', sans-serif;
 
-    div:nth-child(2) {
-        float: left;
-        padding: 2px 10px;
-        margin: 8px 0 0 15px;
-        font-size: 22px;
-        background-color: #ddd;
-        color: #666;
+        & > span {
+            display: inline-block;
+            height: 100%;
+            line-height: $header-height;
+            padding: 0 15px;
+            cursor: pointer;
+            transition: all 300ms ease-out;
+            color: white;
+
+            &:hover,
+            &.active {
+                background-color: #ccc;
+                color: #000;
+            }
+        }
     }
 }
 
-#navigation {
+#footer-desktop {
+    font-family: sans-serif;
     position: absolute;
-    top: 110px;
-    left: 30px;
-    height: 100%;
-    width: 265px;
-    font-family: 'Oswald', sans-serif;
-    text-transform: uppercase;
-    font-size: 12px;
     color: white;
-    overflow: hidden;
+    bottom: 30px;
+    right: 30px;
+    font-family: 'AmnestyTradeGothic-BdCn20', sans-serif;
+    text-transform: uppercase;
     @include noselect;
 
-    .menu-type {
-        padding: 17px 0;
-        border-top: 1px solid #999;
-        border-bottom: 1px solid #999;
+    & > span {
+        color: #ccc;
+    }
 
-        span {
-            display: inline-block;
-            padding: 9px;
-            cursor: pointer;
-            border: solid 1px #999;
-            color: #999;
 
-            &.selected {
-                color: white;
-                border: solid 1px white;
-            }
-
-            &:first-child {
-                margin-right: 9px;
-                margin-left: 3px;
-            }
+    .label {
+        &:after {
+            content: "";
+            border-right: 1px solid #999;
+            margin: 0 10px 0 10px;
         }
     }
 
-    .container {
-        margin: 40px 0 0 0;
-        overflow: hidden;
+    .facebook {
+        @include fa-icon;
+        &:before {
+            content: "\f082";
+        }
+        margin-right: 10px;
+        font-size: 18px;
     }
 
-    ul, li {
-        list-style: none;
-        padding: 0;
-        margin: 0;
+    .twitter {
+        @include fa-icon;
+        &:before {
+            content: "\f099";
+        }
+        font-size: 18px;
     }
 
-    ul.menu-witness,
-    ul.menu-location {
+    .facebook,
+    .twitter {
+        font-size: 20px;
         cursor: pointer;
-
-        // first level li
-        & > li {
-
-            & > .folder {
-                display: block;
-                padding: 10px 13px;
-                margin-bottom: 10px;
-                background-color: rgba(0, 0, 0, 0.65);
-                transition: background-color 200ms ease-out;
-
-                .icon {
-                    //@include line-icon;
-                    font-family: 'Arial', 'Helvetica', sans-serif;
-                    // font-size: 13px;
-                    margin-right: 8px;
-
-                    display: inline-block;
-                    width: 15px;
-                    height: 15px;
-                    line-height: 15px;
-                    text-align: center;
-                    font-size: 18px;
-                    // position: relative;
-
-                    &:before {
-                        //content: "\e095";
-                        content: '+';
-                        top: 1px;
-                        position: relative;
-                    }
-                }
-
-                &:hover {
-                    //background-color: rgba(0, 0, 0, 1);
-                    background-color: rgba(100,6,6,0.65);
-                }
-            }
-
-            &:last-child > .folder {
-                margin-bottom: 0;
-            }
-
-            // second level ul
-            & > ul {
-                overflow: hidden;
-                height: 0;
-                transition: height 500ms;
-
-                // second level li
-                & > li {
-                    display: block;
-                    padding: 5px 10px;
-                    margin: 0 7px 10px 7px;
-                    background-color: rgba(153, 153, 153, 0.7);
-                    transition: background-color 300ms ease-out;
-                    // cursor: pointer;
-
-                    &:hover {
-                        background-color: rgba(153, 153, 153, 1);
-                    }
-                }
-            }
-
-            &.selected {
-                .folder {
-                    background-color: rgba(224,6,6,0.65);
-
-                    .icon:before {
-                        // content: "\e615";
-                        content: '-';
-                        top: 0;
-                    }
-                }
-            }
-
-            &.over:not(.selected) {
-                .folder {
-                    background-color: rgba(100,6,6,0.65);
-                }
-            }
+        &:hover{
+            color: white;
         }
     }
+}
 
+// This parent can be any width and height
+.block {
+    text-align: center;
+    // May want to do this if there is risk the container may be narrower than the element inside
+    white-space: nowrap;
+
+    // The ghost, nudged to maintain perfect centering
+    &:before {
+        content: '';
+        display: inline-block;
+        height: 100%;
+        vertical-align: middle;
+        margin-right: -0.25em; // Adjusts for spacing
+    }
+}
+
+// The element to be centered, can also be of any width and height
+.centered {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+#introMessage {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    font-size: 30px;
+    font-family: 'Oswald', sans-serif;
+    @include noselect;
+
+    .message {
+        margin: 0;
+        padding: 10px 15px;
+        background-color: white;
+        text-transform: uppercase;
+    }
+}
+
+#typed-strings {
+    visibility: hidden;
 }
 
 //
@@ -760,10 +720,6 @@ body {
 // stats and gui
 //
 
-
-.dg.ac {
-    top: 60px !important;
-}
 
 #stats {
     top: 60px !important;

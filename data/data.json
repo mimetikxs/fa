@@ -3,100 +3,164 @@
         {
             "name" : "Corridor",
             "slug" : "corridor",
-            "obj" : "obj/rooms/corridor.js",
+            "objRoom" : "obj/rooms/corridor.js",
+            "obj360" : "groupCell01",
             "cameraPos" : {
                 "x" : 0,
                 "y" : 0,
                 "z" : 0
             },
+            "cameraLookAt": {
+                "x" : 0,
+                "y" : 0,
+                "z" : 0
+            },
+            "bodies": [
+            ],
             "sound" : "path"
         },
         {
             "name" : "Group cell 1",
             "slug" : "group-cell-1",
-            "obj" : "obj/rooms/groupcell-a-c.js",
+            "objRoom" : "obj/rooms/groupcell-a-c.js",
+            "obj360" : "groupCell01",
             "cameraPos" : {
                 "x" : 0,
                 "y" : 0,
                 "z" : 0
             },
+            "cameraLookAt": {
+                "x" : 0,
+                "y" : 0,
+                "z" : 0
+            },
+            "bodies": [
+            ],
             "sound" : "path"
         },
         {
             "name" : "Group cell 2",
             "slug" : "group-cell-2",
-            "obj" : "obj/rooms/groupcell-d.js",
+            "objRoom" : "obj/rooms/groupcell-d.js",
+            "obj360" : "groupCell02",
             "cameraPos" : {
                 "x" : 0,
                 "y" : 0,
                 "z" : 0
             },
+            "cameraLookAt": {
+                "x" : 0,
+                "y" : 0,
+                "z" : 0
+            },
+            "bodies": [
+            ],
             "sound" : "path"
         },
         {
             "name" : "Group cell 3",
             "slug" : "group-cell-3",
-            "obj" : "obj/rooms/groupcell-e.js",
+            "objRoom" : "obj/rooms/groupcell-e.js",
+            "obj360" : "groupCell03",
             "cameraPos" : {
                 "x" : 0,
                 "y" : 0,
                 "z" : 0
             },
+            "cameraLookAt": {
+                "x" : 0,
+                "y" : 0,
+                "z" : 0
+            },
+            "bodies": [
+            ],
             "sound" : "path"
         },
         {
             "name" : "Solitary 1",
             "slug" : "solitary-1",
-            "obj" : "obj/rooms/solitary-ac.js",
+            "objRoom" : "obj/rooms/solitary-ac.js",
+            "obj360" : "isoCell02",
             "cameraPos" : {
-                "x" : 0,
-                "y" : 0,
-                "z" : 0
+                "x" : 0.93,
+                "y" : 1.55,
+                "z" : 1.32
             },
+            "cameraLookAt": {
+                "x" : 0.96,
+                "y" : 1.55,
+                "z" : 1.2
+            },
+            "bodies": [
+            ],
             "sound" : "path"
         },
         {
             "name" : "Solitary 2",
             "slug" : "solitary-2",
-            "obj" : "obj/rooms/solitary-d.js",
+            "objRoom" : "obj/rooms/solitary-d.js",
+            "obj360" : "isoCell02",
             "cameraPos" : {
-                "x" : 0,
-                "y" : 0,
-                "z" : 0
+                "x" : 0.93,
+                "y" : 1.55,
+                "z" : 1.32
             },
+            "cameraLookAt": {
+                "x" : 0.96,
+                "y" : 1.55,
+                "z" : 1.2
+            },
+            "bodies": [
+                {
+                    "name" : "bodyCrouchA",
+                    "x" : 0.343,
+                    "z" : 0.286,
+                    "angle" : 140
+                },
+                {
+                    "name" : "bodyCrouchA",
+                    "x" : 1.62,
+                    "z" : 1.22,
+                    "angle" : 270
+                },
+                {
+                    "name" : "bodyCrouchA",
+                    "x" : 0.812,
+                    "z" : 1.57,
+                    "angle" : 115
+                },
+                {
+                    "name" : "bodyStandA",
+                    "x" : 1.53,
+                    "z" : 0.453,
+                    "angle" : 87
+                },
+                {
+                    "name" : "bodyStandA",
+                    "x" : 0.324,
+                    "z" : 1.045,
+                    "angle" : 268
+                }
+            ],
             "sound" : "path"
         },
         {
             "name" : "Solitary 3",
             "slug" : "solitary-3",
-            "obj" : "obj/rooms/solitary-e.js",
+            "objRoom" : "obj/rooms/solitary-e.js",
+            "obj360" : "isoCell03",
             "cameraPos" : {
-                "x" : 0,
-                "y" : 0,
-                "z" : 0
+                "x" : 0.93,
+                "y" : 1.55,
+                "z" : 1.32
             },
-            "sound" : "path"
-        },
-        {
-            "name" : "Visiting",
-            "slug" : "visiting",
-            "obj" : "obj/rooms/visiting.js",
-            "cameraPos" : {
-                "x" : 0,
-                "y" : 0,
-                "z" : 0
+            "cameraLookAt": {
+                "x" : 0.96,
+                "y" : 1.55,
+                "z" : 1.2
             },
-            "sound" : "path"
-        },
-        {
-            "name" : "Welcome",
-            "slug" : "welcome",
-            "obj" : "obj/rooms/welcome.js",
-            "cameraPos" : {
-                "x" : 0,
-                "y" : 0,
-                "z" : 0
-            },
+            "bodies": [
+            ],
             "sound" : "path"
         }
     ],
@@ -125,7 +189,6 @@
             "title" : "Measuring his face in cell door",
             "id" : "a00",
             "video" : "",
-            "subs" : "",
             "witness" : "a",
             "location" : "solitary-1"
         },
@@ -133,7 +196,6 @@
             "title" : "The water story",
             "id" : "a01",
             "video" : "",
-            "subs" : "",
             "witness" : "a",
             "location" : "solitary-1"
         },
@@ -141,7 +203,6 @@
             "title" : "Eating contaminated food",
             "id" : "a02",
             "video" : "",
-            "subs" : "",
             "witness" : "a",
             "location" : "solitary-1"
         },
@@ -149,7 +210,6 @@
             "title" : "Worms from his mouth",
             "id" : "a03",
             "video" : "",
-            "subs" : "",
             "witness" : "a",
             "location" : "solitary-1"
         },
@@ -157,7 +217,6 @@
             "title" : "The hospital as slaughterhouse",
             "id" : "a04",
             "video" : "",
-            "subs" : "",
             "witness" : "a",
             "location" : "group-cell-1"
         },
@@ -165,7 +224,6 @@
             "title" : "Using sunset to tell the time",
             "id" : "a05",
             "video" : "",
-            "subs" : "",
             "witness" : "a",
             "location" : "group-cell-1"
         },
@@ -173,7 +231,6 @@
             "title" : "The sounds of hope and fear",
             "id" : "a06",
             "video" : "",
-            "subs" : "",
             "witness" : "a",
             "location" : "group-cell-1"
         },
@@ -181,7 +238,6 @@
             "title" : "The sounds of prisoners crying",
             "id" : "a07",
             "video" : "",
-            "subs" : "",
             "witness" : "a",
             "location" : "group-cell-1"
         },
@@ -189,7 +245,6 @@
             "title" : "Bribing the guards for a hug",
             "id" : "a08",
             "video" : "",
-            "subs" : "",
             "witness" : "a",
             "location" : "visiting"
         },
@@ -199,7 +254,6 @@
             "title" : "Newcomers learn to be silent",
             "id" : "c00",
             "video" : "",
-            "subs" : "",
             "witness" : "c",
             "location" : "solitary-1"
         },
@@ -207,7 +261,6 @@
             "title" : "The sound of bread bags",
             "id" : "c01",
             "video" : "",
-            "subs" : "",
             "witness" : "c",
             "location" : "solitary-1"
         },
@@ -215,7 +268,6 @@
             "title" : "Water with A",
             "id" : "c02",
             "video" : "",
-            "subs" : "",
             "witness" : "c",
             "location" : "solitary-1"
         },
@@ -223,7 +275,6 @@
             "title" : "Came back from hospital, later died",
             "id" : "c03",
             "video" : "",
-            "subs" : "",
             "witness" : "c",
             "location" : "solitary-1"
         },
@@ -231,7 +282,6 @@
             "title" : "You never want to wake up",
             "id" : "c04",
             "video" : "",
-            "subs" : "",
             "witness" : "c",
             "location" : "group-cell-2"
         },
@@ -239,7 +289,6 @@
             "title" : "No echo, cells full of people",
             "id" : "c05",
             "video" : "",
-            "subs" : "",
             "witness" : "c",
             "location" : "group-cell-2"
         }

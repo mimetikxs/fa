@@ -33,29 +33,41 @@
 
 		<div id="content">
 
-			<!-- main screen -->
-			<div id="layer-gl"></div>
-			<div id="layer-labels"></div>
+			<!--
+				prison
+			-->
+			<div id="layer-prison">
+				<div class="gl"></div>
+				<div class="labels"></div>
 
-			<div id="title">
-				<div>Saydnaya Prison</div>
-				<div>صيدنايا</div>
+				<div class="title">
+					<div>Saydnaya Prison</div>
+					<div>صيدنايا</div>
+				</div>
+
+				<div class="navigation">
+					<div class="menu-type">
+						<span data-type="location">Explore by location</span>
+						<span data-type="witness">Explore by witness</span>
+					</div>
+					<div class="container">
+					</div>
+				</div>
 			</div>
 
-			<div id="navigation">
-				<div class="menu-type">
-					<span data-type="location">Explore by location</span>
-					<span data-type="witness">Explore by witness</span>
-				</div>
-				<div class="container">
-				</div>
+			<!--
+				360 view
+			-->
+			<div id="layer-360">
+				<div class="gl"></div>
+				<div class="labels"></div>
+				<div class="title"></div>
+				<div class="btn-exit">Back</div>
 			</div>
 
-			<!-- 360 view screen -->
-			<div id="layer-cell"></div>
-			<div class="btn-exit-360">Back</div>
-
-			<!-- video screen -->
+			<!--
+				video
+			-->
 			<div id="layer-video">
 				<div class="player"></div>
 
@@ -80,16 +92,14 @@
 					<div class="btn-exit">Close</div>
 				</div>
 			</div>
-
 		</div>
-
 
 
 		<div id="header">
 			<div class="logos">
 				<span class="ai"></span><span class="fa"></span>
 			</div>
-			<div id="mainNav">
+			<div class="mainNav">
 				<span class="active">Explore استكشف</span><span>About حول</span><span>Take Action بادر بالتحرك</span>
 			</div>
 		</div>
@@ -103,6 +113,7 @@
 		<!-- Scripts -->
 
 		<script src="js/lib/jquery-3.0.0.min.js"></script>
+		<script src="js/lib/jquery.transit.min.js"></script>
 		<script src="js/lib/dat.gui.js"></script>
 		<script src="js/lib/Stats.js"></script>
 
@@ -126,7 +137,8 @@
 		<script src="js/src/StateVideo.js"></script>
 		<script src="js/src/StateVideo3.js"></script>
 		<script src="js/src/StateExplore.js"></script>
-		<script src="js/src/StateCell.js"></script>
+		<script src="js/src/View360.js"></script>
+		<script src="js/src/State360.js"></script>
 		<script src="js/src/App.js"></script>
 
 	</body>

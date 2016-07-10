@@ -4,6 +4,8 @@
 
 FA.StatePreload = function( app ) {
 
+    var name = 'STATE_PRELOAD';
+
     var loaded = false,
         messageCompleted = false,
 
@@ -94,7 +96,6 @@ FA.StatePreload = function( app ) {
         loadBuildingModel();
         loadTerrain();
         loadRooms();
-        loadCell360();
 
     }
 
@@ -156,7 +157,7 @@ FA.StatePreload = function( app ) {
                 loader = new THREE.JSONLoader( manager );
 
             loader.load(
-                data.obj,
+                data.objRoom,
                 function ( geometry, materials ) {
                     var bufferGeom = new THREE.BufferGeometry();
                     bufferGeom.fromGeometry( geometry )
@@ -214,22 +215,6 @@ FA.StatePreload = function( app ) {
         }
 
         app.terrainMesh.geometry.applyMatrix( transform );
-
-    }
-
-
-    function loadCell360() {
-
-        var loader = new THREE.JSONLoader( manager );
-        loader.setTexturePath( 'obj/groupCell/maps/' );
-        loader.load(
-            'obj/groupCell/groupCell.js',
-            function ( geometry, materials ) {
-                var material = new THREE.MultiMaterial( materials );
-
-                app.cellMesh = new THREE.Mesh( geometry, material );
-            }
-        );
 
     }
 

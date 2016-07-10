@@ -1,9 +1,5 @@
 /*
  * 3D view of the building
- *
- * @buildingMesh [Mesh]
- * @roomMeshes [Mesh Array]
- * @terrainMesh [Mesh]
  */
 FA.BuildingView = function( app ) {
 
@@ -28,10 +24,9 @@ FA.BuildingView = function( app ) {
 
         controls,
 
-        raycaster,
+        raycaster;
 
-        roomUnderMouse;
-
+        // roomUnderMouse;
 
     init();
 
@@ -44,7 +39,7 @@ FA.BuildingView = function( app ) {
         terrainMesh = app.terrainMesh;
         rooms = app.rooms;
 
-        $dom = $('#layer-gl');
+        $dom = $('#layer-prison .gl');
 
         sceneWidth = $dom.width();
         sceneHeight = $dom.height();
@@ -134,8 +129,10 @@ FA.BuildingView = function( app ) {
 
     function addControls() {
 
+        var interaciveEl = $('#layer-prison .labels')[0];
+
         // controls
-        controls = new THREE.OrbitControls( camera, $('#layer-labels')[0] );
+        controls = new THREE.OrbitControls( camera, interaciveEl );
         //controls.addEventListener( 'change', render ); // add this only if there is no animation loop (requestAnimationFrame)
         controls.enableDamping = true;
         controls.dampingFactor = 0.05;
@@ -204,25 +201,23 @@ FA.BuildingView = function( app ) {
     }
 
 
-
-
-    var count = 0;
-    var color = new THREE.Color( 0,0,0 );
-    var black = new THREE.Color( 0,0,0 );
-    var red = new THREE.Color( 1,0,0 );
-    function animateRoom() {
-        count += 0.1;
-
-        if ( !roomUnderMouse )
-            return;
-
-        var val = 0.5 * (1 + Math.sin( count )) * 0.5;
-
-        color.copy(black);
-        color.lerp(red, val);
-
-        roomUnderMouse.material.emissive.setHex(color.getHex());
-    }
+    // var count = 0;
+    // var color = new THREE.Color( 0,0,0 );
+    // var black = new THREE.Color( 0,0,0 );
+    // var red = new THREE.Color( 1,0,0 );
+    // function animateRoom() {
+    //     count += 0.1;
+    //
+    //     if ( !roomUnderMouse )
+    //         return;
+    //
+    //     var val = 0.5 * (1 + Math.sin( count )) * 0.5;
+    //
+    //     color.copy(black);
+    //     color.lerp(red, val);
+    //
+    //     roomUnderMouse.material.emissive.setHex(color.getHex());
+    // }
 
 
     //        //

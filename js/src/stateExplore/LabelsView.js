@@ -13,7 +13,7 @@ FA.LabelsView = function( app ) {
 
     function init() {
 
-        $dom = $('#layer-labels');
+        $dom = $('#layer-prison .labels');
 
         for ( var i = 0; i < app.rooms.length; i++ ) {
             $dom.append( app.rooms[ i ].$label );

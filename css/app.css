@@ -393,214 +393,210 @@ body {
   left: 0;
   width: 100%; }
 
-#layer-cell,
-#layer-labels,
-#layer-gl {
+#layer-prison,
+#layer-360 {
   position: absolute;
   width: 100%;
   height: 100%;
-  opacity: 0;
   overflow: hidden;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -khtml-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
-  user-select: none;
-  transition: opacity 500ms ease-out; }
+  user-select: none; }
 
-#layer-cell {
-  visibility: hidden; }
-
-.labels {
+#layer-prison .gl,
+#layer-prison .labels {
   position: absolute;
   width: 100%;
+  height: 100%; }
+#layer-prison .labels {
+  transition: opacity 500ms ease-out; }
+  #layer-prison .labels .label {
+    position: absolute;
+    opacity: 0.8; }
+    #layer-prison .labels .label .line {
+      position: absolute;
+      height: 30px;
+      width: 30px;
+      bottom: 0;
+      left: 15px;
+      border-left: 2px solid black;
+      -moz-transform: skew(-40deg);
+      -webkit-transform: skew(-40deg);
+      transform: skew(-40deg); }
+    #layer-prison .labels .label .tag {
+      position: absolute;
+      bottom: 30px;
+      left: 28px;
+      font-size: 12px;
+      background-color: #000;
+      color: #fff;
+      padding: 4px 8px;
+      font-family: 'Oswald', sans-serif;
+      text-transform: uppercase;
+      white-space: nowrap;
+      cursor: default;
+      transition: background-color 200ms ease-out; }
+    #layer-prison .labels .label.selected .tag {
+      background-color: #e00606; }
+    #layer-prison .labels .label.selected .line {
+      border-color: red; }
+    #layer-prison .labels .label.over:not(.selected) .tag {
+      background-color: #640606; }
+    #layer-prison .labels .label.over:not(.selected) .line {
+      border-color: #640606; }
+#layer-prison .title {
+  position: absolute;
+  left: 30px;
+  top: 30px;
+  font-family: 'AmnestyTradeGothic-BdCn20', sans-serif;
+  color: #ddd;
+  cursor: default; }
+  #layer-prison .title > div {
+    display: inline-block; }
+  #layer-prison .title div:nth-child(1) {
+    font-size: 41px;
+    text-transform: uppercase;
+    float: left; }
+  #layer-prison .title div:nth-child(2) {
+    float: left;
+    padding: 2px 10px;
+    margin: 8px 0 0 15px;
+    font-size: 22px;
+    background-color: #ddd;
+    color: #666; }
+#layer-prison .navigation {
+  position: absolute;
+  top: 110px;
+  left: 30px;
   height: 100%;
-  top: 0;
-  right: 0; }
-  .labels .label {
+  width: 265px;
+  font-family: 'Oswald', sans-serif;
+  text-transform: uppercase;
+  font-size: 12px;
+  color: white;
+  overflow: hidden;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none; }
+  #layer-prison .navigation .menu-type {
+    padding: 17px 0;
+    border-top: 1px solid #999;
+    border-bottom: 1px solid #999; }
+    #layer-prison .navigation .menu-type span {
+      display: inline-block;
+      padding: 9px;
+      cursor: pointer;
+      border: solid 1px #999;
+      color: #999; }
+      #layer-prison .navigation .menu-type span.selected {
+        color: white;
+        border: solid 1px white; }
+      #layer-prison .navigation .menu-type span:first-child {
+        margin-right: 9px;
+        margin-left: 3px; }
+  #layer-prison .navigation .container {
+    margin: 40px 0 0 0;
+    overflow: hidden; }
+  #layer-prison .navigation ul, #layer-prison .navigation li {
+    list-style: none;
+    padding: 0;
+    margin: 0; }
+  #layer-prison .navigation ul.menu-witness,
+  #layer-prison .navigation ul.menu-location {
+    cursor: pointer; }
+    #layer-prison .navigation ul.menu-witness > li > .folder,
+    #layer-prison .navigation ul.menu-location > li > .folder {
+      display: block;
+      padding: 10px 13px;
+      margin-bottom: 10px;
+      background-color: rgba(0, 0, 0, 0.65);
+      transition: background-color 200ms ease-out; }
+      #layer-prison .navigation ul.menu-witness > li > .folder .icon,
+      #layer-prison .navigation ul.menu-location > li > .folder .icon {
+        display: inline-block;
+        margin-right: 8px;
+        width: 15px;
+        height: 15px;
+        line-height: 15px;
+        text-align: center;
+        font-family: 'Arial', 'Helvetica', sans-serif;
+        font-size: 18px; }
+        #layer-prison .navigation ul.menu-witness > li > .folder .icon:before,
+        #layer-prison .navigation ul.menu-location > li > .folder .icon:before {
+          content: '+';
+          top: 1px;
+          position: relative; }
+      #layer-prison .navigation ul.menu-witness > li > .folder:hover,
+      #layer-prison .navigation ul.menu-location > li > .folder:hover {
+        background-color: rgba(100, 6, 6, 0.65); }
+    #layer-prison .navigation ul.menu-witness > li:last-child > .folder,
+    #layer-prison .navigation ul.menu-location > li:last-child > .folder {
+      margin-bottom: 0; }
+    #layer-prison .navigation ul.menu-witness > li > ul,
+    #layer-prison .navigation ul.menu-location > li > ul {
+      overflow: hidden;
+      height: 0;
+      transition: height 500ms; }
+      #layer-prison .navigation ul.menu-witness > li > ul > li,
+      #layer-prison .navigation ul.menu-location > li > ul > li {
+        display: block;
+        padding: 5px 10px;
+        margin: 0 7px 10px 7px;
+        background-color: rgba(153, 153, 153, 0.7);
+        transition: background-color 300ms ease-out; }
+        #layer-prison .navigation ul.menu-witness > li > ul > li:hover,
+        #layer-prison .navigation ul.menu-location > li > ul > li:hover {
+          background-color: #999999; }
+    #layer-prison .navigation ul.menu-witness > li.selected .folder,
+    #layer-prison .navigation ul.menu-location > li.selected .folder {
+      background-color: rgba(224, 6, 6, 0.65); }
+      #layer-prison .navigation ul.menu-witness > li.selected .folder .icon:before,
+      #layer-prison .navigation ul.menu-location > li.selected .folder .icon:before {
+        content: '-';
+        top: 0; }
+    #layer-prison .navigation ul.menu-witness > li.over:not(.selected) .folder,
+    #layer-prison .navigation ul.menu-location > li.over:not(.selected) .folder {
+      background-color: rgba(100, 6, 6, 0.65); }
+
+#layer-360 {
+  visibility: hidden;
+  opacity: 0; }
+  #layer-360 .gl {
+    background-color: black; }
+  #layer-360 .gl,
+  #layer-360 .labels {
+    position: absolute;
+    width: 100%;
+    height: 100%; }
+  #layer-360 .labels .label {
     position: absolute;
     font-family: 'Oswald', sans-serif;
     text-transform: uppercase;
     white-space: nowrap;
     background-color: #333;
     color: white;
-    padding: 5px 8px; }
-
-#layer-labels .label {
-  position: absolute;
-  opacity: 0.8; }
-  #layer-labels .label .line {
+    padding: 5px 8px;
+    cursor: pointer; }
+  #layer-360 .btn-exit {
     position: absolute;
-    height: 30px;
-    width: 30px;
-    bottom: 0;
-    left: 15px;
-    border-left: 2px solid black;
-    -moz-transform: skew(-40deg);
-    -webkit-transform: skew(-40deg);
-    transform: skew(-40deg); }
-  #layer-labels .label .tag {
-    position: absolute;
-    bottom: 30px;
-    left: 28px;
-    font-size: 12px;
-    background-color: #000;
-    color: #fff;
-    padding: 4px 8px;
-    font-family: 'Oswald', sans-serif;
+    top: 30px;
+    right: 20px;
+    padding: 18px;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.8);
     text-transform: uppercase;
-    white-space: nowrap;
-    cursor: default;
-    transition: background-color 200ms ease-out; }
-  #layer-labels .label.selected .tag {
-    background-color: #e00606; }
-  #layer-labels .label.selected .line {
-    border-color: red; }
-  #layer-labels .label.over:not(.selected) .tag {
-    background-color: #640606; }
-  #layer-labels .label.over:not(.selected) .line {
-    border-color: #640606; }
-
-#header {
-  position: absolute;
-  height: 50px;
-  width: 100%;
-  background-color: black;
-  position: absolute;
-  top: -50px;
-  transition: top 500ms ease-out;
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none; }
-
-.logos {
-  height: 100%;
-  display: inline-block; }
-  .logos > span {
-    height: 100%;
-    display: inline-block;
-    background-size: auto 100%;
-    background-repeat: no-repeat;
+    font-family: 'AmnestyTradeGothic-BdCn20', sans-serif;
+    transition: background-color 300ms, color 300ms;
     cursor: pointer; }
-  .logos .ai {
-    background-image: url("../assets/logo-amnesty-yellow.png");
-    width: 118px; }
-  .logos .fa {
-    background-image: url("../assets/logo-FA-red.jpg");
-    width: 120px; }
-
-#mainNav {
-  float: right;
-  color: #000;
-  height: 100%;
-  margin-right: 20px;
-  text-transform: uppercase;
-  font-weight: bold;
-  font-size: 16px;
-  font-family: 'AmnestyTradeGothic-BdCn20', sans-serif; }
-  #mainNav:after {
-    content: "";
-    display: table;
-    clear: both; }
-  #mainNav > span {
-    display: inline-block;
-    height: 100%;
-    line-height: 50px;
-    padding: 0 15px;
-    cursor: pointer;
-    transition: all 300ms ease-out;
-    color: white; }
-    #mainNav > span:hover, #mainNav > span.active {
-      background-color: #ccc;
-      color: #000; }
-
-#footer-desktop {
-  font-family: sans-serif;
-  position: absolute;
-  color: white;
-  bottom: 30px;
-  right: 30px;
-  font-family: 'AmnestyTradeGothic-BdCn20', sans-serif;
-  text-transform: uppercase;
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none; }
-  #footer-desktop > span {
-    color: #ccc; }
-  #footer-desktop .label:after {
-    content: "";
-    border-right: 1px solid #999;
-    margin: 0 10px 0 10px; }
-  #footer-desktop .facebook {
-    display: inline-block;
-    font: normal normal normal 14px/1 FontAwesome;
-    font-size: inherit;
-    text-rendering: auto;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    margin-right: 10px;
-    font-size: 18px; }
-    #footer-desktop .facebook:before {
-      content: "\f082"; }
-  #footer-desktop .twitter {
-    display: inline-block;
-    font: normal normal normal 14px/1 FontAwesome;
-    font-size: inherit;
-    text-rendering: auto;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    font-size: 18px; }
-    #footer-desktop .twitter:before {
-      content: "\f099"; }
-  #footer-desktop .facebook,
-  #footer-desktop .twitter {
-    font-size: 20px;
-    cursor: pointer; }
-    #footer-desktop .facebook:hover,
-    #footer-desktop .twitter:hover {
-      color: white; }
-
-.block {
-  text-align: center;
-  white-space: nowrap; }
-  .block:before {
-    content: '';
-    display: inline-block;
-    height: 100%;
-    vertical-align: middle;
-    margin-right: -0.25em; }
-
-.centered {
-  display: inline-block;
-  vertical-align: middle; }
-
-#introMessage {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  font-size: 30px;
-  font-family: 'Oswald', sans-serif;
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none; }
-  #introMessage .message {
-    margin: 0;
-    padding: 10px 15px;
-    background-color: white;
-    text-transform: uppercase; }
-
-#typed-strings {
-  visibility: hidden; }
+    #layer-360 .btn-exit:hover {
+      background-color: white;
+      color: black; }
 
 #layer-video {
   position: absolute;
@@ -608,10 +604,9 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: black;
   opacity: 0;
   transition: opacity 500ms;
-  background-color: gray;
+  background-color: black;
   font-family: 'AmnestyTradeGothic-BdCn20', sans-serif; }
   #layer-video .player {
     position: absolute;
@@ -728,156 +723,141 @@ body {
       background-color: white;
       color: black; }
 
-.btn-exit-360 {
+#header {
   position: absolute;
-  top: 30px;
-  right: 20px;
-  padding: 18px;
-  color: white;
-  text-transform: uppercase;
-  background-color: rgba(0, 0, 0, 0.8);
-  font-family: 'AmnestyTradeGothic-BdCn20', sans-serif;
-  transition: background-color 300ms, color 300ms;
-  opacity: 0;
-  cursor: pointer; }
-  .btn-exit-360:hover {
-    background-color: white;
-    color: black; }
-
-#left-bar {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  margin-left: 30px;
-  font-family: 'Oswald', sans-serif;
-  text-transform: uppercase;
-  color: white;
-  z-index: 1000;
+  height: 50px;
+  width: 100%;
+  top: -50px;
+  background-color: black;
+  transition: top 500ms ease-out;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -khtml-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none; }
-
-#title {
-  position: absolute;
-  left: 30px;
-  top: 30px;
-  font-family: 'AmnestyTradeGothic-BdCn20', sans-serif;
-  color: #ddd;
-  cursor: default; }
-  #title > div {
+  #header .logos {
+    height: 100%;
     display: inline-block; }
-  #title div:nth-child(1) {
-    font-size: 41px;
+    #header .logos > span {
+      height: 100%;
+      display: inline-block;
+      background-size: auto 100%;
+      background-repeat: no-repeat;
+      cursor: pointer; }
+    #header .logos .ai {
+      background-image: url("../assets/logo-amnesty-yellow.png");
+      width: 118px; }
+    #header .logos .fa {
+      background-image: url("../assets/logo-FA-red.jpg");
+      width: 120px; }
+  #header .mainNav {
+    float: right;
+    color: #000;
+    height: 100%;
     text-transform: uppercase;
-    float: left; }
-  #title div:nth-child(2) {
-    float: left;
-    padding: 2px 10px;
-    margin: 8px 0 0 15px;
-    font-size: 22px;
-    background-color: #ddd;
-    color: #666; }
+    font-weight: bold;
+    font-size: 16px;
+    font-family: 'AmnestyTradeGothic-BdCn20', sans-serif; }
+    #header .mainNav:after {
+      content: "";
+      display: table;
+      clear: both; }
+    #header .mainNav > span {
+      display: inline-block;
+      height: 100%;
+      line-height: 50px;
+      padding: 0 15px;
+      cursor: pointer;
+      transition: all 300ms ease-out;
+      color: white; }
+      #header .mainNav > span:hover, #header .mainNav > span.active {
+        background-color: #ccc;
+        color: #000; }
 
-#navigation {
+#footer-desktop {
+  font-family: sans-serif;
   position: absolute;
-  top: 110px;
-  left: 30px;
-  height: 100%;
-  width: 265px;
-  font-family: 'Oswald', sans-serif;
-  text-transform: uppercase;
-  font-size: 12px;
   color: white;
-  overflow: hidden;
+  bottom: 30px;
+  right: 30px;
+  font-family: 'AmnestyTradeGothic-BdCn20', sans-serif;
+  text-transform: uppercase;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -khtml-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none; }
-  #navigation .menu-type {
-    padding: 17px 0;
-    border-top: 1px solid #999;
-    border-bottom: 1px solid #999; }
-    #navigation .menu-type span {
-      display: inline-block;
-      padding: 9px;
-      cursor: pointer;
-      border: solid 1px #999;
-      color: #999; }
-      #navigation .menu-type span.selected {
-        color: white;
-        border: solid 1px white; }
-      #navigation .menu-type span:first-child {
-        margin-right: 9px;
-        margin-left: 3px; }
-  #navigation .container {
-    margin: 40px 0 0 0;
-    overflow: hidden; }
-  #navigation ul, #navigation li {
-    list-style: none;
-    padding: 0;
-    margin: 0; }
-  #navigation ul.menu-witness,
-  #navigation ul.menu-location {
+  #footer-desktop > span {
+    color: #ccc; }
+  #footer-desktop .label:after {
+    content: "";
+    border-right: 1px solid #999;
+    margin: 0 10px 0 10px; }
+  #footer-desktop .facebook {
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    margin-right: 10px;
+    font-size: 18px; }
+    #footer-desktop .facebook:before {
+      content: "\f082"; }
+  #footer-desktop .twitter {
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: 18px; }
+    #footer-desktop .twitter:before {
+      content: "\f099"; }
+  #footer-desktop .facebook,
+  #footer-desktop .twitter {
+    font-size: 20px;
     cursor: pointer; }
-    #navigation ul.menu-witness > li > .folder,
-    #navigation ul.menu-location > li > .folder {
-      display: block;
-      padding: 10px 13px;
-      margin-bottom: 10px;
-      background-color: rgba(0, 0, 0, 0.65);
-      transition: background-color 200ms ease-out; }
-      #navigation ul.menu-witness > li > .folder .icon,
-      #navigation ul.menu-location > li > .folder .icon {
-        font-family: 'Arial', 'Helvetica', sans-serif;
-        margin-right: 8px;
-        display: inline-block;
-        width: 15px;
-        height: 15px;
-        line-height: 15px;
-        text-align: center;
-        font-size: 18px; }
-        #navigation ul.menu-witness > li > .folder .icon:before,
-        #navigation ul.menu-location > li > .folder .icon:before {
-          content: '+';
-          top: 1px;
-          position: relative; }
-      #navigation ul.menu-witness > li > .folder:hover,
-      #navigation ul.menu-location > li > .folder:hover {
-        background-color: rgba(100, 6, 6, 0.65); }
-    #navigation ul.menu-witness > li:last-child > .folder,
-    #navigation ul.menu-location > li:last-child > .folder {
-      margin-bottom: 0; }
-    #navigation ul.menu-witness > li > ul,
-    #navigation ul.menu-location > li > ul {
-      overflow: hidden;
-      height: 0;
-      transition: height 500ms; }
-      #navigation ul.menu-witness > li > ul > li,
-      #navigation ul.menu-location > li > ul > li {
-        display: block;
-        padding: 5px 10px;
-        margin: 0 7px 10px 7px;
-        background-color: rgba(153, 153, 153, 0.7);
-        transition: background-color 300ms ease-out; }
-        #navigation ul.menu-witness > li > ul > li:hover,
-        #navigation ul.menu-location > li > ul > li:hover {
-          background-color: #999999; }
-    #navigation ul.menu-witness > li.selected .folder,
-    #navigation ul.menu-location > li.selected .folder {
-      background-color: rgba(224, 6, 6, 0.65); }
-      #navigation ul.menu-witness > li.selected .folder .icon:before,
-      #navigation ul.menu-location > li.selected .folder .icon:before {
-        content: '-';
-        top: 0; }
-    #navigation ul.menu-witness > li.over:not(.selected) .folder,
-    #navigation ul.menu-location > li.over:not(.selected) .folder {
-      background-color: rgba(100, 6, 6, 0.65); }
+    #footer-desktop .facebook:hover,
+    #footer-desktop .twitter:hover {
+      color: white; }
+
+.block {
+  text-align: center;
+  white-space: nowrap; }
+  .block:before {
+    content: '';
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+    margin-right: -0.25em; }
+
+.centered {
+  display: inline-block;
+  vertical-align: middle; }
+
+#introMessage {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  font-size: 30px;
+  font-family: 'Oswald', sans-serif;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none; }
+  #introMessage .message {
+    margin: 0;
+    padding: 10px 15px;
+    background-color: white;
+    text-transform: uppercase; }
+
+#typed-strings {
+  visibility: hidden; }
 
 .control-wrap {
   position: absolute;
@@ -931,9 +911,6 @@ body {
       transition: background-color 300ms; }
   .control:hover .bar {
     background-color: white; }
-
-.dg.ac {
-  top: 60px !important; }
 
 #stats {
   top: 60px !important;

@@ -4,12 +4,10 @@
 
 FA.StateExplore = function( app ) {
 
-    // TODO: change opacity of model if mouse over left menu
-    // opacity returns to the value of the slider after mouse leave
+    var name = 'STATE_EXPLORE';
 
-
-    var $layerGl = $('#layer-gl'),
-        $layerLabels = $('#layer-labels'),
+    var $gl = $('#layer-prison .gl'),
+        $labels = $('#layer-prison .labels'),
 
         sceneWidth,
         sceneHeight,
@@ -22,11 +20,9 @@ FA.StateExplore = function( app ) {
 
         // mouse picking
         mouse = new THREE.Vector2(),
-        isMouseDown = false;
+        isMouseDown = false,
 
-
-
-var roomOnDown = null;
+        roomOnDown = null;
 
 
     function buildSlider() {
@@ -57,11 +53,11 @@ var roomOnDown = null;
 
     function onWindowResize() {
 
-        sceneWidth = $layerGl.width();
-        sceneHeight = $layerGl.height();
+        sceneWidth = $gl.width();
+        sceneHeight = $gl.height();
 
         buildingView.setSize( sceneWidth, sceneHeight );
-        labelsView.setSize( sceneWidth, sceneHeight )
+        labelsView.setSize( sceneWidth, sceneHeight );
 
     }
 
@@ -134,7 +130,9 @@ var roomOnDown = null;
 
         //app.setActiveLocation( slug );
 
-        app.changeState( new FA.StateCell( app ) );
+        var locationData = app.data.locationBySlug[ slug ];
+
+        app.changeState( new FA.State360( app, locationData ) );
 
     }
 
@@ -162,19 +160,17 @@ var roomOnDown = null;
 
         // listeners
         $(window).on( 'resize', onWindowResize );
-        $layerLabels
+        $labels
             .on( 'mousemove', onMouseMove )
             .on( 'mousedown', onMouseDown )
             .on( 'mouseup', onMouseUp );
 
         // revealing //////////////////////////////////////////
-        $layerGl.css( 'opacity', 1 );
-        $layerLabels.css( 'opacity', 1 );
+        $gl.css( 'opacity', 1 );
+        $labels.css( 'opacity', 1 );
         $( '#header' ).css( 'top', 0 );
         menuView.show();
         //////////////////////////////////////////////////////
-
-        console.log(app.getActiveLocation(), app.getOverLocation());
 
     }
 
@@ -194,7 +190,7 @@ var roomOnDown = null;
 
         // remove listeners
         $(window).off( 'resize', onWindowResize );
-        $layerLabels
+        $labels
             .off( 'mousemove', onMouseMove )
             .off( 'mousedown', onMouseDown )
             .off( 'mouseup', onMouseUp );
@@ -206,9 +202,7 @@ var roomOnDown = null;
         menuView.hide();
         labelsView.destroy();
 
-        // slider.hide();
         destroySlider();
-
 
     }
 

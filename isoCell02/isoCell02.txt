@@ -1,0 +1,44 @@
+
+
+isoCell02 
+
+lookatpoint.x = 0.96;
+			
+lookatpoint.y = 1.55;
+		
+lookatpoint.z = 1.2;
+
+cameraPos.x = 0.93;
+
+cameraPos.y = 1.55;
+
+cameraPos.z = 1.32;
+
+bodyCrouchA01
+0.343
+0.286
+140
+
+bodyCrouchA02
+1.62
+1.22
+270
+
+bodyCrouchA03
+0.812
+1.57
+352
+
+bodyStandA01
+1.53
+0.453
+87
+
+bodyStandA02
+0.324
+1.045
+268
+
+
+
+---------------------------------------

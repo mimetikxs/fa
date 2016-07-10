@@ -84,8 +84,8 @@ FA.App = (function() {
         // views
         buildingView : null,
 
-        // cell
-        cellMesh : null,
+        // 360
+        view360 : null,
 
         // public methods
         changeState : changeState,
@@ -111,6 +111,7 @@ FA.App.changeState( new FA.StatePreload( FA.App ) );
 // global scope event listeners
 //
 
+// resize div.content
 $( window ).on( 'resize', function( e ) {
     $( '#content' ).css( 'height', $(window).height() - 50 ); // header bar is 50px
 } ).trigger( 'resize' );
