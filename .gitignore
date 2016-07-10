@@ -1,5 +1,10 @@
 assets/
-prision.html
-cell.html
 sound/
 obj/
+
+css/*.map
+
+isoCell02/
+
+prision.html
+cell.html
