@@ -1,14 +1,16 @@
 /*
  * 360 view of the cells
  */
-FA.View360 = function() {
+
+FA.View360 = function( app ) {
 
     var scope = this,
 
         $dom = $('#layer-360 .gl'),
+        $labels = $('#layer-360 .labels'),
 
-        sceneWidth = $dom.width(),
-        sceneHeight = $dom.height(),
+        sceneWidth,
+        sceneHeight,
 
         manager,
 
@@ -18,13 +20,18 @@ FA.View360 = function() {
         controls,
         raycaster,
 
-        interactiveGroup, // object picking: this is the parent of all interactive objects
+        interactiveGroup,               // object picking: this is the parent of all interactive objects
+        interactiveItems = [],          // FA.InteractiveItem
 
-        //TODO: interactive objects
+        bodyGeometries = {},            // lookup { "name" : THREE.Geometry }
 
-        bodyGeometries = {}, // lookup { "name" : THREE.geometry } // TODO: clear on exit?
+        updateCallback = function(){},
 
-        updateCallback = function(){};
+        locationData = null;            // the current data being displayed
+
+
+    var intersecting = null;
+
 
 
 
@@ -37,7 +44,10 @@ FA.View360 = function() {
         var ambient = new THREE.AmbientLight( 0xffffff, 1.0 );
         scene.add( ambient );
 
-        camera = new THREE.PerspectiveCamera( 50, sceneWidth / sceneHeight, 0.1, 300 );
+        interactiveGroup = new THREE.Object3D();
+        scene.add( interactiveGroup );
+
+        camera = new THREE.PerspectiveCamera( 60, sceneWidth / sceneHeight, 0.1, 300 );
         // camera.position.x = cameraPos.x;
         // camera.position.y = cameraPos.y;
         // camera.position.z = cameraPos.z;
@@ -48,7 +58,6 @@ FA.View360 = function() {
         renderer = new THREE.WebGLRenderer( { antialias: true } );
         renderer.setPixelRatio( window.devicePixelRatio );
         renderer.setSize( sceneWidth, sceneHeight );
-        //renderer.setClearColor( 0x666666 );
 
         // controls
         var interaciveEl = $('#layer-360 .labels')[0];
@@ -58,13 +67,33 @@ FA.View360 = function() {
         controls.dampingFactor = 0.15;
         controls.enableZoom = false;
         controls.enablePan = false;
-        controls.enableKeys = false ;
+        controls.enableKeys = false;
+        controls.scaleFactor = 0.08;
         // controls.target.x = cameraLookAt.x;
         // controls.target.y = cameraLookAt.y;
         // controls.target.z = cameraLookAt.z;
         controls.target.x = (cameraLookAt.x === 0) ? 0.96 : cameraLookAt.x;
         controls.target.y = (cameraLookAt.y === 0) ? 1.55 : cameraLookAt.y;
         controls.target.z = (cameraLookAt.z === 0) ? 1.2 : cameraLookAt.z;
+
+        scope.setSize( $dom.width(), $dom.height() );
+
+    }
+
+
+    function loadRoom( fileName ) {
+
+        var loader = new THREE.JSONLoader( manager );
+        loader.setTexturePath('obj/360s/maps/')
+        loader.load(
+            'obj/360s/' + fileName + '.js',
+            function ( geometry, materials ) {
+                var material = new THREE.MultiMaterial( materials );
+                var object = new THREE.Mesh( geometry, material );
+
+                scene.add( object );
+            }
+        );
 
     }
 
@@ -105,7 +134,59 @@ FA.View360 = function() {
 
     function loadInteractiveObject( data ) {
 
-        // TODO
+        var name = data.fileName,
+            mediaId = data.mediaId,
+            mediaData = app.data.mediaById[ mediaId ],
+            loader = new THREE.JSONLoader( manager );
+        loader.setTexturePath( 'obj/360s/maps/' )
+        loader.load(
+            'obj/360s/' + name + '.js',
+            function ( geometry, materials ) {
+                // var material = new THREE.MeshBasicMaterial( 0xffffff );
+                //var material = new THREE.MultiMaterial( materials );
+                var material = materials[ 0 ]; // only has one matei
+                var mesh = new THREE.Mesh( geometry, material );
+                var item = new FA.InteractiveItem( mesh, mediaData.title, mediaId );
+
+                interactiveItems.push( item );
+
+                interactiveGroup.add( item.object3D );
+
+                $labels.append( item.$label );
+            }
+        );
+
+    }
+
+
+    function updateLabels() {
+
+        for ( var i = 0, max = interactiveItems.length; i < max; i++ ) {
+            var item = interactiveItems[ i ],
+                anchor = item.getCenter(),
+                ndc = anchor.clone().project( camera ); // NDC (-1.0 .. 1.0)
+
+            // clipping
+		    if ( ndc.z < -1  ||  ndc.z > 1
+		    	||  ndc.x < -1  ||  ndc.x > 1
+		    	||  ndc.y < -1  ||  ndc.y > 1 ) {
+
+		    	item.$label.css( {
+		    		visibility : 'hidden'
+		    	});
+
+		    } else {
+                var screenCoord = {
+                    x: ( ndc.x + 1 ) * sceneWidth / 2,    //+ jqdiv.offset().left,
+        		    y: ( - ndc.y + 1 ) * sceneHeight / 2  //+ jqdiv.offset().top
+                }
+
+                item.$label.css( {
+                    'visibility' : 'visible',
+                    'transform' : 'translate3d(' + screenCoord.x  + 'px,' + screenCoord.y + 'px,0px)'
+                } );
+            }
+        }
 
     }
 
@@ -116,16 +197,19 @@ FA.View360 = function() {
 
         renderer.render( scene, camera );
 
-    }
+        updateLabels();
 
+    }
 
 
     //        //
     // Public //
     //        //
 
-    // TODO: move loading out of View360 to State360
-    this.load = function( data ) {
+
+    this.load = function( data, onComplete, onError ) {
+
+        locationData = data;
 
         scope.clear();
 
@@ -145,22 +229,14 @@ FA.View360 = function() {
 
             updateCallback = updateWhenReady;
 
-            // add to dom
+            // add renderer to dom
             $dom.append( renderer.domElement );
+
+            if ( onComplete ) onComplete();
         }
 
         // load the room
-        var loader = new THREE.JSONLoader( manager );
-        loader.setTexturePath('obj/360s/maps/')
-        loader.load(
-            'obj/360s/' + data.obj360 + '.js',
-            function ( geometry, materials ) {
-                var material = new THREE.MultiMaterial( materials );
-                var object = new THREE.Mesh( geometry, material );
-
-                scene.add( object );
-            }
-        );
+        loadRoom( data.obj360 );
 
         // load the bodies
         var bodyNames = [],
@@ -176,14 +252,17 @@ FA.View360 = function() {
         }
 
         // load the interactive objects
-        // for (var i = 0; i < data.interactiveObjects.length; i++) {
-        //     loadBody( data.bodies[ i ] );
-        // }
+        var objects = data.objects;
+        for (var i = 0; i < objects.length; i++) {
+            loadInteractiveObject( objects[ i ] );
+        }
 
     }
 
 
     this.clear = function() {
+
+        locationData = null;
 
         updateCallback = function(){};
 
@@ -197,7 +276,12 @@ FA.View360 = function() {
         camera = null;
         renderer = null;
 
+        interactiveItems = [];
+        bodyGeometries = {};
+
+        // clear dom
         $dom.empty();
+        $labels.empty();
 
     }
 
@@ -209,19 +293,19 @@ FA.View360 = function() {
     }
 
 
-    // this.getIntersectingObject = function( mouse ) {
-    //
-    //     raycaster.setFromCamera( mouse, camera );
-    //
-    //     var intersects = raycaster.intersectObjects( roomsGroup.children );
-    //
-    //     if ( intersects.length > 0 ) {
-    //         return intersects[ 0 ].object;
-    //     } else {
-    //         return null;
-    //     }
-    //
-    // }
+    this.getIntersectingObject = function( mouse ) {
+
+        raycaster.setFromCamera( mouse, camera );
+
+        var intersects = raycaster.intersectObjects( interactiveGroup.children );
+
+        if ( intersects.length > 0 ) {
+            return intersects[ 0 ].object;
+        } else {
+            return null;
+        }
+
+    }
 
 
     this.setSize = function( width, height ) {
@@ -251,4 +335,22 @@ FA.View360 = function() {
 
     }
 
+
+    this.getLocationData = function() {
+
+        return locationData;
+
+    }
+
+
+    this.getItemBySlug = function( slug ) {
+
+        for ( var i = 0, max = interactiveItems.length; i < max; i++ ) {
+            if ( interactiveItems[ i ].getSlug() === slug ) {
+                return interactiveItems[ i ];
+            }
+        }
+        return null;
+
+    }
 }

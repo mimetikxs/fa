@@ -8,10 +8,10 @@
 		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 
 		<link rel="stylesheet" href="js/lib/videojs/video-js.css">
-		<script src="js/lib/videojs/video.min.js"></script>
-
 		<link href="https://fonts.googleapis.com/css?family=Oswald:300,400,700" rel="stylesheet">
 		<link rel="stylesheet" href="css/app.css">
+
+		<script src="js/lib/videojs/video.min.js"></script>
 	</head>
 
 	<body>
@@ -33,9 +33,7 @@
 
 		<div id="content">
 
-			<!--
-				prison
-			-->
+			<!-- prison -->
 			<div id="layer-prison">
 				<div class="gl"></div>
 				<div class="labels"></div>
@@ -55,9 +53,7 @@
 				</div>
 			</div>
 
-			<!--
-				360 view
-			-->
+			<!-- 360 view -->
 			<div id="layer-360">
 				<div class="gl"></div>
 				<div class="labels"></div>
@@ -65,9 +61,7 @@
 				<div class="btn-exit">Back</div>
 			</div>
 
-			<!--
-				video
-			-->
+			<!-- video -->
 			<div id="layer-video">
 				<div class="player"></div>
 
@@ -126,19 +120,18 @@
 		<script src="js/src/FA.js"></script>
 		<script src="js/src/Utils.js"></script>
 		<script src="js/src/Data.js"></script>
-		<script src="js/src/Room.js"></script>
-		<script src="js/src/LabelsView.js"></script>
-		<script src="js/src/BuildingView.js"></script>
-		<script src="js/src/MenuView.js"></script>
 		<script src="js/src/Slider.js"></script>
 		<script src="js/src/BufferLoader.js"></script>
+		<script src="js/src/InteractiveItem.js"></script>
+		<script src="js/src/stateExplore/LabelsView.js"></script>
+		<script src="js/src/stateExplore/BuildingView.js"></script>
+		<script src="js/src/stateExplore/MenuView.js"></script>
+		<script src="js/src/stateExplore/StateExplore.js"></script>
+		<script src="js/src/state360/View360.js"></script>
+		<script src="js/src/state360/State360.js"></script>
+		<script src="js/src/statePreload/StatePreload.js"></script>
+		<script src="js/src/stateVideo/StateVideo3.js"></script>
 		<script src="js/src/StateIdle.js"></script>
-		<script src="js/src/StatePreload.js"></script>
-		<script src="js/src/StateVideo.js"></script>
-		<script src="js/src/StateVideo3.js"></script>
-		<script src="js/src/StateExplore.js"></script>
-		<script src="js/src/View360.js"></script>
-		<script src="js/src/State360.js"></script>
 		<script src="js/src/App.js"></script>
 
 	</body>

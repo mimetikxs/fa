@@ -76,6 +76,10 @@ FA.StatePreload = function( app ) {
                 app.data = new FA.Data( result );
 
                 loadResources();
+            },
+            error : function( jqXHR, status, errorThrown ) {
+
+                console.log( status );
             }
         });
     }
@@ -90,7 +94,6 @@ FA.StatePreload = function( app ) {
 
         manager.onLoad = function() {
             loaded = true;
-            scaleGeometries();
         }
 
         loadBuildingModel();
@@ -112,6 +115,9 @@ FA.StatePreload = function( app ) {
                 for (var i = 0; i < materials.length; i++) {
                     materials[ i ].transparent = true;
                 }
+
+                scaleGeometry( geometry );
+
                 app.buildingMesh = new THREE.Mesh( geometry, material );
                 app.buildingMesh.geometry.computeBoundingSphere();
             },
@@ -134,6 +140,9 @@ FA.StatePreload = function( app ) {
                         polygonOffsetUnits : 1
                     } );
                 }
+
+                scaleGeometry( geometry );
+
                 app.buildingRoofMesh = new THREE.Mesh( geometry, material );
             },
             onProgress,
@@ -159,10 +168,19 @@ FA.StatePreload = function( app ) {
             loader.load(
                 data.objRoom,
                 function ( geometry, materials ) {
-                    var bufferGeom = new THREE.BufferGeometry();
-                    bufferGeom.fromGeometry( geometry )
+                    //var bufferGeom = new THREE.BufferGeometry();
+                    //bufferGeom.fromGeometry( geometry );
+                    var material = new THREE.MeshPhongMaterial( {
+                        color : 0xffffff,
+                        polygonOffset : true,
+                        polygonOffsetFactor : -1, // positive value pushes polygon further away
+                        polygonOffsetUnits : 1
+                    } );
 
-                    var room = new FA.Room( geometry, name, slug );
+                    scaleGeometry( geometry );
+
+                    var mesh = new THREE.Mesh( geometry, material );
+                    var room = new FA.InteractiveItem( mesh, name, slug );
 
                     app.rooms.push( room );
                 },
@@ -186,6 +204,8 @@ FA.StatePreload = function( app ) {
                 }
                 var material = new THREE.MultiMaterial( materials );
 
+                scaleGeometry( geometry );
+
                 app.terrainMesh = new THREE.Mesh( geometry, material );;
             },
             onProgress,
@@ -195,7 +215,7 @@ FA.StatePreload = function( app ) {
     }
 
 
-    function scaleGeometries() {
+    function scaleGeometry( geometry ) {
 
         // centers the imported models into the scene
         var transform = new THREE.Matrix4(),
@@ -205,16 +225,7 @@ FA.StatePreload = function( app ) {
         translate.makeTranslation( 32.57, 0, 30 );
         transform.multiplyMatrices( scale, translate );
 
-        app.buildingMesh.geometry.applyMatrix( transform );
-
-        app.buildingRoofMesh.geometry.applyMatrix( transform );
-
-        var rooms = app.rooms;
-        for ( var i = 0; i < rooms.length; i++ ) {
-            rooms[ i ].object3D.geometry.applyMatrix( transform );
-        }
-
-        app.terrainMesh.geometry.applyMatrix( transform );
+        geometry.applyMatrix( transform );
 
     }
 

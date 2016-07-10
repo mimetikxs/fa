@@ -79,7 +79,16 @@ FA.StateExplore = function( app ) {
         if ( isMouseDown ) {
             // app.setOverLocation( null );
         } else {
-            app.setOverLocation( getRoomUnderMouse( mouse ) );
+            var roomUnderMouse = getRoomUnderMouse( mouse );
+
+            app.setOverLocation( roomUnderMouse );
+
+            // change mouse cursor
+            if ( roomUnderMouse ) {
+                $labels.css( 'cursor', 'pointer' );
+            } else {
+                $labels.css( 'cursor', 'default' );
+            }
         }
 
     }

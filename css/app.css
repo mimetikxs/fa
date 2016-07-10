@@ -437,7 +437,7 @@ body {
       font-family: 'Oswald', sans-serif;
       text-transform: uppercase;
       white-space: nowrap;
-      cursor: default;
+      cursor: pointer;
       transition: background-color 200ms ease-out; }
     #layer-prison .labels .label.selected .tag {
       background-color: #e00606; }
@@ -567,8 +567,6 @@ body {
 #layer-360 {
   visibility: hidden;
   opacity: 0; }
-  #layer-360 .gl {
-    background-color: black; }
   #layer-360 .gl,
   #layer-360 .labels {
     position: absolute;
@@ -582,7 +580,10 @@ body {
     background-color: #333;
     color: white;
     padding: 5px 8px;
-    cursor: pointer; }
+    cursor: pointer;
+    transition: background-color 300ms; }
+    #layer-360 .labels .label.over {
+      background-color: rgba(255, 0, 0, 0.7); }
   #layer-360 .btn-exit {
     position: absolute;
     top: 30px;
@@ -597,6 +598,23 @@ body {
     #layer-360 .btn-exit:hover {
       background-color: white;
       color: black; }
+  #layer-360 .title {
+    position: absolute;
+    left: 30px;
+    top: 30px;
+    padding: 10px 20px;
+    color: black;
+    background-color: rgba(255, 255, 255, 0.8);
+    font-family: 'AmnestyTradeGothic-BdCn20', sans-serif;
+    text-transform: uppercase;
+    font-size: 28px;
+    cursor: default;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none; }
 
 #layer-video {
   position: absolute;

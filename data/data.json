@@ -17,6 +17,8 @@
             },
             "bodies": [
             ],
+            "objects": [
+            ],
             "sound" : "path"
         },
         {
@@ -35,6 +37,8 @@
                 "z" : 0
             },
             "bodies": [
+            ],
+            "objects": [
             ],
             "sound" : "path"
         },
@@ -55,6 +59,8 @@
             },
             "bodies": [
             ],
+            "objects": [
+            ],
             "sound" : "path"
         },
         {
@@ -74,6 +80,8 @@
             },
             "bodies": [
             ],
+            "objects": [
+            ],
             "sound" : "path"
         },
         {
@@ -92,6 +100,8 @@
                 "z" : 1.2
             },
             "bodies": [
+            ],
+            "objects": [
             ],
             "sound" : "path"
         },
@@ -142,6 +152,12 @@
                     "angle" : 268
                 }
             ],
+            "objects": [
+                {
+                    "fileName" : "isoCell02buttonA",
+                    "mediaId" : "a00"
+                }
+            ],
             "sound" : "path"
         },
         {
@@ -160,6 +176,8 @@
                 "z" : 1.2
             },
             "bodies": [
+            ],
+            "objects": [
             ],
             "sound" : "path"
         }

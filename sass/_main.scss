@@ -108,7 +108,7 @@ body {
                 font-family: 'Oswald', sans-serif;
                 text-transform: uppercase;
                 white-space: nowrap;
-                cursor: default;;
+                cursor: pointer;
                 transition: background-color 200ms ease-out;
             }
 
@@ -294,10 +294,6 @@ body {
     visibility: hidden;
     opacity: 0;
 
-    .gl{
-        background-color: black;
-    }
-
     .gl,
     .labels {
         position: absolute;;
@@ -315,6 +311,11 @@ body {
             color: white;
             padding: 5px 8px;
             cursor: pointer;
+            transition: background-color 300ms;
+
+            &.over {
+                background-color: rgba(255,0,0,0.7);
+            }
         }
     }
 
@@ -334,6 +335,20 @@ body {
             background-color: rgba(255,255,255,1);
             color: black;
         }
+    }
+
+    .title {
+        position: absolute;
+        left: 30px;
+        top: 30px;
+        padding: 10px 20px;
+        color: black;
+        background-color: rgba(255,255,255,0.8);
+        font-family: 'AmnestyTradeGothic-BdCn20', sans-serif;
+        text-transform: uppercase;
+        font-size: 28px;
+        cursor: default;
+        @include noselect;
     }
 }
 
@@ -388,7 +403,6 @@ body {
             font-size: 28px;
             text-transform: uppercase;
             // margin-right: 20px;
-
         }
 
         .location,

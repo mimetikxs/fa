@@ -1,8 +1,7 @@
-FA.Room = function( geometry, name, slug ) {
+FA.InteractiveItem = function( mesh, name, slug ) {
 
     var object3D = null,
         center = null,
-
         $label = null;  // refernce to dom element associated with this room
 
 
@@ -13,14 +12,7 @@ FA.Room = function( geometry, name, slug ) {
 
     function build3D() {
 
-        var material = new THREE.MeshPhongMaterial( {
-            color : 0xffffff,
-            polygonOffset : true,
-            polygonOffsetFactor : -1, // positive value pushes polygon further away
-            polygonOffsetUnits : 1
-        } );
-
-        object3D = new THREE.Mesh( geometry, material );
+        object3D = mesh;
         object3D.name = slug;
 
     }
@@ -38,12 +30,12 @@ FA.Room = function( geometry, name, slug ) {
 
     function calculateCenter() {
 
-        geometry.computeBoundingBox();
+        mesh.geometry.computeBoundingBox();
 
         center = new THREE.Vector3();
         center.addVectors(
-            geometry.boundingBox.min,
-            geometry.boundingBox.max
+            mesh.geometry.boundingBox.min,
+            mesh.geometry.boundingBox.max
         );
         center.divideScalar( 2 );
 

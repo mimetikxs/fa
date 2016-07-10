@@ -79,12 +79,12 @@ FA.App = (function() {
         buildingMesh     : null,
         buildingRoofMesh : null,
         terrainMesh      : null,
-        rooms            : [ ],  // FA.Room
 
-        // views
+        // prison view
+        rooms : [ ],  // FA.InteractiveItem
         buildingView : null,
 
-        // 360
+        // 360 view
         view360 : null,
 
         // public methods
