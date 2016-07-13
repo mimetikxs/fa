@@ -14,6 +14,12 @@ FA.App = (function() {
         overLocation = null;
 
 
+    // setup audio
+    window.AudioContext = window.AudioContext || window.webkitAudioContext;
+    var audioContext = new AudioContext();
+
+
+
     update();
 
 
@@ -75,17 +81,22 @@ FA.App = (function() {
 
         data : null,
 
-        // mesh + texture data
+        // prison mesh + texture data
         buildingMesh     : null,
         buildingRoofMesh : null,
         terrainMesh      : null,
 
         // prison view
-        rooms : [ ],  // FA.InteractiveItem
+        rooms : [ ],                    // FA.InteractiveItem
         buildingView : null,
+        modelOpacity : 0.4,
 
         // 360 view
         view360 : null,
+
+        // sound
+        audioContext : audioContext,
+        sounds : [ ],                   // FA.Sound
 
         // public methods
         changeState : changeState,

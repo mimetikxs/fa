@@ -102,10 +102,14 @@ FA.LabelsView = function( app ) {
             buildingCenter = prisonMesh.position.clone(),
             rooms = app.rooms;
 
+            var appOverLocation = app.getOverLocation(),
+                appActiveLocation = app.getActiveLocation();
+
         // update all labels
         for ( var i = 0, max = rooms.length; i < max; i++ ) {
 
             var room = rooms[ i ],
+                roomSlug = room.getSlug(),
                 anchor = room.getCenter(),
                 screenCoord = toScreenXY( anchor, camera ),
 
@@ -116,12 +120,20 @@ FA.LabelsView = function( app ) {
                 pct = (distanceToAnchor - nearZ) / (farZ - nearZ);
                 pct = 1 - pct;
 
-            // opacity won't be affected by disatnce if this room is selected
-            var opacity = ( room.getSlug() !== app.getActiveLocation() ) ? (0.1 + pct) : 0.8;
-            opacity = ( room.getSlug() !== app.getOverLocation() ) ? opacity : 0.8;
+
+
+            // opacity won't be affected by disatnce if this room is active or selected
+            var opacity = ( roomSlug !== appActiveLocation ) ? (0.1 + pct) : 0.8;
+            opacity = ( roomSlug !== appOverLocation ) ? opacity : 0.8;
+
+            // testing scaling
+            var targetScale = ( roomSlug === appOverLocation || roomSlug === appActiveLocation ) ? 1.1 : 1;
+            // ease
+            room.scale += ( targetScale - room.scale ) * 0.2;
 
             room.$label.css( {
-                'transform' : 'translate3d(' + screenCoord.x  + 'px,' + screenCoord.y + 'px,0px)',
+                'transform' : 'translate3d(' + screenCoord.x  + 'px,' + screenCoord.y + 'px,0px) scale(' + room.scale + ',' + room.scale +')',
+                // 'transform' : 'translate3d(' + screenCoord.x  + 'px,' + screenCoord.y + 'px,0px)',
                 'opacity' : opacity,
                 'z-index' : Math.floor(pct * 100)
             } );

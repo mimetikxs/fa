@@ -379,13 +379,14 @@ th {
   font-weight: normal;
   font-style: normal; }
 body {
-  overflow: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-family: 'Roboto', sans-serif;
-  background-color: #666666;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale; }
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #666666;
+  font-size: 16; }
+  body[data-section="about"] {
+    background-color: white; }
 
 #content {
   position: absolute;
@@ -404,7 +405,8 @@ body {
   -khtml-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
-  user-select: none; }
+  user-select: none;
+  background-color: black; }
 
 #layer-prison .gl,
 #layer-prison .labels {
@@ -415,7 +417,8 @@ body {
   transition: opacity 500ms ease-out; }
   #layer-prison .labels .label {
     position: absolute;
-    opacity: 0.8; }
+    opacity: 0.8;
+    transform: scale(1, 1); }
     #layer-prison .labels .label .line {
       position: absolute;
       height: 30px;
@@ -501,7 +504,7 @@ body {
         margin-right: 9px;
         margin-left: 3px; }
   #layer-prison .navigation .container {
-    margin: 40px 0 0 0;
+    margin: 20px 0 0 0;
     overflow: hidden; }
   #layer-prison .navigation ul, #layer-prison .navigation li {
     list-style: none;
@@ -625,7 +628,8 @@ body {
   opacity: 0;
   transition: opacity 500ms;
   background-color: black;
-  font-family: 'AmnestyTradeGothic-BdCn20', sans-serif; }
+  font-family: 'AmnestyTradeGothic-BdCn20', sans-serif;
+  overflow: hidden; }
   #layer-video .player {
     position: absolute;
     width: 100%;
@@ -742,12 +746,15 @@ body {
       color: black; }
 
 #header {
-  position: absolute;
+  position: fixed;
   height: 50px;
   width: 100%;
-  top: -50px;
+  top: 0;
   background-color: black;
   transition: top 500ms ease-out;
+  font-family: 'AmnestyTradeGothic-BdCn20', sans-serif;
+  text-transform: uppercase;
+  font-size: 16px;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -khtml-user-select: none;
@@ -769,36 +776,76 @@ body {
     #header .logos .fa {
       background-image: url("../assets/logo-FA-red.jpg");
       width: 120px; }
-  #header .mainNav {
+  #header .menuItem {
+    display: inline-block;
     float: right;
-    color: #000;
-    height: 100%;
-    text-transform: uppercase;
-    font-weight: bold;
-    font-size: 16px;
-    font-family: 'AmnestyTradeGothic-BdCn20', sans-serif; }
-    #header .mainNav:after {
+    margin-right: 1px;
+    padding: 0 15px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 300ms ease-out, color 300ms ease-out; }
+    #header .menuItem:after {
       content: "";
       display: table;
       clear: both; }
-    #header .mainNav > span {
+    #header .menuItem > span:nth-child(2) {
+      margin-left: 5px;
+      font-family: 'AmnestyTradeGothic-Cn18', sans-serif; }
+  #header .mainNav-menu,
+  #header .takeAction {
+    float: right; }
+  #header .mainNav-menu .menuItem {
+    height: 100%;
+    line-height: 50px;
+    color: #fff; }
+    #header .mainNav-menu .menuItem.active, #header .mainNav-menu .menuItem:hover {
+      background-color: #DADADA;
+      color: #000; }
+  #header .takeAction {
+    border: 10px solid black;
+    box-sizing: border-box;
+    line-height: 30px;
+    padding: 0 15px;
+    color: black;
+    background-color: #DADADA;
+    transition: background-color 300ms ease-out, color 300ms ease-out;
+    cursor: pointer;
+    font-size: 14px; }
+    #header .takeAction:hover {
+      background-color: #FF0; }
+    #header .takeAction > span:nth-child(2) {
+      margin-left: 5px;
+      font-family: 'AmnestyTradeGothic-Cn18', sans-serif; }
+  #header .subNav-menu {
+    position: absolute;
+    top: 50px;
+    left: 0;
+    width: 100%;
+    background-color: #DADADA;
+    color: #000;
+    margin-right: 20px;
+    font-size: 14px;
+    cursor: default;
+    padding-right: 20px; }
+    #header .subNav-menu .menuItem {
       display: inline-block;
-      height: 100%;
-      line-height: 50px;
-      padding: 0 15px;
+      float: right;
+      line-height: 40px;
+      height: 40px;
       cursor: pointer;
-      transition: all 300ms ease-out;
-      color: white; }
-      #header .mainNav > span:hover, #header .mainNav > span.active {
-        background-color: #ccc;
-        color: #000; }
+      color: #000; }
+      #header .subNav-menu .menuItem.active, #header .subNav-menu .menuItem:hover {
+        background-color: #ff0; }
+      #header .subNav-menu .menuItem:first-child {
+        margin-right: 20px; }
 
 #footer-desktop {
-  font-family: sans-serif;
   position: absolute;
-  color: white;
-  bottom: 30px;
   right: 30px;
+  bottom: 30px; }
+
+.share-social {
+  color: white;
   font-family: 'AmnestyTradeGothic-BdCn20', sans-serif;
   text-transform: uppercase;
   -webkit-touch-callout: none;
@@ -807,13 +854,13 @@ body {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none; }
-  #footer-desktop > span {
+  .share-social > span {
     color: #ccc; }
-  #footer-desktop .label:after {
+  .share-social .label:after {
     content: "";
     border-right: 1px solid #999;
     margin: 0 10px 0 10px; }
-  #footer-desktop .facebook {
+  .share-social .facebook {
     display: inline-block;
     font: normal normal normal 14px/1 FontAwesome;
     font-size: inherit;
@@ -822,9 +869,9 @@ body {
     -moz-osx-font-smoothing: grayscale;
     margin-right: 10px;
     font-size: 18px; }
-    #footer-desktop .facebook:before {
+    .share-social .facebook:before {
       content: "\f082"; }
-  #footer-desktop .twitter {
+  .share-social .twitter {
     display: inline-block;
     font: normal normal normal 14px/1 FontAwesome;
     font-size: inherit;
@@ -832,14 +879,14 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-size: 18px; }
-    #footer-desktop .twitter:before {
+    .share-social .twitter:before {
       content: "\f099"; }
-  #footer-desktop .facebook,
-  #footer-desktop .twitter {
+  .share-social .facebook,
+  .share-social .twitter {
     font-size: 20px;
     cursor: pointer; }
-    #footer-desktop .facebook:hover,
-    #footer-desktop .twitter:hover {
+    .share-social .facebook:hover,
+    .share-social .twitter:hover {
       color: white; }
 
 .block {
@@ -896,7 +943,6 @@ body {
     font-family: 'Oswald', sans-serif;
     text-transform: uppercase;
     font-size: 12px;
-    z-index: 1;
     float: left;
     padding: 0 12px;
     line-height: 34px;
@@ -933,6 +979,200 @@ body {
 #stats {
   top: 60px !important;
   left: 10px; }
+
+body[data-section="about"] {
+  line-height: 1.4; }
+  body[data-section="about"] h1, body[data-section="about"] h2 {
+    font-family: 'AmnestyTradeGothic-BdCn20', sans-serif;
+    text-transform: uppercase;
+    line-height: 1;
+    font-weight: normal; }
+  body[data-section="about"] h2 {
+    font-size: 2.375em; }
+  body[data-section="about"] #content {
+    top: 90px;
+    overflow: auto; }
+
+.fragment-wrapper {
+  position: relative;
+  padding: 50px;
+  text-align: center; }
+  .fragment-wrapper .fragment {
+    max-width: 750px;
+    position: relative;
+    display: inline-block; }
+
+#page-header {
+  height: 200px;
+  background-image: url("https://www.amnesty.org/media/patternlibrary/air_2014_7.jpg?preset=fixed_1472_42_hi");
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: 50% 50%; }
+  #page-header .fragment {
+    width: 100%;
+    height: 100%; }
+  #page-header h1 {
+    position: absolute;
+    display: inline-block;
+    bottom: 0;
+    left: 0;
+    margin: 0;
+    padding: 10px 20px;
+    background-color: black;
+    color: white;
+    font-size: 3.0625em; }
+
+body[data-sub-section="saydnaya"] #page-header {
+  background-image: url("https://www.amnesty.org/media/patternlibrary/air_2014_7.jpg?preset=fixed_1472_42_hi"); }
+
+body[data-sub-section="detention"] #page-header {
+  background-image: url("https://www.amnesty.org/media/patternlibrary/air_2014_7.jpg?preset=fixed_1472_42_hi"); }
+
+body[data-sub-section="making-of"] #page-header {
+  background-image: url("https://www.amnesty.org/media/patternlibrary/air_2014_7.jpg?preset=fixed_1472_42_hi"); }
+
+body:not([data-sub-section]) .fragment {
+  max-width: 1000px; }
+
+#boxes {
+  background-color: #fff; }
+  #boxes .box {
+    float: left;
+    display: inline-block;
+    width: 33.33333%;
+    text-align: left;
+    text-decoration: none;
+    color: #000;
+    vertical-align: text-top;
+    box-sizing: border-box;
+    padding: 0 10px 0 10px; }
+    #boxes .box img {
+      display: block;
+      width: 100%;
+      height: auto;
+      background-color: #B6B6B6; }
+    #boxes .box .info {
+      padding: 30px;
+      border: 1px solid #B6B6B6;
+      border-top: none;
+      box-sizing: border-box;
+      color: #000;
+      background-color: #fff;
+      transition: color 300ms ease-out, background-color 300ms ease-out; }
+    #boxes .box h2 {
+      font-size: 1.75em;
+      margin: 0 0 20px 0; }
+    #boxes .box p {
+      margin: 0;
+      font-size: 0.875em; }
+    #boxes .box:hover .info {
+      color: #fff;
+      background-color: #000; }
+
+#main .fragment {
+  text-align: left; }
+#main p {
+  font-size: 0.875em; }
+#main h2 {
+  margin: 1em 0 0.5em 0; }
+#main blockquote {
+  border-left: 15px solid #000;
+  padding-left: 40px;
+  margin: 50px 0; }
+  #main blockquote:first-child {
+    margin-top: 0; }
+  #main blockquote .text {
+    position: relative;
+    font-family: 'AmnestyTradeGothic-BdCn20', sans-serif;
+    line-height: 1;
+    font-size: 1.875em; }
+    #main blockquote .text:before {
+      position: absolute;
+      left: -.6em;
+      content: '\201C'; }
+    #main blockquote .text:after {
+      position: relative;
+      left: .15em;
+      content: '\201D'; }
+  #main blockquote .source {
+    color: #B6B6B6;
+    padding-top: 20px;
+    font-size: 0.875em; }
+#main .intro {
+  font-family: 'AmnestyTradeGothic-BdCn20', sans-serif;
+  font-size: 1.625em;
+  line-height: 1;
+  margin-bottom: 60px; }
+#main .image-box {
+  width: 100%;
+  padding: 20px 0;
+  box-sizing: border-box;
+  text-align: center; }
+  #main .image-box img {
+    width: 100%;
+    height: auto; }
+  #main .image-box .caption {
+    font-size: 0.75em;
+    color: #363636;
+    text-align: left; }
+
+#cta-form {
+  border-top: 1px solid #DADADA; }
+  #cta-form .form-wrapper {
+    max-width: 500px; }
+    #cta-form .form-wrapper h2 {
+      margin: 0 0 10px 0; }
+    #cta-form .form-wrapper p {
+      margin: 0 0 30px 0;
+      font-size: 0.875em; }
+    #cta-form .form-wrapper img {
+      width: 100%;
+      height: auto; }
+
+#report {
+  background-color: #363636;
+  color: #fff; }
+  #report .fragment {
+    max-width: 900px;
+    text-align: left; }
+  #report .column-left {
+    width: 400px;
+    float: left; }
+    #report .column-left:after {
+      content: "";
+      display: table;
+      clear: both; }
+  #report .column-right {
+    margin-left: 440px; }
+  #report h2 {
+    font-size: 2em;
+    margin: 0 0 0.625em 0; }
+  #report img {
+    width: 100%;
+    height: auto; }
+  #report p {
+    margin: 0 0 1.5625em 0;
+    font-size: 0.875em; }
+  #report .button {
+    display: inline-block;
+    padding: 15px 25px;
+    text-decoration: none;
+    color: #000;
+    background-color: #ff0;
+    font-family: 'AmnestyTradeGothic-BdCn20', sans-serif;
+    text-transform: uppercase;
+    transition: background-color 300ms; }
+    #report .button:hover {
+      background-color: #ffd500; }
+
+#page-footer {
+  padding: 20px 50px;
+  background-color: #000; }
+  #page-footer .fragment {
+    width: 100%;
+    max-width: 100%; }
+  #page-footer .share-social {
+    text-align: right; }
 
 /*
   Player Skin Designer for Video.js

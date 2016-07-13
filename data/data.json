@@ -4,121 +4,177 @@
             "name" : "Corridor",
             "slug" : "corridor",
             "objRoom" : "obj/rooms/corridor.js",
-            "obj360" : "groupCell01",
-            "cameraPos" : {
-                "x" : 0,
-                "y" : 0,
-                "z" : 0
-            },
-            "cameraLookAt": {
-                "x" : 0,
-                "y" : 0,
-                "z" : 0
+            "obj360" : "corridor",
+            "light" : 0.8,
+            "camera" : {
+                "position" : {
+                    "x" : 7.55,
+                    "y" : 1.20,
+                    "z" : 0.88
+                },
+                "lookAt": {
+                    "x" : 7.14,
+                    "y" : 1.20,
+                    "z" : 1.01
+                },
+                "fov" : 35,
+                "minPolar" : 0,
+                "maxPolar" : "PI"
             },
             "bodies": [
             ],
             "objects": [
             ],
-            "sound" : "path"
+            "sound" : {
+                "ambient" : "groupCell02/loop.mp3",
+                "enter" : "groupCell02/enter.mp3",
+                "exit" : "groupCell02/exit.mp3"
+            }
         },
         {
             "name" : "Group cell 1",
             "slug" : "group-cell-1",
             "objRoom" : "obj/rooms/groupcell-a-c.js",
             "obj360" : "groupCell01",
-            "cameraPos" : {
-                "x" : 0,
-                "y" : 0,
-                "z" : 0
-            },
-            "cameraLookAt": {
-                "x" : 0,
-                "y" : 0,
-                "z" : 0
+            "light" : 0.8,
+            "camera" : {
+                "position" : {
+                    "x" : 3.87,
+                    "y" : 1.60,
+                    "z" : 3.28
+                },
+                "lookAt": {
+                    "x" : 4.45,
+                    "y" : 1.40,
+                    "z" : 2.80
+                },
+                "fov" : 35,
+                "minPolar" : 0,
+                "maxPolar" : "PI"
             },
             "bodies": [
             ],
             "objects": [
             ],
-            "sound" : "path"
+            "sound" : {
+                "ambient" : "groupCell02/loop.mp3",
+                "enter" : "groupCell02/enter.mp3",
+                "exit" : "groupCell02/exit.mp3"
+            }
         },
         {
             "name" : "Group cell 2",
             "slug" : "group-cell-2",
             "objRoom" : "obj/rooms/groupcell-d.js",
             "obj360" : "groupCell02",
-            "cameraPos" : {
-                "x" : 0,
-                "y" : 0,
-                "z" : 0
-            },
-            "cameraLookAt": {
-                "x" : 0,
-                "y" : 0,
-                "z" : 0
+            "light" : 0.8,
+            "camera" : {
+                "position" : {
+                    "x" : 6.2,
+                    "y" : 1,
+                    "z" : 1
+                },
+                "lookAt": {
+                    "x" : 5.81,
+                    "y" : 1,
+                    "z" : 1.2
+                },
+                "fov" : 35,
+                "minPolar" : 0,
+                "maxPolar" : "PI"
             },
             "bodies": [
             ],
             "objects": [
             ],
-            "sound" : "path"
+            "sound" : {
+                "ambient" : "groupCell02/loop.mp3",
+                "enter" : "groupCell02/enter.mp3",
+                "exit" : "groupCell02/exit.mp3"
+            }
         },
         {
             "name" : "Group cell 3",
             "slug" : "group-cell-3",
             "objRoom" : "obj/rooms/groupcell-e.js",
             "obj360" : "groupCell03",
-            "cameraPos" : {
-                "x" : 0,
-                "y" : 0,
-                "z" : 0
-            },
-            "cameraLookAt": {
-                "x" : 0,
-                "y" : 0,
-                "z" : 0
+            "light" : 0.8,
+            "camera" : {
+                "position" : {
+                    "x" : 4.8,
+                    "y" : 0.95,
+                    "z" : 4.35
+                },
+                "lookAt": {
+                    "x" : 4.62,
+                    "y" : 0.95,
+                    "z" : 3.31
+                },
+                "fov" : 35,
+                "minPolar" : 0,
+                "maxPolar" : "PI"
             },
             "bodies": [
             ],
             "objects": [
             ],
-            "sound" : "path"
+            "sound" : {
+                "ambient" : "groupCell02/loop.mp3",
+                "enter" : "groupCell02/enter.mp3",
+                "exit" : "groupCell02/exit.mp3"
+            }
         },
         {
             "name" : "Solitary 1",
             "slug" : "solitary-1",
             "objRoom" : "obj/rooms/solitary-ac.js",
-            "obj360" : "isoCell02",
-            "cameraPos" : {
-                "x" : 0.93,
-                "y" : 1.55,
-                "z" : 1.32
-            },
-            "cameraLookAt": {
-                "x" : 0.96,
-                "y" : 1.55,
-                "z" : 1.2
+            "obj360" : "isoCell01",
+            "light" : 1,
+            "camera" : {
+                "position" : {
+                    "x" : 0.93,
+                    "y" : 1.55,
+                    "z" : 1.32
+                },
+                "lookAt": {
+                    "x" : 0.96,
+                    "y" : 1.55,
+                    "z" : 1.2
+                },
+                "fov" : 35,
+                "minPolar" : 0,
+                "maxPolar" : "PI"
             },
             "bodies": [
             ],
             "objects": [
             ],
-            "sound" : "path"
+            "sound" : {
+                "ambient" : "isoCell01/loop.mp3",
+                "enter" : "isoCell01/enter.mp3",
+                "exit" : "isoCell01/exit.mp3"
+            }
         },
         {
             "name" : "Solitary 2",
             "slug" : "solitary-2",
             "objRoom" : "obj/rooms/solitary-d.js",
             "obj360" : "isoCell02",
-            "cameraPos" : {
-                "x" : 0.93,
-                "y" : 1.55,
-                "z" : 1.32
-            },
-            "cameraLookAt": {
-                "x" : 0.96,
-                "y" : 1.55,
-                "z" : 1.2
+            "light" : 1,
+            "camera" : {
+                "position" : {
+                    "x" : 1.37,
+                    "y" : 0.8,
+                    "z" : 1.2
+                },
+                "lookAt": {
+                    "x" : 1.25,
+                    "y" : 1.0,
+                    "z" : 1.3
+                },
+                "fov" : 35,
+                "minPolar" : 0,
+                "maxPolar" : "PI"
             },
             "bodies": [
                 {
@@ -158,28 +214,73 @@
                     "mediaId" : "a00"
                 }
             ],
-            "sound" : "path"
+            "sound" : {
+                "ambient" : "isoCell01/loop.mp3",
+                "enter" : "isoCell01/enter.mp3",
+                "exit" : "isoCell01/exit.mp3"
+            }
         },
         {
             "name" : "Solitary 3",
             "slug" : "solitary-3",
             "objRoom" : "obj/rooms/solitary-e.js",
             "obj360" : "isoCell03",
-            "cameraPos" : {
-                "x" : 0.93,
-                "y" : 1.55,
-                "z" : 1.32
-            },
-            "cameraLookAt": {
-                "x" : 0.96,
-                "y" : 1.55,
-                "z" : 1.2
+            "light" : 1,
+            "camera" : {
+                "position" : {
+                    "x" : 0.85,
+                    "y" : 1.0,
+                    "z" : 0.96
+                },
+                "lookAt": {
+                    "x" : 0.91,
+                    "y" : 1.2,
+                    "z" : 0.86
+                },
+                "fov" : 55,
+                "minPolar" : 0,
+                "maxPolar" : "PI"
             },
             "bodies": [
             ],
             "objects": [
             ],
-            "sound" : "path"
+            "sound" : {
+                "ambient" : "isoCell01/loop.mp3",
+                "enter" : "isoCell01/enter.mp3",
+                "exit" : "isoCell01/exit.mp3"
+            }
+        },
+        {
+            "name" : "Reception",
+            "slug" : "reception",
+            "objRoom" : "obj/rooms/reception.js",
+            "obj360" : "isoCell03",
+            "light" : 1,
+            "camera" : {
+                "position" : {
+                    "x" : 0.85,
+                    "y" : 1.0,
+                    "z" : 0.96
+                },
+                "lookAt": {
+                    "x" : 0.91,
+                    "y" : 1.2,
+                    "z" : 0.86
+                },
+                "fov" : 35,
+                "minPolar" : 0,
+                "maxPolar" : "PI"
+            },
+            "bodies": [
+            ],
+            "objects": [
+            ],
+            "sound" : {
+                "ambient" : "isoCell01/loop.mp3",
+                "enter" : "isoCell01/enter.mp3",
+                "exit" : "isoCell01/exit.mp3"
+            }
         }
     ],
 
@@ -204,7 +305,7 @@
 
 	"media" : [
         {
-            "title" : "Measuring his face in cell door",
+            "title" : "Using sunset to tell the time",
             "id" : "a00",
             "video" : "",
             "witness" : "a",

@@ -14,7 +14,7 @@
 		<script src="js/lib/videojs/video.min.js"></script>
 	</head>
 
-	<body>
+	<body data-section="explore">
 
 		<!-- <div id="introMessage" class="block">
 			<div class="message centered">
@@ -34,6 +34,7 @@
 		<div id="content">
 
 			<!-- prison -->
+
 			<div id="layer-prison">
 				<div class="gl"></div>
 				<div class="labels"></div>
@@ -54,6 +55,7 @@
 			</div>
 
 			<!-- 360 view -->
+
 			<div id="layer-360">
 				<div class="gl"></div>
 				<div class="labels"></div>
@@ -62,6 +64,7 @@
 			</div>
 
 			<!-- video -->
+
 			<div id="layer-video">
 				<div class="player"></div>
 
@@ -93,12 +96,22 @@
 			<div class="logos">
 				<span class="ai"></span><span class="fa"></span>
 			</div>
-			<div class="mainNav">
-				<span class="active">Explore استكشف</span><span>About حول</span><span>Take Action بادر بالتحرك</span>
+
+			<div class="takeAction">
+				<span>Take Action</span><span>بادر بالتحرك</span>
+			</div>
+
+			<div class="mainNav-menu">
+				<a class="menuItem" data-target="about" href="about.php">
+					<span>About</span><span>حول</span>
+				</a>
+				<a class="menuItem active" data-target="explore">
+					<span>Explore</span><span>استكشف</span>
+				</a>
 			</div>
 		</div>
 
-		<div id="footer-desktop">
+		<div id="footer-desktop" class="share-social">
 			<span class="label">share</span>
 			<span class="facebook"></span>
 			<span class="twitter"></span>
@@ -118,10 +131,11 @@
         <script src="js/lib/threejs/OrbitControls.js"></script>
 
 		<script src="js/src/FA.js"></script>
+		<script src="js/src/sound/BufferLoader.js"></script>
+		<script src="js/src/sound/Sound.js"></script>
 		<script src="js/src/Utils.js"></script>
 		<script src="js/src/Data.js"></script>
 		<script src="js/src/Slider.js"></script>
-		<script src="js/src/BufferLoader.js"></script>
 		<script src="js/src/InteractiveItem.js"></script>
 		<script src="js/src/stateExplore/LabelsView.js"></script>
 		<script src="js/src/stateExplore/BuildingView.js"></script>

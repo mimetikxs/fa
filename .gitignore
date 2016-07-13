@@ -1,10 +1,10 @@
-assets/
-sound/
-obj/
+/assets/
+/sound/
+/obj/
+/obj-orig/
 
-css/*.map
+/css/*.map
 
-isoCell02/
+/isoCell02/
 
-prision.html
-cell.html
+/cell.html

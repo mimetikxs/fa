@@ -40,17 +40,37 @@
 }
 
 
+$browser-context: 16; // Default
+
+@function em($pixels, $context: $browser-context) {
+  @return #{$pixels/$context}em;
+}
+
+// ------------------------------------------
+// common
+// ------------------------------------------
+
 $header-height: 50px;
+
+$c-grey--darker: #262626;
+$c-grey--dark: #363636;
+$c-grey--mid: #B6B6B6;
+$c-grey--light: #DADADA;
+$c-yellow: #FF0;
 
 
 body {
-    overflow: hidden;
+    // overflow: hidden;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    font-family: 'Roboto', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
     background-color: #666666;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+    font-size: $browser-context;
+
+    &[data-section="about"] {
+        background-color: white;
+    }
 }
 
 #content {
@@ -61,6 +81,10 @@ body {
     // height: 100%; // dinamically set (see App.js)
 }
 
+// ------------------------------------------
+// explore - common
+// ------------------------------------------
+
 #layer-prison,
 #layer-360 {
     position: absolute;;
@@ -68,8 +92,13 @@ body {
     height: 100%;
     overflow: hidden;
     @include noselect;
+    background-color: black;
     // transition: opacity 300ms ease-out;
 }
+
+// ------------------------------------------
+// explore - prison screen
+// ------------------------------------------
 
 #layer-prison {
     .gl,
@@ -85,6 +114,8 @@ body {
         .label {
             position: absolute;
             opacity: 0.8;
+            transform: scale(1,1);
+            // transition: transform 200ms ease-out ;
 
             .line {
                 position: absolute;
@@ -198,7 +229,7 @@ body {
         }
 
         .container {
-            margin: 40px 0 0 0;
+            margin: 20px 0 0 0;
             overflow: hidden;
         }
 
@@ -290,6 +321,10 @@ body {
     }
 }
 
+// ------------------------------------------
+// explore - 360 screen
+// ------------------------------------------
+
 #layer-360 {
     visibility: hidden;
     opacity: 0;
@@ -352,6 +387,10 @@ body {
     }
 }
 
+// ------------------------------------------
+// explore - video screen
+// ------------------------------------------
+
 #layer-video {
     position: absolute;
     top: 0;
@@ -362,6 +401,7 @@ body {
     transition: opacity 500ms;
     background-color: black;
     font-family: 'AmnestyTradeGothic-BdCn20', sans-serif;
+    overflow: hidden;
 
     .player {
         position: absolute;
@@ -515,13 +555,21 @@ body {
     }
 }
 
+// ------------------------------------------
+// top bar
+// ------------------------------------------
+
 #header {
-    position: absolute;
+    position: fixed;
     height: $header-height;
     width: 100%;
-    top: -$header-height;
+    // top: -$header-height;
+    top: 0;
     background-color: black;
     transition: top 500ms ease-out;
+    font-family: 'AmnestyTradeGothic-BdCn20', sans-serif;
+    text-transform: uppercase;
+    font-size: 16px;
     @include noselect;
 
     .logos {
@@ -545,40 +593,123 @@ body {
         }
     }
 
-    .mainNav {
+    .menuItem {
+        display: inline-block;
         float: right;
-        color: #000;
-        height: 100%;
+        margin-right: 1px;
+        padding: 0 15px;
+        cursor: pointer;
+        text-decoration: none;
+        transition: background-color 300ms ease-out, color 300ms ease-out;
         @include clearfix;
-        text-transform: uppercase;
-        font-weight: bold;
-        font-size: 16px;
-        font-family: 'AmnestyTradeGothic-BdCn20', sans-serif;
 
-        & > span {
-            display: inline-block;
+        > span:nth-child(2){
+            margin-left: 5px;
+            // font-size: 14px;
+            font-family: 'AmnestyTradeGothic-Cn18', sans-serif;
+        }
+    }
+
+    .mainNav-menu,
+    .takeAction {
+        float: right;
+    }
+
+    .mainNav-menu {
+        .menuItem {
             height: 100%;
             line-height: $header-height;
-            padding: 0 15px;
-            cursor: pointer;
-            transition: all 300ms ease-out;
-            color: white;
+            color: #fff;
 
-            &:hover,
-            &.active {
-                background-color: #ccc;
+            &.active,
+            &:hover {
+                background-color: $c-grey--light;
                 color: #000;
             }
         }
     }
+
+    .takeAction {
+        border: 10px solid black;
+        box-sizing: border-box;
+        line-height: 30px;
+        padding: 0 15px;
+        color: black;
+        background-color: $c-grey--light;
+        transition: background-color 300ms ease-out, color 300ms ease-out;
+        cursor: pointer;
+        font-size: 14px;
+
+        &:hover {
+            background-color: $c-yellow;
+        }
+
+        > span:nth-child(2){
+            margin-left: 5px;
+            // font-size: 12px;
+            font-family: 'AmnestyTradeGothic-Cn18', sans-serif;
+        }
+    }
+
+    .subNav-menu {
+        position: absolute;
+        top: $header-height;
+        left: 0;
+        width: 100%;
+        background-color: $c-grey--light;
+        color: #000;
+        margin-right: 20px;
+        font-size: 14px;
+        cursor: default;
+        padding-right: 20px;
+
+
+        .menuItem {
+            display: inline-block;
+            float: right;
+            line-height: 40px;
+            height: 40px;
+            cursor: pointer;
+            color: #000;
+
+            &.active,
+            &:hover {
+                background-color: #ff0;
+            }
+
+            &:first-child {
+                margin-right: 20px;
+            }
+        }
+    }
+
+    // about submenu show/hide
+    // .mainNav-menu [data-target="about"]{
+    //     .subNav-menu {
+    //         display: none;
+    //     }
+    //
+    //     &.active,
+    //     &:hover {
+    //         .subNav-menu {
+    //             display: block;
+    //         }
+    //     }
+    // }
 }
 
+// ------------------------------------------
+// footer
+// ------------------------------------------
+
 #footer-desktop {
-    font-family: sans-serif;
     position: absolute;
-    color: white;
-    bottom: 30px;
     right: 30px;
+    bottom: 30px;
+}
+
+.share-social {
+    color: white;
     font-family: 'AmnestyTradeGothic-BdCn20', sans-serif;
     text-transform: uppercase;
     @include noselect;
@@ -586,7 +717,6 @@ body {
     & > span {
         color: #ccc;
     }
-
 
     .label {
         &:after {
@@ -622,6 +752,10 @@ body {
         }
     }
 }
+
+// ------------------------------------------
+// intro / preload
+// ------------------------------------------
 
 // This parent can be any width and height
 .block {
@@ -665,9 +799,10 @@ body {
     visibility: hidden;
 }
 
-//
-// Slider
-//
+
+// ------------------------------------------
+// slider
+// ------------------------------------------
 
 .control-wrap {
     position: absolute;
@@ -687,7 +822,6 @@ body {
         font-family: 'Oswald', sans-serif;
         text-transform: uppercase;
         font-size: 12px;
-        z-index: 1;
         float: left;
         padding: 0 12px;
         line-height: 34px;
@@ -727,13 +861,9 @@ body {
 
 }
 
-
-
-
-//
-// stats and gui
-//
-
+// ------------------------------------------
+// stats
+// ------------------------------------------
 
 #stats {
     top: 60px !important;

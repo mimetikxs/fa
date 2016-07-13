@@ -26,7 +26,6 @@ FA.BuildingView = function( app ) {
 
         raycaster;
 
-        // roomUnderMouse;
 
     init();
 
@@ -272,7 +271,7 @@ FA.BuildingView = function( app ) {
         // building
         var materials = buildingMesh.material.materials;
         for ( var i = 0; i < materials.length; i++ ) {
-            materials[ i ].opacity = 0.15 + val * ( 1 - 0.15 ); // remap from [0.0-1.0] to [0.1-1.0]
+            materials[ i ].opacity = 0.1 + val * ( 1 - 0.15 ); // remap from [0.0-1.0] to [0.1-1.0]
             materials[ i ].needsUpdate = true;
         }
 
@@ -288,7 +287,7 @@ FA.BuildingView = function( app ) {
         // terrain
         materials = terrainMesh.material.materials;
         for ( var i = 0; i < materials.length; i++ ) {
-            materials[ i ].opacity = val * val + 0.2;   // exponential curve
+            materials[ i ].opacity = val * val + 0.05;   // exponential curve
             materials[ i ].needsUpdate = true;
         }
 

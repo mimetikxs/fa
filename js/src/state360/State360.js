@@ -21,6 +21,9 @@ FA.State360 = function( app, locationData ) {
         intersectingItem = null; // FA.InteractiveItem
 
 
+    // var sounds = [];
+
+
 
     function onMouseMove( e ) {
 
@@ -156,9 +159,12 @@ FA.State360 = function( app, locationData ) {
 
     function goBack() {
 
+        app.changeState( new FA.StateExplore( app ) );
+
         view360.clear(); // clear when we go back
 
-        app.changeState( new FA.StateExplore( app ) );
+        app.sounds = [ ]; // clear the 360 sounds
+
 
     }
 
@@ -167,7 +173,54 @@ FA.State360 = function( app, locationData ) {
 
         //DO NOT clear the View360 so the scene is available when back from video
 
+        // DO NOT clear the sounds
+
         app.changeState( new FA.StateVideo2( app, 'cell', videoData ) );
+
+    }
+
+
+
+    function loadSound() {
+
+        var soundData = locationData.sound;
+
+        var filesList = [
+            {
+                url : 'sound/' + soundData.ambient,
+                soundId : "ambient",
+                loop : true
+            }
+            // TODO: enter and exit sounds
+        ];
+
+        var bufferLoader = new FA.BufferLoader(
+            app.audioContext,
+            filesList,
+            onBuffersLoaded
+        );
+
+        bufferLoader.load();
+
+        function onBuffersLoaded( bufferList ) {
+
+            for (var i = 0; i < bufferList.length; i++) {
+                var buffer = bufferList[ i ].buffer,
+                    id = bufferList[ i ].id,
+                    loop = bufferList[ i ].loop;
+
+                var sound = FA.Sound( app.audioContext, buffer, id, loop );
+
+                app.sounds.push( sound );
+
+                // testing
+                // play sound as soon as it's loaded
+                sound.play();
+                sound.fadeIn( 2000 );
+
+            }
+
+        }
 
     }
 
@@ -188,11 +241,18 @@ FA.State360 = function( app, locationData ) {
         // when we are back from a video, locationData is undefined
         // we assume view360 is not cleared, so we keep the old data
         if ( !locationData ) {
-            // do nothing
+            //do not change the 360  wiew
+
+            // play the sounds
+            app.sounds[0].play();
+            app.sounds[0].fadeIn( 2000 );
         } else {
             // load a new 360
             $layer.find( '.title' ).text( locationData.name );
             view360.load( locationData );
+
+            // testing sound
+            loadSound();
         }
 
         // reveal layer
@@ -225,6 +285,11 @@ FA.State360 = function( app, locationData ) {
             'opacity': 1,
             'visibility': 'hidden'
         } );
+
+        // fadeout all the sound
+        for ( var i = 0; i < app.sounds.length; i++ ) {
+            app.sounds[ i ].fadeOut( 1000 );
+        }
 
     }
 

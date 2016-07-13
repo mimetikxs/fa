@@ -8,62 +8,7 @@ FA.StatePreload = function( app ) {
 
     var loaded = false,
         messageCompleted = false,
-
-        // audio
-        context, // TODO: move to App.context
-        bufferLoader,
-        gainNode,
-
-        // 3d loader manager
         manager;
-
-
-    function initSound() {
-
-        window.AudioContext = window.AudioContext || window.webkitAudioContext;
-        context = new AudioContext();
-
-        bufferLoader = new FA.BufferLoader(
-            context,
-            [
-                'sound/drone-test.mp3'
-            ],
-            onBuffersLoaded
-        );
-
-        bufferLoader.load();
-
-        function onBuffersLoaded( bufferList ) {
-            // TODO: store in App.source
-            var source = context.createBufferSource();
-            source.buffer = bufferList[ 0 ];
-            //source.connect( context.destination );
-            //source.start( 0 );  // NOTE: this won't work on iOS
-
-            // Create a gain node.
-            gainNode = context.createGain();
-            source.connect( gainNode );                 // Connect the source to the gain node.
-            gainNode.connect( context.destination );    // Connect the gain node to the destination.
-            gainNode.gain.value = 0;
-            source.start( 0 );  // NOTE: this won't work on iOS, it requires user interaction
-
-            fadeoutSoundVolume( 0, 0.3 );
-        }
-
-    }
-
-
-    function fadeoutSoundVolume( volumeStart , volumeEnd ) {
-
-        $( { value : volumeStart } ).animate( { value : volumeEnd }, {
-            duration : 2000,
-            easing : 'linear',
-            step : function( val ) {
-                gainNode.gain.value = val;
-            }
-        })
-
-    }
 
 
     function loadData() {
@@ -171,10 +116,7 @@ FA.StatePreload = function( app ) {
                     //var bufferGeom = new THREE.BufferGeometry();
                     //bufferGeom.fromGeometry( geometry );
                     var material = new THREE.MeshPhongMaterial( {
-                        color : 0xffffff,
-                        polygonOffset : true,
-                        polygonOffsetFactor : -1, // positive value pushes polygon further away
-                        polygonOffsetUnits : 1
+                        color : 0xffffff
                     } );
 
                     scaleGeometry( geometry );

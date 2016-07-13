@@ -120,8 +120,8 @@ FA.Slider = function() {
 		var sliderWidth = $slider.width(),
 			mouseX = event.pageX - $slider.offset().left;  // local mouse x
 
-		percent = mouseX / sliderWidth * 100;
-		percent = (percent > 100) ? 100 : (percent < 0) ? 0 : percent;	// clamp [0..100]
+		percent = mouseX / sliderWidth;
+		percent = (percent > 1) ? 1 : (percent < 0) ? 0 : percent;	// clamp [0..1]
 
 		updatePercent();
 
@@ -164,10 +164,9 @@ FA.Slider = function() {
 
 	function updatePercent() {
 
-		$bar.css( 'width', percent + '%' );
+		$bar.css( 'width', percent * 100 + '%' );
 
-		// a normalized value is passed to the handler
-		onChangeCallback( percent * 0.01 );
+		onChangeCallback( percent );
 
 	}
 

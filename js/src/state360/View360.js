@@ -29,31 +29,42 @@ FA.View360 = function( app ) {
 
         locationData = null;            // the current data being displayed
 
+    var orbitCenter = new THREE.Vector3();
 
     var intersecting = null;
 
+    // var directionalLight;
 
 
 
-    function init( cameraPos, cameraLookAt ) {
+    function init( cameraData, lightIntensity ) {
 
         raycaster = new THREE.Raycaster();
 
         scene = new THREE.Scene();
 
-        var ambient = new THREE.AmbientLight( 0xffffff, 1.0 );
-        scene.add( ambient );
-
         interactiveGroup = new THREE.Object3D();
         scene.add( interactiveGroup );
 
-        camera = new THREE.PerspectiveCamera( 60, sceneWidth / sceneHeight, 0.1, 300 );
-        // camera.position.x = cameraPos.x;
-        // camera.position.y = cameraPos.y;
-        // camera.position.z = cameraPos.z;
-        camera.position.x = (cameraPos.x === 0) ? 0.93 : cameraPos.x;
-        camera.position.y = (cameraPos.y === 0) ? 1.55 : cameraPos.y;
-        camera.position.z = (cameraPos.z === 0) ? 1.32 : cameraPos.z;
+        orbitCenter.set(
+            cameraData.lookAt.x,
+            cameraData.lookAt.y,
+            cameraData.lookAt.z
+        );
+
+        camera = new THREE.PerspectiveCamera( cameraData.fov, sceneWidth / sceneHeight, 0.01, 300 );
+        camera.position.set(
+            cameraData.position.x,
+            cameraData.position.y,
+            cameraData.position.z
+        );
+
+        var ambient = new THREE.AmbientLight( 0xffffff, lightIntensity );
+        scene.add( ambient );
+
+        // directionalLight = new THREE.DirectionalLight( 0xffffff, 3 );
+        // directionalLight.target.position.copy( orbitCenter );
+        // scene.add( directionalLight );
 
         renderer = new THREE.WebGLRenderer( { antialias: true } );
         renderer.setPixelRatio( window.devicePixelRatio );
@@ -69,12 +80,9 @@ FA.View360 = function( app ) {
         controls.enablePan = false;
         controls.enableKeys = false;
         controls.scaleFactor = 0.08;
-        // controls.target.x = cameraLookAt.x;
-        // controls.target.y = cameraLookAt.y;
-        // controls.target.z = cameraLookAt.z;
-        controls.target.x = (cameraLookAt.x === 0) ? 0.96 : cameraLookAt.x;
-        controls.target.y = (cameraLookAt.y === 0) ? 1.55 : cameraLookAt.y;
-        controls.target.z = (cameraLookAt.z === 0) ? 1.2 : cameraLookAt.z;
+        controls.minPolarAngle = cameraData.minPolar;
+        controls.maxPolarAngle = ( cameraData.maxPolar === "PI" ) ? Math.PI : cameraData.maxPolar;
+        controls.target = orbitCenter;
 
         scope.setSize( $dom.width(), $dom.height() );
 
@@ -124,7 +132,6 @@ FA.View360 = function( app ) {
         loader.load(
             'obj/bodies/' + fileName + '.js',
             function ( geometry, materials ) {
-
                 bodyGeometries[ fileName ] = geometry; // store the geometry
             }
         );
@@ -143,7 +150,6 @@ FA.View360 = function( app ) {
             'obj/360s/' + name + '.js',
             function ( geometry, materials ) {
                 // var material = new THREE.MeshBasicMaterial( 0xffffff );
-                //var material = new THREE.MultiMaterial( materials );
                 var material = materials[ 0 ]; // only has one matei
                 var mesh = new THREE.Mesh( geometry, material );
                 var item = new FA.InteractiveItem( mesh, mediaData.title, mediaId );
@@ -195,6 +201,8 @@ FA.View360 = function( app ) {
 
         controls.update();
 
+        // directionalLight.position.copy( camera.position );
+
         renderer.render( scene, camera );
 
         updateLabels();
@@ -213,7 +221,7 @@ FA.View360 = function( app ) {
 
         scope.clear();
 
-        init( data.cameraPos, data.cameraLookAt );
+        init( data.camera, data.light );
 
         manager = new THREE.LoadingManager();
         manager.onProgress = function ( item, loaded, total ) {
@@ -239,17 +247,17 @@ FA.View360 = function( app ) {
         loadRoom( data.obj360 );
 
         // load the bodies
-        var bodyNames = [],
-            bodies = data.bodies,
-            bodyName;
-        for (var i = 0; i < bodies.length; i++) {
-            bodyName = bodies[ i ].name;
-            // load the model only once
-            if ( bodyNames.indexOf( bodyName ) === -1 ) {
-                bodyNames.push( bodyName );
-                loadBody( bodyName );
-            }
-        }
+        // var bodyNames = [],
+        //     bodies = data.bodies,
+        //     bodyName;
+        // for (var i = 0; i < bodies.length; i++) {
+        //     bodyName = bodies[ i ].name;
+        //     // load the model only once
+        //     if ( bodyNames.indexOf( bodyName ) === -1 ) {
+        //         bodyNames.push( bodyName );
+        //         loadBody( bodyName );
+        //     }
+        // }
 
         // load the interactive objects
         var objects = data.objects;

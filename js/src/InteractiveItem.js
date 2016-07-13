@@ -4,6 +4,9 @@ FA.InteractiveItem = function( mesh, name, slug ) {
         center = null,
         $label = null;  // refernce to dom element associated with this room
 
+    // testing
+    // scaling on active/selected
+    var scale = 1;
 
     build3D();
     buildLabel();
@@ -15,6 +18,15 @@ FA.InteractiveItem = function( mesh, name, slug ) {
         object3D = mesh;
         object3D.name = slug;
 
+        // set material properties
+        // all interactive emissive components are not black
+        // to make them more visible
+        var material = object3D.material;
+        material.emissive.setHex( 0x333333 ),
+        material.polygonOffset = true,
+        material.polygonOffsetFactor = -1, // positive value pushes polygon further away
+        material.polygonOffsetUnits = 1
+        material.needsUpdate = true;
     }
 
 
@@ -73,7 +85,7 @@ FA.InteractiveItem = function( mesh, name, slug ) {
 
     function unmark() {
 
-        object3D.material.emissive.setHex( 0x000000 );
+        object3D.material.emissive.setHex( 0x333333 );
 
     }
 
@@ -93,7 +105,9 @@ FA.InteractiveItem = function( mesh, name, slug ) {
         getSlug   : getSlug,
 
         mark : mark,
-        unmark : unmark
+        unmark : unmark,
+
+        scale : scale
 
     }
 

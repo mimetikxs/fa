@@ -29,8 +29,8 @@ FA.StateExplore = function( app ) {
 
         slider = new FA.Slider();
         slider.onChange( setOpacity );
-        slider.setPercent( 30 ); // 30%
-        $('body').append( slider.$dom );
+        slider.setPercent( app.modelOpacity ); // 30%
+        $( 'body' ).append( slider.$dom );
 
     }
 
@@ -44,6 +44,8 @@ FA.StateExplore = function( app ) {
 
 
     function setOpacity( val ) {
+
+        app.modelOpacity = val;
 
         buildingView.setOpacity( val );
         labelsView.setOpacity( val );
@@ -163,7 +165,7 @@ FA.StateExplore = function( app ) {
 
         buildSlider();
 
-        buildingView.setOpacity( 0.3 );
+        buildingView.setOpacity( app.modelOpacity );
 
         onWindowResize();
 
