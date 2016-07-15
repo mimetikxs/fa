@@ -51,7 +51,11 @@
 					</div>
 					<div class="container">
 					</div>
+					<div class="ar-watch-videos">
+						<div class="folder">شاهد فيديوهات</div>
+					</div>
 				</div>
+
 			</div>
 
 			<!-- 360 view -->
@@ -60,53 +64,73 @@
 				<div class="gl"></div>
 				<div class="labels"></div>
 				<div class="title"></div>
-				<div class="btn-exit">Back</div>
+				<div class="btn-exit"></div>
 			</div>
 
-			<!-- video -->
+		</div>
 
-			<div id="layer-video">
-				<div class="player"></div>
+		<!-- video overlay -->
 
-				<div class="controls">
-					<div class="info">
-						<span class="title">Measuring his face in cell door</span>
-						<!-- <span class="witness">Witness A</span>
-						<span class="separator">/</span>
-						<span class="location">Solitary 1</span> -->
+		<div id="layer-video">
+			<div class="player"></div>
+
+			<div class="controls">
+				<div class="info">
+					<span class="title">Measuring his face in cell door</span>
+					<!-- <span class="witness">Witness A</span>
+					<span class="location">Solitary 1</span> -->
+				</div>
+
+				<div class="info-arabic">
+					<span class="title">قياس وجهه على باب الزنزانة</span>
+				</div>
+
+				<div class="btn-next">
+					<div class="arrow"></div>
+					<div class="label">Guards shortening their sticks</div>
+				</div>
+
+				<div class="btn-prev">
+					<div class="arrow"></div>
+					<div class="label">No echo, cells full of people</div>
+				</div>
+
+				<div class="btn-exit"></div>
+
+				<div class="bottom-bar">
+					<div class="takeAction">
+				        <span>Take Action</span><span>بادر بالتحرك</span>
+				    </div>
+					<div class="share-social">
+						<span class="label">share</span>
+						<span class="facebook"></span>
+						<span class="twitter"></span>
 					</div>
-					<div class="info-arabic">
-						<span class="title">قياس وجهه على باب الزنزانة</span>
-					</div>
-					<div class="btn-next">
-						<div class="arrow"></div>
-						<div class="label">Guards shortening their sticks</div>
-					</div>
-					<div class="btn-prev">
-						<div class="arrow"></div>
-						<div class="label">No echo, cells full of people</div>
-					</div>
-					<div class="btn-exit">Close</div>
 				</div>
 			</div>
 		</div>
 
+		<!-- top bar -->
 
 		<div id="header">
 			<div class="logos">
-				<span class="ai"></span><span class="fa"></span>
+				<span class="ai"></span>
+				<span class="fa"></span>
 			</div>
 
 			<div class="takeAction">
-				<span>Take Action</span><span>بادر بالتحرك</span>
+				<span>Take Action</span>
+				<span>بادر بالتحرك</span>
 			</div>
 
 			<div class="mainNav-menu">
-				<a class="menuItem" data-target="about" href="about.php">
-					<span>About</span><span>حول</span>
+				<a class="menuItem" data-target="about" href="en/about.php">
+					<span>About</span>
+					<span>حول</span>
 				</a>
 				<a class="menuItem active" data-target="explore">
-					<span>Explore</span><span>استكشف</span>
+					<span>Explore</span>
+					<span>استكشف</span>
 				</a>
 			</div>
 		</div>

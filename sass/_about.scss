@@ -44,7 +44,7 @@ body[data-section="about"] {
 
 #page-header {
     height: 200px;
-    background-image: url("https://www.amnesty.org/media/patternlibrary/air_2014_7.jpg?preset=fixed_1472_42_hi");
+    background-image: url("../assets/placeholder-header.jpg");
     background-attachment: fixed;
     background-size: cover;
     background-position: 50% 50%;
@@ -67,22 +67,36 @@ body[data-section="about"] {
     }
 
     .language-switch {
+        position: absolute;
+        right: 0;
+        top: 0;
+        padding: 10px 20px;
+        color: #fff;
+        background: #000;
+        font-size: em(18);
+        cursor: pointer;
+        font-family: 'AmnestyTradeGothic-BdCn20', sans-serif;
 
+        &:hover {
+            color: #000;
+            background-color: #fff;
+            transition: color 300ms, background-color 300ms;
+        }
     }
 }
 
 // header images
 // body:not([data-sub-section]) {
-//     background-image: url("https://www.amnesty.org/media/patternlibrary/air_2014_7.jpg?preset=fixed_1472_42_hi");
+//     background-image: url("../assets/placeholder-header.jpg");
 // }
 body[data-sub-section="saydnaya"] #page-header {
-    background-image: url("https://www.amnesty.org/media/patternlibrary/air_2014_7.jpg?preset=fixed_1472_42_hi");
+    background-image: url("../assets/placeholder-header.jpg");
 }
 body[data-sub-section="detention"] #page-header {
-    background-image: url("https://www.amnesty.org/media/patternlibrary/air_2014_7.jpg?preset=fixed_1472_42_hi");
+    background-image: url("../assets/placeholder-header.jpg");
 }
-body[data-sub-section="making-of"] #page-header {
-    background-image: url("https://www.amnesty.org/media/patternlibrary/air_2014_7.jpg?preset=fixed_1472_42_hi");
+body[data-sub-section="methodology"] #page-header {
+    background-image: url("../assets/placeholder-header.jpg");
 }
 
 // ------------------------------------------
@@ -109,8 +123,7 @@ body:not([data-sub-section]) {
         text-decoration: none;
         color: #000;
         vertical-align: text-top;
-        // outside gutters
-        // https://css-tricks.com/dont-overthink-it-grids/
+        // outside gutters https://css-tricks.com/dont-overthink-it-grids/
         box-sizing: border-box;
         padding: 0 10px 0 10px;
 
@@ -144,7 +157,7 @@ body:not([data-sub-section]) {
         &:hover {
             .info {
                 color: #fff;
-                background-color: #000;
+                background-color: $c-grey--dark;
             }
         }
     }
@@ -326,5 +339,101 @@ body:not([data-sub-section]) {
 
     .share-social {
         text-align: right;
+    }
+}
+
+
+// ------------------------------------------
+// about - arabic
+// ------------------------------------------
+
+body[data-lang="ar"] {
+    $image-width: 400px;
+
+    #content {
+        direction: rtl;
+    }
+
+    #page-header {
+        h1 {
+            left: auto;
+            right: 0;
+            padding: 20px 20px;
+        }
+
+        .language-switch {
+            right: auto;
+            left: 0;
+        }
+    }
+
+    #boxes {
+        .box {
+            text-align: right;
+        }
+    }
+
+    #main {
+        .fragment {
+            text-align: right;
+        }
+
+        p {
+            font-size: em(16);
+        }
+
+        blockquote {
+            border-left: none;
+            padding-left: 0;
+            border-right: 15px solid #000;
+            padding-right: 40px;
+
+            &:first-child {
+                margin-top: 0;
+            }
+
+            .text {
+                line-height: 1;
+                font-size: em(30);
+
+                &:before {
+                    position: absolute;
+                    // right: auto;
+                    right: -.6em;
+                    content: '\201D';
+                }
+
+                &:after {
+                    position: relative;
+                    left: auto;
+                    right: .15em;
+                    content: '\201C';
+                }
+
+
+            }
+
+            .source {
+                color: $c-grey--mid;
+                padding-top: 20px;
+                font-size: em(14);
+            }
+        }
+    }
+
+    #report {
+        .column-left {
+            width: auto;
+            margin-right: $image-width + 40px;
+            text-align: right;
+            float: none;
+        }
+
+        .column-right {
+            width: $image-width;
+            float: right;
+            margin: 0;
+            @include clearfix;
+        }
     }
 }

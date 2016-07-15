@@ -152,7 +152,9 @@ $slider-bg-color: #444;
   background: rgba($slider-bg-color, 0.75);
 }
 
-// NESTOR
+// --------------------------------------------
+// FA
+// --------------------------------------------
 
 .video-js .vjs-play-progress:before {
     // content: none;
@@ -171,6 +173,9 @@ $slider-bg-color: #444;
 .vjs-paused.vjs-has-started .vjs-big-play-button {
   display: block;
 }
+.vjs-paused.vjs-has-started.vjs-seeking .vjs-big-play-button {
+  display: none;
+}
 
 
 // custom control bar transition
@@ -181,7 +186,7 @@ $slider-bg-color: #444;
     transition: bottom 500ms;
 }
 
-.vjs-default-skin.vjs-has-started.vjs-user-inactive .vjs-control-bar {
+.vjs-default-skin.vjs-has-started.vjs-user-inactive.vjs-playing .vjs-control-bar {
   display: flex;
   visibility: inherit;
   opacity: inherit;

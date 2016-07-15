@@ -4,7 +4,7 @@
 	<head>
 		<title>Detention in Syria</title>
 		<meta charset="utf-8">
-		<link rel="stylesheet" href="css/app.css">
+		<link rel="stylesheet" href="../css/app.css">
 	</head>
 
 	<body data-section="about" data-sub-section="detention">
@@ -31,7 +31,7 @@
 					<p>Prisoners speak of an endless cycle of beatings. On the journey after arrest. In transit between detention centres. As part of a ‘welcome party’ of abuse on arrival at a prison, used to frighten new arrivals into submission. And then every day for every conceivable minor ‘breaking’ of rules, including talking or not cleaning their cells.</p>
 
 					<div class="image-box">
-						<img src="assets/placeholder-700x370.jpg" alt="" />
+						<img src="../assets/placeholder-700x370.jpg" alt="" />
 						<div class="caption">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque</div>
 					</div>
 
@@ -55,22 +55,19 @@
 				</div>
 			</div>
 
-			<?php include 'includes/fragment-cta-form.php';?>
+			<?php include '../includes/fragment-cta-form-en.php';?>
 
-			<?php include 'includes/fragment-report.php';?>
+			<?php include '../includes/fragment-report-en.php';?>
 
-			<?php include 'includes/fragment-footer.php';?>
+			<?php include '../includes/fragment-footer.php';?>
 
 		</div>
 
-		<?php include 'includes/fragment-header.php';?>
+		<?php include '../includes/fragment-header-en.php';?>
 
 		<!-- Scripts -->
 
-		<script src="js/lib/jquery-3.0.0.min.js"></script>
-		<script src="js/lib/jquery.transit.min.js"></script>
-		<script src="js/lib/player.min.js"></script>
-		<script src="js/header.js"></script>
+		<?php include '../includes/fragment-scripts.php';?>
 
 	</body>
 

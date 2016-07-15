@@ -2,6 +2,7 @@ FA.MenuView = function( app ) {
 
     var $container = $( '#layer-prison .navigation .container' ),
         $menuType = $( '#layer-prison .navigation .menu-type' ),
+        $btnArabic = $( '#layer-prison .navigation .ar-watch-videos .folder' ),
         $locationMenu,
         $witnessMenu,
         $currentMenu,
@@ -19,7 +20,7 @@ FA.MenuView = function( app ) {
 
         navMode = null;
 
-
+console.log($btnArabic);
 
     init();
 
@@ -192,6 +193,13 @@ FA.MenuView = function( app ) {
 
         app.on( 'overLocationChange', onModelOverLocationChange );
         // app.on( 'activeLocationChange', onModelActiveLocationChange );
+
+        // go to first video for arabic users
+        $btnArabic.on( 'click', function() {
+            var mediaData = app.data.medias[ 0 ]; // media by index (0 = first)
+
+            app.changeState( new FA.StateVideo2( app, 'home', mediaData ) );
+        } )
 
     }
 
@@ -393,7 +401,7 @@ FA.MenuView = function( app ) {
 
         var windowHeight = $(window).innerHeight(),
             startY = $container.offset().top,
-            height = windowHeight - startY - 40;
+            height = windowHeight - startY - 110;
 
         $container.css( 'height', height );
 

@@ -2,9 +2,9 @@
 <html lang="en">
 
 	<head>
-		<title>Saydnaya</title>
+		<title>About Saydnaya</title>
 		<meta charset="utf-8">
-		<link rel="stylesheet" href="css/app.css">
+		<link rel="stylesheet" href="../css/app.css">
 	</head>
 
 	<body data-section="about" data-sub-section="saydnaya">
@@ -13,7 +13,8 @@
 
 			<div class="fragment-wrapper" id="page-header">
 				<div class="fragment">
-					<h1>Saydnaya</h1>
+					<h1>About Saydnaya</h1>
+                    <span class="language-switch">العربية</span>
 				</div>
 			</div>
 
@@ -47,22 +48,19 @@
 				</div>
 			</div>
 
-            <?php include 'includes/fragment-cta-form.php';?>
+            <?php include '../includes/fragment-cta-form-en.php';?>
 
-			<?php include 'includes/fragment-report.php';?>
+			<?php include '../includes/fragment-report-en.php';?>
 
-            <?php include 'includes/fragment-footer.php';?>
+            <?php include '../includes/fragment-footer.php';?>
 
 		</div>
 
-		<?php include 'includes/fragment-header.php';?>
+		<?php include '../includes/fragment-header-en.php';?>
 
 		<!-- Scripts -->
 
-		<script src="js/lib/jquery-3.0.0.min.js"></script>
-		<script src="js/lib/jquery.transit.min.js"></script>
-		<script src="js/lib/player.min.js"></script>
-		<script src="js/header.js"></script>
+		<?php include '../includes/fragment-scripts.php';?>
 
 	</body>
 

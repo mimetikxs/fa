@@ -39,6 +39,44 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.cross {
+    position: relative;
+    display: inline-block;
+    width: 55px;
+    height: 55px;
+    overflow: hidden;
+    background-color: rgba(0,0,0,0.7);
+    transition: background-color 300ms;
+    cursor: pointer;
+
+    &:hover {
+        background-color: rgba(255,255,255,1);
+        &::before,
+        &::after {
+            background: #000;
+        }
+    }
+
+    &::before,
+    &::after {
+        content: '';
+        position: absolute;
+        height: 3px;
+        width: 100%;
+        top: 50%;
+        left: 0;
+        margin-top: -1px;
+        background: #fff;
+        transition: background-color 300ms ease-out;
+    }
+    &::before {
+        transform: rotate(45deg) scale(0.7);
+    }
+    &::after {
+        transform: rotate(-45deg) scale(0.7);
+    }
+}
+
 
 $browser-context: 16; // Default
 
@@ -205,8 +243,8 @@ body {
         @include noselect;
 
         .menu-type {
-            padding: 17px 0;
-            border-top: 1px solid #999;
+            padding: 20px 0;
+            //border-top: 1px solid #999;
             border-bottom: 1px solid #999;
 
             span {
@@ -229,7 +267,7 @@ body {
         }
 
         .container {
-            margin: 20px 0 0 0;
+            margin: 20px 0 20px 0;
             overflow: hidden;
         }
 
@@ -318,6 +356,36 @@ body {
             }
         }
 
+        .ar-watch-videos {
+            border-top: 1px solid #999;
+            padding-top: 20px;
+            direction: rtl;
+            //font-family: 'AmnestyTradeGothic-BdCn20', sans-serif;
+            font-family: 'AmnestyTradeGothic-Cn18', sans-serif;
+
+            .folder {
+                display: inline-block;
+                padding: 0 13px;
+                margin-bottom: 0;
+                line-height: 30px;
+                height: 35px;
+                // background-color: rgba(0, 0, 0, 0.65);
+                border: 1px solid #ccc;
+                color: #ccc;
+                font-size: 18px;
+                transition:
+                    background-color 200ms ease-out,
+                    color 200ms ease-out,
+                    border-color 200ms ease-out;
+                cursor: pointer;
+
+                &:hover {
+                    color: black;
+                    background-color: #ccc;
+                    border-color: #ccc;
+                }
+            }
+        }
     }
 }
 
@@ -355,21 +423,10 @@ body {
     }
 
     .btn-exit {
+        @extend .cross;
         position: absolute;
         top: 30px;
         right: 20px;
-        padding: 18px;
-        color: white;
-        background-color: rgba(0,0,0,0.8);
-        text-transform: uppercase;
-        font-family: 'AmnestyTradeGothic-BdCn20', sans-serif;
-        transition: background-color 300ms, color 300ms;
-        cursor: pointer;
-
-        &:hover {
-            background-color: rgba(255,255,255,1);
-            color: black;
-        }
     }
 
     .title {
@@ -388,10 +445,11 @@ body {
 }
 
 // ------------------------------------------
-// explore - video screen
+// full body video overlay
 // ------------------------------------------
 
 #layer-video {
+    z-index: 1;
     position: absolute;
     top: 0;
     left: 0;
@@ -409,18 +467,9 @@ body {
         height: 100%;
     }
 
-    .controls {
-        &.inactive {
-          visibility: hidden;
-          opacity: 0;
-          transition: visibility 0s linear 1000ms, opacity 1000ms;
-        }
-        &.active {
-          visibility: visible;
-          opacity: 1;
-          transition: visibility 0s linear 0s, opacity 1000ms;
-        }
-    }
+    // .controls {
+    //
+    // }
 
     .info {
         position: absolute;
@@ -542,17 +591,64 @@ body {
     }
 
     .btn-exit {
+        @extend .cross;
         top: 30px;
         right: 20px;
-        padding: 18px;
-        background-color: rgba(0,0,0,0.8);
-        transition: background-color 300ms, color 300ms;
+    }
 
-        &:hover {
-            background-color: rgba(255,255,255,1);
-            color: black;
+    .bottom-bar {
+        position: absolute;
+        width: 100%;
+        bottom: 50px; //30px;
+        box-sizing: border-box;
+        transition: bottom 500ms;
+        pointer-events: none;
+
+        & > * {
+            display: inline-block;
+            pointer-events: auto;
+        }
+
+        .takeAction {
+            line-height: 38px;
+            height: 40px;
+            box-sizing: border-box;
+            float: left;
+            margin-left: 30px;
+            color: $c-grey--mid;
+            background-color: rgba(0,0,0,0.8);
+            padding: 0 15px;
+            background-color: rgba(0,0,0,0.8);
+            border: 1px solid $c-grey--mid;
+
+            &:hover {
+                border-color: $c-yellow;
+                background-color: $c-yellow;
+                color: #000;
+            }
+        }
+
+        .share-social {
+            position: absolute;
+            right: 30px;
+            bottom: 0;
+            line-height: 28px;
+            height: 30px;
+            vertical-align: baseline;
         }
     }
+
+    .inactive {
+      visibility: hidden;
+      opacity: 0;
+      transition: visibility 0s linear 1000ms, opacity 1000ms;
+    }
+    .active {
+      visibility: visible;
+      opacity: 1;
+      transition: visibility 0s linear 0s, opacity 1000ms;
+    }
+
 }
 
 // ------------------------------------------
@@ -596,8 +692,9 @@ body {
     .menuItem {
         display: inline-block;
         float: right;
-        margin-right: 1px;
+        // margin-right: 1px;
         padding: 0 15px;
+        border-right: 1px solid #666;
         cursor: pointer;
         text-decoration: none;
         transition: background-color 300ms ease-out, color 300ms ease-out;
@@ -608,14 +705,21 @@ body {
             // font-size: 14px;
             font-family: 'AmnestyTradeGothic-Cn18', sans-serif;
         }
+
+        &:last-child {
+            border-left: 1px solid #666;
+        }
     }
 
-    .mainNav-menu,
-    .takeAction {
-        float: right;
-    }
+    //.mainNav-menu,
+    // .takeAction {
+    //     float: right;
+    // }
 
     .mainNav-menu {
+        position: absolute;
+        top: 0;
+        right: 215px;
         .menuItem {
             height: 100%;
             line-height: $header-height;
@@ -630,24 +734,20 @@ body {
     }
 
     .takeAction {
-        border: 10px solid black;
         box-sizing: border-box;
+        position: absolute;
+        top: 10px;
+        right: 20px;
         line-height: 30px;
-        padding: 0 15px;
-        color: black;
-        background-color: $c-grey--light;
-        transition: background-color 300ms ease-out, color 300ms ease-out;
-        cursor: pointer;
-        font-size: 14px;
+        padding: 0 12px;
+        border: 1px solid #666;
+        color: #fff;
+        background-color: #000;
 
         &:hover {
+            color: #000;
             background-color: $c-yellow;
-        }
-
-        > span:nth-child(2){
-            margin-left: 5px;
-            // font-size: 12px;
-            font-family: 'AmnestyTradeGothic-Cn18', sans-serif;
+            border-color: $c-yellow;
         }
     }
 
@@ -658,27 +758,22 @@ body {
         width: 100%;
         background-color: $c-grey--light;
         color: #000;
-        margin-right: 20px;
-        font-size: 14px;
         cursor: default;
         padding-right: 20px;
-
+        box-sizing: border-box;
 
         .menuItem {
             display: inline-block;
             float: right;
-            line-height: 40px;
-            height: 40px;
+            line-height: 50px;
+            height: 50px;
             cursor: pointer;
             color: #000;
+            border-color: $c-grey--mid;
 
             &.active,
             &:hover {
                 background-color: #ff0;
-            }
-
-            &:first-child {
-                margin-right: 20px;
             }
         }
     }
@@ -696,6 +791,19 @@ body {
     //         }
     //     }
     // }
+}
+
+.takeAction {
+    transition: border-color 300ms ease-out, background-color 300ms ease-out, color 300ms ease-out;
+    cursor: pointer;
+    font-size: 16px;
+    text-transform: uppercase;
+
+    > span:nth-child(2){
+        margin-left: 5px;
+        // font-size: 12px;
+        font-family: 'AmnestyTradeGothic-Cn18', sans-serif;
+    }
 }
 
 // ------------------------------------------
@@ -806,7 +914,7 @@ body {
 
 .control-wrap {
     position: absolute;
-    top: 90px;
+    top: 87px;
     right: 30px;
     overflow: hidden;
     width: 85px;

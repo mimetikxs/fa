@@ -378,6 +378,34 @@ th {
   src: url("fonts/AmnestyTradeGothic-Cn18.ttf") format("truetype");
   font-weight: normal;
   font-style: normal; }
+.cross, #layer-360 .btn-exit, #layer-video .btn-exit {
+  position: relative;
+  display: inline-block;
+  width: 55px;
+  height: 55px;
+  overflow: hidden;
+  background-color: rgba(0, 0, 0, 0.7);
+  transition: background-color 300ms;
+  cursor: pointer; }
+  .cross:hover, #layer-360 .btn-exit:hover, #layer-video .btn-exit:hover {
+    background-color: white; }
+    .cross:hover::before, #layer-360 .btn-exit:hover::before, #layer-video .btn-exit:hover::before, .cross:hover::after, #layer-360 .btn-exit:hover::after, #layer-video .btn-exit:hover::after {
+      background: #000; }
+  .cross::before, #layer-360 .btn-exit::before, #layer-video .btn-exit::before, .cross::after, #layer-360 .btn-exit::after, #layer-video .btn-exit::after {
+    content: '';
+    position: absolute;
+    height: 3px;
+    width: 100%;
+    top: 50%;
+    left: 0;
+    margin-top: -1px;
+    background: #fff;
+    transition: background-color 300ms ease-out; }
+  .cross::before, #layer-360 .btn-exit::before, #layer-video .btn-exit::before {
+    transform: rotate(45deg) scale(0.7); }
+  .cross::after, #layer-360 .btn-exit::after, #layer-video .btn-exit::after {
+    transform: rotate(-45deg) scale(0.7); }
+
 body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -488,8 +516,7 @@ body {
   -ms-user-select: none;
   user-select: none; }
   #layer-prison .navigation .menu-type {
-    padding: 17px 0;
-    border-top: 1px solid #999;
+    padding: 20px 0;
     border-bottom: 1px solid #999; }
     #layer-prison .navigation .menu-type span {
       display: inline-block;
@@ -504,7 +531,7 @@ body {
         margin-right: 9px;
         margin-left: 3px; }
   #layer-prison .navigation .container {
-    margin: 20px 0 0 0;
+    margin: 20px 0 20px 0;
     overflow: hidden; }
   #layer-prison .navigation ul, #layer-prison .navigation li {
     list-style: none;
@@ -566,6 +593,26 @@ body {
     #layer-prison .navigation ul.menu-witness > li.over:not(.selected) .folder,
     #layer-prison .navigation ul.menu-location > li.over:not(.selected) .folder {
       background-color: rgba(100, 6, 6, 0.65); }
+  #layer-prison .navigation .ar-watch-videos {
+    border-top: 1px solid #999;
+    padding-top: 20px;
+    direction: rtl;
+    font-family: 'AmnestyTradeGothic-Cn18', sans-serif; }
+    #layer-prison .navigation .ar-watch-videos .folder {
+      display: inline-block;
+      padding: 0 13px;
+      margin-bottom: 0;
+      line-height: 30px;
+      height: 35px;
+      border: 1px solid #ccc;
+      color: #ccc;
+      font-size: 18px;
+      transition: background-color 200ms ease-out, color 200ms ease-out, border-color 200ms ease-out;
+      cursor: pointer; }
+      #layer-prison .navigation .ar-watch-videos .folder:hover {
+        color: black;
+        background-color: #ccc;
+        border-color: #ccc; }
 
 #layer-360 {
   visibility: hidden;
@@ -590,17 +637,7 @@ body {
   #layer-360 .btn-exit {
     position: absolute;
     top: 30px;
-    right: 20px;
-    padding: 18px;
-    color: white;
-    background-color: rgba(0, 0, 0, 0.8);
-    text-transform: uppercase;
-    font-family: 'AmnestyTradeGothic-BdCn20', sans-serif;
-    transition: background-color 300ms, color 300ms;
-    cursor: pointer; }
-    #layer-360 .btn-exit:hover {
-      background-color: white;
-      color: black; }
+    right: 20px; }
   #layer-360 .title {
     position: absolute;
     left: 30px;
@@ -620,6 +657,7 @@ body {
     user-select: none; }
 
 #layer-video {
+  z-index: 1;
   position: absolute;
   top: 0;
   left: 0;
@@ -634,14 +672,6 @@ body {
     position: absolute;
     width: 100%;
     height: 100%; }
-  #layer-video .controls.inactive {
-    visibility: hidden;
-    opacity: 0;
-    transition: visibility 0s linear 1000ms, opacity 1000ms; }
-  #layer-video .controls.active {
-    visibility: visible;
-    opacity: 1;
-    transition: visibility 0s linear 0s, opacity 1000ms; }
   #layer-video .info {
     position: absolute;
     top: 30px;
@@ -737,13 +767,47 @@ body {
       right: 60px; }
   #layer-video .btn-exit {
     top: 30px;
-    right: 20px;
-    padding: 18px;
-    background-color: rgba(0, 0, 0, 0.8);
-    transition: background-color 300ms, color 300ms; }
-    #layer-video .btn-exit:hover {
-      background-color: white;
-      color: black; }
+    right: 20px; }
+  #layer-video .bottom-bar {
+    position: absolute;
+    width: 100%;
+    bottom: 50px;
+    box-sizing: border-box;
+    transition: bottom 500ms;
+    pointer-events: none; }
+    #layer-video .bottom-bar > * {
+      display: inline-block;
+      pointer-events: auto; }
+    #layer-video .bottom-bar .takeAction {
+      line-height: 38px;
+      height: 40px;
+      box-sizing: border-box;
+      float: left;
+      margin-left: 30px;
+      color: #B6B6B6;
+      background-color: rgba(0, 0, 0, 0.8);
+      padding: 0 15px;
+      background-color: rgba(0, 0, 0, 0.8);
+      border: 1px solid #B6B6B6; }
+      #layer-video .bottom-bar .takeAction:hover {
+        border-color: #FF0;
+        background-color: #FF0;
+        color: #000; }
+    #layer-video .bottom-bar .share-social {
+      position: absolute;
+      right: 30px;
+      bottom: 0;
+      line-height: 28px;
+      height: 30px;
+      vertical-align: baseline; }
+  #layer-video .inactive {
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s linear 1000ms, opacity 1000ms; }
+  #layer-video .active {
+    visibility: visible;
+    opacity: 1;
+    transition: visibility 0s linear 0s, opacity 1000ms; }
 
 #header {
   position: fixed;
@@ -779,8 +843,8 @@ body {
   #header .menuItem {
     display: inline-block;
     float: right;
-    margin-right: 1px;
     padding: 0 15px;
+    border-right: 1px solid #666;
     cursor: pointer;
     text-decoration: none;
     transition: background-color 300ms ease-out, color 300ms ease-out; }
@@ -791,31 +855,33 @@ body {
     #header .menuItem > span:nth-child(2) {
       margin-left: 5px;
       font-family: 'AmnestyTradeGothic-Cn18', sans-serif; }
-  #header .mainNav-menu,
+    #header .menuItem:last-child {
+      border-left: 1px solid #666; }
+  #header .mainNav-menu {
+    position: absolute;
+    top: 0;
+    right: 215px; }
+    #header .mainNav-menu .menuItem {
+      height: 100%;
+      line-height: 50px;
+      color: #fff; }
+      #header .mainNav-menu .menuItem.active, #header .mainNav-menu .menuItem:hover {
+        background-color: #DADADA;
+        color: #000; }
   #header .takeAction {
-    float: right; }
-  #header .mainNav-menu .menuItem {
-    height: 100%;
-    line-height: 50px;
-    color: #fff; }
-    #header .mainNav-menu .menuItem.active, #header .mainNav-menu .menuItem:hover {
-      background-color: #DADADA;
-      color: #000; }
-  #header .takeAction {
-    border: 10px solid black;
     box-sizing: border-box;
+    position: absolute;
+    top: 10px;
+    right: 20px;
     line-height: 30px;
-    padding: 0 15px;
-    color: black;
-    background-color: #DADADA;
-    transition: background-color 300ms ease-out, color 300ms ease-out;
-    cursor: pointer;
-    font-size: 14px; }
+    padding: 0 12px;
+    border: 1px solid #666;
+    color: #fff;
+    background-color: #000; }
     #header .takeAction:hover {
-      background-color: #FF0; }
-    #header .takeAction > span:nth-child(2) {
-      margin-left: 5px;
-      font-family: 'AmnestyTradeGothic-Cn18', sans-serif; }
+      color: #000;
+      background-color: #FF0;
+      border-color: #FF0; }
   #header .subNav-menu {
     position: absolute;
     top: 50px;
@@ -823,21 +889,28 @@ body {
     width: 100%;
     background-color: #DADADA;
     color: #000;
-    margin-right: 20px;
-    font-size: 14px;
     cursor: default;
-    padding-right: 20px; }
+    padding-right: 20px;
+    box-sizing: border-box; }
     #header .subNav-menu .menuItem {
       display: inline-block;
       float: right;
-      line-height: 40px;
-      height: 40px;
+      line-height: 50px;
+      height: 50px;
       cursor: pointer;
-      color: #000; }
+      color: #000;
+      border-color: #B6B6B6; }
       #header .subNav-menu .menuItem.active, #header .subNav-menu .menuItem:hover {
         background-color: #ff0; }
-      #header .subNav-menu .menuItem:first-child {
-        margin-right: 20px; }
+
+.takeAction {
+  transition: border-color 300ms ease-out, background-color 300ms ease-out, color 300ms ease-out;
+  cursor: pointer;
+  font-size: 16px;
+  text-transform: uppercase; }
+  .takeAction > span:nth-child(2) {
+    margin-left: 5px;
+    font-family: 'AmnestyTradeGothic-Cn18', sans-serif; }
 
 #footer-desktop {
   position: absolute;
@@ -926,7 +999,7 @@ body {
 
 .control-wrap {
   position: absolute;
-  top: 90px;
+  top: 87px;
   right: 30px;
   overflow: hidden;
   width: 85px;
@@ -1004,7 +1077,7 @@ body[data-section="about"] {
 
 #page-header {
   height: 200px;
-  background-image: url("https://www.amnesty.org/media/patternlibrary/air_2014_7.jpg?preset=fixed_1472_42_hi");
+  background-image: url("../assets/placeholder-header.jpg");
   background-attachment: fixed;
   background-size: cover;
   background-position: 50% 50%; }
@@ -1021,15 +1094,29 @@ body[data-section="about"] {
     background-color: black;
     color: white;
     font-size: 3.0625em; }
+  #page-header .language-switch {
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 10px 20px;
+    color: #fff;
+    background: #000;
+    font-size: 1.125em;
+    cursor: pointer;
+    font-family: 'AmnestyTradeGothic-BdCn20', sans-serif; }
+    #page-header .language-switch:hover {
+      color: #000;
+      background-color: #fff;
+      transition: color 300ms, background-color 300ms; }
 
 body[data-sub-section="saydnaya"] #page-header {
-  background-image: url("https://www.amnesty.org/media/patternlibrary/air_2014_7.jpg?preset=fixed_1472_42_hi"); }
+  background-image: url("../assets/placeholder-header.jpg"); }
 
 body[data-sub-section="detention"] #page-header {
-  background-image: url("https://www.amnesty.org/media/patternlibrary/air_2014_7.jpg?preset=fixed_1472_42_hi"); }
+  background-image: url("../assets/placeholder-header.jpg"); }
 
-body[data-sub-section="making-of"] #page-header {
-  background-image: url("https://www.amnesty.org/media/patternlibrary/air_2014_7.jpg?preset=fixed_1472_42_hi"); }
+body[data-sub-section="methodology"] #page-header {
+  background-image: url("../assets/placeholder-header.jpg"); }
 
 body:not([data-sub-section]) .fragment {
   max-width: 1000px; }
@@ -1067,7 +1154,7 @@ body:not([data-sub-section]) .fragment {
       font-size: 0.875em; }
     #boxes .box:hover .info {
       color: #fff;
-      background-color: #000; }
+      background-color: #363636; }
 
 #main .fragment {
   text-align: left; }
@@ -1174,6 +1261,58 @@ body:not([data-sub-section]) .fragment {
   #page-footer .share-social {
     text-align: right; }
 
+body[data-lang="ar"] #content {
+  direction: rtl; }
+body[data-lang="ar"] #page-header h1 {
+  left: auto;
+  right: 0;
+  padding: 20px 20px; }
+body[data-lang="ar"] #page-header .language-switch {
+  right: auto;
+  left: 0; }
+body[data-lang="ar"] #boxes .box {
+  text-align: right; }
+body[data-lang="ar"] #main .fragment {
+  text-align: right; }
+body[data-lang="ar"] #main p {
+  font-size: 1em; }
+body[data-lang="ar"] #main blockquote {
+  border-left: none;
+  padding-left: 0;
+  border-right: 15px solid #000;
+  padding-right: 40px; }
+  body[data-lang="ar"] #main blockquote:first-child {
+    margin-top: 0; }
+  body[data-lang="ar"] #main blockquote .text {
+    line-height: 1;
+    font-size: 1.875em; }
+    body[data-lang="ar"] #main blockquote .text:before {
+      position: absolute;
+      right: -.6em;
+      content: '\201D'; }
+    body[data-lang="ar"] #main blockquote .text:after {
+      position: relative;
+      left: auto;
+      right: .15em;
+      content: '\201C'; }
+  body[data-lang="ar"] #main blockquote .source {
+    color: #B6B6B6;
+    padding-top: 20px;
+    font-size: 0.875em; }
+body[data-lang="ar"] #report .column-left {
+  width: auto;
+  margin-right: 440px;
+  text-align: right;
+  float: none; }
+body[data-lang="ar"] #report .column-right {
+  width: 400px;
+  float: right;
+  margin: 0; }
+  body[data-lang="ar"] #report .column-right:after {
+    content: "";
+    display: table;
+    clear: both; }
+
 /*
   Player Skin Designer for Video.js
   http://videojs.com
@@ -1277,11 +1416,14 @@ body:not([data-sub-section]) .fragment {
 .vjs-paused.vjs-has-started .vjs-big-play-button {
   display: block; }
 
+.vjs-paused.vjs-has-started.vjs-seeking .vjs-big-play-button {
+  display: none; }
+
 .vjs-default-skin.vjs-has-started .vjs-control-bar {
   bottom: 0;
   transition: bottom 500ms; }
 
-.vjs-default-skin.vjs-has-started.vjs-user-inactive .vjs-control-bar {
+.vjs-default-skin.vjs-has-started.vjs-user-inactive.vjs-playing .vjs-control-bar {
   display: flex;
   visibility: inherit;
   opacity: inherit;

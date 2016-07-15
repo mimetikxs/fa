@@ -89,33 +89,42 @@ FA.View360 = function( app ) {
     }
 
 
-    function loadRoom( fileName ) {
+    function loadRoom( fileNames ) {
 
-        var loader = new THREE.JSONLoader( manager );
-        loader.setTexturePath('obj/360s/maps/')
-        loader.load(
-            'obj/360s/' + fileName + '.js',
-            function ( geometry, materials ) {
-                var material = new THREE.MultiMaterial( materials );
-                var object = new THREE.Mesh( geometry, material );
+        for (var i = 0; i < fileNames.length; i++) {
+            var fileName = fileNames[ i ];
 
-                scene.add( object );
-            }
-        );
+            var loader = new THREE.JSONLoader( manager );
+            loader.setTexturePath('obj/360s/maps/')
+            loader.load(
+                'obj/360s/' + fileName + '.js',
+                function ( geometry, materials ) {
+                    var material = new THREE.MultiMaterial( materials );
+                    var object = new THREE.Mesh( geometry, material );
+
+                    scene.add( object );
+                }
+            );
+        }
 
     }
 
 
     function addBody( data ) {
 
-        var material = new THREE.MeshBasicMaterial( { transparent: true, opacity: 0.7, color: 0x000000 } );
+        // abort if this geomtry wasn't loaded
+        if ( !bodyGeometries[ data.name ] ) {
+            return;
+        }
+
+        var material = new THREE.MeshBasicMaterial( { transparent: true, opacity: 0.6, color: 0x000000 } );
             transform = new THREE.Matrix4(),
             rotateY = new THREE.Matrix4(),
             translate = new THREE.Matrix4(),
             toRadians = 180 / Math.PI;
 
         rotateY.makeRotationY( data.angle * toRadians );
-        translate.makeTranslation( data.x, 0, data.z );
+        translate.makeTranslation( data.x, data.y, data.z );
         transform.multiplyMatrices( translate, rotateY );
 
         object = new THREE.Mesh( bodyGeometries[ data.name ], material );
@@ -149,8 +158,7 @@ FA.View360 = function( app ) {
         loader.load(
             'obj/360s/' + name + '.js',
             function ( geometry, materials ) {
-                // var material = new THREE.MeshBasicMaterial( 0xffffff );
-                var material = materials[ 0 ]; // only has one matei
+                var material = materials[ 0 ]; // only has one matetial
                 var mesh = new THREE.Mesh( geometry, material );
                 var item = new FA.InteractiveItem( mesh, mediaData.title, mediaId );
 
@@ -161,6 +169,37 @@ FA.View360 = function( app ) {
                 $labels.append( item.$label );
             }
         );
+
+    }
+
+
+    function loadObject( data ) {
+
+        var name = data.name,
+            loader = new THREE.JSONLoader( manager );
+        loader.setTexturePath( 'obj/360s/maps/' )
+        loader.load(
+            'obj/360s/' + name + '.js',
+            function ( geometry, materials ) {
+
+                var transform = new THREE.Matrix4(),
+                    rotateY = new THREE.Matrix4(),
+                    translate = new THREE.Matrix4(),
+                    toRadians = 180 / Math.PI;
+
+                rotateY.makeRotationY( data.angle * toRadians );
+                translate.makeTranslation( data.x, data.y, data.z );
+                transform.multiplyMatrices( translate, rotateY );
+
+                var material = materials[ 0 ]; // only has one material
+                var mesh = new THREE.Mesh( geometry, material );
+                mesh.applyMatrix( transform );
+
+                scene.add( mesh );
+            }
+        );
+
+
 
     }
 
@@ -235,10 +274,10 @@ FA.View360 = function( app ) {
                 addBody( bodies[ i ] );
             }
 
-            updateCallback = updateWhenReady;
-
             // add renderer to dom
             $dom.append( renderer.domElement );
+
+            updateCallback = updateWhenReady;
 
             if ( onComplete ) onComplete();
         }
@@ -247,22 +286,27 @@ FA.View360 = function( app ) {
         loadRoom( data.obj360 );
 
         // load the bodies
-        // var bodyNames = [],
-        //     bodies = data.bodies,
-        //     bodyName;
-        // for (var i = 0; i < bodies.length; i++) {
-        //     bodyName = bodies[ i ].name;
-        //     // load the model only once
-        //     if ( bodyNames.indexOf( bodyName ) === -1 ) {
-        //         bodyNames.push( bodyName );
-        //         loadBody( bodyName );
-        //     }
-        // }
+        var bodyNames = [],
+            bodies = data.bodies,
+            bodyName;
+        for (var i = 0; i < bodies.length; i++) {
+            bodyName = bodies[ i ].name;
+            // load the model only once
+            if ( bodyNames.indexOf( bodyName ) === -1 ) {
+                bodyNames.push( bodyName );
+                loadBody( bodyName );
+            }
+        }
 
         // load the interactive objects
+        // var objects = data.objects;
+        // for (var i = 0; i < objects.length; i++) {
+        //     loadInteractiveObject( objects[ i ] );
+        // }
+
         var objects = data.objects;
         for (var i = 0; i < objects.length; i++) {
-            loadInteractiveObject( objects[ i ] );
+            loadObject( objects[ i ] );
         }
 
     }

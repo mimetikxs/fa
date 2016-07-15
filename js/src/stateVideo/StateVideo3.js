@@ -36,18 +36,57 @@ FA.StateVideo2 = function( app, stateName, data ) {
         });
 
         player.on( 'userinactive', function(){
-            $('#layer-video .controls').removeClass('active').addClass('inactive');
+            if( !player.paused() ) {
+                hideControls();
+            }
         } );
 
         player.on( 'useractive', function(){
-            $('#layer-video .controls').removeClass('inactive').addClass('active');
+            if( !player.paused() ) {
+                showControls();
+            }
+        } );
+
+        // player.on( 'play', function() {
+        //     hideControls();
+        // } );
+
+        player.on( 'pause', function() {
+            showControls();
+
         } );
 
         player.on( 'ended', function(){
-            goToNext();
+            //goToNext();
+            showControls();
+        } );
+
+        // player.on( 'seeking', function() {
+        //     console.log("seeking...");
+        // } );
+
+        player.on( 'stalled', function() {
+            console.log("-----------------------------------------------");
+            console.log("VIDEO STALLED ---------------------------------");
+            console.log("-----------------------------------------------");
         } );
 
         player.play();
+
+    }
+
+    function showControls() {
+
+        $('#layer-video .controls').removeClass('inactive').addClass('active');
+        $( '#layer-video .bottom-bar' ).css( 'bottom', 50 ); // rise bottom bar
+
+    }
+
+
+    function hideControls() {
+
+        $('#layer-video .controls').removeClass('active').addClass('inactive');
+        $( '#layer-video .bottom-bar' ).css( 'bottom', 30 ); // lower bottom bar
 
     }
 
@@ -77,7 +116,7 @@ FA.StateVideo2 = function( app, stateName, data ) {
         // add video tag
         $player.html(
             '<video id="example_video_1" class="video-js vjs-default-skin vjs-fill" controls preload="none" width="640" height="264" poster="">' +
-            //   '<source src="https://player.vimeo.com/external/173798367.hd.mp4?s=2a49d1c55e3c72aa0efce952686db446589423d1&profile_id=119" type="video/mp4">' +
+              '<source src="https://player.vimeo.com/external/173798367.hd.mp4?s=2a49d1c55e3c72aa0efce952686db446589423d1&profile_id=119" type="video/mp4">' +
               '<source src="https://player.vimeo.com/external/173798367.sd.mp4?s=66afc4bfc32a75138f1dd92c347640a15b59a878&profile_id=165" type="video/mp4">' +
               '<p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>' +
             '</video>'

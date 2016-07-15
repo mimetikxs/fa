@@ -1,7 +1,7 @@
 <div class="fragment-wrapper" id="report">
     <div class="fragment">
         <div class="column-left">
-            <img src="assets/report.jpeg"/>
+            <img src="../assets/report.jpeg"/>
         </div>
         <div class="column-right">
             <h2>Part of the detention report</h2>
