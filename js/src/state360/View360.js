@@ -24,6 +24,7 @@ FA.View360 = function( app ) {
         interactiveItems = [],          // FA.InteractiveItem
 
         bodyGeometries = {},            // lookup { "name" : THREE.Geometry }
+        objectGeomtries = {},           // lookup { "name" : THREE.Geometry }
 
         updateCallback = function(){},
 
@@ -103,7 +104,9 @@ FA.View360 = function( app ) {
                     var object = new THREE.Mesh( geometry, material );
 
                     scene.add( object );
-                }
+                },
+                onProgress,
+                onError
             );
         }
 
@@ -117,11 +120,11 @@ FA.View360 = function( app ) {
             return;
         }
 
-        var material = new THREE.MeshBasicMaterial( { transparent: true, opacity: 0.6, color: 0x000000 } );
+        var material = new THREE.MeshBasicMaterial( { transparent: true, opacity: 0.8, color: 0x000000 } );
             transform = new THREE.Matrix4(),
             rotateY = new THREE.Matrix4(),
             translate = new THREE.Matrix4(),
-            toRadians = 180 / Math.PI;
+            toRadians = Math.PI / 180;
 
         rotateY.makeRotationY( data.angle * toRadians );
         translate.makeTranslation( data.x, data.y, data.z );
@@ -142,7 +145,9 @@ FA.View360 = function( app ) {
             'obj/bodies/' + fileName + '.js',
             function ( geometry, materials ) {
                 bodyGeometries[ fileName ] = geometry; // store the geometry
-            }
+            },
+            onProgress,
+            onError
         );
 
     }
@@ -154,11 +159,20 @@ FA.View360 = function( app ) {
             mediaId = data.mediaId,
             mediaData = app.data.mediaById[ mediaId ],
             loader = new THREE.JSONLoader( manager );
+
         loader.setTexturePath( 'obj/360s/maps/' )
         loader.load(
             'obj/360s/' + name + '.js',
             function ( geometry, materials ) {
-                var material = materials[ 0 ]; // only has one matetial
+                //var material = materials[ 0 ]; // only has one matetial
+                console.log("TODO: fix this. Material is -> ", material); // TODO: pfg need to fix. is loading *undefined* material
+
+                var material = new THREE.MeshPhongMaterial( {
+                    color : 0x666666,
+                    transparent: true,
+                    opacity: 0.3,
+
+                } );
                 var mesh = new THREE.Mesh( geometry, material );
                 var item = new FA.InteractiveItem( mesh, mediaData.title, mediaId );
 
@@ -177,6 +191,7 @@ FA.View360 = function( app ) {
 
         var name = data.name,
             loader = new THREE.JSONLoader( manager );
+
         loader.setTexturePath( 'obj/360s/maps/' )
         loader.load(
             'obj/360s/' + name + '.js',
@@ -185,7 +200,7 @@ FA.View360 = function( app ) {
                 var transform = new THREE.Matrix4(),
                     rotateY = new THREE.Matrix4(),
                     translate = new THREE.Matrix4(),
-                    toRadians = 180 / Math.PI;
+                    toRadians = Math.PI / 180;
 
                 rotateY.makeRotationY( data.angle * toRadians );
                 translate.makeTranslation( data.x, data.y, data.z );
@@ -196,10 +211,10 @@ FA.View360 = function( app ) {
                 mesh.applyMatrix( transform );
 
                 scene.add( mesh );
-            }
+            },
+            onProgress,
+            onError
         );
-
-
 
     }
 
@@ -249,12 +264,25 @@ FA.View360 = function( app ) {
     }
 
 
+    function onProgress( xhr ) {
+        if ( xhr.lengthComputable ) {
+            var percentComplete = xhr.loaded / xhr.total * 100;
+            console.log( Math.round(percentComplete, 2) + '% downloaded' );
+        }
+    };
+
+
+    function onError( xhr ) {
+        console.log( "LOADING ERROR", xhr );
+    };
+
+
     //        //
     // Public //
     //        //
 
 
-    this.load = function( data, onComplete, onError ) {
+    this.load = function( data, onComplete ) {
 
         locationData = data;
 
@@ -299,11 +327,12 @@ FA.View360 = function( app ) {
         }
 
         // load the interactive objects
-        // var objects = data.objects;
-        // for (var i = 0; i < objects.length; i++) {
-        //     loadInteractiveObject( objects[ i ] );
-        // }
+        var objects = data.interactiveObjects;
+        for (var i = 0; i < objects.length; i++) {
+            loadInteractiveObject( objects[ i ] );
+        }
 
+        // load the interactive objects
         var objects = data.objects;
         for (var i = 0; i < objects.length; i++) {
             loadObject( objects[ i ] );

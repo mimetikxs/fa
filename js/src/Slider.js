@@ -14,9 +14,6 @@ FA.Slider = function() {
 		isMouseDown = false,
 		isMouseOut = false,
 
-		openWidth = 204,
-		closedWidth = 85,
-
 		onChangeCallback = function( value ) {};
 
 
@@ -29,8 +26,9 @@ FA.Slider = function() {
 		var html = [
             '<div class="control-wrap">',
     			'<div class="control">',
-                    '<div class="label">Look inside</div>',
+                    // '<div class="label">Look inside</div>',
     				'<div class="slider">',
+						'<div class="guide"></div>',
     					'<div class="bar"></div>',
     				'</div>',
     			'</div>',
@@ -96,6 +94,8 @@ FA.Slider = function() {
 
 		$(document).on( 'mousemove', onMousemove );
 
+		onMousemove( event ); // trigger
+
 		event.stopPropagation();
 		return false;
 
@@ -107,10 +107,6 @@ FA.Slider = function() {
 		isMouseDown = false;
 
 		$(document).off( 'mousemove', onMousemove );
-
-		if ( isMouseOut ) {
-			scope.$dom.css( 'width', closedWidth );
-		}
 
 	}
 
@@ -136,7 +132,6 @@ FA.Slider = function() {
 
 			// close
 			isMouseOut = true;
-			scope.$dom.css( 'width', closedWidth );
 		}
 
 	}
@@ -146,18 +141,12 @@ FA.Slider = function() {
 
 		isMouseOut = false;
 
-		scope.$dom.css( 'width', openWidth );
-
 	}
 
 
 	function onMouseleave( e ) {
 
 		isMouseOut = true;
-
-		if ( !isMouseDown ) {
-			scope.$dom.css( 'width', closedWidth );
-		}
 
 	}
 

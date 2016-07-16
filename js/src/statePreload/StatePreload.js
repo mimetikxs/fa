@@ -10,8 +10,23 @@ FA.StatePreload = function( app ) {
         messageCompleted = false,
         manager;
 
+    var isTimeUp = false,
+        intervalId,
+        secondsCounter = 0,
+        maxSeconds = 2,
 
-    function loadData() {
+        $btnSkip = $( '#layer-intro .btn-skip' ),
+        $spinner = $( '#layer-intro .intro-spinner' ),
+
+        $player = $('#layer-intro .video-container'),
+        player,
+        isVideoReady = false,
+        isVideoStarted = false;
+
+
+
+
+    function loadData( onComplete ) {
 
         $.ajax({
             dataType: 'json',
@@ -20,7 +35,7 @@ FA.StatePreload = function( app ) {
 
                 app.data = new FA.Data( result );
 
-                loadResources();
+                onComplete();
             },
             error : function( jqXHR, status, errorThrown ) {
 
@@ -39,6 +54,8 @@ FA.StatePreload = function( app ) {
 
         manager.onLoad = function() {
             loaded = true;
+
+            showSkip();
         }
 
         loadBuildingModel();
@@ -183,15 +200,124 @@ FA.StatePreload = function( app ) {
     function onError( xhr ) {};
 
 
-    function goToNext() {
+    function goToNextState() {
 
-        setTimeout( function() {
-            $( '#introMessage' ).fadeOut( 1000, function() {
-                app.changeState( new FA.StateVideo( app ) );
-            } );
+        $( '#layer-prison' ).css( 'display', 'block' );
+
+        // fadeout intro
+        $( "#layer-intro" ).transition( { opacity: 0 }, 500, 'out',
+            function() {
+                player.dispose();
+
+                this.remove();
+
+                app.changeState( new FA.StateExplore( app ) );
+            }
+        );
+
+    }
+
+
+    function buidlVideo() {
+
+        $player.html(
+            '<video id="example_video_1" class="video-js vjs-default-skin vjs-fill" controls preload="none" width="640" height="264" poster="">' +
+              '<source src="https://player.vimeo.com/external/174832604.hd.mp4?s=71f0ad7b107b0b7f97283d78d58b0cf01bc8b5fb&profile_id=174" type="video/mp4">' +
+              '<source src="https://player.vimeo.com/external/174832604.sd.mp4?s=b555bd13a70870b1bd28e31b784857d9f8cfa19b&profile_id=165" type="video/mp4">' +
+              '<p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>' +
+            '</video>'
+        );
+        $player.css( { 'display': 'none', 'opacity': 0 } );
+
+        // init videojs
+        player = videojs(
+            "example_video_1",
+            {
+                controlBar: {
+                    volumeMenuButton: false,
+                    fullscreenToggle: false
+                }
+            },
+            function() {
+                // Player is initialized and ready.
+                isVideoReady = true;
+            }
+        );
+
+        player.on( 'ended', function() {
+            goToNextState();
+        } );
+
+    }
+
+
+    function startVideo() {
+
+        $player
+            .css('display', 'block')
+            .transition( { opacity: 1 }, 500, 'in',
+                function() {
+                    $('#introMessage').css('visibility', 'hidden'); // hide message
+                }
+            );
+
+        player.play();
+
+        isVideoStarted = true;
+
+    }
+
+
+    function startTimer() {
+
+        intervalId = setInterval( function() {
+            secondsCounter++;
+
+            if ( secondsCounter > maxSeconds ) {
+                clearInterval( intervalId );
+                isTimeUp = true;
+            }
+
         }, 1000 );
 
     }
+
+
+    function showSkip() {
+
+        $btnSkip
+            .css( { visibility: 'visible', opacity: 0 } )
+            .transition( { opacity: 1 }, 500, 'in')
+            .on( 'click', function( e ) {
+
+                goToNextState();
+
+            });
+
+        $spinner.transition( { opacity: 0 }, 200, 'out');
+        $spinner.transition( { height: 0, delay: 0 }, 300, 'out');
+    }
+
+
+    // function revealText( onComplete ) {
+    //
+    //     var $lines = $( '#introMessage .hidden' ),
+    //         length = $lines.length,
+    //         index = 0,
+    //         intervalId;
+    //
+    //     intervalId = setInterval( function() {
+    //         $lines.eq( index ).removeClass('hidden');
+    //         index++;
+    //
+    //         if ( index >= length ) {
+    //             clearInterval( intervalId );
+    //
+    //             onComplete();
+    //         }
+    //     }, 100 );
+    //
+    // }
 
 
     //        //
@@ -201,30 +327,31 @@ FA.StatePreload = function( app ) {
 
     this.enter = function() {
 
-        //loadResources();
-        loadData();
+        // hide layers
+        $( '#layer-prison, #layer-video' ).css( 'display', 'none' );
 
-        // initSound();
-        //
-        // // init typed
-        // $( "#introMessage .message" ).typed( {
-        //     stringsElement : $( '#typed-strings' )
-        //     ,showCursor : false
-        //     ,backDelay : 500
-        //     ,callback : goToNext
-        // });
+        $( '#layer-prison' ).css( 'opacity', 1 );
+
+        $( '#introMessage .centered' ).transition( { opacity: 1 }, 900, 'in');
+
+        // prepare the player
+        buidlVideo();
+
+        // load json + resources
+        loadData( loadResources );
+
+        // whait at least two seconds before starting video
+        startTimer();
 
     }
 
 
     this.update = function() {
 
-        // bypass
-        if (loaded) {
-            $( '#layer-video' ).fadeOut();
-            // $( '#introMessage' ).fadeOut();
-            app.changeState( new FA.StateExplore( app ) );
-            // app.changeState( new FA.StateVideo2( app ) );
+        console.log( loaded, isVideoReady, isVideoStarted, isTimeUp );
+
+        if ( loaded  &&  isVideoReady  &&  !isVideoStarted  &&  isTimeUp ) {
+            startVideo();
         }
 
     }
@@ -232,7 +359,11 @@ FA.StatePreload = function( app ) {
 
     this.exit = function() {
 
-        // fadeoutSoundVolume( 0.3, 0 );
+        if ( intervalId ) {
+            clearInterval( intervalId );
+        }
+
+        $btnSkip.off();
 
     }
 

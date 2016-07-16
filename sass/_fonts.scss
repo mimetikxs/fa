@@ -27,3 +27,19 @@
     font-weight: normal;
     font-style: normal;
 }
+
+@font-face {
+    font-family: 'FrutigerLTArabic-77BlackCn';
+    src: url('fonts/FrutigerLTArabic-77BlackCn.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+$f-default: sans-serif;
+
+$f-default--rtl: Tahoma, sans-serif;
+
+$f-title: 'AmnestyTradeGothic-BdCn20', sans-serif;
+
+$f-title--rtl: 'FrutigerLTArabic-77BlackCn', 'HelveticaNeue-CondensedBold', 'Franklin Gothic Medium', Tahoma, sans-serif;

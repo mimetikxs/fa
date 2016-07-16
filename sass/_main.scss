@@ -131,7 +131,6 @@ body {
     overflow: hidden;
     @include noselect;
     background-color: black;
-    // transition: opacity 300ms ease-out;
 }
 
 // ------------------------------------------
@@ -153,7 +152,6 @@ body {
             position: absolute;
             opacity: 0.8;
             transform: scale(1,1);
-            // transition: transform 200ms ease-out ;
 
             .line {
                 position: absolute;
@@ -205,7 +203,7 @@ body {
         position: absolute;
         left: 30px;
         top: 30px;
-        font-family: 'AmnestyTradeGothic-BdCn20', sans-serif;
+        font-family: $f-title;
         color: #ddd;
         cursor: default;
 
@@ -213,25 +211,39 @@ body {
             display: inline-block;
         }
 
+        // title
         div:nth-child(1) {
-            font-size: 41px;
+            font-size: 44px;
             text-transform: uppercase;
             float: left;
         }
 
+        // arabic
         div:nth-child(2) {
             float: left;
-            padding: 2px 10px;
-            margin: 8px 0 0 15px;
-            font-size: 22px;
-            background-color: #ddd;
-            color: #666;
+            font-size: 36px;
+            color: #ddd;
+            line-height: 46px;
+            margin-left: 13px;
+            font-family: $f-title--rtl;
+        }
+
+        // subtitle
+        div:nth-child(3) {
+            position: absolute;
+            display: block;
+            left: 0;
+            top: 55px;
+            font-size: 1.38em;
+            font-family: 'AmnestyTradeGothic-Cn18', sans-serif;
+            text-transform: uppercase;
+            color: #aaa;
         }
     }
 
     .navigation {
         position: absolute;
-        top: 110px;
+        top: 135px;
         left: 30px;
         height: 100%;
         width: 265px;
@@ -240,11 +252,12 @@ body {
         font-size: 12px;
         color: white;
         overflow: hidden;
+        opacity: 0;
         @include noselect;
 
         .menu-type {
             padding: 20px 0;
-            //border-top: 1px solid #999;
+            border-top: 1px solid #999;
             border-bottom: 1px solid #999;
 
             span {
@@ -286,7 +299,7 @@ body {
 
                 & > .folder {
                     display: block;
-                    padding: 10px 13px;
+                    padding: 12px 13px;
                     margin-bottom: 10px;
                     background-color: rgba(0, 0, 0, 0.65);
                     transition: background-color 200ms ease-out;
@@ -326,9 +339,9 @@ body {
                     // second level li
                     & > li {
                         display: block;
-                        padding: 5px 10px;
+                        padding: 7px 10px;
                         margin: 0 7px 10px 7px;
-                        background-color: rgba(153, 153, 153, 0.7);
+                        background-color: rgba(128, 128, 128, 0.7);
                         transition: background-color 300ms ease-out;
 
                         &:hover {
@@ -360,8 +373,7 @@ body {
             border-top: 1px solid #999;
             padding-top: 20px;
             direction: rtl;
-            //font-family: 'AmnestyTradeGothic-BdCn20', sans-serif;
-            font-family: 'AmnestyTradeGothic-Cn18', sans-serif;
+            font-family: $f-default--rtl;
 
             .folder {
                 display: inline-block;
@@ -369,10 +381,9 @@ body {
                 margin-bottom: 0;
                 line-height: 30px;
                 height: 35px;
-                // background-color: rgba(0, 0, 0, 0.65);
-                border: 1px solid #ccc;
-                color: #ccc;
-                font-size: 18px;
+                border: 1px solid #999;
+                color: #999;
+                font-size: 16px;
                 transition:
                     background-color 200ms ease-out,
                     color 200ms ease-out,
@@ -407,17 +418,23 @@ body {
     .labels {
         .label {
             position: absolute;
-            font-family: 'Oswald', sans-serif;
-            text-transform: uppercase;
-            white-space: nowrap;
-            background-color: #333;
-            color: white;
-            padding: 5px 8px;
-            cursor: pointer;
-            transition: background-color 300ms;
+
+            .tag {
+                padding: 5px 8px;
+                font-family: 'Oswald', sans-serif;
+                text-transform: uppercase;
+                white-space: nowrap;
+                background-color: rgba(0,0,0,0.7);
+                color: white;
+                cursor: pointer;
+                transition: background-color 300ms;
+                font-size: 13px;
+            }
 
             &.over {
-                background-color: rgba(255,0,0,0.7);
+                .tag {
+                    background-color: rgba(255,0,0,0.7);
+                }
             }
         }
     }
@@ -442,6 +459,15 @@ body {
         cursor: default;
         @include noselect;
     }
+
+    .spinner-wrap {
+        position: absolute;
+        width: 100%;
+        text-align: center;
+        top: 50%;
+        margin-top: -35px;
+        display: none;
+    }
 }
 
 // ------------------------------------------
@@ -458,7 +484,7 @@ body {
     opacity: 0;
     transition: opacity 500ms;
     background-color: black;
-    font-family: 'AmnestyTradeGothic-BdCn20', sans-serif;
+    font-family: $f-title;
     overflow: hidden;
 
     .player {
@@ -466,10 +492,6 @@ body {
         width: 100%;
         height: 100%;
     }
-
-    // .controls {
-    //
-    // }
 
     .info {
         position: absolute;
@@ -480,8 +502,6 @@ body {
         padding: 10px 20px;
 
         & > * {
-            // padding: 10px 15px;
-            // background-color: rgba(0,0,0,0.2);
             line-height: 35px;
             height: 35px;
             display: inline-block;
@@ -491,18 +511,11 @@ body {
         .title {
             font-size: 28px;
             text-transform: uppercase;
-            // margin-right: 20px;
         }
 
         .location,
         .witness {
             text-transform: uppercase;
-            font-size: 17px;
-            font-family: 'AmnestyTradeGothic-Cn18', sans-serif;
-        }
-
-        .separator {
-            margin: 0 10px;
             font-size: 17px;
             font-family: 'AmnestyTradeGothic-Cn18', sans-serif;
         }
@@ -514,7 +527,8 @@ body {
         top: 92px;
         left: 30px;
         background-color: rgba(0,0,0,0.8);
-        padding: 10px 20px;
+        padding: 5px 20px;
+        font-family: $f-title--rtl;
     }
 
     .btn-next,
@@ -660,10 +674,9 @@ body {
     height: $header-height;
     width: 100%;
     // top: -$header-height;
-    top: 0;
     background-color: black;
     transition: top 500ms ease-out;
-    font-family: 'AmnestyTradeGothic-BdCn20', sans-serif;
+    font-family: $f-title;
     text-transform: uppercase;
     font-size: 16px;
     @include noselect;
@@ -703,18 +716,13 @@ body {
         > span:nth-child(2){
             margin-left: 5px;
             // font-size: 14px;
-            font-family: 'AmnestyTradeGothic-Cn18', sans-serif;
+            font-family: $f-default--rtl;
         }
 
         &:last-child {
             border-left: 1px solid #666;
         }
     }
-
-    //.mainNav-menu,
-    // .takeAction {
-    //     float: right;
-    // }
 
     .mainNav-menu {
         position: absolute;
@@ -801,8 +809,7 @@ body {
 
     > span:nth-child(2){
         margin-left: 5px;
-        // font-size: 12px;
-        font-family: 'AmnestyTradeGothic-Cn18', sans-serif;
+        font-family: $f-default--rtl;
     }
 }
 
@@ -887,25 +894,154 @@ body {
     vertical-align: middle;
 }
 
+#layer-intro{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    transition: opacity 300ms;
+
+    .btn-skip {
+        position: absolute;
+        display: inline-block;
+        right: 20px;
+        top: 20px;
+        text-transform: uppercase;
+        background-color: rgba(0,0,0,0.2);
+        color: #fff;
+        padding: 10px 15px;
+        font-family: $f-title;
+        cursor: pointer;
+        visibility: hidden;
+        transition:
+            background-color 300ms,
+            color 300ms;
+
+        &:hover {
+            background-color: rgba(255,255,255,1);
+            color: #000;
+        }
+    }
+}
+
 #introMessage {
     position: absolute;
     width: 100%;
     height: 100%;
     font-size: 30px;
-    font-family: 'Oswald', sans-serif;
     @include noselect;
+    font-family: $f-default;
+    text-align: center;
+    background-color: $c-grey--light;
 
-    .message {
-        margin: 0;
-        padding: 10px 15px;
-        background-color: white;
-        text-transform: uppercase;
+    .centered {
+        opacity: 0;
+    }
+
+    .centered > * {
+        transition: height 500ms, opacity 1500ms;
+        overflow: hidden;
+        display: block;
+
+        &.hidden {
+            height: 0;
+            opacity: 0;
+        }
+    }
+
+    .intro-logos {
+
+    }
+
+    .intro-title,
+    .intro-subtitle {
+        span {
+            display: inline-block;
+            background-color: #000;
+            color: white;
+            padding: 0 20px;
+            margin: 0;
+            font-family: $f-title;
+            text-transform: uppercase;
+        }
+    }
+
+    .intro-title {
+        line-height: 80px;
+        height: 90px;   // = 10px margin-bottom
+        font-size: 49px;
+    }
+
+    .intro-subtitle {
+        line-height: 50px;
+        height: 70px;   // = 20px margin-bottom
+        font-size: 28px;
+
+        span {
+            background-color: #fff;
+            color: #000;
+        }
+    }
+
+    .intro-language {
+        font-size: 16px;
+        line-height: 24px;
+        height: 50px;
+
+        .ar {
+            font-family: $f-default--rtl;
+        }
+    }
+
+    .intro-spinner {
+        margin-top: 30px;
+        height: 50px;
     }
 }
 
-#typed-strings {
-    visibility: hidden;
+//
+// Spinner
+//
+
+.spinner {
+    display: inline-block;
+    height: 28px;
+    width: 28px;
+    animation: rotate 1.0s infinite linear;
+    border: 8px solid #fff;
+    border-right-color: transparent;
+    border-radius: 50%;
+
+    @keyframes rotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
 }
+
+//
+// Intro video
+//
+
+.video-container {
+    // z-index: 1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    // opacity: 0;
+    transition: opacity 500ms;
+    background-color: black;
+    font-family: $f-title;
+    overflow: hidden;
+
+    .player {
+        // position: absolute;
+        width: 100%;
+        height: 100%;
+    }
+}
+
 
 
 // ------------------------------------------
@@ -917,14 +1053,9 @@ body {
     top: 87px;
     right: 30px;
     overflow: hidden;
-    width: 85px;
-    transition: width 400ms ease-in-out;
 }
 
 .control {
-    width: 210px;
-    @include clearfix;
-
     .label {
         color: #ccc;
         font-family: 'Oswald', sans-serif;
@@ -935,7 +1066,7 @@ body {
         line-height: 34px;
         height: 35px;
         box-sizing: border-box;
-        border: 1px solid #ccc;
+        border: 1px solid #999;
         border-right: none;
         @include noselect;
         cursor: default;
@@ -944,12 +1075,20 @@ body {
     .slider {
         float: left;
         position: relative;
-        width: 120px;
+        width: 155px;
         height: 35px;
         padding: 10px;
         box-sizing: border-box;
-        border: 1px solid #ccc;
+        border: 1px solid #999;
         cursor: ew-resize;
+
+        .guide {
+            position: absolute;
+            top: 16px;
+            width: 133px;
+            border-top: 1px solid #999;
+            box-sizing: border-box;
+        }
 
         .bar {
             position: relative;

@@ -18,15 +18,22 @@ FA.InteractiveItem = function( mesh, name, slug ) {
         object3D = mesh;
         object3D.name = slug;
 
-        // set material properties
-        // all interactive emissive components are not black
-        // to make them more visible
-        var material = object3D.material;
-        material.emissive.setHex( 0x333333 ),
-        material.polygonOffset = true,
-        material.polygonOffsetFactor = -1, // positive value pushes polygon further away
-        material.polygonOffsetUnits = 1
-        material.needsUpdate = true;
+        if ( object3D.material.length > 1 ) {
+            for (var i = 0; i < object3D.material.length; i++) {
+                setMaterial( object3D.material[ i ] );
+            }
+        } else {
+            setMaterial( object3D.material );
+        }
+
+        function setMaterial( material ) {
+            material.side = THREE.DoubleSide;
+            material.emissive.setHex( 0x333333 );
+            material.polygonOffset = true;
+            material.polygonOffsetFactor = -1; // positive value pushes polygon further away
+            material.polygonOffsetUnits = 1;
+            material.needsUpdate = true;
+        }
     }
 
 

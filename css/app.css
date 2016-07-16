@@ -378,6 +378,11 @@ th {
   src: url("fonts/AmnestyTradeGothic-Cn18.ttf") format("truetype");
   font-weight: normal;
   font-style: normal; }
+@font-face {
+  font-family: 'FrutigerLTArabic-77BlackCn';
+  src: url("fonts/FrutigerLTArabic-77BlackCn.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal; }
 .cross, #layer-360 .btn-exit, #layer-video .btn-exit {
   position: relative;
   display: inline-block;
@@ -482,25 +487,34 @@ body {
   position: absolute;
   left: 30px;
   top: 30px;
-  font-family: 'AmnestyTradeGothic-BdCn20', sans-serif;
+  font-family: "AmnestyTradeGothic-BdCn20", sans-serif;
   color: #ddd;
   cursor: default; }
   #layer-prison .title > div {
     display: inline-block; }
   #layer-prison .title div:nth-child(1) {
-    font-size: 41px;
+    font-size: 44px;
     text-transform: uppercase;
     float: left; }
   #layer-prison .title div:nth-child(2) {
     float: left;
-    padding: 2px 10px;
-    margin: 8px 0 0 15px;
-    font-size: 22px;
-    background-color: #ddd;
-    color: #666; }
+    font-size: 36px;
+    color: #ddd;
+    line-height: 46px;
+    margin-left: 13px;
+    font-family: "FrutigerLTArabic-77BlackCn", "HelveticaNeue-CondensedBold", "Franklin Gothic Medium", Tahoma, sans-serif; }
+  #layer-prison .title div:nth-child(3) {
+    position: absolute;
+    display: block;
+    left: 0;
+    top: 55px;
+    font-size: 1.38em;
+    font-family: 'AmnestyTradeGothic-Cn18', sans-serif;
+    text-transform: uppercase;
+    color: #aaa; }
 #layer-prison .navigation {
   position: absolute;
-  top: 110px;
+  top: 135px;
   left: 30px;
   height: 100%;
   width: 265px;
@@ -509,6 +523,7 @@ body {
   font-size: 12px;
   color: white;
   overflow: hidden;
+  opacity: 0;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -khtml-user-select: none;
@@ -517,6 +532,7 @@ body {
   user-select: none; }
   #layer-prison .navigation .menu-type {
     padding: 20px 0;
+    border-top: 1px solid #999;
     border-bottom: 1px solid #999; }
     #layer-prison .navigation .menu-type span {
       display: inline-block;
@@ -543,7 +559,7 @@ body {
     #layer-prison .navigation ul.menu-witness > li > .folder,
     #layer-prison .navigation ul.menu-location > li > .folder {
       display: block;
-      padding: 10px 13px;
+      padding: 12px 13px;
       margin-bottom: 10px;
       background-color: rgba(0, 0, 0, 0.65);
       transition: background-color 200ms ease-out; }
@@ -576,9 +592,9 @@ body {
       #layer-prison .navigation ul.menu-witness > li > ul > li,
       #layer-prison .navigation ul.menu-location > li > ul > li {
         display: block;
-        padding: 5px 10px;
+        padding: 7px 10px;
         margin: 0 7px 10px 7px;
-        background-color: rgba(153, 153, 153, 0.7);
+        background-color: rgba(128, 128, 128, 0.7);
         transition: background-color 300ms ease-out; }
         #layer-prison .navigation ul.menu-witness > li > ul > li:hover,
         #layer-prison .navigation ul.menu-location > li > ul > li:hover {
@@ -597,16 +613,16 @@ body {
     border-top: 1px solid #999;
     padding-top: 20px;
     direction: rtl;
-    font-family: 'AmnestyTradeGothic-Cn18', sans-serif; }
+    font-family: Tahoma, sans-serif; }
     #layer-prison .navigation .ar-watch-videos .folder {
       display: inline-block;
       padding: 0 13px;
       margin-bottom: 0;
       line-height: 30px;
       height: 35px;
-      border: 1px solid #ccc;
-      color: #ccc;
-      font-size: 18px;
+      border: 1px solid #999;
+      color: #999;
+      font-size: 16px;
       transition: background-color 200ms ease-out, color 200ms ease-out, border-color 200ms ease-out;
       cursor: pointer; }
       #layer-prison .navigation .ar-watch-videos .folder:hover {
@@ -623,16 +639,18 @@ body {
     width: 100%;
     height: 100%; }
   #layer-360 .labels .label {
-    position: absolute;
-    font-family: 'Oswald', sans-serif;
-    text-transform: uppercase;
-    white-space: nowrap;
-    background-color: #333;
-    color: white;
-    padding: 5px 8px;
-    cursor: pointer;
-    transition: background-color 300ms; }
-    #layer-360 .labels .label.over {
+    position: absolute; }
+    #layer-360 .labels .label .tag {
+      padding: 5px 8px;
+      font-family: 'Oswald', sans-serif;
+      text-transform: uppercase;
+      white-space: nowrap;
+      background-color: rgba(0, 0, 0, 0.7);
+      color: white;
+      cursor: pointer;
+      transition: background-color 300ms;
+      font-size: 13px; }
+    #layer-360 .labels .label.over .tag {
       background-color: rgba(255, 0, 0, 0.7); }
   #layer-360 .btn-exit {
     position: absolute;
@@ -655,6 +673,13 @@ body {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none; }
+  #layer-360 .spinner-wrap {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    top: 50%;
+    margin-top: -35px;
+    display: none; }
 
 #layer-video {
   z-index: 1;
@@ -666,7 +691,7 @@ body {
   opacity: 0;
   transition: opacity 500ms;
   background-color: black;
-  font-family: 'AmnestyTradeGothic-BdCn20', sans-serif;
+  font-family: "AmnestyTradeGothic-BdCn20", sans-serif;
   overflow: hidden; }
   #layer-video .player {
     position: absolute;
@@ -692,17 +717,14 @@ body {
       text-transform: uppercase;
       font-size: 17px;
       font-family: 'AmnestyTradeGothic-Cn18', sans-serif; }
-    #layer-video .info .separator {
-      margin: 0 10px;
-      font-size: 17px;
-      font-family: 'AmnestyTradeGothic-Cn18', sans-serif; }
   #layer-video .info-arabic {
     position: absolute;
     color: white;
     top: 92px;
     left: 30px;
     background-color: rgba(0, 0, 0, 0.8);
-    padding: 10px 20px; }
+    padding: 5px 20px;
+    font-family: "FrutigerLTArabic-77BlackCn", "HelveticaNeue-CondensedBold", "Franklin Gothic Medium", Tahoma, sans-serif; }
   #layer-video .btn-next,
   #layer-video .btn-prev,
   #layer-video .btn-exit {
@@ -813,10 +835,9 @@ body {
   position: fixed;
   height: 50px;
   width: 100%;
-  top: 0;
   background-color: black;
   transition: top 500ms ease-out;
-  font-family: 'AmnestyTradeGothic-BdCn20', sans-serif;
+  font-family: "AmnestyTradeGothic-BdCn20", sans-serif;
   text-transform: uppercase;
   font-size: 16px;
   -webkit-touch-callout: none;
@@ -854,7 +875,7 @@ body {
       clear: both; }
     #header .menuItem > span:nth-child(2) {
       margin-left: 5px;
-      font-family: 'AmnestyTradeGothic-Cn18', sans-serif; }
+      font-family: Tahoma, sans-serif; }
     #header .menuItem:last-child {
       border-left: 1px solid #666; }
   #header .mainNav-menu {
@@ -910,7 +931,7 @@ body {
   text-transform: uppercase; }
   .takeAction > span:nth-child(2) {
     margin-left: 5px;
-    font-family: 'AmnestyTradeGothic-Cn18', sans-serif; }
+    font-family: Tahoma, sans-serif; }
 
 #footer-desktop {
   position: absolute;
@@ -976,78 +997,158 @@ body {
   display: inline-block;
   vertical-align: middle; }
 
+#layer-intro {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  transition: opacity 300ms; }
+  #layer-intro .btn-skip {
+    position: absolute;
+    display: inline-block;
+    right: 20px;
+    top: 20px;
+    text-transform: uppercase;
+    background-color: rgba(0, 0, 0, 0.2);
+    color: #fff;
+    padding: 10px 15px;
+    font-family: "AmnestyTradeGothic-BdCn20", sans-serif;
+    cursor: pointer;
+    visibility: hidden;
+    transition: background-color 300ms, color 300ms; }
+    #layer-intro .btn-skip:hover {
+      background-color: white;
+      color: #000; }
+
 #introMessage {
   position: absolute;
   width: 100%;
   height: 100%;
   font-size: 30px;
-  font-family: 'Oswald', sans-serif;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -khtml-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
-  user-select: none; }
-  #introMessage .message {
+  user-select: none;
+  font-family: sans-serif;
+  text-align: center;
+  background-color: #DADADA; }
+  #introMessage .centered {
+    opacity: 0; }
+  #introMessage .centered > * {
+    transition: height 500ms, opacity 1500ms;
+    overflow: hidden;
+    display: block; }
+    #introMessage .centered > *.hidden {
+      height: 0;
+      opacity: 0; }
+  #introMessage .intro-title span,
+  #introMessage .intro-subtitle span {
+    display: inline-block;
+    background-color: #000;
+    color: white;
+    padding: 0 20px;
     margin: 0;
-    padding: 10px 15px;
-    background-color: white;
+    font-family: "AmnestyTradeGothic-BdCn20", sans-serif;
     text-transform: uppercase; }
+  #introMessage .intro-title {
+    line-height: 80px;
+    height: 90px;
+    font-size: 49px; }
+  #introMessage .intro-subtitle {
+    line-height: 50px;
+    height: 70px;
+    font-size: 28px; }
+    #introMessage .intro-subtitle span {
+      background-color: #fff;
+      color: #000; }
+  #introMessage .intro-language {
+    font-size: 16px;
+    line-height: 24px;
+    height: 50px; }
+    #introMessage .intro-language .ar {
+      font-family: Tahoma, sans-serif; }
+  #introMessage .intro-spinner {
+    margin-top: 30px;
+    height: 50px; }
 
-#typed-strings {
-  visibility: hidden; }
+.spinner {
+  display: inline-block;
+  height: 28px;
+  width: 28px;
+  animation: rotate 1.0s infinite linear;
+  border: 8px solid #fff;
+  border-right-color: transparent;
+  border-radius: 50%; }
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg); }
+  100% {
+    transform: rotate(360deg); } }
+.video-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transition: opacity 500ms;
+  background-color: black;
+  font-family: "AmnestyTradeGothic-BdCn20", sans-serif;
+  overflow: hidden; }
+  .video-container .player {
+    width: 100%;
+    height: 100%; }
 
 .control-wrap {
   position: absolute;
   top: 87px;
   right: 30px;
-  overflow: hidden;
-  width: 85px;
-  transition: width 400ms ease-in-out; }
+  overflow: hidden; }
 
-.control {
-  width: 210px; }
-  .control:after {
-    content: "";
-    display: table;
-    clear: both; }
-  .control .label {
-    color: #ccc;
-    font-family: 'Oswald', sans-serif;
-    text-transform: uppercase;
-    font-size: 12px;
-    float: left;
-    padding: 0 12px;
-    line-height: 34px;
-    height: 35px;
-    box-sizing: border-box;
-    border: 1px solid #ccc;
-    border-right: none;
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    cursor: default; }
-  .control .slider {
-    float: left;
+.control .label {
+  color: #ccc;
+  font-family: 'Oswald', sans-serif;
+  text-transform: uppercase;
+  font-size: 12px;
+  float: left;
+  padding: 0 12px;
+  line-height: 34px;
+  height: 35px;
+  box-sizing: border-box;
+  border: 1px solid #999;
+  border-right: none;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: default; }
+.control .slider {
+  float: left;
+  position: relative;
+  width: 155px;
+  height: 35px;
+  padding: 10px;
+  box-sizing: border-box;
+  border: 1px solid #999;
+  cursor: ew-resize; }
+  .control .slider .guide {
+    position: absolute;
+    top: 16px;
+    width: 133px;
+    border-top: 1px solid #999;
+    box-sizing: border-box; }
+  .control .slider .bar {
     position: relative;
-    width: 120px;
-    height: 35px;
-    padding: 10px;
-    box-sizing: border-box;
-    border: 1px solid #ccc;
-    cursor: ew-resize; }
-    .control .slider .bar {
-      position: relative;
-      top: 0px;
-      left: 0px;
-      height: 100%;
-      background-color: #ccc;
-      transition: background-color 300ms; }
-  .control:hover .bar {
-    background-color: white; }
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    background-color: #ccc;
+    transition: background-color 300ms; }
+.control:hover .bar {
+  background-color: white; }
 
 #stats {
   top: 60px !important;
@@ -1056,14 +1157,14 @@ body {
 body[data-section="about"] {
   line-height: 1.4; }
   body[data-section="about"] h1, body[data-section="about"] h2 {
-    font-family: 'AmnestyTradeGothic-BdCn20', sans-serif;
+    font-family: "AmnestyTradeGothic-BdCn20", sans-serif;
     text-transform: uppercase;
     line-height: 1;
     font-weight: normal; }
   body[data-section="about"] h2 {
     font-size: 2.375em; }
   body[data-section="about"] #content {
-    top: 90px;
+    top: 100px;
     overflow: auto; }
 
 .fragment-wrapper {
@@ -1076,8 +1177,10 @@ body[data-section="about"] {
     display: inline-block; }
 
 #page-header {
-  height: 200px;
-  background-image: url("../assets/placeholder-header.jpg");
+  box-sizing: border-box;
+  position: relative;
+  height: 300px;
+  background-image: url("../assets/header-sat-image.jpg");
   background-attachment: fixed;
   background-size: cover;
   background-position: 50% 50%; }
@@ -1103,7 +1206,7 @@ body[data-section="about"] {
     background: #000;
     font-size: 1.125em;
     cursor: pointer;
-    font-family: 'AmnestyTradeGothic-BdCn20', sans-serif; }
+    font-family: "FrutigerLTArabic-77BlackCn", "HelveticaNeue-CondensedBold", "Franklin Gothic Medium", Tahoma, sans-serif; }
     #page-header .language-switch:hover {
       color: #000;
       background-color: #fff;
@@ -1170,7 +1273,7 @@ body:not([data-sub-section]) .fragment {
     margin-top: 0; }
   #main blockquote .text {
     position: relative;
-    font-family: 'AmnestyTradeGothic-BdCn20', sans-serif;
+    font-family: "AmnestyTradeGothic-BdCn20", sans-serif;
     line-height: 1;
     font-size: 1.875em; }
     #main blockquote .text:before {
@@ -1186,7 +1289,7 @@ body:not([data-sub-section]) .fragment {
     padding-top: 20px;
     font-size: 0.875em; }
 #main .intro {
-  font-family: 'AmnestyTradeGothic-BdCn20', sans-serif;
+  font-family: "AmnestyTradeGothic-BdCn20", sans-serif;
   font-size: 1.625em;
   line-height: 1;
   margin-bottom: 60px; }
@@ -1246,7 +1349,7 @@ body:not([data-sub-section]) .fragment {
     text-decoration: none;
     color: #000;
     background-color: #ff0;
-    font-family: 'AmnestyTradeGothic-BdCn20', sans-serif;
+    font-family: "AmnestyTradeGothic-BdCn20", sans-serif;
     text-transform: uppercase;
     transition: background-color 300ms; }
     #report .button:hover {
@@ -1261,57 +1364,66 @@ body:not([data-sub-section]) .fragment {
   #page-footer .share-social {
     text-align: right; }
 
-body[data-lang="ar"] #content {
-  direction: rtl; }
-body[data-lang="ar"] #page-header h1 {
-  left: auto;
-  right: 0;
-  padding: 20px 20px; }
-body[data-lang="ar"] #page-header .language-switch {
-  right: auto;
-  left: 0; }
-body[data-lang="ar"] #boxes .box {
-  text-align: right; }
-body[data-lang="ar"] #main .fragment {
-  text-align: right; }
-body[data-lang="ar"] #main p {
-  font-size: 1em; }
-body[data-lang="ar"] #main blockquote {
-  border-left: none;
-  padding-left: 0;
-  border-right: 15px solid #000;
-  padding-right: 40px; }
-  body[data-lang="ar"] #main blockquote:first-child {
-    margin-top: 0; }
-  body[data-lang="ar"] #main blockquote .text {
-    line-height: 1;
-    font-size: 1.875em; }
-    body[data-lang="ar"] #main blockquote .text:before {
-      position: absolute;
-      right: -.6em;
-      content: '\201D'; }
-    body[data-lang="ar"] #main blockquote .text:after {
-      position: relative;
-      left: auto;
-      right: .15em;
-      content: '\201C'; }
-  body[data-lang="ar"] #main blockquote .source {
-    color: #B6B6B6;
-    padding-top: 20px;
-    font-size: 0.875em; }
-body[data-lang="ar"] #report .column-left {
-  width: auto;
-  margin-right: 440px;
-  text-align: right;
-  float: none; }
-body[data-lang="ar"] #report .column-right {
-  width: 400px;
-  float: right;
-  margin: 0; }
-  body[data-lang="ar"] #report .column-right:after {
-    content: "";
-    display: table;
-    clear: both; }
+body[data-lang="ar"] {
+  font-family: Tahoma, sans-serif; }
+  body[data-lang="ar"] h1, body[data-lang="ar"] h2 {
+    font-family: "FrutigerLTArabic-77BlackCn", "HelveticaNeue-CondensedBold", "Franklin Gothic Medium", Tahoma, sans-serif; }
+  body[data-lang="ar"] #content {
+    direction: rtl; }
+    body[data-lang="ar"] #content blockquote .text {
+      font-family: "FrutigerLTArabic-77BlackCn", "HelveticaNeue-CondensedBold", "Franklin Gothic Medium", Tahoma, sans-serif; }
+  body[data-lang="ar"] #page-header h1 {
+    left: auto;
+    right: 0;
+    padding: 20px 20px; }
+  body[data-lang="ar"] #page-header .language-switch {
+    font-family: "AmnestyTradeGothic-BdCn20", sans-serif;
+    right: auto;
+    left: 0; }
+  body[data-lang="ar"] #boxes .box {
+    text-align: right; }
+  body[data-lang="ar"] #main .intro {
+    font-family: "FrutigerLTArabic-77BlackCn", "HelveticaNeue-CondensedBold", "Franklin Gothic Medium", Tahoma, sans-serif; }
+  body[data-lang="ar"] #main .fragment {
+    text-align: right; }
+  body[data-lang="ar"] #main p {
+    font-size: 1em; }
+  body[data-lang="ar"] #main blockquote {
+    border-left: none;
+    padding-left: 0;
+    border-right: 15px solid #000;
+    padding-right: 40px; }
+    body[data-lang="ar"] #main blockquote:first-child {
+      margin-top: 0; }
+    body[data-lang="ar"] #main blockquote .text {
+      line-height: 1;
+      font-size: 1.875em; }
+      body[data-lang="ar"] #main blockquote .text:before {
+        position: absolute;
+        right: -.6em;
+        content: '\201D'; }
+      body[data-lang="ar"] #main blockquote .text:after {
+        position: relative;
+        left: auto;
+        right: .15em;
+        content: '\201C'; }
+    body[data-lang="ar"] #main blockquote .source {
+      color: #B6B6B6;
+      padding-top: 20px;
+      font-size: 0.875em; }
+  body[data-lang="ar"] #report .column-left {
+    width: auto;
+    margin-right: 440px;
+    text-align: right;
+    float: none; }
+  body[data-lang="ar"] #report .column-right {
+    width: 400px;
+    float: right;
+    margin: 0; }
+    body[data-lang="ar"] #report .column-right:after {
+      content: "";
+      display: table;
+      clear: both; }
 
 /*
   Player Skin Designer for Video.js

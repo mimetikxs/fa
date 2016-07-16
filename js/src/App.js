@@ -115,8 +115,9 @@ FA.App = (function() {
 FA.utils.makePublisher( FA.App );
 
 // set inital state
+// TODO: add check for mobile
 FA.App.changeState( new FA.StatePreload( FA.App ) );
-
+//FA.App.changeState( new FA.StateExploreMobile( FA.App ) );
 
 //
 // global scope event listeners

@@ -437,10 +437,9 @@ console.log($btnArabic);
 
     this.show = function() {
 
-        $('#left-bar').fadeIn( 300 );
+        $('#layer-prison .navigation').transition( { opacity: 1 }, 500, 'out');
 
         // TODO: enable events on show
-
         // add listeners
         // addListeners();
         //
@@ -467,11 +466,6 @@ console.log($btnArabic);
 
         // removeListeners
         // removeListeners();
-
-        // close any open folder
-        // $currentMenu.find( '.selected' )
-        //     .removeClass( 'selected' )
-        //     .find('ul').height(0);
 
     }
 

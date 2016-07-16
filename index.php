@@ -2,7 +2,7 @@
 <html lang="en">
 
 	<head>
-		<title>Home</title>
+		<title>Inside Saydnaya</title>
 
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
@@ -10,26 +10,10 @@
 		<link rel="stylesheet" href="js/lib/videojs/video-js.css">
 		<link href="https://fonts.googleapis.com/css?family=Oswald:300,400,700" rel="stylesheet">
 		<link rel="stylesheet" href="css/app.css">
-
 		<script src="js/lib/videojs/video.min.js"></script>
 	</head>
 
 	<body data-section="explore">
-
-		<!-- <div id="introMessage" class="block">
-			<div class="message centered">
-
-			</div>
-		</div> -->
-		<!-- <div id="typed-strings">
-			<p>Located 25km away from Damascus</p>
-			<p>the <strong>Saidnaya</strong> prison is one of the most notorious</p>
-			<p>Neither human rights observers nor journalists</p>
-			<p>have been able to visit Saidnaya since 2011</p>
-			<p>the prison is a <strong>black hole</strong></p>
-			<p>This is as close to Saidnaya as we can get</p>
-		</div> -->
-
 
 		<div id="content">
 
@@ -40,8 +24,9 @@
 				<div class="labels"></div>
 
 				<div class="title">
-					<div>Saydnaya Prison</div>
+					<div>Saydnaya</div>
 					<div>صيدنايا</div>
+					<div>Inside a Syrian torture prison</div>
 				</div>
 
 				<div class="navigation">
@@ -65,6 +50,9 @@
 				<div class="labels"></div>
 				<div class="title"></div>
 				<div class="btn-exit"></div>
+				<div class="spinner-wrap">
+					<div class="spinner"></div>
+				</div>
 			</div>
 
 		</div>
@@ -108,6 +96,43 @@
 					</div>
 				</div>
 			</div>
+		</div>
+
+		<!-- intro -->
+
+		<div id="layer-intro">
+			<div id="introMessage" class="block">
+				<div class="centered">
+					<div class="intro-logos">
+						<span class="amnesty"></span>
+						<span class="fa"></span>
+					</div>
+					<div class="intro-title">
+						<span>Saydnaya</span>
+					</div>
+
+					<div class="intro-subtitle">
+						<span>Inside a Syrian Torture Prison</span>
+					</div>
+
+					<div class="intro-language">
+						<div class="en">Content in english and arabic</div>
+						<div class="ar">المحتوى باللغتين العربية والإنجليزية</div>
+					</div>
+
+					<div class="intro-spinner">
+						<div class="spinner"></div>
+					</div>
+				</div>
+			</div>
+
+			<div class="video-container">
+
+			</div>
+
+			<div class="btn-skip">Explore</div>
+
+
 		</div>
 
 		<!-- top bar -->
@@ -168,7 +193,7 @@
 		<script src="js/src/state360/View360.js"></script>
 		<script src="js/src/state360/State360.js"></script>
 		<script src="js/src/statePreload/StatePreload.js"></script>
-		<script src="js/src/stateVideo/StateVideo3.js"></script>
+		<script src="js/src/stateVideo/StateVideo.js"></script>
 		<script src="js/src/StateIdle.js"></script>
 		<script src="js/src/App.js"></script>
 

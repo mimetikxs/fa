@@ -1,43 +1,95 @@
-FA.StateVideo = function( app ) {
+FA.StateVideo2 = function( app, stateName, data ) {
 
-    var videoWidth,
-        videoHeight,
-        videoRatio;
+    var name = 'STATE_VIDEO';
 
-    var iframeEl;
-    var player;
+    var $layer = $( '#layer-video' ),
+        $player = $layer.find( '.player' ),
+        $controls = $layer.find( '.controls' ),
+        $btnExit = $layer.find( '.btn-exit' ),
+        player;
 
 
-    function refreshVideoSize() {
-        var holderWidth = $(window).width(),
-            holderHeight = $(window).height(),
-            holderRatio = holderWidth / holderHeight,
-            targetW, targetH;
 
-        if (holderRatio < videoRatio) {
-            // fit vertical
-            targetH = holderHeight;
-            targetW = holderHeight * videoRatio;
+    function goToNext() {
+
+        if ( stateName === "cell" ) {
+            app.changeState( new FA.State360( app ) );
         } else {
-            // fit horizontal
-            targetH = holderWidth / videoRatio;
-            targetW = holderWidth;
+            app.changeState( new FA.StateExplore( app ) );
         }
 
-        // clamp
-        // targetH = (targetH > videoHeight) ? videoHeight : targetH;
-        // targetW = (targetW > videoWidth) ? videoWidth : targetW;
-
-        iframeEl.css( {
-            'position'    : 'absolute',
-            'height'      : targetH,
-            'width'       : targetW,
-            'top'         : '50%',
-            'left'        : '50%',
-            'margin-top'  : -targetH / 2,
-            'margin-left' : -targetW / 2
-        } );
     }
+
+
+    function init() {
+
+        // set the names
+        $layer.find( '.info .title').text( data.title );
+        //$layer.find( '.info-arabic .title').text( data.titleArabic );
+
+        // show player
+        $player.css('opacity', 1);
+
+        // events
+        $btnExit.on('click', function(){
+            goToNext();
+        });
+
+        player.on( 'userinactive', function(){
+            if( !player.paused() ) {
+                hideControls();
+            }
+        } );
+
+        player.on( 'useractive', function(){
+            if( !player.paused() ) {
+                showControls();
+            }
+        } );
+
+        // player.on( 'play', function() {
+        //     hideControls();
+        // } );
+
+        player.on( 'pause', function() {
+            showControls();
+
+        } );
+
+        player.on( 'ended', function(){
+            //goToNext();
+            showControls();
+        } );
+
+        // player.on( 'seeking', function() {
+        //     console.log("seeking...");
+        // } );
+
+        player.on( 'stalled', function() {
+            console.log("-----------------------------------------------");
+            console.log("VIDEO STALLED ---------------------------------");
+            console.log("-----------------------------------------------");
+        } );
+
+        player.play();
+
+    }
+
+    function showControls() {
+
+        $('#layer-video .controls').removeClass('inactive').addClass('active');
+        $( '#layer-video .bottom-bar' ).css( 'bottom', 50 ); // rise bottom bar
+
+    }
+
+
+    function hideControls() {
+
+        $('#layer-video .controls').removeClass('active').addClass('inactive');
+        $( '#layer-video .bottom-bar' ).css( 'bottom', 30 ); // lower bottom bar
+
+    }
+
 
     /*******************
      * Public
@@ -46,112 +98,65 @@ FA.StateVideo = function( app ) {
 
     this.enter = function() {
 
+        // prepare dom elements
+        $( '#header' ).css( 'top', 0 );
 
-        $('.btn-exit').hide();
-        $('.btn-next').hide();
+        // show layer
+        $layer.css( {
+            display : 'block',
+            opacity : 1
+        } );
 
-        // var options = {
-        //     //id : 114154572, //84898863, //,
-        //     url: 'https://player.vimeo.com/video/114154572?background=1',
-        //     loop : false,
-        //     byline : false,
-        //     portrait : false,
-        //     title : false
-        // };
-        //
-        // player = new Vimeo.Player( 'layer-video', options );
+        // show controls
+        $controls.removeClass('inactive').addClass('active');
 
-        $('#layer-video .player').html(
-            '<iframe src="https://player.vimeo.com/video/114154572?background=1&loop=0&" width="500" height="281" frameborder="0">' +
-            '</iframe>'
+        // player is hidden until ready
+        $player.css('opacity', 0);
+
+        // add video tag
+        $player.html(
+            '<video id="example_video_1" class="video-js vjs-default-skin vjs-fill" controls preload="none" width="640" height="264" poster="">' +
+              '<source src="https://player.vimeo.com/external/173798367.hd.mp4?s=2a49d1c55e3c72aa0efce952686db446589423d1&profile_id=119" type="video/mp4">' +
+              '<source src="https://player.vimeo.com/external/173798367.sd.mp4?s=66afc4bfc32a75138f1dd92c347640a15b59a878&profile_id=165" type="video/mp4">' +
+              '<p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>' +
+            '</video>'
         );
 
-        iframeEl = $('#layer-video iframe');
-        player = new Vimeo.Player( iframeEl[0] );
-
-        player.on( 'play', function( data ) {
-            iframeEl = $('iframe');
-            videoWidth = 640; //1280;
-            videoHeight = 360; //720;
-            videoRatio = videoWidth / videoHeight;
-            refreshVideoSize();
-        } );
-
-        player.on( 'timeupdate', function( data ) {
-            console.log( data );
-        } );
-
-        player.on( 'ended', function( data ) {
-            app.changeState( new FA.StateHome( app ) );
-        } );
-
-        // player.on( 'loaded', function( data ) {
-        //     //player.play();
-        //     console.log( 'video loaded!' );
-        //     console.log( data );
-        // });
-
-        player.enableTextTrack('en').then(function(track) {
-            // track.language = the iso code for the language
-            // track.kind = 'captions' or 'subtitles'
-            // track.label = the human-readable label
-        }).catch(function(error) {
-            switch (error.name) {
-                case 'InvalidTrackLanguageError':
-                    // no track was available with the specified language
-                    break;
-                case 'InvalidTrackError':
-                    // no track was available with the specified language and kind
-                    break;
-                default:
-                    // some other error occurred
-                    break;
+        // init videojs
+        player = videojs(
+            "example_video_1",
+            {
+                controlBar: {
+                    volumeMenuButton: false,
+                    fullscreenToggle: false
+                }
+            },
+            function() {
+                // Player is initialized and ready.
+                init();
             }
-        });
-
-        // player.getVideoWidth().then( function( width ) {
-        //     videoWidth = width;
-        // }).catch(function( error ) {
-        //     console.log( error );
-        // });
-        //
-        // player.getVideoHeight().then( function( height ) {
-        //     videoHeight = height;
-        // }).catch(function( error ) {
-        //     console.log( error );
-        // });
-
-        $( window ).resize( refreshVideoSize );
-
-        $('#layer-video').css({
-            opacity : 1
-        });
-
-        player.setVolume(1);
-        player.play();
-        player.stop();
+        );
 
     }
 
 
     this.update = function() {
 
+        // do nothing
 
     }
 
 
     this.exit = function() {
 
-        $( '#layer-video' ).fadeOut( 1000 );
+        $btnExit.off();
 
-        $( window ).off( 'resize' );
+        player.dispose();
 
-        player.unload().then(function() {
-            // the video was unloaded
-            console.log('video unloaded');
-        }).catch(function(error) {
-            console.log(error);
-        });
+        $layer.css( {
+            opacity: 0,
+            display: 'none'
+        } );
 
     }
 

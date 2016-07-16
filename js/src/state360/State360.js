@@ -21,10 +21,6 @@ FA.State360 = function( app, locationData ) {
         intersectingItem = null; // FA.InteractiveItem
 
 
-    // var sounds = [];
-
-
-
     function onMouseMove( e ) {
 
         // local
@@ -165,13 +161,12 @@ FA.State360 = function( app, locationData ) {
 
         app.sounds = [ ]; // clear the 360 sounds
 
-
     }
 
 
     function goToVideo( videoData ) {
 
-        //DO NOT clear the View360 so the scene is available when back from video
+        // DO NOT clear the View360 so the scene is available when back from video
 
         // DO NOT clear the sounds
 
@@ -225,6 +220,46 @@ FA.State360 = function( app, locationData ) {
     }
 
 
+    function showSpinner() {
+
+        $layer.find( '.spinner-wrap' ).css( 'display', 'block' );
+
+        // avoid aborting -- TODO: allow abort preloading
+        $layer.find( '.btn-exit' ).css( {
+            visibility: 'hidden',
+            opacity: 0
+        } );
+
+        // hide labels
+        $labels.css( 'display', 'none' );
+
+    }
+
+
+    function hideSpinner() {
+
+        $layer.find( '.spinner-wrap' ).css( 'display', 'none' );
+
+        $layer.find( '.btn-exit' )
+            .css( 'visibility', 'visible' )
+            .transition( { opacity: 1 }, 500, 'out');
+
+        // show labels
+        $labels.css( 'display', 'block' );
+
+    }
+
+
+    function on3DLoaded() {
+
+        hideSpinner();
+
+        // show labels
+        $labels.css( 'display', 'block' );
+
+    }
+
+
     //        //
     // Public //
     //        //
@@ -241,15 +276,24 @@ FA.State360 = function( app, locationData ) {
         // when we are back from a video, locationData is undefined
         // we assume view360 is not cleared, so we keep the old data
         if ( !locationData ) {
-            //do not change the 360  wiew
+            // do not change the 360  wiew!
 
-            // play the sounds
+            // play the sounds (already loaded)
             app.sounds[0].play();
             app.sounds[0].fadeIn( 2000 );
+
+            // show exit button
+            $layer.find( '.btn-exit' ).css( { visibility: 'visible', opacity: 1 } );
+            // show labels
+            $labels.css( 'display', 'block' );
+
         } else {
             // load a new 360
             $layer.find( '.title' ).text( locationData.name );
-            view360.load( locationData );
+
+            view360.load( locationData, on3DLoaded );
+
+            showSpinner();
 
             // testing sound
             loadSound();
@@ -285,8 +329,13 @@ FA.State360 = function( app, locationData ) {
             'opacity': 1,
             'visibility': 'hidden'
         } );
+        // hide button
+        $layer.find( '.btn-exit' ).css( {
+            visibility: 'hidden',
+            opacity: 0
+        } );
 
-        // fadeout all the sound
+        // fadeout all the sounds
         for ( var i = 0; i < app.sounds.length; i++ ) {
             app.sounds[ i ].fadeOut( 1000 );
         }
