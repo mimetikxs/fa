@@ -506,8 +506,8 @@ body {
         float: left;
         top: 100px;
         right: 20px;
-        font-size: 28px;
-        width: 43px;
+        font-size: 33px;
+        width: 44px;
         height: 43px;
         background-color: rgba(255,255,255, 0.8);
         transition: background-color 300ms;
@@ -515,12 +515,12 @@ body {
         margin-left: 10px;
 
         &:before {
-            content: "\e08b";
+            content: "\e095";
             height: 43px;
             width: 43px;
             display: inline-block;
             text-align: center;
-            line-height: 44px;
+            line-height: 43px;
             color: #000;
             transition: color 300ms;
         }
