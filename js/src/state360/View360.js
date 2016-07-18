@@ -164,15 +164,28 @@ FA.View360 = function( app ) {
         loader.load(
             'obj/360s/' + name + '.js',
             function ( geometry, materials ) {
-                //var material = materials[ 0 ]; // only has one matetial
-                console.log("TODO: fix this. Material is -> ", material); // TODO: pfg need to fix. is loading *undefined* material
+                //console.log("TODO: fix this. Material is -> ", material); // TODO: pfg need to fix. is loading *undefined* material
+
+                // manualy create a material
+                var color, opacity;
+
+                if ( data.isGrey ) {
+                    console.log("lkdsjflkfds");
+                    color = 0x222222;
+                    opacity = 0.5;
+                } else {
+                    color = 0x000000;
+                    opacity = 0.8;
+                }
+
+                opacity = ( data.opacity ) ? data.opacity : opacity;
 
                 var material = new THREE.MeshPhongMaterial( {
-                    color : 0x666666,
+                    color : color,
                     transparent: true,
-                    opacity: 0.3,
-
+                    opacity: opacity
                 } );
+
                 var mesh = new THREE.Mesh( geometry, material );
                 var item = new FA.InteractiveItem( mesh, mediaData.title, mediaId );
 
@@ -265,10 +278,10 @@ FA.View360 = function( app ) {
 
 
     function onProgress( xhr ) {
-        if ( xhr.lengthComputable ) {
-            var percentComplete = xhr.loaded / xhr.total * 100;
-            console.log( Math.round(percentComplete, 2) + '% downloaded' );
-        }
+        // if ( xhr.lengthComputable ) {
+        //     var percentComplete = xhr.loaded / xhr.total * 100;
+        //     console.log( Math.round(percentComplete, 2) + '% downloaded' );
+        // }
     };
 
 
@@ -284,15 +297,15 @@ FA.View360 = function( app ) {
 
     this.load = function( data, onComplete ) {
 
-        locationData = data;
-
         scope.clear();
+
+        locationData = data;
 
         init( data.camera, data.light );
 
         manager = new THREE.LoadingManager();
         manager.onProgress = function ( item, loaded, total ) {
-            console.log( item, loaded, total );
+            // console.log( item, loaded, total );
         };
         manager.onLoad = function() {
 

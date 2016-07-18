@@ -8,6 +8,8 @@ FA.InteractiveItem = function( mesh, name, slug ) {
     // scaling on active/selected
     var scale = 1;
 
+    var emissiveDefault = 0x000000;
+
     build3D();
     buildLabel();
     calculateCenter();
@@ -27,8 +29,8 @@ FA.InteractiveItem = function( mesh, name, slug ) {
         }
 
         function setMaterial( material ) {
-            material.side = THREE.DoubleSide;
-            material.emissive.setHex( 0x333333 );
+            // material.side = THREE.DoubleSide;
+            material.emissive.setHex( emissiveDefault );
             material.polygonOffset = true;
             material.polygonOffsetFactor = -1; // positive value pushes polygon further away
             material.polygonOffsetUnits = 1;
@@ -92,7 +94,16 @@ FA.InteractiveItem = function( mesh, name, slug ) {
 
     function unmark() {
 
-        object3D.material.emissive.setHex( 0x333333 );
+        object3D.material.emissive.setHex( emissiveDefault );
+
+    }
+
+
+    function setEmissiveDefault( hex ) {
+
+        emissiveDefault = hex;
+
+        object3D.material.emissive.setHex( emissiveDefault );
 
     }
 
@@ -114,7 +125,9 @@ FA.InteractiveItem = function( mesh, name, slug ) {
         mark : mark,
         unmark : unmark,
 
-        scale : scale
+        scale : scale,
+
+        setEmissiveDefault : setEmissiveDefault
 
     }
 

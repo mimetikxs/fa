@@ -127,7 +127,7 @@ FA.LabelsView = function( app ) {
             opacity = ( roomSlug !== appOverLocation ) ? opacity : 0.8;
 
             // testing scaling
-            var targetScale = ( roomSlug === appOverLocation || roomSlug === appActiveLocation ) ? 1.1 : 1;
+            var targetScale = ( roomSlug === appOverLocation || roomSlug === appActiveLocation ) ? 1.15 : 1;
             // ease
             room.scale += ( targetScale - room.scale ) * 0.2;
 
@@ -145,7 +145,7 @@ FA.LabelsView = function( app ) {
 
     this.setOpacity = function( val ){
 
-        $dom.css( 'opacity', ( val < 0.5 ) ? 1 : 0 );
+        $dom.css( 'opacity', ( val < 0.6 ) ? 1 : 0 );
 
     }
 

@@ -48,8 +48,19 @@
 			<div id="layer-360">
 				<div class="gl"></div>
 				<div class="labels"></div>
-				<div class="title"></div>
+				<div class="title-wrap">
+					<div class="title"></div>
+					<div class="btn-info"></div>
+				</div>
+				<div class="title-arabic"></div>
 				<div class="btn-exit"></div>
+				<div class="box-info-wrap">
+					<div class="box-info">
+						<div class="btn-close"></div>
+						<span class="language-switch">العربية</span>
+						<div class="content"></div>
+					</div>
+				</div>
 				<div class="spinner-wrap">
 					<div class="spinner"></div>
 				</div>
@@ -64,13 +75,23 @@
 
 			<div class="controls">
 				<div class="info">
-					<span class="title">Measuring his face in cell door</span>
-					<!-- <span class="witness">Witness A</span>
-					<span class="location">Solitary 1</span> -->
+					<div class="title">
+						<span></span>
+					</div>
+					<div class="subtitle">
+						<span class="witness"></span>
+						<span class="location"></span>
+					</div>
 				</div>
 
 				<div class="info-arabic">
-					<span class="title">قياس وجهه على باب الزنزانة</span>
+					<div class="title">
+						<span></span>
+					</div>
+					<div class="subtitle">
+						<span class="witness"></span>
+						<span class="location"></span>
+					</div>
 				</div>
 
 				<div class="btn-next">
@@ -96,19 +117,25 @@
 					</div>
 				</div>
 			</div>
+
+			<div class="spinner-wrap">
+				<div class="spinner"></div>
+			</div>
 		</div>
 
 		<!-- intro -->
 
 		<div id="layer-intro">
+			<div class="intro-logos">
+				<span class="ai"></span><span class="fa"></span>
+			</div>
+
 			<div id="introMessage" class="block">
+
 				<div class="centered">
-					<div class="intro-logos">
-						<span class="amnesty"></span>
-						<span class="fa"></span>
-					</div>
+
 					<div class="intro-title">
-						<span>Saydnaya</span>
+						<span>Saydnaya</span><span>صيدنايا</span>
 					</div>
 
 					<div class="intro-subtitle">
@@ -126,21 +153,19 @@
 				</div>
 			</div>
 
-			<div class="video-container">
+			<div class="video-container"></div>
 
+			<div class="btn-skip">
+				<span>Explore</span>
+				<span>استكشف</span>
 			</div>
-
-			<div class="btn-skip">Explore</div>
-
-
 		</div>
 
 		<!-- top bar -->
 
 		<div id="header">
 			<div class="logos">
-				<span class="ai"></span>
-				<span class="fa"></span>
+				<span class="ai"></span><span class="fa"></span>
 			</div>
 
 			<div class="takeAction">
@@ -195,7 +220,9 @@
 		<script src="js/src/statePreload/StatePreload.js"></script>
 		<script src="js/src/stateVideo/StateVideo.js"></script>
 		<script src="js/src/StateIdle.js"></script>
+		<script src="js/src/StateExploreMobile.js"></script>
 		<script src="js/src/App.js"></script>
+		<script src="js/responsive.js"></script>
 
 	</body>
 

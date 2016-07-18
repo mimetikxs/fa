@@ -1,12 +1,14 @@
 FA.State360 = function( app, locationData ) {
 
-    var name = 'STATE_360';
+    // var name = 'STATE_360';
 
 
     var $layer = $( '#layer-360' ),
         $gl = $layer.find( '.gl' ),
         $labels = $layer.find( '.labels' ),
-
+        $btnExit = $layer.find( '.btn-exit' ),
+        $btnCloseInfo = $layer.find( '.btn-close' ),
+        $btnShowInfo = $layer.find( '.btn-info' ),
         view360,
 
         sceneWidth,
@@ -124,7 +126,14 @@ FA.State360 = function( app, locationData ) {
 
         window.addEventListener( 'resize', onWindowResize, false );
 
-        $( '.btn-exit' ).on( 'click', goBack );
+        $btnExit
+            .on( 'click', goBack );
+
+        $btnCloseInfo
+            .on( 'click', hideInfo );
+
+        $btnShowInfo
+            .on( 'click', showInfo );
 
         $labels
             .on( 'mousemove', onMouseMove )
@@ -142,8 +151,14 @@ FA.State360 = function( app, locationData ) {
 
         window.removeEventListener( 'resize', onWindowResize );
 
-        $('.btn-exit')
+        $btnExit
             .off( 'click', goBack );
+
+        $btnCloseInfo
+            .off( 'click', hideInfo );
+
+        $btnShowInfo
+            .off( 'click', showInfo );
 
         $labels
             .off( 'mousemove', onMouseMove )
@@ -170,10 +185,9 @@ FA.State360 = function( app, locationData ) {
 
         // DO NOT clear the sounds
 
-        app.changeState( new FA.StateVideo2( app, 'cell', videoData ) );
+        app.changeState( new FA.StateVideo2( app, view360.getLocationData().slug, videoData ) );
 
     }
-
 
 
     function loadSound() {
@@ -225,7 +239,7 @@ FA.State360 = function( app, locationData ) {
         $layer.find( '.spinner-wrap' ).css( 'display', 'block' );
 
         // avoid aborting -- TODO: allow abort preloading
-        $layer.find( '.btn-exit' ).css( {
+        $layer.find( '.btn-exit, .btn-info' ).css( {
             visibility: 'hidden',
             opacity: 0
         } );
@@ -240,7 +254,7 @@ FA.State360 = function( app, locationData ) {
 
         $layer.find( '.spinner-wrap' ).css( 'display', 'none' );
 
-        $layer.find( '.btn-exit' )
+        $layer.find( '.btn-exit, .btn-info' )
             .css( 'visibility', 'visible' )
             .transition( { opacity: 1 }, 500, 'out');
 
@@ -259,6 +273,64 @@ FA.State360 = function( app, locationData ) {
 
     }
 
+
+    function initGui( locationData ) {
+
+        $layer
+            .find( '.title' ).text( locationData.name ).end()
+            .find( '.title-arabic' ).text( locationData.nameAr );
+
+        // hide the info box
+        $layer.find( '.box-info-wrap' )
+            .css( {
+                display: 'none',
+                opacity: 0,
+            });
+
+        // hide / show the info button
+        var noInfo = locationData.info === "" || !locationData.info;
+        $btnShowInfo.css( {
+            display: noInfo ? 'none' : 'inline-block'
+        } );
+
+        // parse and display
+        // http://juristr.com/blog/2010/05/n-will-break-your-json-jquery-wcf/
+        var html = convertToHTMLVisibleNewline( locationData.info );
+        $layer.find( '.box-info .content' ).html( html );
+
+        function convertToHTMLVisibleNewline(value) {
+            if (value != null && value != "") {
+                return value.replace(/\n/g, "<br/>");
+            } else {
+                return value;
+            }
+        }
+
+    }
+
+    function showInfo() {
+
+        $layer.find( '.box-info-wrap' )
+            .css( { display: 'block' } )
+            .transition( { opacity: 1 }, 250, 'in');
+
+        $btnShowInfo.addClass( 'active' );
+    }
+
+
+    function hideInfo() {
+
+        $layer.find( '.box-info-wrap' )
+            .transition( { opacity: 0 }, 250, 'in', function() {
+                $(this).css( { display: 'none' } );
+            } );
+
+        // reset scroll
+        $layer.find( '.box-info .content' ).scrollTop(0);
+
+        $btnShowInfo.removeClass( 'active' );
+
+    }
 
     //        //
     // Public //
@@ -282,16 +354,16 @@ FA.State360 = function( app, locationData ) {
             app.sounds[0].play();
             app.sounds[0].fadeIn( 2000 );
 
-            // show exit button
-            $layer.find( '.btn-exit' ).css( { visibility: 'visible', opacity: 1 } );
+            // show buttons
+            $layer.find( '.btn-exit, .btn-info' ).css( { visibility: 'visible', opacity: 1 } );
             // show labels
             $labels.css( 'display', 'block' );
 
         } else {
-            // load a new 360
-            $layer.find( '.title' ).text( locationData.name );
 
             view360.load( locationData, on3DLoaded );
+
+            initGui( locationData );
 
             showSpinner();
 
@@ -324,13 +396,16 @@ FA.State360 = function( app, locationData ) {
 
         removeListeners();
 
+        // hide info box
+        hideInfo();
+
         // hide layer
         $layer.css( {
             'opacity': 1,
             'visibility': 'hidden'
         } );
-        // hide button
-        $layer.find( '.btn-exit' ).css( {
+        // hide buttons
+        $layer.find( '.btn-exit, .btn-info' ).css( {
             visibility: 'hidden',
             opacity: 0
         } );

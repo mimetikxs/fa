@@ -20,7 +20,6 @@ FA.MenuView = function( app ) {
 
         navMode = null;
 
-console.log($btnArabic);
 
     init();
 
@@ -177,6 +176,13 @@ console.log($btnArabic);
     }
 
 
+    function goToVideo( mediaData ) {
+
+        app.changeState( new FA.StateVideo2( app, '', mediaData ) );
+
+    }
+
+
     function addListeners() {
 
         $(window)
@@ -198,7 +204,7 @@ console.log($btnArabic);
         $btnArabic.on( 'click', function() {
             var mediaData = app.data.medias[ 0 ]; // media by index (0 = first)
 
-            app.changeState( new FA.StateVideo2( app, 'home', mediaData ) );
+            app.changeState( new FA.StateVideo2( app, '', mediaData ) );
         } )
 
     }
@@ -302,16 +308,23 @@ console.log($btnArabic);
                 }
             }
 
-        } else if ( $target.hasClass( 'media' ) ) {
+            // jump into 360 view
+            // if we are in location mode and this folder is empty
+            var numChildren = $target.parent().find('li').length;
+            if ( navMode === 'location'  &&  numChildren === 0 ) {
+                var slug = $target.parent().data( 'location' );
+                var locationData = app.data.locationBySlug[ slug ];
 
-            // TODO
-            // extract id of video
-            // change state (pass video id, and next state type: eg. home or )
+                app.changeState( new FA.State360( app, locationData ) );
+
+            }
+
+        } else if ( $target.hasClass( 'media' ) ) {
 
             var id = $target.data( 'id' ),
                 mediaData = app.data.mediaById[ id ];
 
-            app.changeState( new FA.StateVideo2( app, 'home', mediaData ) );
+            goToVideo( mediaData );
 
         }
 

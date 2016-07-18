@@ -4,6 +4,7 @@ FA.Data = function( data ) {
 		mediasByWitness = {},
 		mediaById = {},
 		locationBySlug = {},
+		witnessBySlug = {},
 
 	 	medias = data.media,
 		locations = data.locations,
@@ -49,6 +50,12 @@ FA.Data = function( data ) {
 		locationBySlug[ location.slug ] = location;
 	}
 
+	// create witness lookup
+	for ( i = 0; i < witnesses.length; i++ ) {
+		witness = witnesses[ i ];
+		witnessBySlug[ witness.slug ] = witness;
+	}
+
 	return {
 		locations : locations,
 		witnesses : witnesses,
@@ -56,7 +63,8 @@ FA.Data = function( data ) {
 		mediasByLocation : mediasByLocation,
 		mediasByWitness : mediasByWitness,
 		mediaById : mediaById,
-		locationBySlug : locationBySlug
+		locationBySlug : locationBySlug,
+		witnessBySlug : witnessBySlug
 	}
 
 }

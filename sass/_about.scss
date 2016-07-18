@@ -5,8 +5,10 @@
 
 $max-width: 750px;
 
-body[data-section="about"] {
+body[data-section="about"],
+body.mobile, {
     line-height: 1.4;
+    background-color: white;
 
     h1, h2 {
         font-family: $f-title;

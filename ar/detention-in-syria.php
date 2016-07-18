@@ -3,6 +3,7 @@
 
 	<head>
 		<title>الاحتجاز في سوريا</title>
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 		<meta charset="utf-8">
 		<link rel="stylesheet" href="../css/app.css">
 	</head>

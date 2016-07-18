@@ -23,7 +23,7 @@ var segments = location.pathname.split( '/' ),
     langSegment = segments[ segments.length - 2 ],
     targetLang = ( langSegment == 'ar' ) ? 'en' : 'ar';
 
-    console.log('../' + targetLang + '/' + fileSegment);
+    // console.log('../' + targetLang + '/' + fileSegment);
 
 $( '[data-section="about"] .language-switch' ).click( function( e ) {
     window.location.href = '../' + targetLang + '/' + fileSegment;

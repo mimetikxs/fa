@@ -1,10 +1,7 @@
-/*
- * Level 0 (root)
- */
 
 FA.StateExplore = function( app ) {
 
-    var name = 'STATE_EXPLORE';
+    // var name = 'STATE_EXPLORE';
 
     var $gl = $('#layer-prison .gl'),
         $labels = $('#layer-prison .labels'),
@@ -146,7 +143,6 @@ FA.StateExplore = function( app ) {
         app.changeState( new FA.State360( app, locationData ) );
 
     }
-
 
     //        //
     // Public //

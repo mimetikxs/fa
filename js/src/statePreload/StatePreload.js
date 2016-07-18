@@ -4,7 +4,7 @@
 
 FA.StatePreload = function( app ) {
 
-    var name = 'STATE_PRELOAD';
+    // var name = 'STATE_PRELOAD';
 
     var loaded = false,
         messageCompleted = false,
@@ -39,7 +39,7 @@ FA.StatePreload = function( app ) {
             },
             error : function( jqXHR, status, errorThrown ) {
 
-                console.log( status );
+                console.log( status, errorThrown );
             }
         });
     }
@@ -140,6 +140,7 @@ FA.StatePreload = function( app ) {
 
                     var mesh = new THREE.Mesh( geometry, material );
                     var room = new FA.InteractiveItem( mesh, name, slug );
+                    room.setEmissiveDefault( 0x333333 )
 
                     app.rooms.push( room );
                 },
@@ -348,10 +349,11 @@ FA.StatePreload = function( app ) {
 
     this.update = function() {
 
-        console.log( loaded, isVideoReady, isVideoStarted, isTimeUp );
+        // console.log( loaded, isVideoReady, isVideoStarted, isTimeUp );
 
         if ( loaded  &&  isVideoReady  &&  !isVideoStarted  &&  isTimeUp ) {
-            startVideo();
+            // startVideo();
+            // goToNextState();
         }
 
     }

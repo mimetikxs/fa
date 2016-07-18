@@ -2,3 +2,4 @@
 <script src="../js/lib/jquery.transit.min.js"></script>
 <script src="../js/lib/player.min.js"></script>
 <script src="../js/about.js"></script>
+<script src="../js/responsive.js"></script>

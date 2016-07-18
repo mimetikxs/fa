@@ -3,6 +3,7 @@
 
 	<head>
 		<title>حول</title>
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 		<meta charset="utf-8">
 		<link rel="stylesheet" href="../css/app.css">
 	</head>
@@ -20,7 +21,7 @@
 
 			<div class="fragment-wrapper" id="boxes">
 				<div class="fragment">
-					<a class="box" href="../saydnaya.php">
+					<a class="box" href="../ar/saydnaya.php">
 						<img src="../assets/placeholder-360x230.jpg"/>
 						<div class="info">
 							<h2>Saydnaya</h2>

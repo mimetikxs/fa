@@ -106,24 +106,53 @@ FA.App = (function() {
         getOverLocation : getOverLocation,
         setOverLocation : setOverLocation
 
-
     }
 
 })(); // App entry point (singleton)
 
+//
 // make publisher
+//
+
 FA.utils.makePublisher( FA.App );
 
+//
+// is this mobile?
+//
+
+if ( FA.utils.isMobile() ) {
+
+    $( 'body' ).addClass( 'mobile' );
+
+}
+
+//
 // set inital state
-// TODO: add check for mobile
-FA.App.changeState( new FA.StatePreload( FA.App ) );
-//FA.App.changeState( new FA.StateExploreMobile( FA.App ) );
-
-//
-// global scope event listeners
 //
 
-// resize div.content
-$( window ).on( 'resize', function( e ) {
-    $( '#content' ).css( 'height', $(window).height() - 50 ); // header bar is 50px
-} ).trigger( 'resize' );
+if ( $( 'body' ).hasClass( 'mobile' ) ) {
+
+    initMobile();
+
+} else {
+
+    initStandard();
+
+}
+
+function initStandard() {
+
+    FA.App.changeState( new FA.StatePreload( FA.App ) );
+
+    // global scope event listener
+    $( window ).on( 'resize', function( e ) {
+        $( '#content' ).css( 'height', $( window ).height() - 50 ); // header bar is 50px height
+    } ).trigger( 'resize' );
+
+}
+
+function initMobile() {
+
+    FA.App.changeState( new FA.StateExploreMobile( FA.App ) );
+
+}
