@@ -154,7 +154,9 @@
                 {
                     "fileName" : "truck_butBody",
                     "mediaId" : "00",
-                    "opacity": 0.8
+                    "opacity": 0.8,
+                    "doubleSide": false,
+                    "opacityHighLight": 0.5
                 }
             ],
             "sound" : {
@@ -1429,17 +1431,17 @@
             "camera" : {
                 "position" : {
                     "x" : 0,
-                    "y" : 1.2,
+                    "y" : 1.55,
                     "z" : 0
                 },
                 "lookAt": {
                     "x" : 0,
-                    "y" : 1.2,
+                    "y" : 1.65,
                     "z" : 1
                 },
                 "fov" : 35,
-                "minPolar" : 0,
-                "maxPolar" : "PI"
+                "minPolar" : 1.62,
+                "maxPolar" : 1.72
             },
             "bodies": [
                 {
@@ -1491,7 +1493,8 @@
                 {
                     "fileName" : "corridor_butApex",
                     "mediaId" : "05",
-                    "opacity" : 0.3
+                    "opacity" : 1.0,
+                    "opacityHighLight" : 0.9
                 }
             ],
             "sound" : {

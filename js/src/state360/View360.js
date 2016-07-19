@@ -187,7 +187,16 @@ FA.View360 = function( app ) {
 
                 var mesh = new THREE.Mesh( geometry, material );
                 var item = new FA.InteractiveItem( mesh, mediaData.title, mediaId );
+
+                // TODO: more consistent material storage in the json
                 item.setEmissiveDefault( 0x000000 );
+                if ( data.doubleSide !== undefined ) {
+                    item.setDoubleSide( data.doubleSide );
+                }
+                if ( data.opacityHighLight !== undefined ) {
+                    console.log("-------", data.opacityHighLight);
+                    item.setHighlightOpacity( data.opacityHighLight );
+                }
 
                 interactiveItems.push( item );
 
