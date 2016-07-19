@@ -6,11 +6,11 @@ FA.StatePreload = function( app ) {
 
     // var name = 'STATE_PRELOAD';
 
-    var loaded = false,
+    var is3Dloaded = false,
         messageCompleted = false,
-        manager;
+        manager,
 
-    var isTimeUp = false,
+        isTimeUp = false,
         intervalId,
         secondsCounter = 0,
         maxSeconds = 2,
@@ -21,7 +21,8 @@ FA.StatePreload = function( app ) {
         $player = $('#layer-intro .video-container'),
         player,
         isVideoReady = false,
-        isVideoStarted = false;
+        isVideoStarted = false,
+        isSoundLoaded = false;
 
 
 
@@ -44,16 +45,41 @@ FA.StatePreload = function( app ) {
         });
     }
 
+    function loadSound() {
+
+        // create the sound for the main screen
+        ion.sound({
+            sounds: [
+                {
+                    name: app.data.mainScreenSound.ambient,
+                    loop: true
+                },
+            ],
+
+            // main config
+            path: "sound/",
+            preload: true,
+            multiplay: true,
+            // volume: 0.9
+            ready_callback: function() {
+                isSoundLoaded = true;
+            }
+        });
+
+    }
+
 
     function loadResources() {
 
+        // blocks until loaded
+
         manager = new THREE.LoadingManager();
         manager.onProgress = function ( item, loaded, total ) {
-            console.log( item, loaded, total );
+            // console.log( item, loaded, total );
         };
 
         manager.onLoad = function() {
-            loaded = true;
+            is3Dloaded = true;
 
             showSkip();
         }
@@ -222,9 +248,7 @@ FA.StatePreload = function( app ) {
     function buidlVideo() {
 
         $player.html(
-            '<video id="example_video_1" class="video-js vjs-default-skin vjs-fill" controls preload="none" width="640" height="264" poster="">' +
-              '<source src="https://player.vimeo.com/external/175314910.hd.mp4?s=2bee0b314be50f68a55c0c06ce2578952c361666&profile_id=174" type="video/mp4">' +
-              '<source src="https://player.vimeo.com/external/175314910.sd.mp4?s=6f641f05a5b6e044d68ba8ae283f6cb42d90b072&profile_id=164" type="video/mp4">' +
+            '<video id="video_0" class="video-js vjs-default-skin vjs-fill" controls preload="none" width="640" height="264" poster="">' +
               '<p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>' +
             '</video>'
         );
@@ -232,7 +256,7 @@ FA.StatePreload = function( app ) {
 
         // init videojs
         player = videojs(
-            "example_video_1",
+            "video_0",
             {
                 controlBar: {
                     volumeMenuButton: false,
@@ -261,6 +285,11 @@ FA.StatePreload = function( app ) {
                     $('#introMessage').css('visibility', 'hidden'); // hide message
                 }
             );
+
+        player.src( [
+            { type: "video/mp4", src: app.data.introVideo.hd },
+            { type: "video/mp4", src: app.data.introVideo.sd }
+        ] );
 
         player.play();
 
@@ -300,27 +329,6 @@ FA.StatePreload = function( app ) {
     }
 
 
-    // function revealText( onComplete ) {
-    //
-    //     var $lines = $( '#introMessage .hidden' ),
-    //         length = $lines.length,
-    //         index = 0,
-    //         intervalId;
-    //
-    //     intervalId = setInterval( function() {
-    //         $lines.eq( index ).removeClass('hidden');
-    //         index++;
-    //
-    //         if ( index >= length ) {
-    //             clearInterval( intervalId );
-    //
-    //             onComplete();
-    //         }
-    //     }, 100 );
-    //
-    // }
-
-
     //        //
     // Public //
     //        //
@@ -338,10 +346,16 @@ FA.StatePreload = function( app ) {
         // prepare the player
         buidlVideo();
 
-        // load json + resources
-        loadData( loadResources );
+        // load json  resources
+        loadData( function() {
+            // and then load 3d + sound
+            loadResources();
+            loadSound();
+        } );
 
         // whait at least two seconds before starting video
+        // this ensures that the user will see the intro text for at least maxSeconds
+        // before launching the video
         startTimer();
 
     }
@@ -349,9 +363,10 @@ FA.StatePreload = function( app ) {
 
     this.update = function() {
 
-        // console.log( loaded, isVideoReady, isVideoStarted, isTimeUp );
+        // console.log( is3Dloaded, isVideoReady, isVideoStarted, isTimeUp );
 
-        if ( loaded  &&  isVideoReady  &&  !isVideoStarted  &&  isTimeUp ) {
+        // TODO: [optimisation] check this in separate interval that works at a lower rate (eg: every second)
+        if ( is3Dloaded  &&  isSoundLoaded  &&  isVideoReady  &&  isTimeUp  &&  !isVideoStarted   ) {
             startVideo();
             // goToNextState();
         }

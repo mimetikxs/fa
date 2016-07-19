@@ -136,7 +136,7 @@ FA.StateExplore = function( app ) {
 
     function goToRoom( slug ) {
 
-        //app.setActiveLocation( slug );
+        app.setActiveLocation( slug );
 
         var locationData = app.data.locationBySlug[ slug ];
 
@@ -179,10 +179,8 @@ FA.StateExplore = function( app ) {
         menuView.show();
         //////////////////////////////////////////////////////
 
-        // testing
-        for ( var i = 0; i < app.sounds.length; i++ ) {
-            app.sounds[ i ].stop();
-        }
+        // testing sound
+        ion.sound.play( app.data.mainScreenSound.ambient );
 
     }
 
@@ -207,7 +205,7 @@ FA.StateExplore = function( app ) {
             .off( 'mousedown', onMouseDown )
             .off( 'mouseup', onMouseUp );
 
-        app.setOverLocation( null );
+        //app.setOverLocation( null );
         // app.setActiveLocation( null );
 
         //buildingView.destroy();
@@ -215,6 +213,10 @@ FA.StateExplore = function( app ) {
         labelsView.destroy();
 
         destroySlider();
+
+        // testing sound
+        // ion.sound.volume( app.data.mainScreenSound.ambient, {volume:0.5} );
+        ion.sound.pause( app.data.mainScreenSound.ambient );
 
     }
 

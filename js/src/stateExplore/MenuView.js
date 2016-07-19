@@ -183,6 +183,30 @@ FA.MenuView = function( app ) {
     }
 
 
+
+
+    function deselectCurrentFolder() {
+
+        $currentMenu.find( '.selected' )
+            .removeClass( 'selected' )
+            .find( 'ul' ).css( 'height', 0 );
+
+    }
+
+
+    function selectFolder( $folder ) {
+
+        var height = $folder.next().prop( 'scrollHeight' );
+        $folder
+            .next().css( 'height', height ).end()
+            .parent().addClass( 'selected' );
+
+    }
+
+
+
+
+
     function addListeners() {
 
         $(window)
@@ -198,7 +222,7 @@ FA.MenuView = function( app ) {
             .on( 'mousemove', onMouseMove );
 
         app.on( 'overLocationChange', onModelOverLocationChange );
-        // app.on( 'activeLocationChange', onModelActiveLocationChange );
+        app.on( 'activeLocationChange', onModelActiveLocationChange );
 
         // go to first video for arabic users
         $btnArabic.on( 'click', function() {
@@ -226,7 +250,7 @@ FA.MenuView = function( app ) {
             .off( 'mouseleave', '.media', onMouseleaveMedia );
 
         app.remove( 'overLocationChange', onModelOverLocationChange );
-        // app.remove( 'activeLocationChange', onModelActiveLocationChange );
+        app.remove( 'activeLocationChange', onModelActiveLocationChange );
 
     }
 
@@ -246,11 +270,22 @@ FA.MenuView = function( app ) {
     }
 
 
-    // function onModelActiveLocationChange( e ) {
-    //
-    //
-    //
-    // }
+    function onModelActiveLocationChange( e ) {
+
+        if ( !$currentMenu.hasClass( 'menu-location' ) ) {
+            return;
+        }
+
+        deselectCurrentFolder();
+
+        var location = e.current;
+
+        if ( location ) {
+            var el = $('.menu-location [data-location="' + location + '"]');
+            selectFolder( el.find('.folder') );
+        }
+
+    }
 
 
     function onTypeClick( e ) {
@@ -271,43 +306,36 @@ FA.MenuView = function( app ) {
 
     function onClick( e ) {
 
-        var $target = $( e.target );
+        var $target = $( e.target ),
+            targetIsFolder = $target.hasClass( 'folder' ) || $target.parent().hasClass( 'folder' );
 
-        if ( $target.hasClass( 'folder' ) || $target.parent().hasClass( 'folder' ) ) {
+        if ( targetIsFolder ) {
 
             // if we clicked the inner span, we need to point to the right element
             $target = ( $target.parent().hasClass( 'folder' ) ) ? $target.parent() : $target;
 
             // if already selected
             if ( $target.parent().hasClass( 'selected' ) ) {
-                // deselect current
-                $currentMenu.find( '.selected' )
-                    .removeClass( 'selected' )
-                    .find( 'ul' ).css( 'height', 0 );
 
-                app.setActiveLocation( null );
+                if ( $currentMenu.hasClass( 'menu-location' ) ) {
+                    app.setActiveLocation( null );
+                } else {
+                    deselectCurrentFolder();
+                }
 
             } else {
-
-                // deselect current
-                $currentMenu.find( '.selected' )
-                    .removeClass( 'selected' )
-                    .find( 'ul' ).css( 'height', 0 );
-
-                // select new
-                var height = $target.next().prop('scrollHeight');
-                $target
-                    .next().css( 'height', height ).end()
-                    .parent().addClass( 'selected' );
 
                 // change active location
                 if ( $currentMenu.hasClass( 'menu-location' ) ) {
                     var slug = $target.parent().data( 'location' );
-
                     app.setActiveLocation( slug );
+                } else {
+                    deselectCurrentFolder();
+                    selectFolder( $target );
                 }
             }
 
+            // [ for empty folders ]
             // jump into 360 view
             // if we are in location mode and this folder is empty
             var numChildren = $target.parent().find('li').length;

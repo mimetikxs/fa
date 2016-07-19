@@ -203,11 +203,11 @@
 		<script src="js/lib/threejs/three.js"></script>
 		<script src="js/lib/threejs/OBJLoader.js"></script>
         <script src="js/lib/threejs/OrbitControls.js"></script>
-		<!-- <script src="js/lib/ion.sound.min.js"></script> -->
+		<script src="js/lib/ion.sound.min.js"></script>
 
 		<script src="js/src/FA.js"></script>
-		<script src="js/src/sound/BufferLoader.js"></script>
-		<script src="js/src/sound/Sound.js"></script>
+		<!-- <script src="js/src/sound/BufferLoader.js"></script> -->
+		<!-- <script src="js/src/sound/Sound.js"></script> -->
 		<script src="js/src/Utils.js"></script>
 		<script src="js/src/Data.js"></script>
 		<script src="js/src/Slider.js"></script>

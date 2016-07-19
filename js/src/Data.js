@@ -64,7 +64,12 @@ FA.Data = function( data ) {
 		mediasByWitness : mediasByWitness,
 		mediaById : mediaById,
 		locationBySlug : locationBySlug,
-		witnessBySlug : witnessBySlug
+		witnessBySlug : witnessBySlug,
+
+		// intro data
+		introVideo : data.introVideo,
+		//
+		mainScreenSound : data.mainScreenSound
 	}
 
 }

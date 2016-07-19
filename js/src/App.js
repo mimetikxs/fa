@@ -15,8 +15,8 @@ FA.App = (function() {
 
 
     // setup audio
-    window.AudioContext = window.AudioContext || window.webkitAudioContext;
-    var audioContext = new AudioContext();
+    // window.AudioContext = window.AudioContext || window.webkitAudioContext;
+    // var audioContext = new AudioContext();
 
 
 
@@ -95,8 +95,8 @@ FA.App = (function() {
         view360 : null,
 
         // sound
-        audioContext : audioContext,
-        sounds : [ ],                   // FA.Sound
+        // audioContext : audioContext,
+        // sounds : [ ],                   // FA.Sound
 
         // public methods
         changeState : changeState,

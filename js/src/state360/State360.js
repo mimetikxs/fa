@@ -21,7 +21,6 @@ FA.State360 = function( app, locationData ) {
 
         intersectingItem = null; // FA.InteractiveItem
 
-    var bufferLoader;
 
 
     function onMouseMove( e ) {
@@ -175,7 +174,7 @@ FA.State360 = function( app, locationData ) {
 
         view360.clear(); // clear when we go back
 
-        app.sounds = [ ]; // clear the 360 sounds
+        destroySound();
 
     }
 
@@ -185,7 +184,10 @@ FA.State360 = function( app, locationData ) {
         // DO NOT clear the View360 so the scene is available when back from video
 
         // DO NOT clear the sounds
+        pauseSound();
 
+        // TODO: the active location data should be accessible from FA.App object
+        // View360 shouldn't keep this reference as it is only intended to handle view
         app.changeState( new FA.StateVideo2( app, view360.getLocationData().slug, videoData ) );
 
     }
@@ -195,42 +197,67 @@ FA.State360 = function( app, locationData ) {
 
         var soundData = locationData.sound;
 
-        var filesList = [
-            {
-                url : 'sound/' + soundData.ambient,
-                soundId : "ambient",
-                loop : true
-            }
-            // TODO: enter and exit sounds
-        ];
+        // create the sound for the main screen
+        ion.sound({
+            sounds: [
+                {
+                    name: soundData.ambient,
+                    loop: true
+                },
+            ],
 
-        bufferLoader = new FA.BufferLoader(
-            app.audioContext,
-            filesList,
-            onBuffersLoaded
-        );
+            // main config
+            path: "sound/",
+            preload: true,
+            multiplay: true,
+            // volume: 0.9
+            // ready_callback: function() {
+            //     isSoundLoaded = true;
+            // }
+        });
 
-        bufferLoader.load();
+        console.log( "loading / playing", soundData.ambient );
 
-        function onBuffersLoaded( bufferList ) {
+        ion.sound.play( soundData.ambient );
 
-            for (var i = 0; i < bufferList.length; i++) {
-                var buffer = bufferList[ i ].buffer,
-                    id = bufferList[ i ].id,
-                    loop = bufferList[ i ].loop;
+    }
 
-                var sound = FA.Sound( app.audioContext, buffer, id, loop );
 
-                app.sounds.push( sound );
+    function resumeSound() {
 
-                // testing
-                // play sound as soon as it's loaded
-                sound.play();
-                sound.fadeIn( 2000 );
+        // var soundData = view360.getLocationData();
+        var locationData = app.data.locationBySlug[ app.getActiveLocation() ];
+        var soundData = locationData.sound;
 
-            }
+        console.log( "resuming", soundData.ambient );
 
-        }
+        ion.sound.play( soundData.ambient );
+
+    }
+
+
+    function pauseSound() {
+
+        // var soundData = view360.getLocationData();
+        var locationData = app.data.locationBySlug[ app.getActiveLocation() ];
+        var soundData = locationData.sound;
+
+        console.log( "pausing", soundData.ambient );
+
+        ion.sound.pause( soundData.ambient );
+
+    }
+
+
+    function destroySound() {
+
+        // var soundData = view360.getLocationData();
+        var locationData = app.data.locationBySlug[ app.getActiveLocation() ];
+        var soundData = locationData.sound;
+
+        console.log( "destroying", soundData.ambient );
+
+        ion.sound.destroy( soundData.ambient );
 
     }
 
@@ -348,12 +375,12 @@ FA.State360 = function( app, locationData ) {
 
         // when we are back from a video, locationData is undefined
         // we assume view360 is not cleared, so we keep the old data
+        // TODO: find another way of detenting when we are comming back from a video
+        // checking locationData for this purpose is WRONG
         if ( !locationData ) {
             // do not change the 360  wiew!
 
-            // play the sounds (already loaded)
-            app.sounds[0].play();
-            app.sounds[0].fadeIn( 2000 );
+            resumeSound();
 
             // show buttons
             $layer.find( '.btn-exit, .btn-info' ).css( { visibility: 'visible', opacity: 1 } );
@@ -368,7 +395,6 @@ FA.State360 = function( app, locationData ) {
 
             showSpinner();
 
-            // testing sound
             loadSound();
         }
 
@@ -410,15 +436,6 @@ FA.State360 = function( app, locationData ) {
             visibility: 'hidden',
             opacity: 0
         } );
-
-        // cancel any requests
-        if(bufferLoader)
-            bufferLoader.onComplete = function(){};
-
-        // fadeout all the sounds
-        for ( var i = 0; i < app.sounds.length; i++ ) {
-            app.sounds[ i ].fadeOut( 1000 );
-        }
 
     }
 

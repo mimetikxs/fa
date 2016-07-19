@@ -1017,7 +1017,7 @@ body {
     box-sizing: border-box;
     position: absolute;
     top: 9px;
-    right: 20px;
+    right: 16px;
     line-height: 30px;
     padding: 0 12px;
     border: 1px solid #666;
@@ -1139,6 +1139,7 @@ body {
     font-family: "AmnestyTradeGothic-BdCn20", sans-serif;
     cursor: pointer;
     visibility: hidden;
+    z-index: 1;
     transition: background-color 300ms, color 300ms; }
     #layer-intro .btn-skip > span:nth-child(2) {
       font-family: Tahoma, sans-serif; }
@@ -1147,7 +1148,7 @@ body {
       color: #000; }
   #layer-intro .intro-logos {
     position: absolute;
-    height: 40px;
+    height: 45px;
     display: inline-block;
     top: 20px;
     left: 20px;
@@ -1159,11 +1160,11 @@ body {
       background-repeat: no-repeat;
       cursor: pointer; }
     #layer-intro .intro-logos .ai {
-      background-image: url("../assets/logo-amnesty-black.png");
-      width: 94px; }
+      background-image: url("../assets/logo-amnesty-yellow.png");
+      width: 106px; }
     #layer-intro .intro-logos .fa {
-      background-image: url("../assets/logo-FA-grey.jpg");
-      width: 80px; }
+      background-image: url("../assets/logo-FA-red.jpg");
+      width: 90px; }
 
 #introMessage {
   position: absolute;
@@ -1236,6 +1237,7 @@ body {
   100% {
     transform: rotate(360deg); } }
 .video-container {
+  z-index: 1;
   position: absolute;
   top: 0;
   left: 0;
