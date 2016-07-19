@@ -161,7 +161,7 @@
                 "ambient" : "TRUCK_02 looping track.mp3",
                 "enter" : "TRUCK_01 opening track.mp3"
             },
-            "info": ""
+            "info": "This image space and soundtrack have been reconstructed from witness interviews using 3d computer and acoustic modeling.\n\nWhen transported to Saydnaya, prisoners were packed into delivery trucks referred to as “meat fridges”; they were not told where they where going. As the truck made its way up a hill, Jamal described hearing the faint blasts of artillery in the distance and thought he heard “patrol cars in front and behind …a helicopter above us” which he speculated was due to the military being “afraid the Free Syrian Army would liberate us.”\n\nUpon arrival at the prison, prisoners are subjected to a notoriously brutal initiation known as a ‘welcome party’.\n\n“When we reached the prison, the guards opened the doors and started to scream at us and curse us,” he recalled. “As soon as you get out of the vehicle and your feet touch the ground, the ‘welcome party’ begins…As we waited for our turn, we heard the sounds of beating, of people falling out of the truck, we heard people scream - everyone was screaming, the guards and the prisoners.” \n\nAll the prisoners were severely beaten. The guards “used plastic and metal cables, even electric cables. They hit us absolutely everywhere, even on the head.” The beatings are meant to punish detainees and make them comply with the prison’s regime of terror. “They had to break us, they treated us like animals…they had no problem killing us right there and then.”\n\nIt was only upon arrival that most of the prisoners understood, for the first time, that they were in Saydnaya. For most, the prison was the last stop in a sequence of detentions; from Saydnaya, there was no onward transfer. “You either die or are released.”"
         },
         {
             "name" : "Samer & Jamal’s Solitary Cell",
@@ -374,21 +374,21 @@
         			"x": 0.34,
         			"z": 0.28,
         			"y": 0,
-        			"angle": 221
+        			"angle": 41
         		},
         		{
         			"name": "bodyCrouchA",
         			"x": 1.62,
         			"z": 1.22,
         			"y": 0,
-        			"angle": 90
+        			"angle": -90
         		},
         		{
         			"name": "bodyCrouchA",
         			"x": 0.81,
         			"z": 1.57,
         			"y": 0,
-        			"angle": 0
+        			"angle": 180
         		},
         		{
         			"name": "bodyStandA",
@@ -1498,7 +1498,7 @@
                 "ambient" : "CORRIDOR_02_loop track.mp3",
                 "enter" : "CORRIDOR_01_opening track.mp3"
             },
-            "info": ""
+            "info": "This image space and soundtrack have been reconstructed from witness interviews using 3d computer and acoustic modeling.\n\nThe main building has a panoptical structure, with wings projecting out of a central circulation hub. From the central space, patrolling guards can survey the separately gated wings.\n\nInversely, prisoners in cells close to these areas are able to hear things – beatings, gates closing and being locked, the movements of guards and prisoners’; and newcomers being subjected to the “Welcome Party”.\n\nWhile being registered, and before being lead into their cells, prisoners were wildly beaten with whips, hoses or silicone bars. This happened outdoors, and then in the stairwells and hallways. When they were lead through the prison, detainees were forced to hold the waist of the person in front of them and to bow down, in a train-like formation.\n\nIn the moments after arrival, prisoners endured listening to the torture and beatings that were being inflicted on fellow detainees, as it came closer and closer to their turn. Their own memories of the “Welcome Party” were often ruptured because of pain and terror.\n\nAnas related the problem of describing the exact architecture of the main circulation spaces of the prison: “I got really confused from the beatings, you just think about walking straight and fast and not being beaten”. No prisoners are allowed to walk though the central circulation hub with their eyes open – they were either blindfolded, forced to hold their hands tight against their eyes, or to pull their shirt up over their heads and to cover their faces.\n\nWe have reconstructed this space from the little that witnesses could describe or estimate, and from identifying stairwells in satellite images and after studying other examples of prison architecture. “Any Saydnaya prisoner could describe the prison from the inside” Samer confirmed, “but as for the route, no one can determine the real dimensions, the real route.“There is one noteable exception to this, which is the witness Diab Serriya, who was imprisoned in Saydnaya during a different period (before 2011) and, notably, during an infamous siege by prisoners which allowed him to explore, in detail, areas of the prison that remained completely unknown to the other detainees interviewed.\n\nSome of the witnesses described certain spaces as much larger, staircases much longer, corridors more circular than we know them in fact to be; but such memory distortions are common in terror and in pain, and are, to some extent, themselves evidence of that violence. Upon being released after three years in Saydnaya, one witness turned back to look at the prison, and - seeing it from the outside for the very first time - recalls a building that towered some seven stories above him; when, in fact, it is only three floors above ground."
         }
     ],
 
@@ -1536,8 +1536,8 @@
             "titleAr" : "الوصول إلي صيدنايا",
             "id" : "00",
             "video" : {
-                "hd": "https://player.vimeo.com/external/174336519.hd.mp4?s=3c7a05fbc3d763b38ac824d509028078a99bc842&profile_id=174",
-                "sd": "https://player.vimeo.com/external/174336519.sd.mp4?s=b9f6dd97b231c075f127276e29446fbfa7287734&profile_id=164"
+                "hd": "https://player.vimeo.com/external/175314487.hd.mp4?s=25e3b50f5a1512739105f998474fd38050bc4ba4&profile_id=174",
+                "sd": "https://player.vimeo.com/external/175314487.sd.mp4?s=99e228a836c68ef4400a7f07fb894f6b358a51a9&profile_id=164"
             },
             "witness" : "d",
             "location" : "reception"
@@ -1547,8 +1547,8 @@
             "titleAr" : "عبر النافذة",
             "id" : "01",
             "video" : {
-                "hd": "https://player.vimeo.com/external/173798367.hd.mp4?s=2a49d1c55e3c72aa0efce952686db446589423d1&profile_id=174",
-                "sd": "https://player.vimeo.com/external/173798367.sd.mp4?s=66afc4bfc32a75138f1dd92c347640a15b59a878&profile_id=164"
+                "hd": "https://player.vimeo.com/external/175313326.hd.mp4?s=21cef6228fc2d65a2c80d2eb085bdce7b9fa7cfe&profile_id=174",
+                "sd": "https://player.vimeo.com/external/175313326.sd.mp4?s=27f65bd9993ccb48ebd87f3f7192712dad40b1a2&profile_id=164"
             },
             "witness" : "a",
             "location" : "solitary-1"
@@ -1558,8 +1558,8 @@
             "titleAr" : "قطرة ماء",
             "id" : "02",
             "video" : {
-                "hd": "https://player.vimeo.com/external/174832604.hd.mp4?s=71f0ad7b107b0b7f97283d78d58b0cf01bc8b5fb&profile_id=174",
-                "sd": "https://player.vimeo.com/external/174832604.sd.mp4?s=b555bd13a70870b1bd28e31b784857d9f8cfa19b&profile_id=164"
+                "hd": "https://player.vimeo.com/external/175316856.hd.mp4?s=9e7fe2c0a8a1c9207dc19b12eeab636886dbede2&profile_id=174",
+                "sd": "https://player.vimeo.com/external/175316856.sd.mp4?s=122fb9fd675d13edcc4133f2fbadc35deba4f4f7&profile_id=164"
             },
             "witness" : "c",
             "location" : "solitary-1"
@@ -1569,8 +1569,8 @@
             "titleAr" : "أين نحن؟",
             "id" : "03",
             "video" : {
-                "hd": "https://player.vimeo.com/external/174336519.hd.mp4?s=3c7a05fbc3d763b38ac824d509028078a99bc842&profile_id=174",
-                "sd": "https://player.vimeo.com/external/174336519.sd.mp4?s=b9f6dd97b231c075f127276e29446fbfa7287734&profile_id=164"
+                "hd": "https://player.vimeo.com/external/175314166.hd.mp4?s=ca1cdb2d02eeeb199008bbe1da9646175d6fb07f&profile_id=174",
+                "sd": "https://player.vimeo.com/external/175314166.sd.mp4?s=607accd3ef0a2b65645cec933e109bbdf282d2bc&profile_id=164"
             },
             "witness" : "d",
             "location" : "solitary-2"
@@ -1580,8 +1580,8 @@
             "titleAr" : "الخوف يبدأ في المساء",
             "id" : "04",
             "video" : {
-                "hd": "https://player.vimeo.com/external/173798367.hd.mp4?s=2a49d1c55e3c72aa0efce952686db446589423d1&profile_id=174",
-                "sd": "https://player.vimeo.com/external/173798367.sd.mp4?s=66afc4bfc32a75138f1dd92c347640a15b59a878&profile_id=164"
+                "hd": "https://player.vimeo.com/external/175315153.hd.mp4?s=a16fc8f31ade0fd68adb64b78dfdd135d3c873fe&profile_id=174",
+                "sd": "https://player.vimeo.com/external/175315153.sd.mp4?s=d942c4af79ff0ddad99f167a8ab4b2ad52716ecf&profile_id=164"
             },
             "witness" : "e",
             "location" : "solitary-3"
@@ -1591,21 +1591,19 @@
             "titleAr" : "تشويش الذاكرة",
             "id" : "05",
             "video" : {
-                "hd": "https://player.vimeo.com/external/174832604.hd.mp4?s=71f0ad7b107b0b7f97283d78d58b0cf01bc8b5fb&profile_id=174",
-                "sd": "https://player.vimeo.com/external/174832604.sd.mp4?s=b555bd13a70870b1bd28e31b784857d9f8cfa19b&profile_id=164"
+                "hd": "https://player.vimeo.com/external/175314664.hd.mp4?s=ecb1627c6125dac45835bc627d74fbdbb8fbafdc&profile_id=174",
+                "sd": "https://player.vimeo.com/external/175314664.sd.mp4?s=69f1111feccd14855f695a92b689154939ee0a49&profile_id=164"
             },
             "witness" : "e",
             "location" : "corridor"
         },
-
-
         {
             "title" : "Hunger is the worst thing",
             "titleAr" : "شيء أسوأ الجوع",
             "id" : "06",
             "video" : {
-                "hd": "https://player.vimeo.com/external/173798367.hd.mp4?s=2a49d1c55e3c72aa0efce952686db446589423d1&profile_id=174",
-                "sd": "https://player.vimeo.com/external/173798367.sd.mp4?s=66afc4bfc32a75138f1dd92c347640a15b59a878&profile_id=164"
+                "hd": "https://player.vimeo.com/external/175317106.hd.mp4?s=bfa310e8c46967ae8863ad94937084b0bfc9136c&profile_id=174",
+                "sd": "https://player.vimeo.com/external/175317106.sd.mp4?s=8c81bd77411175d38dcd72ec27acc8f839b93a7c&profile_id=164"
             },
             "witness" : "e",
             "location" : "group-cell-3"
@@ -1615,8 +1613,8 @@
             "titleAr" : "مداد الوقت",
             "id" : "07",
             "video" : {
-                "hd": "https://player.vimeo.com/external/173798367.hd.mp4?s=2a49d1c55e3c72aa0efce952686db446589423d1&profile_id=174",
-                "sd": "https://player.vimeo.com/external/173798367.sd.mp4?s=66afc4bfc32a75138f1dd92c347640a15b59a878&profile_id=164"
+                "hd": "https://player.vimeo.com/external/175315554.hd.mp4?s=3b60d1d70221fd32710524da72da3a79a3cb0267&profile_id=174",
+                "sd": "https://player.vimeo.com/external/175315554.sd.mp4?s=d04f7c9c7f58b70240b06f6c48ac712a30b79550&profile_id=164"
             },
             "witness" : "d",
             "location" : "group-cell-2"

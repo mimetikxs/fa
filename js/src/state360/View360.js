@@ -170,7 +170,6 @@ FA.View360 = function( app ) {
                 var color, opacity;
 
                 if ( data.isGrey ) {
-                    console.log("lkdsjflkfds");
                     color = 0x222222;
                     opacity = 0.5;
                 } else {
@@ -188,6 +187,7 @@ FA.View360 = function( app ) {
 
                 var mesh = new THREE.Mesh( geometry, material );
                 var item = new FA.InteractiveItem( mesh, mediaData.title, mediaId );
+                item.setEmissiveDefault( 0x000000 );
 
                 interactiveItems.push( item );
 

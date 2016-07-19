@@ -48,10 +48,11 @@ body.mobile, {
     box-sizing: border-box;
     position: relative;
     height: 300px;
-    background-image: url("../assets/header-sat-image.jpg");
+    background-image: url("../assets/sat-image-crop-4.png");
     background-attachment: fixed;
-    background-size: cover;
-    background-position: 50% 50%;
+    background-size: auto;
+    background-position: 50% 100px;
+    background-repeat: no-repeat;
 
     .fragment {
         width: 100%;
@@ -94,13 +95,16 @@ body.mobile, {
 //     background-image: url("../assets/placeholder-header.jpg");
 // }
 body[data-sub-section="saydnaya"] #page-header {
-    background-image: url("../assets/placeholder-header.jpg");
+    background-image: url("../assets/detention-syria.jpg");
+    background-position: initial;
 }
 body[data-sub-section="detention"] #page-header {
-    background-image: url("../assets/placeholder-header.jpg");
+    background-image: url("../assets/detention-syria.jpg");
+    background-position: initial;
 }
 body[data-sub-section="methodology"] #page-header {
-    background-image: url("../assets/placeholder-header.jpg");
+    background-image: url("../assets/methodology.png");
+    background-position: initial;
 }
 
 // ------------------------------------------

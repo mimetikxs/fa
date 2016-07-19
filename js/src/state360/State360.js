@@ -2,7 +2,6 @@ FA.State360 = function( app, locationData ) {
 
     // var name = 'STATE_360';
 
-
     var $layer = $( '#layer-360' ),
         $gl = $layer.find( '.gl' ),
         $labels = $layer.find( '.labels' ),
@@ -21,6 +20,8 @@ FA.State360 = function( app, locationData ) {
         itemOnDown = null,      // string
 
         intersectingItem = null; // FA.InteractiveItem
+
+    var bufferLoader;
 
 
     function onMouseMove( e ) {
@@ -203,7 +204,7 @@ FA.State360 = function( app, locationData ) {
             // TODO: enter and exit sounds
         ];
 
-        var bufferLoader = new FA.BufferLoader(
+        bufferLoader = new FA.BufferLoader(
             app.audioContext,
             filesList,
             onBuffersLoaded
@@ -409,6 +410,10 @@ FA.State360 = function( app, locationData ) {
             visibility: 'hidden',
             opacity: 0
         } );
+
+        // cancel any requests
+        if(bufferLoader)
+            bufferLoader.onComplete = function(){};
 
         // fadeout all the sounds
         for ( var i = 0; i < app.sounds.length; i++ ) {

@@ -179,6 +179,11 @@ FA.StateExplore = function( app ) {
         menuView.show();
         //////////////////////////////////////////////////////
 
+        // testing
+        for ( var i = 0; i < app.sounds.length; i++ ) {
+            app.sounds[ i ].stop();
+        }
+
     }
 
 

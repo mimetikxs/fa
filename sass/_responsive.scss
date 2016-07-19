@@ -68,8 +68,14 @@
         }
     }
 
-    body[data-section="about"] #content {
-        top: 50px;
+    body[data-section="about"] {
+        #page-header {
+            background-size: auto 100%;
+            background-position: 50%;
+        }
+        #content {
+            top: 50px;
+        }
     }
 
     // -------------------------
@@ -198,7 +204,7 @@
             top: 50px;
         }
 
-        // subtitle
+
         #page-header {
             font-family: $f-title;
             background-image: none;

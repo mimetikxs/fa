@@ -112,6 +112,7 @@ body {
     -moz-osx-font-smoothing: grayscale;
     background-color: #666666;
     font-size: $browser-context;
+    -webkit-tap-highlight-color: rgba(255,255,255,0);
 
     &[data-section="about"] {
         background-color: white;
@@ -264,8 +265,8 @@ body {
 
         .menu-type {
             padding: 20px 0;
-            border-top: 1px solid #999;
-            border-bottom: 1px solid #999;
+            // border-top: 1px solid #999;
+            border-bottom: 1px solid #ccc;
 
             span {
                 display: inline-block;
@@ -383,7 +384,7 @@ body {
         }
 
         .ar-watch-videos {
-            border-top: 1px solid #999;
+            border-top: 1px solid #ccc;
             padding-top: 20px;
             direction: rtl;
             font-family: $f-title--rtl;
@@ -394,8 +395,8 @@ body {
                 margin-bottom: 0;
                 line-height: 33px;
                 height: 35px;
-                border: 1px solid #999;
-                color: #999;
+                border: 1px solid #ccc;
+                color: #ccc;
                 font-size: 16px;
                 transition:
                     background-color 200ms ease-out,
@@ -502,25 +503,24 @@ body {
     }
 
     .btn-info {
-        @include line-icon;
+        // @include line-icon;
         float: left;
         top: 100px;
         right: 20px;
-        font-size: 33px;
         width: 44px;
         height: 43px;
         background-color: rgba(255,255,255, 0.8);
         transition: background-color 300ms;
         cursor: pointer;
-        margin-left: 10px;
+        margin-left: 20px;
 
         &:before {
-            content: "\e095";
-            height: 43px;
-            width: 43px;
+            content: "+";
+            font-size: 46px;
+            width: 44px;
+            line-height: 38px;
             display: inline-block;
             text-align: center;
-            line-height: 43px;
             color: #000;
             transition: color 300ms;
         }
@@ -1279,18 +1279,18 @@ body {
     .slider {
         float: left;
         position: relative;
-        width: 155px;
+        width: 180px;
         height: 35px;
         padding: 10px;
         box-sizing: border-box;
-        border: 1px solid #999;
+        border: 1px solid #ccc;
         cursor: ew-resize;
 
         .guide {
             position: absolute;
             top: 16px;
-            width: 133px;
-            border-top: 1px solid #999;
+            width: 158px;
+            border-top: 1px solid #ccc;
             box-sizing: border-box;
         }
 

@@ -66,11 +66,8 @@ function showDefaultTopBar() {
 
 function showStakedMenu() {
 
-
-
-    if ( getCurrentFile() == "" ) {
+    if ( getCurrentFile() == "" || getCurrentFile == "saydnaya.php" ) {
         $( '#header' ).append( getHomeStackedMenu() );
-        getHomeStackedMenu
     } else {
         var lang = getCurrentLanguage();
         $( '#header' ).append( get_menuStaked_html( lang ) );

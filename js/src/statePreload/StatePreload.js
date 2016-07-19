@@ -223,8 +223,8 @@ FA.StatePreload = function( app ) {
 
         $player.html(
             '<video id="example_video_1" class="video-js vjs-default-skin vjs-fill" controls preload="none" width="640" height="264" poster="">' +
-              '<source src="https://player.vimeo.com/external/174832604.hd.mp4?s=71f0ad7b107b0b7f97283d78d58b0cf01bc8b5fb&profile_id=174" type="video/mp4">' +
-              '<source src="https://player.vimeo.com/external/174832604.sd.mp4?s=b555bd13a70870b1bd28e31b784857d9f8cfa19b&profile_id=165" type="video/mp4">' +
+              '<source src="https://player.vimeo.com/external/175314910.hd.mp4?s=2bee0b314be50f68a55c0c06ce2578952c361666&profile_id=174" type="video/mp4">' +
+              '<source src="https://player.vimeo.com/external/175314910.sd.mp4?s=6f641f05a5b6e044d68ba8ae283f6cb42d90b072&profile_id=164" type="video/mp4">' +
               '<p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>' +
             '</video>'
         );
@@ -352,7 +352,7 @@ FA.StatePreload = function( app ) {
         // console.log( loaded, isVideoReady, isVideoStarted, isTimeUp );
 
         if ( loaded  &&  isVideoReady  &&  !isVideoStarted  &&  isTimeUp ) {
-            // startVideo();
+            startVideo();
             // goToNextState();
         }
 

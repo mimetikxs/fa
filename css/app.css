@@ -417,7 +417,8 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #666666;
-  font-size: 16; }
+  font-size: 16;
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0); }
   body[data-section="about"] {
     background-color: white; }
 
@@ -532,8 +533,7 @@ body {
   user-select: none; }
   #layer-prison .navigation .menu-type {
     padding: 20px 0;
-    border-top: 1px solid #999;
-    border-bottom: 1px solid #999; }
+    border-bottom: 1px solid #ccc; }
     #layer-prison .navigation .menu-type span {
       display: inline-block;
       padding: 9px;
@@ -613,7 +613,7 @@ body {
     #layer-prison .navigation ul.menu-location > li.over:not(.selected) .folder {
       background-color: rgba(100, 6, 6, 0.65); }
   #layer-prison .navigation .ar-watch-videos {
-    border-top: 1px solid #999;
+    border-top: 1px solid #ccc;
     padding-top: 20px;
     direction: rtl;
     font-family: "FrutigerLTArabic-77BlackCn", "HelveticaNeue-CondensedBold", "Franklin Gothic Medium", Tahoma, sans-serif; }
@@ -623,8 +623,8 @@ body {
       margin-bottom: 0;
       line-height: 33px;
       height: 35px;
-      border: 1px solid #999;
-      color: #999;
+      border: 1px solid #ccc;
+      color: #ccc;
       font-size: 16px;
       transition: background-color 200ms ease-out, color 200ms ease-out, border-color 200ms ease-out;
       cursor: pointer; }
@@ -697,33 +697,22 @@ body {
     font-size: 28px;
     font-family: "AmnestyTradeGothic-BdCn20", sans-serif; }
   #layer-360 .btn-info {
-    font-family: 'simple-line-icons';
-    speak: none;
-    font-style: normal;
-    font-weight: normal;
-    font-variant: normal;
-    text-transform: none;
-    line-height: 1;
-    /* Better Font Rendering =========== */
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
     float: left;
     top: 100px;
     right: 20px;
-    font-size: 33px;
     width: 44px;
     height: 43px;
     background-color: rgba(255, 255, 255, 0.8);
     transition: background-color 300ms;
     cursor: pointer;
-    margin-left: 10px; }
+    margin-left: 20px; }
     #layer-360 .btn-info:before {
-      content: "\e095";
-      height: 43px;
-      width: 43px;
+      content: "+";
+      font-size: 46px;
+      width: 44px;
+      line-height: 38px;
       display: inline-block;
       text-align: center;
-      line-height: 43px;
       color: #000;
       transition: color 300ms; }
     #layer-360 .btn-info.active, #layer-360 .btn-info:hover {
@@ -1288,17 +1277,17 @@ body {
 .control .slider {
   float: left;
   position: relative;
-  width: 155px;
+  width: 180px;
   height: 35px;
   padding: 10px;
   box-sizing: border-box;
-  border: 1px solid #999;
+  border: 1px solid #ccc;
   cursor: ew-resize; }
   .control .slider .guide {
     position: absolute;
     top: 16px;
-    width: 133px;
-    border-top: 1px solid #999;
+    width: 158px;
+    border-top: 1px solid #ccc;
     box-sizing: border-box; }
   .control .slider .bar {
     position: relative;
@@ -1346,10 +1335,11 @@ body.mobile {
   box-sizing: border-box;
   position: relative;
   height: 300px;
-  background-image: url("../assets/header-sat-image.jpg");
+  background-image: url("../assets/sat-image-crop-4.png");
   background-attachment: fixed;
-  background-size: cover;
-  background-position: 50% 50%; }
+  background-size: auto;
+  background-position: 50% 100px;
+  background-repeat: no-repeat; }
   #page-header .fragment {
     width: 100%;
     height: 100%; }
@@ -1379,13 +1369,16 @@ body.mobile {
       transition: color 300ms, background-color 300ms; }
 
 body[data-sub-section="saydnaya"] #page-header {
-  background-image: url("../assets/placeholder-header.jpg"); }
+  background-image: url("../assets/detention-syria.jpg");
+  background-position: initial; }
 
 body[data-sub-section="detention"] #page-header {
-  background-image: url("../assets/placeholder-header.jpg"); }
+  background-image: url("../assets/detention-syria.jpg");
+  background-position: initial; }
 
 body[data-sub-section="methodology"] #page-header {
-  background-image: url("../assets/placeholder-header.jpg"); }
+  background-image: url("../assets/methodology.png");
+  background-position: initial; }
 
 body:not([data-sub-section]) .fragment {
   max-width: 1000px; }
@@ -1780,6 +1773,9 @@ body[data-lang="ar"] {
       #header .staked-nav .item.active {
         background-color: #fff; }
 
+  body[data-section="about"] #page-header {
+    background-size: auto 100%;
+    background-position: 50%; }
   body[data-section="about"] #content {
     top: 50px; }
 
