@@ -156,7 +156,8 @@
                     "mediaId" : "00",
                     "opacity": 0.8,
                     "doubleSide": false,
-                    "opacityHighLight": 0.5
+                    "opacityHighLight": 0.8,
+                    "colorHighlight" : "#ff00ff"
                 }
             ],
             "sound" : {
@@ -268,7 +269,8 @@
             "slug" : "solitary-2",
             "objRoom" : "obj/rooms/solitary-d.js",
             "obj360" : [
-                "isoCell02"
+                "isoCell02",
+                "outside"
             ],
             "light" : 3.5,
             "camera" : {
@@ -352,7 +354,8 @@
             "slug" : "solitary-3",
             "objRoom" : "obj/rooms/solitary-e.js",
             "obj360" : [
-                "isoCell03"
+                "isoCell03",
+                "outside"
             ],
             "light" : 3.5,
             "camera" : {

@@ -26,15 +26,11 @@ FA.View360 = function( app ) {
         bodyGeometries = {},            // lookup { "name" : THREE.Geometry }
         objectGeomtries = {},           // lookup { "name" : THREE.Geometry }
 
-        updateCallback = function(){},
-
-        locationData = null;            // the current data being displayed
+        updateCallback = function(){};
 
     var orbitCenter = new THREE.Vector3();
 
     var intersecting = null;
-
-    // var directionalLight;
 
 
 
@@ -76,11 +72,11 @@ FA.View360 = function( app ) {
 
         controls = new THREE.OrbitControls( camera, interaciveEl );
         controls.enableDamping = true;
-        controls.dampingFactor = 0.15;
+        controls.dampingFactor = 0.05;
         controls.enableZoom = false;
         controls.enablePan = false;
         controls.enableKeys = false;
-        controls.scaleFactor = 0.08;
+        controls.scaleFactor = 0.05;
         controls.minPolarAngle = cameraData.minPolar;
         controls.maxPolarAngle = ( cameraData.maxPolar === "PI" ) ? Math.PI : cameraData.maxPolar;
         controls.target = orbitCenter;
@@ -277,8 +273,6 @@ FA.View360 = function( app ) {
 
         controls.update();
 
-        // directionalLight.position.copy( camera.position );
-
         renderer.render( scene, camera );
 
         updateLabels();
@@ -307,8 +301,6 @@ FA.View360 = function( app ) {
     this.load = function( data, onComplete ) {
 
         scope.clear();
-
-        locationData = data;
 
         init( data.camera, data.light );
 
@@ -364,8 +356,6 @@ FA.View360 = function( app ) {
 
 
     this.clear = function() {
-
-        locationData = null;
 
         updateCallback = function(){};
 
@@ -435,13 +425,6 @@ FA.View360 = function( app ) {
     this.getCamera = function() {
 
         return camera;
-
-    }
-
-
-    this.getLocationData = function() {
-
-        return locationData;
 
     }
 

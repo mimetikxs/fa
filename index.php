@@ -58,7 +58,9 @@
 					<div class="box-info">
 						<div class="btn-close"></div>
 						<span class="language-switch">العربية</span>
-						<div class="content"></div>
+						<div class="content-wrap">
+							<div class="content"></div>
+						</div>
 					</div>
 				</div>
 				<div class="spinner-wrap">

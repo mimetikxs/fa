@@ -8,11 +8,10 @@ FA.InteractiveItem = function( mesh, name, slug ) {
     // scaling on active/selected
     var scale = 1;
 
-    var emissiveDefault = 0x000000;
-
-    var isDoubleSide = true;
-
-    var opacityDefault = 1.0,
+    var emissiveDefault = 0x000000,
+        emissiveHighlight = 0xff0000,
+        isDoubleSide = true,
+        opacityDefault = 1.0,
         opacityHighLight = 1.0;
 
 
@@ -42,7 +41,7 @@ FA.InteractiveItem = function( mesh, name, slug ) {
             material.side = THREE.DoubleSide;
             material.emissive.setHex( emissiveDefault );
             material.polygonOffset = true;
-            material.polygonOffsetFactor = 1; // positive value pushes polygon further away
+            material.polygonOffsetFactor = -1; // positive value pushes polygon further away
             material.polygonOffsetUnits = 1;
             material.needsUpdate = true;
         }
@@ -97,7 +96,7 @@ FA.InteractiveItem = function( mesh, name, slug ) {
 
     function mark() {
 
-        object3D.material.emissive.setHex( 0xff0000 );
+        object3D.material.emissive.setHex( emissiveHighlight );
         object3D.material.opacity = opacityHighLight;
         object3D.material.needsUpdate = true;
 
@@ -117,8 +116,17 @@ FA.InteractiveItem = function( mesh, name, slug ) {
 
         emissiveDefault = hex;
 
-        object3D.material.emissive.setHex( emissiveDefault );
-        object3D.material.needsUpdate = true;
+        // object3D.material.emissive.setHex( emissiveDefault );
+        // object3D.material.needsUpdate = true;
+
+    }
+
+    function setEmissiveHighligt( hex ) {
+
+        emissiveHighlight = hex;
+
+        // object3D.material.emissive.setHex( emissiveHighlight );
+        // object3D.material.needsUpdate = true;
 
     }
 

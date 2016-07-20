@@ -287,8 +287,8 @@ FA.StatePreload = function( app ) {
             );
 
         player.src( [
-            { type: "video/mp4", src: app.data.introVideo.hd },
-            { type: "video/mp4", src: app.data.introVideo.sd }
+            { type: "video/mp4", src: app.data.introVideo.hd }
+            // { type: "video/mp4", src: app.data.introVideo.sd }
         ] );
 
         player.play();

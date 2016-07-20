@@ -133,10 +133,11 @@ FA.BuildingView = function( app ) {
         // controls
         controls = new THREE.OrbitControls( camera, interaciveEl );
         //controls.addEventListener( 'change', render ); // add this only if there is no animation loop (requestAnimationFrame)
+        controls.scaleFactor = 0.04;
         controls.enableDamping = true;
         controls.dampingFactor = 0.05;
         controls.enableZoom = true;
-        controls.zoomSpeed = 0.25;
+        controls.zoomSpeed = 0.2;
         controls.enablePan = false;
         controls.autoRotate = true;
         controls.autoRotateSpeed = 0.008;

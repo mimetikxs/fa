@@ -183,19 +183,19 @@ FA.State360 = function( app, locationData ) {
 
         // DO NOT clear the View360 so the scene is available when back from video
 
-        // DO NOT clear the sounds
+        // DO NOT clear the sounds, only pause
         pauseSound();
 
-        // TODO: the active location data should be accessible from FA.App object
-        // View360 shouldn't keep this reference as it is only intended to handle view
-        app.changeState( new FA.StateVideo2( app, view360.getLocationData().slug, videoData ) );
+        var locationData = app.data.locationBySlug[ app.getActiveLocation() ];
+        app.changeState( new FA.StateVideo2( app, locationData.slug, videoData ) );
 
     }
 
 
     function loadSound() {
 
-        var soundData = locationData.sound;
+        var locationData = app.data.locationBySlug[ app.getActiveLocation() ],
+            soundData = locationData.sound;
 
         // create the sound for the main screen
         ion.sound({
@@ -205,8 +205,6 @@ FA.State360 = function( app, locationData ) {
                     loop: true
                 },
             ],
-
-            // main config
             path: "sound/",
             preload: true,
             multiplay: true,
@@ -225,9 +223,8 @@ FA.State360 = function( app, locationData ) {
 
     function resumeSound() {
 
-        // var soundData = view360.getLocationData();
-        var locationData = app.data.locationBySlug[ app.getActiveLocation() ];
-        var soundData = locationData.sound;
+        var locationData = app.data.locationBySlug[ app.getActiveLocation() ],
+            soundData = locationData.sound;
 
         console.log( "resuming", soundData.ambient );
 
@@ -238,9 +235,8 @@ FA.State360 = function( app, locationData ) {
 
     function pauseSound() {
 
-        // var soundData = view360.getLocationData();
-        var locationData = app.data.locationBySlug[ app.getActiveLocation() ];
-        var soundData = locationData.sound;
+        var locationData = app.data.locationBySlug[ app.getActiveLocation() ],
+            soundData = locationData.sound;
 
         console.log( "pausing", soundData.ambient );
 
@@ -251,9 +247,8 @@ FA.State360 = function( app, locationData ) {
 
     function destroySound() {
 
-        // var soundData = view360.getLocationData();
-        var locationData = app.data.locationBySlug[ app.getActiveLocation() ];
-        var soundData = locationData.sound;
+        var locationData = app.data.locationBySlug[ app.getActiveLocation() ],
+            soundData = locationData.sound;
 
         console.log( "destroying", soundData.ambient );
 
