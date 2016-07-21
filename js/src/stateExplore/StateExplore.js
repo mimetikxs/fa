@@ -205,7 +205,7 @@ FA.StateExplore = function( app ) {
             .off( 'mousedown', onMouseDown )
             .off( 'mouseup', onMouseUp );
 
-        //app.setOverLocation( null );
+        // app.setOverLocation( null );
         // app.setActiveLocation( null );
 
         //buildingView.destroy();

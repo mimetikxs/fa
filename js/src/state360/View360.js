@@ -49,7 +49,7 @@ FA.View360 = function( app ) {
             cameraData.lookAt.z
         );
 
-        camera = new THREE.PerspectiveCamera( cameraData.fov, sceneWidth / sceneHeight, 0.01, 300 );
+        camera = new THREE.PerspectiveCamera( cameraData.fov, sceneWidth / sceneHeight, 0.01, 500 );
         camera.position.set(
             cameraData.position.x,
             cameraData.position.y,
@@ -58,10 +58,6 @@ FA.View360 = function( app ) {
 
         var ambient = new THREE.AmbientLight( 0xffffff, lightIntensity );
         scene.add( ambient );
-
-        // directionalLight = new THREE.DirectionalLight( 0xffffff, 3 );
-        // directionalLight.target.position.copy( orbitCenter );
-        // scene.add( directionalLight );
 
         renderer = new THREE.WebGLRenderer( { antialias: true } );
         renderer.setPixelRatio( window.devicePixelRatio );

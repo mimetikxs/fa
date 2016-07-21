@@ -144,10 +144,19 @@ function initStandard() {
 
     FA.App.changeState( new FA.StatePreload( FA.App ) );
 
-    // global scope event listener
-    $( window ).on( 'resize', function( e ) {
-        $( '#content' ).css( 'height', $( window ).height() - 50 ); // header bar is 50px height
-    } ).trigger( 'resize' );
+    // global scope event listeners:
+
+    // resize content div
+    $( window )
+        .on( 'resize', function( e ) {
+            $( '#content' ).css( 'height', $( window ).height() - 50 ); // header bar is 50px height
+        } ).trigger( 'resize' );
+
+    // return to explore view
+    $( 'body[data-section="explore"] .mainNav-menu [data-target="explore"]' )
+        .on( 'click', function( e ) {
+            FA.App.changeState( new FA.StateExplore( FA.App ) );
+        } );
 
 }
 

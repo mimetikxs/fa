@@ -7,7 +7,7 @@ FA.State360 = function( app, locationData ) {
         $labels = $layer.find( '.labels' ),
         $btnExit = $layer.find( '.btn-exit' ),
         $btnCloseInfo = $layer.find( '.btn-close' ),
-        $btnShowInfo = $layer.find( '.btn-info' ),
+        $btnsShowInfo = $layer.find( '.title, .title-arabic' ), // these two elements trigger the info
         view360,
 
         sceneWidth,
@@ -19,7 +19,13 @@ FA.State360 = function( app, locationData ) {
         labelUnderMouse = null, // string
         itemOnDown = null,      // string
 
-        intersectingItem = null; // FA.InteractiveItem
+        intersectingItem = null, // FA.InteractiveItem
+
+        // auto scrolling
+        localMouseY = 0,
+        targetScroll = 0,
+        currentScroll = 0,
+        $infoContent = $layer.find( '.box-info .content' );
 
 
 
@@ -61,6 +67,13 @@ FA.State360 = function( app, locationData ) {
                 $labels.css( 'cursor', 'default' );
             }
         }
+
+    }
+
+    function onBoxInfoMouseMove( e ) {
+
+        // auto scrolling
+        localMouseY = e.pageY - $infoContent.parent().offset().top;
 
     }
 
@@ -132,17 +145,33 @@ FA.State360 = function( app, locationData ) {
         $btnCloseInfo
             .on( 'click', hideInfo );
 
-        $btnShowInfo
-            .on( 'click', showInfo );
+        $btnsShowInfo
+            .on( 'click', onShowInfoClick );
 
         $labels
             .on( 'mousemove', onMouseMove )
             .on( 'mousedown', onMouseDown )
             .on( 'mouseup', onMouseUp );
 
+        // auto scroll
+        $('.box-info')
+            .on( 'mousemove', onBoxInfoMouseMove )
+
+
+
+
         // $( '.label' ).on( 'click', function(){
         //     app.changeState( new FA.StateVideo2( app, "cell", { title: "interactive item" } ) ); // back to cell after video
         // });
+
+    }
+
+
+    function onShowInfoClick( e ) {
+
+        var targetLang = $( e.target ).hasClass( 'title-arabic' ) ? 'ar' : 'en';
+
+        showInfo( targetLang );
 
     }
 
@@ -157,8 +186,8 @@ FA.State360 = function( app, locationData ) {
         $btnCloseInfo
             .off( 'click', hideInfo );
 
-        $btnShowInfo
-            .off( 'click', showInfo );
+        $btnsShowInfo
+            .off( 'click', onShowInfoClick );
 
         $labels
             .off( 'mousemove', onMouseMove )
@@ -310,12 +339,6 @@ FA.State360 = function( app, locationData ) {
                 opacity: 0,
             });
 
-        // hide / show the info button
-        var noInfo = locationData.info === "" || !locationData.info;
-        $btnShowInfo.css( {
-            display: noInfo ? 'none' : 'inline-block'
-        } );
-
         // parse and display
         // http://juristr.com/blog/2010/05/n-will-break-your-json-jquery-wcf/
         var html = convertToHTMLVisibleNewline( locationData.info );
@@ -331,17 +354,69 @@ FA.State360 = function( app, locationData ) {
 
     }
 
-    function showInfo() {
+    function showInfo( lang ) {
+
+        var styleAcive = {
+                'opacity': 1,
+                'top': '30px',
+                'color': '#000',
+                'background-color': 'rgba(255,255,255,0.8)',
+                'height': '',
+                'line-height': '',
+                'font-size': ''
+            },
+            styleAciveAr = {
+                'opacity': 1,
+                'top': '30px',
+                'color': '#000',
+                'background-color': 'rgba(255,255,255,0.8)',
+                'height': '43px',
+                'line-height': '40px',
+                'font-size': '28px'
+            },
+            styleInactive = {
+                'opacity': 0,
+                'top': '',
+                'color': '',
+                'background-color': '',
+                'height': '',
+                'line-height': '',
+                'font-size': ''
+            };
+
+        if ( lang === 'en' ) {
+            $layer.find( '.title' ).css( styleAcive );
+            $layer.find( '.title-arabic' ).css( styleInactive );
+            $layer.find( '.box-info' )
+                .addClass( 'en' ).removeClass( 'ar' )
+                .find( '.language-switch' ).text( 'العربية' );
+        } else {
+            $layer.find( '.title' ).css( styleInactive );
+            $layer.find( '.title-arabic' ).css( styleAciveAr );
+            $layer.find( '.box-info' )
+                .addClass( 'ar' ).removeClass( 'en' )
+                .find( '.language-switch' ).text( 'English' );
+        }
 
         $layer.find( '.box-info-wrap' )
             .css( { display: 'block' } )
             .transition( { opacity: 1 }, 250, 'in');
 
-        $btnShowInfo.addClass( 'active' );
     }
 
 
     function hideInfo() {
+
+        // reset
+        $layer.find( '.title, .title-arabic' ).css({
+            'opacity': '',
+            'top': '',
+            'color': '',
+            'background-color': '',
+            'height': '',
+            'line-height': '',
+            'font-size': ''
+        });
 
         $layer.find( '.box-info-wrap' )
             .transition( { opacity: 0 }, 250, 'in', function() {
@@ -350,8 +425,6 @@ FA.State360 = function( app, locationData ) {
 
         // reset scroll
         $layer.find( '.box-info .content' ).scrollTop(0);
-
-        $btnShowInfo.removeClass( 'active' );
 
     }
 
@@ -410,6 +483,26 @@ FA.State360 = function( app, locationData ) {
     this.update = function ()  {
 
         view360.update();
+
+        //
+        // update info box scroll if open
+        //
+        var contentHeight = $infoContent.height(),
+            containerHeight = $infoContent.parent().height(),
+            overflow = contentHeight - containerHeight,
+            pct = ( localMouseY - 40 ) / ( containerHeight - 80 );  // margin of 40px on top and bottom
+
+        pct = Math.min( Math.max( pct, 0 ), 1); // clamp
+
+        if ( overflow > 0 ) {
+            targetScroll = pct * overflow;
+        } else {
+            targetScroll = 0;
+        }
+
+        currentScroll += ( targetScroll - currentScroll ) * 0.05;
+
+        $infoContent.css( 'transform', 'translate3d(0px,-' + currentScroll + 'px,0px)' );
 
     }
 

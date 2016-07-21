@@ -27,11 +27,20 @@ FA.StatePreload = function( app ) {
 
 
 
+
+
     function loadData( onComplete ) {
+
+        var url;
+        if ( location.hostname === 'localhost' ) {
+            url = 'http://localhost:8888/saydnaya/data/data.json';
+        } else {
+            url = 'data/data.json';
+        }
 
         $.ajax({
             dataType: 'json',
-            url : "http://localhost:8888/saydnaya/data/data.json",
+            url : url,
             success : function( result ) {
 
                 app.data = new FA.Data( result );
@@ -166,7 +175,8 @@ FA.StatePreload = function( app ) {
 
                     var mesh = new THREE.Mesh( geometry, material );
                     var room = new FA.InteractiveItem( mesh, name, slug );
-                    room.setEmissiveDefault( 0x333333 )
+                    room.setEmissiveDefault( 0x333333 );
+                    room.unmark();
 
                     app.rooms.push( room );
                 },

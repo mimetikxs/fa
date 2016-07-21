@@ -13,9 +13,16 @@ FA.StateExploreMobile = function( app ) {
 
     function loadData( onComplete ) {
 
+        var url;
+        if ( location.hostname === 'localhost' ) {
+            url = 'http://localhost:8888/saydnaya/data/data.json';
+        } else {
+            url = 'data/data.json';
+        }
+
         $.ajax({
             dataType: 'json',
-            url : "http://localhost:8888/saydnaya/data/data.json",
+            url : url,
             success : function( result ) {
                 app.data = new FA.Data( result );
                 onComplete();

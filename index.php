@@ -48,11 +48,11 @@
 			<div id="layer-360">
 				<div class="gl"></div>
 				<div class="labels"></div>
-				<div class="title-wrap">
-					<div class="title"></div>
-					<div class="btn-info"></div>
-				</div>
-				<div class="title-arabic"></div>
+				<!-- <div class="title-wrap"> -->
+				<div class="title btn-info"></div>
+					<!-- <div class="btn-info"></div> -->
+				<!-- </div> -->
+				<div class="title-arabic btn-info"></div>
 				<div class="btn-exit"></div>
 				<div class="box-info-wrap">
 					<div class="box-info">
