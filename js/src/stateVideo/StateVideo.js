@@ -5,9 +5,8 @@
 //                        Pass the id of a location to navigate only through the videos associated.
 // data          [Object] The data to feed the video.
 
-FA.StateVideo2 = function( app, fromLocation, data ) {
-
-    // var name = 'STATE_VIDEO';
+// FA.StateVideo2 = function( app, fromLocation, videoId ) {
+FA.StateVideo2 = function( app, videoId ) {
 
     var $layer = $( '#layer-video' ),
         $player = $layer.find( '.player' ),
@@ -15,7 +14,10 @@ FA.StateVideo2 = function( app, fromLocation, data ) {
         $arrowPrev = $layer.find( '.btn-prev' ),
         $arrowNext = $layer.find( '.btn-next' ),
         $btnExit = $layer.find( '.btn-exit' ),
+
         player,
+
+        videoData,
 
         isArrowHover,
         isUserActive,
@@ -27,15 +29,17 @@ FA.StateVideo2 = function( app, fromLocation, data ) {
 
     function close() {
 
-        if ( fromLocation !== ""  &&  fromLocation !== null ) {
-            app.changeState( new FA.State360( app ) );
-        } else {
-            if ( $('body').hasClass('mobile') ) {
-                app.changeState( new FA.StateExploreMobile( app ) );
-            } else {
-                app.changeState( new FA.StateExplore( app ) );
-            }
+        var prevState = ( app.getPrevState() ) ? app.getPrevState().getStateData() : null;
 
+        if ( prevState.kind === 'location' ) {
+            History.back();
+        } else {
+            if ( $( 'body' ).hasClass( 'mobile' ) ) {
+                //app.changeState( new FA.StateExploreMobile( app ) );
+                //History.pushState( null, null, '?explore=false' )
+            } else {
+                History.pushState( null, null, '?kind=explore' )
+            }
         }
 
     }
@@ -43,7 +47,7 @@ FA.StateVideo2 = function( app, fromLocation, data ) {
 
     function init() {
 
-        initControls( data );
+        initControls();
 
         addListeners();
 
@@ -54,40 +58,40 @@ FA.StateVideo2 = function( app, fromLocation, data ) {
     }
 
 
-    function initControls( data ) {
+    function initControls() {
 
         // set the info
-        var witnessData = app.data.witnessBySlug[ data.witness ],
-            locationData = app.data.locationBySlug[ data.location ];
+        var witnessData = app.data.witnessBySlug[ videoData.witness ],
+            locationData = app.data.locationBySlug[ videoData.location ];
 
         $layer.find( '.info' )
-            .find('.title span').text( data.title ).end()
+            .find('.title span').text( videoData.title ).end()
             .find('.witness').text( witnessData.name ).end()
             .find('.location').text( locationData.name );
 
         $layer.find( '.info-arabic' )
-            .find('.title span').text( data.titleAr ).end()
+            .find('.title span').text( videoData.titleAr ).end()
             .find('.witness').text( witnessData.nameAr ).end()
             .find('.location').text( locationData.nameAr );
 
         // set arrows
         var videos,
             lastIndex,
-            currIndex;
+            currIndex,
+            prevState = ( app.getPrevState() ) ? app.getPrevState().getStateData() : null;
 
-        if ( fromLocation !== ""  &&  fromLocation !== null ) {
+
+
+        if ( prevState  &&  prevState.kind === 'location'  &&  prevState.id !== undefined ) {
             // navigate only videos contained in the location
-            videos = app.data.mediasByLocation[ fromLocation ];
+            videos = app.data.mediasByLocation[ prevState.id ];
         } else {
             // navigate all the videos
             videos = app.data.medias;
         }
 
         lastIndex = videos.length - 1;
-        currIndex = videos.indexOf( data );
-
-        // console.log( fromLocation, videos );
-        // console.log( lastIndex, currIndex );
+        currIndex = videos.indexOf( videoData );
 
         // prev
         if ( currIndex > 0 ) {
@@ -245,16 +249,17 @@ FA.StateVideo2 = function( app, fromLocation, data ) {
 
     function goToVideo( id ) {
 
-        var mediaData = app.data.mediaById[ id ],
-            isMobile = false, // TODO
+        videoData = app.data.mediaById[ id ]
+
+        var isMobile = false, // TODO
             sources = [];
 
-        initControls( mediaData );
+        initControls(  );
 
         if ( !isMobile ) {
-            sources.push( { type: "video/mp4", src: mediaData.video.hd } )
+            sources.push( { type: "video/mp4", src: videoData.video.hd } )
         } else {
-            sources.push( { type: "video/mp4", src: mediaData.video.sd } )
+            sources.push( { type: "video/mp4", src: videoData.video.sd } )
         }
 
         // change sources
@@ -269,7 +274,21 @@ FA.StateVideo2 = function( app, fromLocation, data ) {
      ******************/
 
 
+     // info about this state
+     this.getStateData = function() {
+
+         return {
+             kind: 'video',
+             id: videoId
+         }
+
+     }
+
+
     this.enter = function() {
+
+        // get the data
+        videoData = app.data.mediaById[ videoId ];
 
         // prepare dom elements
         $( '#header' ).css( 'top', 0 );
@@ -291,8 +310,8 @@ FA.StateVideo2 = function( app, fromLocation, data ) {
             poster = ( isMobile ) ? '' : '', // TODO: add poster on mobile devices
             html = '';
         html += '<video id="video_1" class="video-js vjs-default-skin vjs-fill" controls preload="none" width="640" height="264" poster="' + poster + '">';
-        html += ( isMobile ) ? '' : '<source src="' + data.video.hd + '" type="video/mp4">'; // do not add hd source if this is a mobile device
-        html += '<source src="' + data.video.sd + '" type="video/mp4">';
+        html += ( isMobile ) ? '' : '<source src="' + videoData.video.hd + '" type="video/mp4">'; // do not add hd source if this is a mobile device
+        html += '<source src="' + videoData.video.sd + '" type="video/mp4">';
         html += '<p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>';
         html += '</video>';
         $player.html( html );

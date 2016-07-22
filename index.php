@@ -196,10 +196,11 @@
 		<!-- Scripts -->
 
 		<script src="js/lib/jquery-3.0.0.min.js"></script>
+		<script src="js/lib/jquery.easing.1.3.js"></script>
 		<script src="js/lib/jquery.transit.min.js"></script>
-		<script src="js/lib/dat.gui.js"></script>
-		<script src="js/lib/Stats.js"></script>
-
+		<!-- <script src="js/lib/dat.gui.js"></script> -->
+		<!-- <script src="js/lib/Stats.js"></script> -->
+		<script src="js/lib/jquery.history.js"></script>
 		<script src="js/lib/player.min.js"></script>
 		<script src="js/lib/typed.js"></script>
 		<script src="js/lib/threejs/three.js"></script>
@@ -208,8 +209,6 @@
 		<script src="js/lib/ion.sound.min.js"></script>
 
 		<script src="js/src/FA.js"></script>
-		<!-- <script src="js/src/sound/BufferLoader.js"></script> -->
-		<!-- <script src="js/src/sound/Sound.js"></script> -->
 		<script src="js/src/Utils.js"></script>
 		<script src="js/src/Data.js"></script>
 		<script src="js/src/Slider.js"></script>

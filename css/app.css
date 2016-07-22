@@ -667,7 +667,7 @@ body {
     cursor: default;
     color: #000;
     background-color: rgba(255, 255, 255, 0.8);
-    transition: all 200ms ease-out;
+    transition: all 250ms ease-out;
     cursor: pointer;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -1420,6 +1420,8 @@ body:not([data-sub-section]) .fragment {
   font-size: 0.875em; }
 #main h2 {
   margin: 1em 0 0.5em 0; }
+#main ol li {
+  margin-bottom: 10px; }
 #main blockquote {
   border-left: 15px solid #000;
   padding-left: 40px;

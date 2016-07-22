@@ -176,12 +176,20 @@ FA.MenuView = function( app ) {
     }
 
 
-    function goToVideo( mediaData ) {
+    function goToVideo( id ) {
 
-        app.changeState( new FA.StateVideo2( app, '', mediaData ) );
+        // historyjs
+        History.pushState( null, null, '?kind=video&id=' + id );
 
     }
 
+
+
+    function goTo360( id ) {
+
+        History.pushState( null, null, '?kind=location&id=' + id );
+
+    }
 
 
 
@@ -228,7 +236,7 @@ FA.MenuView = function( app ) {
         $btnArabic.on( 'click', function() {
             var mediaData = app.data.medias[ 0 ]; // media by index (0 = first)
 
-            app.changeState( new FA.StateVideo2( app, '', mediaData ) );
+            goToVideo( mediaData.id );
         } )
 
     }
@@ -341,18 +349,14 @@ FA.MenuView = function( app ) {
             var numChildren = $target.parent().find('li').length;
             if ( navMode === 'location'  &&  numChildren === 0 ) {
                 var slug = $target.parent().data( 'location' );
-                var locationData = app.data.locationBySlug[ slug ];
 
-                app.changeState( new FA.State360( app, locationData ) );
+                goTo360( slug );
 
             }
 
         } else if ( $target.hasClass( 'media' ) ) {
 
-            var id = $target.data( 'id' ),
-                mediaData = app.data.mediaById[ id ];
-
-            goToVideo( mediaData );
+            goToVideo( $target.data( 'id' ) );
 
         }
 

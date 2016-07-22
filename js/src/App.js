@@ -7,6 +7,7 @@
 FA.App = (function() {
 
     var currentState = new FA.StateIdle(),
+        prevState = null,
 
         prevLocation = null,
         activeLocation = null,            // slug of the current location
@@ -14,12 +15,7 @@ FA.App = (function() {
         overLocation = null;
 
 
-    // setup audio
-    // window.AudioContext = window.AudioContext || window.webkitAudioContext;
-    // var audioContext = new AudioContext();
-
-
-
+    // start loop
     update();
 
 
@@ -34,8 +30,9 @@ FA.App = (function() {
 
     function changeState( newState ) {
 
-        if (currentState) {
+        if ( currentState ) {
             currentState.exit();
+            prevState = currentState;
         }
         currentState = newState;
         currentState.enter();
@@ -94,12 +91,11 @@ FA.App = (function() {
         // 360 view
         view360 : null,
 
-        // sound
-        // audioContext : audioContext,
-        // sounds : [ ],                   // FA.Sound
-
         // public methods
         changeState : changeState,
+
+        // getCurrentState : function() { return currentState; },
+        getPrevState : function() { return prevState; },
 
         getActiveLocation : getActiveLocation,
         setActiveLocation : setActiveLocation,
@@ -155,7 +151,8 @@ function initStandard() {
     // return to explore view
     $( 'body[data-section="explore"] .mainNav-menu [data-target="explore"]' )
         .on( 'click', function( e ) {
-            FA.App.changeState( new FA.StateExplore( FA.App ) );
+            //FA.App.changeState( new FA.StateExplore( FA.App ) );
+            History.pushState( null, null, '?kind=explore' );
         } );
 
 }
@@ -164,4 +161,77 @@ function initMobile() {
 
     FA.App.changeState( new FA.StateExploreMobile( FA.App ) );
 
+}
+
+
+
+
+
+// ----------------------------------------------------------------------------------------
+// history listener
+// to provide deep linking to content in the app
+// at the moment, links to:
+// - home screen (root)
+// - videos
+// todo:
+// - link to 360s
+// ----------------------------------------------------------------------------------------
+
+// listen for state changes
+History.Adapter.bind( window, 'statechange', processUrl );
+
+// maps the url with an application state (explore, video...)
+function processUrl() {
+
+    var urlVars = getUrlVars( History.getState().url ),
+        kind = urlVars[ 'kind' ],
+        id = urlVars[ 'id' ],
+        title;
+
+    // video
+    if ( kind === 'video' )
+    {
+        var isValid = FA.App.data.mediaById[ id ];
+
+        if ( isValid ) {
+            FA.App.changeState( new FA.StateVideo2( FA.App, id ) );
+        } else {
+            // error: url not found
+        }
+        return;
+    }
+
+    // location (aka 360)
+    if ( kind === 'location' )
+    {
+        var isValid = FA.App.data.locationBySlug[ id ];
+
+        if ( isValid ) {
+            FA.App.changeState( new FA.State360( FA.App, id ) );
+        } else {
+            // error: url not found
+        }
+        return;
+    }
+
+
+    // home
+    // if ( url[ 'index' ] )
+    // {
+        FA.App.changeState( new FA.StateExplore( FA.App ) );
+    // }
+
+    // http://stackoverflow.com/questions/4656843/jquery-get-querystring-from-url
+    function getUrlVars( hashString ) {
+
+        var vars = {},
+            hash,
+            hashes = hashString.slice( hashString.indexOf( '?' ) + 1 ).split( '&' );
+        for ( var i = 0; i < hashes.length; i++ ) {
+            hash = hashes[ i ].split( '=' );
+            vars[ hash [ 0 ] ] = hash[ 1 ];
+        }
+        return vars;
+
+    }
 }

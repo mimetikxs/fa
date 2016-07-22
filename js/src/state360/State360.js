@@ -1,6 +1,6 @@
-FA.State360 = function( app, locationData ) {
+FA.State360 = function( app, locationId ) {
 
-    // var name = 'STATE_360';
+    var locationData;
 
     var $layer = $( '#layer-360' ),
         $gl = $layer.find( '.gl' ),
@@ -25,7 +25,9 @@ FA.State360 = function( app, locationData ) {
         localMouseY = 0,
         targetScroll = 0,
         currentScroll = 0,
-        $infoContent = $layer.find( '.box-info .content' );
+        $infoContent = $layer.find( '.box-info .content' ),
+
+        timeoutShowInfo;
 
 
 
@@ -118,8 +120,8 @@ FA.State360 = function( app, locationData ) {
             }
 
             // launch video
-            var videoData = app.data.mediaById[ itemOnUp ];
-            goToVideo( videoData );
+            var videoId = itemOnUp;
+            goToVideo( videoId );
         }
 
     }
@@ -156,8 +158,6 @@ FA.State360 = function( app, locationData ) {
         // auto scroll
         $('.box-info')
             .on( 'mousemove', onBoxInfoMouseMove )
-
-
 
 
         // $( '.label' ).on( 'click', function(){
@@ -199,7 +199,8 @@ FA.State360 = function( app, locationData ) {
 
     function goBack() {
 
-        app.changeState( new FA.StateExplore( app ) );
+        // historyjs
+        History.pushState( null, null, '?kind=explore' )
 
         view360.clear(); // clear when we go back
 
@@ -208,23 +209,21 @@ FA.State360 = function( app, locationData ) {
     }
 
 
-    function goToVideo( videoData ) {
+    function goToVideo( id ) {
 
         // DO NOT clear the View360 so the scene is available when back from video
 
         // DO NOT clear the sounds, only pause
         pauseSound();
 
-        var locationData = app.data.locationBySlug[ app.getActiveLocation() ];
-        app.changeState( new FA.StateVideo2( app, locationData.slug, videoData ) );
-
+        // historyjs
+        History.pushState( null, null, "?kind=video&id=" + id );
     }
 
 
     function loadSound() {
 
-        var locationData = app.data.locationBySlug[ app.getActiveLocation() ],
-            soundData = locationData.sound;
+        var soundData = locationData.sound;
 
         // create the sound for the main screen
         ion.sound({
@@ -243,8 +242,6 @@ FA.State360 = function( app, locationData ) {
             // }
         });
 
-        console.log( "loading / playing", soundData.ambient );
-
         ion.sound.play( soundData.ambient );
 
     }
@@ -252,10 +249,7 @@ FA.State360 = function( app, locationData ) {
 
     function resumeSound() {
 
-        var locationData = app.data.locationBySlug[ app.getActiveLocation() ],
-            soundData = locationData.sound;
-
-        console.log( "resuming", soundData.ambient );
+        var soundData = locationData.sound;
 
         ion.sound.play( soundData.ambient );
 
@@ -264,10 +258,7 @@ FA.State360 = function( app, locationData ) {
 
     function pauseSound() {
 
-        var locationData = app.data.locationBySlug[ app.getActiveLocation() ],
-            soundData = locationData.sound;
-
-        console.log( "pausing", soundData.ambient );
+        var soundData = locationData.sound;
 
         ion.sound.pause( soundData.ambient );
 
@@ -276,10 +267,7 @@ FA.State360 = function( app, locationData ) {
 
     function destroySound() {
 
-        var locationData = app.data.locationBySlug[ app.getActiveLocation() ],
-            soundData = locationData.sound;
-
-        console.log( "destroying", soundData.ambient );
+        var soundData = locationData.sound;
 
         ion.sound.destroy( soundData.ambient );
 
@@ -323,10 +311,15 @@ FA.State360 = function( app, locationData ) {
         // show labels
         $labels.css( 'display', 'block' );
 
+        // show info box
+        timeoutShowInfo = setTimeout( function() {
+            showInfo( 'en' );
+        }, 600 );
+
     }
 
 
-    function initGui( locationData ) {
+    function initGui() {
 
         $layer
             .find( '.title' ).text( locationData.name ).end()
@@ -359,8 +352,10 @@ FA.State360 = function( app, locationData ) {
         var styleAcive = {
                 'opacity': 1,
                 'top': '30px',
-                'color': '#000',
-                'background-color': 'rgba(255,255,255,0.8)',
+                //'color': '#000',
+                // 'background-color': 'rgba(255,255,255,0.8)',
+                'color': '#fff',
+                'background-color': 'rgba(0,0,0,0.8)',
                 'height': '',
                 'line-height': '',
                 'font-size': ''
@@ -368,8 +363,10 @@ FA.State360 = function( app, locationData ) {
             styleAciveAr = {
                 'opacity': 1,
                 'top': '30px',
-                'color': '#000',
-                'background-color': 'rgba(255,255,255,0.8)',
+                // 'color': '#000',
+                // 'background-color': 'rgba(255,255,255,0.8)',
+                'color': '#fff',
+                'background-color': 'rgba(0,0,0,0.8)',
                 'height': '43px',
                 'line-height': '40px',
                 'font-size': '28px'
@@ -402,6 +399,10 @@ FA.State360 = function( app, locationData ) {
             .css( { display: 'block' } )
             .transition( { opacity: 1 }, 250, 'in');
 
+        // $layer.find( '.box-info' )
+        //     .css( {'background-color': 'rgba(255,255,255,0.5)' } )
+        //     .transition( { 'background-color': 'rgba(0,0,0,0.8)' }, 600, 'easeInOutQuint');
+
     }
 
 
@@ -428,12 +429,26 @@ FA.State360 = function( app, locationData ) {
 
     }
 
+
     //        //
     // Public //
     //        //
 
 
+    // info about this state
+    this.getStateData = function() {
+
+        return {
+            kind: 'location',
+            id: locationId
+        }
+
+    }
+
+
     this.enter = function() {
+
+        locationData = app.data.locationBySlug[ locationId ],
 
         // create only once
         app.view360 = app.view360 || new FA.View360( app );
@@ -441,11 +456,11 @@ FA.State360 = function( app, locationData ) {
         // shortcut
         view360 = app.view360;
 
-        // when we are back from a video, locationData is undefined
-        // we assume view360 is not cleared, so we keep the old data
-        // TODO: find another way of detenting when we are comming back from a video
-        // checking locationData for this purpose is WRONG
-        if ( !locationData ) {
+        var prevState = ( app.getPrevState() ) ? app.getPrevState().getStateData() : null;
+
+        // when we are back from a video
+        if ( prevState.kind === 'video' ) {
+
             // do not change the 360  wiew!
 
             resumeSound();
@@ -516,7 +531,7 @@ FA.State360 = function( app, locationData ) {
 
         // hide layer
         $layer.css( {
-            'opacity': 1,
+            'opacity': 0,
             'visibility': 'hidden'
         } );
         // hide buttons
@@ -524,6 +539,8 @@ FA.State360 = function( app, locationData ) {
             visibility: 'hidden',
             opacity: 0
         } );
+
+        clearTimeout( timeoutShowInfo );
 
     }
 

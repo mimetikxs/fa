@@ -39,7 +39,7 @@
 
 					<p>In April 2016, Forensic Architecture and Amnesty International interviewed five former detainees in Istanbul. Each conversation started with an explanation of the way the interview would be conducted and the technology employed. Each witness was told they could stop the process at any given moment.</p>
 
-					<p>3. 3D modelling</p>
+					<h2>3. 3D modelling</h2>
 
 					<p>The witnesses described the cells and other areas of the prison, including stairwells, corridors, moving doors and windows, to an architect working with 3D modelling software. These new models were then compared to the model of the prison produced before the interviews. Witnesses helped the team to correct errors and refine the architecture of spaces within it.</p>
 
@@ -53,10 +53,13 @@
 
 					<h2>6. Ear-witness testimony</h2>
 
-					<p>Prisoners in Saydnaya developed an acute experience of sound, as what they could see was extremely restricted. There was next to no daylight, and detainees were made to cover their eyes with their hands whenever a guard entered the room. What’s more, speaking was prohibited, so prisoners became attuned to any minute sound. To capture these auditory memories, we developed techniques to solicit “ear-witness testimony” and reconstruct the prison’s architecture through sound:
-Witnesses listened to tones of different decibel levels, and were then asked to match them to the levels of specific incidents inside the prison they listened out for.
-We used “echo profiling” to determine the size of spaces such as cells, stairwells and corridors. This involved playing different reverberations and asking witnesses to match them with the ones they recalled.
-We also used “sound artefacts” to simulate prison sounds such as doors, locks and footsteps, which helped to generate further acoustic memories.</p>
+					<p>Prisoners in Saydnaya developed an acute experience of sound, as what they could see was extremely restricted. There was next to no daylight, and detainees were made to cover their eyes with their hands whenever a guard entered the room. What’s more, speaking was prohibited, so prisoners became attuned to any minute sound. To capture these auditory memories, we developed techniques to solicit “ear-witness testimony” and reconstruct the prison’s architecture through sound:</p>
+
+					<ol type="a">
+						<li>Witnesses listened to tones of different decibel levels, and were then asked to match them to the levels of specific incidents inside the prison they listened out for.</li>
+						<li>We used “echo profiling” to determine the size of spaces such as cells, stairwells and corridors. This involved playing different reverberations and asking witnesses to match them with the ones they recalled.</li>
+						<li>We also used “sound artefacts” to simulate prison sounds such as doors, locks and footsteps, which helped to generate further acoustic memories.</li>
+					</ol>
 
 					<h2>7. Contradictions</h2>
 

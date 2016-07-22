@@ -140,13 +140,24 @@ FA.StateExplore = function( app ) {
 
         var locationData = app.data.locationBySlug[ slug ];
 
-        app.changeState( new FA.State360( app, locationData ) );
+        //app.changeState( new FA.State360( app, locationData ) );
+
+        History.pushState( null, null, '?kind=location&id=' + slug )
 
     }
 
     //        //
     // Public //
     //        //
+
+
+    this.getStateData = function() {
+
+        return {
+            kind: 'explore'
+        }
+
+    }
 
 
     this.enter = function() {

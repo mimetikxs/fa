@@ -1,10 +1,12 @@
 /*
- * Load common resources
+ * This is the first state when the page has been returned from the server
+ *
+ * It checks the url and handles the routing
+ *
+ * Loads common resources
  */
 
 FA.StatePreload = function( app ) {
-
-    // var name = 'STATE_PRELOAD';
 
     var is3Dloaded = false,
         messageCompleted = false,
@@ -22,11 +24,79 @@ FA.StatePreload = function( app ) {
         player,
         isVideoReady = false,
         isVideoStarted = false,
-        isSoundLoaded = false;
+        isSoundLoaded = false,
+
+        // router
+        bSkipVideo = false,
+        nextState,
+
+
+        slowLoopIntervalId;
+
+
+    // ----------------------------------------------------------------------------------------
+
+    // maps the url with an application state (explore, video...)
+    // TODO: create FA.Router to process url and return a state
+    // eg: FA.Router.getState( url ) <-- will return the state to pass to FA.App.changeState
+    function processUrl() {
+
+        var urlVars = getUrlVars( History.getState().url ),
+            kind = urlVars[ 'kind' ],
+            id = urlVars[ 'id' ],
+            title;
+
+        // video
+        if ( kind === 'video' )
+        {
+            var isValid = FA.App.data.mediaById[ id ];
+
+            if ( isValid ) {
+                nextState = new FA.StateVideo2( FA.App, id );
+            } else {
+                // error: url not found
+            }
+            return;
+        }
+
+        // location (aka 360)
+        if ( kind === 'location' )
+        {
+            var isValid = FA.App.data.locationBySlug[ id ];
+
+            if ( isValid ) {
+                nextState = new FA.State360( FA.App, id );
+            } else {
+                // error: url not found
+            }
+            return;
+        }
+
+        // default next state
+        nextState = new FA.StateExplore( app );
+
+
+        // http://stackoverflow.com/questions/4656843/jquery-get-querystring-from-url
+        function getUrlVars( hashString ) {
+
+            var vars = {},
+                hash,
+                hashes = hashString.slice( hashString.indexOf( '?' ) + 1 ).split( '&' );
+            for ( var i = 0; i < hashes.length; i++ ) {
+                hash = hashes[ i ].split( '=' );
+                vars[ hash [ 0 ] ] = hash[ 1 ];
+            }
+            return vars;
+
+        }
+
+    }
 
 
 
 
+    // end history listener
+    // ----------------------------------------------------------------------------------------
 
 
     function loadData( onComplete ) {
@@ -53,6 +123,7 @@ FA.StatePreload = function( app ) {
             }
         });
     }
+
 
     function loadSound() {
 
@@ -227,10 +298,10 @@ FA.StatePreload = function( app ) {
 
 
     function onProgress( xhr ) {
-        if ( xhr.lengthComputable ) {
-            var percentComplete = xhr.loaded / xhr.total * 100;
-            console.log( Math.round(percentComplete, 2) + '% downloaded' );
-        }
+        // if ( xhr.lengthComputable ) {
+        //     var percentComplete = xhr.loaded / xhr.total * 100;
+        //     console.log( Math.round(percentComplete, 2) + '% downloaded' );
+        // }
     };
 
 
@@ -248,7 +319,7 @@ FA.StatePreload = function( app ) {
 
                 this.remove();
 
-                app.changeState( new FA.StateExplore( app ) );
+                app.changeState( nextState );
             }
         );
 
@@ -336,12 +407,44 @@ FA.StatePreload = function( app ) {
 
         $spinner.transition( { opacity: 0 }, 200, 'out');
         $spinner.transition( { height: 0, delay: 0 }, 300, 'out');
+
+    }
+
+
+
+    function waitForLoading() {
+
+        // check if everything loaded every 500ms
+        slowLoopIntervalId = setInterval( function() {
+            if ( is3Dloaded  &&  isSoundLoaded  &&  isVideoReady  &&  isTimeUp ) { //  &&  !isVideoStarted   ) {
+
+                // console.log( is3Dloaded, isVideoReady, isVideoStarted, isTimeUp );
+
+                if ( bSkipVideo ) {
+                    goToNextState();
+                } else {
+                    startVideo();
+                }
+                clearInterval( slowLoopIntervalId );
+            }
+        }, 500 );
+
     }
 
 
     //        //
     // Public //
     //        //
+
+
+    // info about this state
+    this.getStateData = function() {
+
+        return {
+            kind: 'preload'
+        }
+
+    }
 
 
     this.enter = function() {
@@ -361,6 +464,8 @@ FA.StatePreload = function( app ) {
             // and then load 3d + sound
             loadResources();
             loadSound();
+            // process the current url once we've got access to the data
+            processUrl();
         } );
 
         // whait at least two seconds before starting video
@@ -368,18 +473,12 @@ FA.StatePreload = function( app ) {
         // before launching the video
         startTimer();
 
+        waitForLoading();
+
     }
 
 
     this.update = function() {
-
-        // console.log( is3Dloaded, isVideoReady, isVideoStarted, isTimeUp );
-
-        // TODO: [optimisation] check this in separate interval that works at a lower rate (eg: every second)
-        if ( is3Dloaded  &&  isSoundLoaded  &&  isVideoReady  &&  isTimeUp  &&  !isVideoStarted   ) {
-            startVideo();
-            // goToNextState();
-        }
 
     }
 
@@ -388,6 +487,7 @@ FA.StatePreload = function( app ) {
 
         if ( intervalId ) {
             clearInterval( intervalId );
+            clearInterval( slowLoopIntervalId );
         }
 
         $btnSkip.off();
