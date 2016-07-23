@@ -1,23 +1,13 @@
-//
-// app:          [FA.App] A reference to the app object.
-// fromLocation: [String] The id/slug of the location the video was launched. This defines the behaviour of the arrows.
-//                        An empty string or null will allow navigation through all the medias.
-//                        Pass the id of a location to navigate only through the videos associated.
-// data          [Object] The data to feed the video.
-
-// FA.StateVideo2 = function( app, fromLocation, videoId ) {
-FA.StateVideo2 = function( app, videoId ) {
+FA.StateVideo2 = function( app, videoData, direction ) {
 
     var $layer = $( '#layer-video' ),
         $player = $layer.find( '.player' ),
         $controls = $layer.find( '.controls' ),
-        $arrowPrev = $layer.find( '.btn-prev' ),
-        $arrowNext = $layer.find( '.btn-next' ),
+        $arrowLeft = $layer.find( '.btn-prev' ),
+        $arrowRight = $layer.find( '.btn-next' ),
         $btnExit = $layer.find( '.btn-exit' ),
 
         player,
-
-        videoData,
 
         isArrowHover,
         isUserActive,
@@ -29,17 +19,19 @@ FA.StateVideo2 = function( app, videoId ) {
 
     function close() {
 
-        var prevState = ( app.getPrevState() ) ? app.getPrevState().getStateData() : null;
+        if ( app.getOpenedLoactionId() ) {
 
-        if ( prevState.kind === 'location' ) {
-            History.back();
+            var locationId = app.getOpenedLoactionId();
+            FA.Router.pushState( 'location', locationId );
+
+        } else if ( $( 'body' ).hasClass( 'mobile' ) ) {
+
+            //History.pushState( null, null, '?kind=explore&mobile=true' )
+
         } else {
-            if ( $( 'body' ).hasClass( 'mobile' ) ) {
-                //app.changeState( new FA.StateExploreMobile( app ) );
-                //History.pushState( null, null, '?explore=false' )
-            } else {
-                History.pushState( null, null, '?kind=explore' )
-            }
+
+            FA.Router.pushState( 'explore' );
+
         }
 
     }
@@ -77,43 +69,75 @@ FA.StateVideo2 = function( app, videoId ) {
         // set arrows
         var videos,
             lastIndex,
-            currIndex,
-            prevState = ( app.getPrevState() ) ? app.getPrevState().getStateData() : null;
+            currIndex;
 
+        // if ( app.openedLocationId ) {
+        //     // navigate only videos contained in the location
+        //     videos = app.data.mediasByLocation[ app.openedLocationId ];
+        // } else {
+        //     // navigate all the videos
+        //     videos = app.data.medias;
+        // }
 
-
-        if ( prevState  &&  prevState.kind === 'location'  &&  prevState.id !== undefined ) {
-            // navigate only videos contained in the location
-            videos = app.data.mediasByLocation[ prevState.id ];
-        } else {
-            // navigate all the videos
-            videos = app.data.medias;
-        }
+        // navigate all the videos
+        videos = app.data.medias;
 
         lastIndex = videos.length - 1;
         currIndex = videos.indexOf( videoData );
 
-        // prev
-        if ( currIndex > 0 ) {
-            var prevVideo = videos[ currIndex - 1 ];
-            $arrowPrev
-                .find( '.label' ).text( prevVideo.title ).end()
+        // // prev
+        // if ( currIndex > 0 ) {
+        //     var prevVideo = videos[ currIndex - 1 ];
+        //     $arrowLeft
+        //         .find( '.label' ).text( prevVideo.title ).end()
+        //         .css( 'visibility', 'visible' )
+        //         .attr( 'data-id', prevVideo.id );
+        // } else {
+        //     $arrowLeft
+        //         .css( 'visibility', 'hidden' );
+        // }
+        //
+        //
+        // if ( currIndex < lastIndex ) {
+        //     var nextVideo = videos[ currIndex + 1 ];
+        //     $arrowRight
+        //         .find( '.label' ).text( nextVideo.title ).end()
+        //         .css( 'visibility', 'visible' )
+        //         .attr( 'data-id', nextVideo.id );
+        // } else {
+        //     $arrowRight
+        //         .css( 'visibility', 'hidden' );
+        // }
+
+        var leftVideo  = ( currIndex > 0 )         ? videos[ currIndex - 1 ] : null,
+            rightVideo = ( currIndex < lastIndex ) ? videos[ currIndex + 1 ] : null;
+
+        // invert navigation
+        if ( direction === 'rtl' ) {
+            var temp = leftVideo;
+            leftVideo = rightVideo;
+            rightVideo = temp;
+        }
+
+        // left
+        if ( leftVideo ) {
+            $arrowLeft
+                .find( '.label' ).text( leftVideo.title ).end()
                 .css( 'visibility', 'visible' )
-                .attr( 'data-id', prevVideo.id );
+                .attr( 'data-id', leftVideo.id );
         } else {
-            $arrowPrev
+            $arrowLeft
                 .css( 'visibility', 'hidden' );
         }
 
-        // next
-        if ( currIndex < lastIndex ) {
-            var nextVideo = videos[ currIndex + 1 ];
-            $arrowNext
-                .find( '.label' ).text( nextVideo.title ).end()
+        // right
+        if ( rightVideo ) {
+            $arrowRight
+                .find( '.label' ).text( rightVideo.title ).end()
                 .css( 'visibility', 'visible' )
-                .attr( 'data-id', nextVideo.id );
+                .attr( 'data-id', rightVideo.id );
         } else {
-            $arrowNext
+            $arrowRight
                 .css( 'visibility', 'hidden' );
         }
 
@@ -178,7 +202,6 @@ FA.StateVideo2 = function( app, videoId ) {
             // showControls();
         } );
 
-
         // testing
         // $(document).on('tap', function(){
         //     console.log("click!");
@@ -194,7 +217,9 @@ FA.StateVideo2 = function( app, videoId ) {
 
         $layer.find( '.btn-prev, .btn-next' )
             .on( 'click', function() {
+
                 goToVideo( $( this ).attr( 'data-id' ) );
+
                 // hide controls
                 // isArrowHover = false;
                 // isUserActive = false;
@@ -247,48 +272,45 @@ FA.StateVideo2 = function( app, videoId ) {
 
     }
 
+
     function goToVideo( id ) {
 
-        videoData = app.data.mediaById[ id ]
-
-        var isMobile = false, // TODO
-            sources = [];
-
-        initControls(  );
-
-        if ( !isMobile ) {
-            sources.push( { type: "video/mp4", src: videoData.video.hd } )
-        } else {
-            sources.push( { type: "video/mp4", src: videoData.video.sd } )
-        }
-
-        // change sources
-        player.src( sources );
-        player.play();
+        FA.Router.pushState( 'video', id, direction );
 
     }
 
 
-    /*******************
-     * Public
-     ******************/
+    function getVideoElementHtml( videoData ) {
+
+        // add video element
+        var isMobile = false,                // TODO: actual mobile check (read body data attr)
+            poster = ( isMobile ) ? '' : '', // TODO: add poster on mobile devices?
+            html = '';
+        html += '<video id="video_1" class="video-js vjs-default-skin vjs-fill" controls preload="none" width="640" height="264" poster="' + poster + '">';
+        html += ( isMobile ) ? '' : '<source src="' + videoData.video.hd + '" type="video/mp4">'; // do not add hd source if this is a mobile device
+        html += '<source src="' + videoData.video.sd + '" type="video/mp4">';
+        html += '<p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>';
+        html += '</video>';
+
+        return html;
+
+    }
+
+
+    //        //
+    // Public //
+    //        //
 
 
      // info about this state
-     this.getStateData = function() {
+     this.getName = function() {
 
-         return {
-             kind: 'video',
-             id: videoId
-         }
+         return 'STATE_VIDEO';
 
      }
 
 
     this.enter = function() {
-
-        // get the data
-        videoData = app.data.mediaById[ videoId ];
 
         // prepare dom elements
         $( '#header' ).css( 'top', 0 );
@@ -306,15 +328,7 @@ FA.StateVideo2 = function( app, videoId ) {
         $player.css('opacity', 0);
 
         // add video element
-        var isMobile = false,                // TODO: actual mobile check (read body data attr)
-            poster = ( isMobile ) ? '' : '', // TODO: add poster on mobile devices
-            html = '';
-        html += '<video id="video_1" class="video-js vjs-default-skin vjs-fill" controls preload="none" width="640" height="264" poster="' + poster + '">';
-        html += ( isMobile ) ? '' : '<source src="' + videoData.video.hd + '" type="video/mp4">'; // do not add hd source if this is a mobile device
-        html += '<source src="' + videoData.video.sd + '" type="video/mp4">';
-        html += '<p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>';
-        html += '</video>';
-        $player.html( html );
+        $player.html( getVideoElementHtml( videoData ) );
 
         // init videojs
         player = videojs(

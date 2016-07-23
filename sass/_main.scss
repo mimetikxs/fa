@@ -541,7 +541,26 @@ body {
             color: #ccc;
             font-size: 14px;
             text-align: left;
+            cursor: default;
             @include select;
+
+            p:first-child {
+                margin-top: 0;
+            }
+
+            p:last-child {
+                font-size: 13px;
+                padding-bottom: 20px;
+            }
+
+            .separator {
+                content: " ";
+                height: 1px;
+                width: 40px;
+                display: inline-block;
+                background-color: #888;
+                margin-bottom: 5px;
+            }
         }
 
         &.ar {

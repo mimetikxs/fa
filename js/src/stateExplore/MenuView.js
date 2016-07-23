@@ -176,21 +176,18 @@ FA.MenuView = function( app ) {
     }
 
 
-    function goToVideo( id ) {
+    function goToVideo( id, direction ) {
 
-        // historyjs
-        History.pushState( null, null, '?kind=video&id=' + id );
-
-    }
-
-
-
-    function goTo360( id ) {
-
-        History.pushState( null, null, '?kind=location&id=' + id );
+        FA.Router.pushState( 'video', id, direction );
 
     }
 
+
+    function goToLocation( id ) {
+
+        FA.Router.pushState( 'location', id );
+
+    }
 
 
     function deselectCurrentFolder() {
@@ -236,7 +233,7 @@ FA.MenuView = function( app ) {
         $btnArabic.on( 'click', function() {
             var mediaData = app.data.medias[ 0 ]; // media by index (0 = first)
 
-            goToVideo( mediaData.id );
+            goToVideo( mediaData.id, 'rtl' );
         } )
 
     }
@@ -350,7 +347,7 @@ FA.MenuView = function( app ) {
             if ( navMode === 'location'  &&  numChildren === 0 ) {
                 var slug = $target.parent().data( 'location' );
 
-                goTo360( slug );
+                goToLocation( slug );
 
             }
 
@@ -473,7 +470,7 @@ FA.MenuView = function( app ) {
             targetScroll = 0;
         }
 
-        currentScroll += ( targetScroll - currentScroll ) * 0.1;
+        currentScroll += ( targetScroll - currentScroll ) * 0.08;
 
         $currentMenu.css( 'transform', 'translate3d(0px,-' + currentScroll + 'px,0px)' );
 

@@ -186,7 +186,6 @@ FA.View360 = function( app ) {
                     item.setDoubleSide( data.doubleSide );
                 }
                 if ( data.opacityHighLight !== undefined ) {
-                    console.log("-------", data.opacityHighLight);
                     item.setHighlightOpacity( data.opacityHighLight );
                 }
 

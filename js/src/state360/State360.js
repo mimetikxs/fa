@@ -1,6 +1,4 @@
-FA.State360 = function( app, locationId ) {
-
-    var locationData;
+FA.State360 = function( app, locationData ) {
 
     var $layer = $( '#layer-360' ),
         $gl = $layer.find( '.gl' ),
@@ -26,6 +24,7 @@ FA.State360 = function( app, locationId ) {
         targetScroll = 0,
         currentScroll = 0,
         $infoContent = $layer.find( '.box-info .content' ),
+        infoScrollLocked = false,
 
         timeoutShowInfo;
 
@@ -74,6 +73,10 @@ FA.State360 = function( app, locationId ) {
 
     function onBoxInfoMouseMove( e ) {
 
+        if ( infoScrollLocked ) {
+            return;
+        }
+
         // auto scrolling
         localMouseY = e.pageY - $infoContent.parent().offset().top;
 
@@ -102,6 +105,10 @@ FA.State360 = function( app, locationId ) {
 
         itemOnDown = getItemUnderMouse( mouse );
 
+        // lock info scroll
+        infoScrollLocked = true;
+
+
     }
 
 
@@ -123,6 +130,13 @@ FA.State360 = function( app, locationId ) {
             var videoId = itemOnUp;
             goToVideo( videoId );
         }
+
+    }
+
+
+    function onDocumentMouseUp( e ) {
+
+        infoScrollLocked = false;
 
     }
 
@@ -154,6 +168,9 @@ FA.State360 = function( app, locationId ) {
             .on( 'mousemove', onMouseMove )
             .on( 'mousedown', onMouseDown )
             .on( 'mouseup', onMouseUp );
+
+        $(document)
+            .on( 'mouseup', onDocumentMouseUp );
 
         // auto scroll
         $('.box-info')
@@ -194,30 +211,32 @@ FA.State360 = function( app, locationId ) {
             .off( 'mousedown', onMouseDown )
             .off( 'mouseup', onMouseUp );
 
+        $(document)
+            .off( 'mouseup', onDocumentMouseUp );
+
     }
 
 
     function goBack() {
 
-        // historyjs
-        History.pushState( null, null, '?kind=explore' )
+        FA.Router.pushState( 'explore' );
 
-        view360.clear(); // clear when we go back
-
-        destroySound();
+        // view360.clear(); // clear when we go back
+        //
+        // destroySound();
 
     }
 
 
     function goToVideo( id ) {
 
-        // DO NOT clear the View360 so the scene is available when back from video
+        // // DO NOT clear the View360 so the scene is available when back from video
+        //
+        // // DO NOT clear the sounds, only pause
+        // pauseSound();
 
-        // DO NOT clear the sounds, only pause
-        pauseSound();
+        FA.Router.pushState( 'video', id );
 
-        // historyjs
-        History.pushState( null, null, "?kind=video&id=" + id );
     }
 
 
@@ -235,11 +254,7 @@ FA.State360 = function( app, locationId ) {
             ],
             path: "sound/",
             preload: true,
-            multiplay: true,
-            // volume: 0.9
-            // ready_callback: function() {
-            //     isSoundLoaded = true;
-            // }
+            multiplay: false
         });
 
         ion.sound.play( soundData.ambient );
@@ -249,27 +264,7 @@ FA.State360 = function( app, locationId ) {
 
     function resumeSound() {
 
-        var soundData = locationData.sound;
-
-        ion.sound.play( soundData.ambient );
-
-    }
-
-
-    function pauseSound() {
-
-        var soundData = locationData.sound;
-
-        ion.sound.pause( soundData.ambient );
-
-    }
-
-
-    function destroySound() {
-
-        var soundData = locationData.sound;
-
-        ion.sound.destroy( soundData.ambient );
+        ion.sound.play( locationData.sound.ambient );
 
     }
 
@@ -279,7 +274,7 @@ FA.State360 = function( app, locationId ) {
         $layer.find( '.spinner-wrap' ).css( 'display', 'block' );
 
         // avoid aborting -- TODO: allow abort preloading
-        $layer.find( '.btn-exit, .btn-info' ).css( {
+        $layer.find( '.btn-exit' ).css( {
             visibility: 'hidden',
             opacity: 0
         } );
@@ -294,7 +289,7 @@ FA.State360 = function( app, locationId ) {
 
         $layer.find( '.spinner-wrap' ).css( 'display', 'none' );
 
-        $layer.find( '.btn-exit, .btn-info' )
+        $layer.find( '.btn-exit' )
             .css( 'visibility', 'visible' )
             .transition( { opacity: 1 }, 500, 'out');
 
@@ -334,18 +329,31 @@ FA.State360 = function( app, locationId ) {
 
         // parse and display
         // http://juristr.com/blog/2010/05/n-will-break-your-json-jquery-wcf/
-        var html = convertToHTMLVisibleNewline( locationData.info );
-        $layer.find( '.box-info .content' ).html( html );
+        // var html = convertToHTMLVisibleNewline( locationData.info );
+        // $layer.find( '.box-info .content' ).html( html );
+        //
+        // function convertToHTMLVisibleNewline(value) {
+        //     if (value != null && value != "") {
+        //         return value.replace(/\n/g, "<br/>");
+        //     } else {
+        //         return value;
+        //     }
+        // }
 
-        function convertToHTMLVisibleNewline(value) {
+        var html = convertToHTMLParagraph( locationData.info );
+        $layer.find( '.box-info .content' ).html( '<p>' + html + '</p>' );
+        $layer.find( '.box-info .content p:last-child' ).before( '<span class="separator"></span>' );
+
+        function convertToHTMLParagraph(value) {
             if (value != null && value != "") {
-                return value.replace(/\n/g, "<br/>");
+                return value.replace(/\n\n/g, "</p><p>");
             } else {
                 return value;
             }
         }
 
     }
+
 
     function showInfo( lang ) {
 
@@ -430,25 +438,43 @@ FA.State360 = function( app, locationId ) {
     }
 
 
+    function updateInfoScroll() {
+
+        var contentHeight = $infoContent.height(),
+            containerHeight = $infoContent.parent().height(),
+            overflow = contentHeight - containerHeight,
+            pct = ( localMouseY - 40 ) / ( containerHeight - 80 );  // margin of 40px on top and bottom
+
+        pct = Math.min( Math.max( pct, 0 ), 1); // clamp
+
+        if ( overflow > 0 ) {
+            targetScroll = pct * overflow;
+        } else {
+            targetScroll = 0;
+        }
+
+        currentScroll += ( targetScroll - currentScroll ) * 0.05;
+
+        //$infoContent.css( 'transform', 'translate3d(0px,-' + currentScroll + 'px,0px)' );
+        $infoContent.parent().scrollTop( currentScroll );
+
+    }
+
+
     //        //
     // Public //
     //        //
 
 
     // info about this state
-    this.getStateData = function() {
+    this.getName = function() {
 
-        return {
-            kind: 'location',
-            id: locationId
-        }
+        return 'STATE_LOCATION';
 
     }
 
 
     this.enter = function() {
-
-        locationData = app.data.locationBySlug[ locationId ],
 
         // create only once
         app.view360 = app.view360 || new FA.View360( app );
@@ -456,22 +482,22 @@ FA.State360 = function( app, locationId ) {
         // shortcut
         view360 = app.view360;
 
-        var prevState = ( app.getPrevState() ) ? app.getPrevState().getStateData() : null;
-
-        // when we are back from a video
-        if ( prevState.kind === 'video' ) {
+        // if this location is opened
+        // assume the user is coming back from a video
+        // and re-use the undestroyed view
+        if ( app.getOpenedLoactionId() === locationData.slug ) {
 
             // do not change the 360  wiew!
 
             resumeSound();
 
-            // show buttons
-            $layer.find( '.btn-exit, .btn-info' ).css( { visibility: 'visible', opacity: 1 } );
-            // show labels
+            // show buttons and labels
+            $layer.find( '.btn-exit' ).css( { visibility: 'visible', opacity: 1 } );
             $labels.css( 'display', 'block' );
 
         } else {
 
+            // load a new view
             view360.load( locationData, on3DLoaded );
 
             initGui( locationData );
@@ -499,25 +525,7 @@ FA.State360 = function( app, locationId ) {
 
         view360.update();
 
-        //
-        // update info box scroll if open
-        //
-        var contentHeight = $infoContent.height(),
-            containerHeight = $infoContent.parent().height(),
-            overflow = contentHeight - containerHeight,
-            pct = ( localMouseY - 40 ) / ( containerHeight - 80 );  // margin of 40px on top and bottom
-
-        pct = Math.min( Math.max( pct, 0 ), 1); // clamp
-
-        if ( overflow > 0 ) {
-            targetScroll = pct * overflow;
-        } else {
-            targetScroll = 0;
-        }
-
-        currentScroll += ( targetScroll - currentScroll ) * 0.05;
-
-        $infoContent.css( 'transform', 'translate3d(0px,-' + currentScroll + 'px,0px)' );
+        updateInfoScroll();
 
     }
 
@@ -526,16 +534,13 @@ FA.State360 = function( app, locationId ) {
 
         removeListeners();
 
-        // hide info box
-        hideInfo();
-
         // hide layer
         $layer.css( {
             'opacity': 0,
             'visibility': 'hidden'
         } );
         // hide buttons
-        $layer.find( '.btn-exit, .btn-info' ).css( {
+        $layer.find( '.btn-exit' ).css( {
             visibility: 'hidden',
             opacity: 0
         } );

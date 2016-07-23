@@ -138,11 +138,7 @@ FA.StateExplore = function( app ) {
 
         app.setActiveLocation( slug );
 
-        var locationData = app.data.locationBySlug[ slug ];
-
-        //app.changeState( new FA.State360( app, locationData ) );
-
-        History.pushState( null, null, '?kind=location&id=' + slug )
+        FA.Router.pushState( 'location', slug );
 
     }
 
@@ -151,16 +147,17 @@ FA.StateExplore = function( app ) {
     //        //
 
 
-    this.getStateData = function() {
+    this.getName = function() {
 
-        return {
-            kind: 'explore'
-        }
+        return 'STATE_EXPLORE';
 
     }
 
 
     this.enter = function() {
+
+        // app.setOverLocation( null );
+        // app.setActiveLocation( null );
 
         // initilise the objects only the first time
         app.buildingView = app.buildingView || new FA.BuildingView( app );

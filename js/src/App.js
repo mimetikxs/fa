@@ -12,7 +12,9 @@ FA.App = (function() {
         prevLocation = null,
         activeLocation = null,            // slug of the current location
         prevOverLocation = null,
-        overLocation = null;
+        overLocation = null,
+
+        openedLocationId = null;
 
 
     // start loop
@@ -36,6 +38,61 @@ FA.App = (function() {
         }
         currentState = newState;
         currentState.enter();
+
+    }
+
+
+    function goToVideo( id, direction ) {
+
+        var videoData = FA.App.data.mediaById[ id ];
+
+        if ( !videoData ) {
+            console.log("[ WARNING ] Resource not found, setting default state");
+            goToHome();
+            return;
+        }
+
+        if ( openedLocationId ) {
+            var locationData = FA.App.data.locationBySlug[ openedLocationId ];
+            ion.sound.pause( locationData.sound.ambient );
+        }
+
+        changeState( new FA.StateVideo2( FA.App, videoData, direction ) );
+
+    }
+
+
+    function goToLocation( id ) {
+
+        var locationData = FA.App.data.locationBySlug[ id ];
+
+        if ( !locationData ) {
+            console.log("[ WARNING ] Resource not found, setting default state");
+            goToHome();
+            return;
+        }
+
+        changeState( new FA.State360( FA.App, locationData ) );
+
+        openedLocationId = id;
+
+    }
+
+
+    function goToHome() {
+
+        // this operations are needed to clear
+        // resources that have been kept in an idle/inactive state
+        if ( openedLocationId ) {
+            FA.App.view360.clear();
+
+            var locationData = FA.App.data.locationBySlug[ openedLocationId ];
+            ion.sound.destroy( locationData.sound.ambient );
+        }
+
+        changeState( new FA.StateExplore( FA.App ) );
+
+        openedLocationId = null;
 
     }
 
@@ -69,6 +126,13 @@ FA.App = (function() {
     }
 
 
+    function getOpenedLoactionId() {
+
+        return openedLocationId;
+
+    }
+
+
     //        //
     // Public //
     //        //
@@ -82,7 +146,6 @@ FA.App = (function() {
         buildingMesh     : null,
         buildingRoofMesh : null,
         terrainMesh      : null,
-
         // prison view
         rooms : [ ],                    // FA.InteractiveItem
         buildingView : null,
@@ -94,17 +157,20 @@ FA.App = (function() {
         // public methods
         changeState : changeState,
 
-        // getCurrentState : function() { return currentState; },
-        getPrevState : function() { return prevState; },
-
         getActiveLocation : getActiveLocation,
         setActiveLocation : setActiveLocation,
         getOverLocation : getOverLocation,
-        setOverLocation : setOverLocation
+        setOverLocation : setOverLocation,
+        getOpenedLoactionId : getOpenedLoactionId,  // an open location can be the current screen or be awaiting for user to come back from video
+
+        goToLocation : goToLocation,
+        goToVideo : goToVideo,
+        goToHome : goToHome
 
     }
 
 })(); // App entry point (singleton)
+
 
 //
 // make publisher
@@ -151,8 +217,7 @@ function initStandard() {
     // return to explore view
     $( 'body[data-section="explore"] .mainNav-menu [data-target="explore"]' )
         .on( 'click', function( e ) {
-            //FA.App.changeState( new FA.StateExplore( FA.App ) );
-            History.pushState( null, null, '?kind=explore' );
+            FA.Router.pushState( 'explore' );
         } );
 
 }
@@ -161,77 +226,4 @@ function initMobile() {
 
     FA.App.changeState( new FA.StateExploreMobile( FA.App ) );
 
-}
-
-
-
-
-
-// ----------------------------------------------------------------------------------------
-// history listener
-// to provide deep linking to content in the app
-// at the moment, links to:
-// - home screen (root)
-// - videos
-// todo:
-// - link to 360s
-// ----------------------------------------------------------------------------------------
-
-// listen for state changes
-History.Adapter.bind( window, 'statechange', processUrl );
-
-// maps the url with an application state (explore, video...)
-function processUrl() {
-
-    var urlVars = getUrlVars( History.getState().url ),
-        kind = urlVars[ 'kind' ],
-        id = urlVars[ 'id' ],
-        title;
-
-    // video
-    if ( kind === 'video' )
-    {
-        var isValid = FA.App.data.mediaById[ id ];
-
-        if ( isValid ) {
-            FA.App.changeState( new FA.StateVideo2( FA.App, id ) );
-        } else {
-            // error: url not found
-        }
-        return;
-    }
-
-    // location (aka 360)
-    if ( kind === 'location' )
-    {
-        var isValid = FA.App.data.locationBySlug[ id ];
-
-        if ( isValid ) {
-            FA.App.changeState( new FA.State360( FA.App, id ) );
-        } else {
-            // error: url not found
-        }
-        return;
-    }
-
-
-    // home
-    // if ( url[ 'index' ] )
-    // {
-        FA.App.changeState( new FA.StateExplore( FA.App ) );
-    // }
-
-    // http://stackoverflow.com/questions/4656843/jquery-get-querystring-from-url
-    function getUrlVars( hashString ) {
-
-        var vars = {},
-            hash,
-            hashes = hashString.slice( hashString.indexOf( '?' ) + 1 ).split( '&' );
-        for ( var i = 0; i < hashes.length; i++ ) {
-            hash = hashes[ i ].split( '=' );
-            vars[ hash [ 0 ] ] = hash[ 1 ];
-        }
-        return vars;
-
-    }
 }

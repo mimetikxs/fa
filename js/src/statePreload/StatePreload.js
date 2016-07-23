@@ -28,75 +28,8 @@ FA.StatePreload = function( app ) {
 
         // router
         bSkipVideo = false,
-        nextState,
-
 
         slowLoopIntervalId;
-
-
-    // ----------------------------------------------------------------------------------------
-
-    // maps the url with an application state (explore, video...)
-    // TODO: create FA.Router to process url and return a state
-    // eg: FA.Router.getState( url ) <-- will return the state to pass to FA.App.changeState
-    function processUrl() {
-
-        var urlVars = getUrlVars( History.getState().url ),
-            kind = urlVars[ 'kind' ],
-            id = urlVars[ 'id' ],
-            title;
-
-        // video
-        if ( kind === 'video' )
-        {
-            var isValid = FA.App.data.mediaById[ id ];
-
-            if ( isValid ) {
-                nextState = new FA.StateVideo2( FA.App, id );
-            } else {
-                // error: url not found
-            }
-            return;
-        }
-
-        // location (aka 360)
-        if ( kind === 'location' )
-        {
-            var isValid = FA.App.data.locationBySlug[ id ];
-
-            if ( isValid ) {
-                nextState = new FA.State360( FA.App, id );
-            } else {
-                // error: url not found
-            }
-            return;
-        }
-
-        // default next state
-        nextState = new FA.StateExplore( app );
-
-
-        // http://stackoverflow.com/questions/4656843/jquery-get-querystring-from-url
-        function getUrlVars( hashString ) {
-
-            var vars = {},
-                hash,
-                hashes = hashString.slice( hashString.indexOf( '?' ) + 1 ).split( '&' );
-            for ( var i = 0; i < hashes.length; i++ ) {
-                hash = hashes[ i ].split( '=' );
-                vars[ hash [ 0 ] ] = hash[ 1 ];
-            }
-            return vars;
-
-        }
-
-    }
-
-
-
-
-    // end history listener
-    // ----------------------------------------------------------------------------------------
 
 
     function loadData( onComplete ) {
@@ -319,7 +252,7 @@ FA.StatePreload = function( app ) {
 
                 this.remove();
 
-                app.changeState( nextState );
+                FA.Router.processUrl()
             }
         );
 
@@ -438,11 +371,9 @@ FA.StatePreload = function( app ) {
 
 
     // info about this state
-    this.getStateData = function() {
+    this.getName = function() {
 
-        return {
-            kind: 'preload'
-        }
+        return 'STATE_PRELOAD';
 
     }
 
@@ -464,8 +395,8 @@ FA.StatePreload = function( app ) {
             // and then load 3d + sound
             loadResources();
             loadSound();
-            // process the current url once we've got access to the data
-            processUrl();
+            // // process the current url once we've got access to the data
+            // processUrl();
         } );
 
         // whait at least two seconds before starting video
