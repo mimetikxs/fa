@@ -83,7 +83,7 @@
     // -------------------------
 
     .fragment-wrapper {
-        padding: 20px;
+        padding: 40px 20px;
 
         .fragment{
             display: inline-block;;
@@ -124,16 +124,16 @@
     }
 
     // cta form
-    body[data-lang="ar"] #cta-form,
-    #cta-form {
-        text-align: center;
-
-        .fragment{
-            max-width: 450px;
-            box-sizing: border-box;
-            // padding: 20px;
-        }
-    }
+    // body[data-lang="ar"] #cta-form,
+    // #cta-form {
+    //     text-align: center;
+    //
+    //     .fragment{
+    //         max-width: 450px;
+    //         box-sizing: border-box;
+    //         // padding: 20px;
+    //     }
+    // }
 
     // report fragment
 
@@ -380,6 +380,41 @@
                     // }
                 }
             }
+        }
+    }
+
+}
+
+// take action overlay
+
+@media screen and ( max-width:800px ) {
+
+    #cta-overlay,
+    #cta-form {
+
+        .column-left,
+        .column-right {
+            float: none !important;
+            width: 100% !important;
+            max-width: 500px !important;
+        }
+
+        .column-left {
+            padding: 0 !important;
+            margin-bottom: 40px;
+        }
+
+        .column-right {
+            padding: 0 !important;
+        }
+
+    }
+
+    #cta-form {
+
+        .column-left,
+        .column-right {
+            max-width: 600px !important;
         }
     }
 

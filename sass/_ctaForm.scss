@@ -1,0 +1,154 @@
+#cta-overlay {
+    position: fixed;
+    // display: inline-block;
+    height: 100%;
+    width: 100%;
+    // text-align: center;
+    overflow-y: auto;
+    background-color: rgba(0,0,0, 0.8);
+    z-index: 10000;
+    display: none;
+
+    .wrap {
+        position: relative;
+        max-width: 900px;
+        background-color: white;
+        padding: 80px 40px 40px;
+        @include clearfix;
+
+        &.ar {
+            display: none; // initially hidden
+        }
+    }
+
+    .btn-close {
+        @extend .cross;
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        height: 40px;
+        width: 40px;
+        background-color: #fff;
+
+        &::before,
+        &::after {
+            background: #000;
+        }
+
+        &:hover {
+            background-color: #000;
+            &::before,
+            &::after {
+                background: #fff;
+            }
+        }
+    }display: none; // initially hidden
+
+    .language-switch {
+        position: absolute;
+        left: 20px;
+        top: 20px;
+        padding: 5px 18px;
+        line-height: 30px;
+        color: #000;
+        font-size: 1.125em;
+        cursor: pointer;
+        font-family: $f-title--rtl;
+        transition: color 300ms, background-color 300ms;
+
+        &:hover {
+            color: #fff;
+            background-color: #000;
+        }
+    }
+}
+
+#cta-overlay,
+#cta-form {
+    .column-left,
+    .column-right {
+        float: left;
+        width: 50%;
+        height: 600px;
+        overflow: hidden;
+        box-sizing: border-box;
+        text-align: left;
+    }
+
+    .column-left {
+        display: block;
+        padding-right: 20px;
+        white-space: normal;
+
+        .copy {
+            height: 100%;
+            overflow-y: auto;
+            padding-right: 40px;
+
+            h2 {
+                font-size: 26px;
+                margin-top: 0;
+                font-family: $f-title;
+                text-transform: uppercase;
+                line-height: 1;
+            }
+
+            p {
+                font-family: $f-default;
+                font-size: 14px;
+                line-height: 1.4;
+
+                &.strong {
+                    font-family: $f-title;
+                    font-size: 18px;
+                }
+            }
+        }
+    }
+
+    .column-right {
+        padding-left: 20px;
+        // height: 600px;
+        // overflow: hidden;
+    }
+
+    iframe.iframe--action {
+        width: 100%;
+    }
+
+    // arabic
+
+    .form-wrapper.ar,
+    .wrap.ar {
+        .column-left {
+            text-align: right;
+            // padding-right: 0;
+
+            .copy {
+                direction: rtl;
+                padding-left: 40px;
+                padding-right: 0;
+
+                h2 {
+                    font-family: $f-title--rtl;
+                }
+
+                p {
+                    &.strong {
+                        font-family: $f-title--rtl;
+                        font-size: 18px;
+                    }
+                }
+            }
+        }
+        .language-switch {
+            font-size: 16px;
+        }
+    }
+}
+
+#cta-form .form-wrapper .column-left {
+    h2 {
+        font-size: 32px;
+    }
+}

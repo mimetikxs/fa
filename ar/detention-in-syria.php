@@ -75,6 +75,8 @@
 
 		<?php include '../includes/fragment-header-ar.php';?>
 
+		<?php include '../includes/fragment-action-form.php';?>
+
 		<!-- Scripts -->
 
 		<?php include '../includes/fragment-scripts.php';?>

@@ -26,7 +26,14 @@
 
         // console.log('../' + targetLang + '/' + fileSegment);
 
-    $( '[data-section="about"] .language-switch' ).click( function( e ) {
+    $( '[data-section="about"] #content .language-switch' ).click( function( e ) {
         window.location.href = '../' + targetLang + '/' + fileSegment;
     } );
+
+    // take action form overlay
+    // action form
+    $( '#header [data-action="cta"]' ).on( 'click', function() {
+        FA.ActionFormOverlay.open();
+    } );
+
 })();

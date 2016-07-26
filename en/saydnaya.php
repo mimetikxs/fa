@@ -69,6 +69,8 @@
 
 		<?php include '../includes/fragment-header-en.php';?>
 
+		<?php include '../includes/fragment-action-form.php';?>
+
 		<!-- Scripts -->
 
 		<?php include '../includes/fragment-scripts.php';?>

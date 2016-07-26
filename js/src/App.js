@@ -13,19 +13,44 @@ FA.App = (function() {
         activeLocation = null,            // slug of the current location
         prevOverLocation = null,
         overLocation = null,
+        openedLocationId = null,
 
-        openedLocationId = null;
+        requestId,  // allows start/stop animation loop (useful for cta overlay)
+        isStoped;
 
 
     // start loop
-    update();
+    start();
+
+
+    function start() {
+
+        // resume loop
+        if ( !requestId ) {
+            update();
+            isStoped = false;
+        }
+
+    }
+
+
+    function stop() {
+
+        // stop loop
+        if ( requestId ) {
+           cancelAnimationFrame( requestId );
+           requestId = undefined;
+           isStoped = true;
+        }
+
+    }
 
 
     function update() {
 
-        requestAnimationFrame( update );
-
         currentState.update();
+
+        requestId = requestAnimationFrame( update );
 
     }
 
@@ -165,7 +190,13 @@ FA.App = (function() {
 
         goToLocation : goToLocation,
         goToVideo : goToVideo,
-        goToHome : goToHome
+        goToHome : goToHome,
+
+        // this mathods are useful to freeze
+        // the loop when form overlay is displayed
+        stopUpdate : stop,
+        startUpdate : start,
+        isStoped : function() { return isStoped; }
 
     }
 

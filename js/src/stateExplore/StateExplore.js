@@ -142,16 +142,73 @@ FA.StateExplore = function( app ) {
 
     }
 
+
+    function playSound() {
+
+        ion.sound.play( app.data.mainScreenSound.ambient );
+
+    }
+
+
+    function pauseSound() {
+
+        ion.sound.pause( app.data.mainScreenSound.ambient );
+
+    }
+
+
+    function addListeners() {
+
+        $(window)
+            .on( 'resize', onWindowResize );
+
+        $labels
+            .on( 'mousemove', onMouseMove )
+            .on( 'mousedown', onMouseDown )
+            .on( 'mouseup', onMouseUp );
+
+        // action form
+        $( '#header [data-action="cta"]' ).on( 'click', function() {
+            FA.ActionFormOverlay.open();
+            pauseSound();
+            app.stopUpdate();
+        } );
+        FA.ActionFormOverlay.onClose( function() {
+            playSound();
+            app.startUpdate();
+        } );
+
+    }
+
+
+    function removeListeners() {
+
+        $(window)
+            .off( 'resize', onWindowResize );
+
+        $labels
+            .off( 'mousemove', onMouseMove )
+            .off( 'mousedown', onMouseDown )
+            .off( 'mouseup', onMouseUp );
+
+        // action form
+        $( '#header [data-action="cta"]' ).off();
+        FA.ActionFormOverlay.onClose( null );
+
+    }
+
+
+
     //        //
     // Public //
     //        //
 
 
-    this.getName = function() {
-
-        return 'STATE_EXPLORE';
-
-    }
+    // this.getName = function() {
+    //
+    //     return 'STATE_EXPLORE';
+    //
+    // }
 
 
     this.enter = function() {
@@ -172,13 +229,7 @@ FA.StateExplore = function( app ) {
         buildingView.setOpacity( app.modelOpacity );
 
         onWindowResize();
-
-        // listeners
-        $(window).on( 'resize', onWindowResize );
-        $labels
-            .on( 'mousemove', onMouseMove )
-            .on( 'mousedown', onMouseDown )
-            .on( 'mouseup', onMouseUp );
+        addListeners();
 
         // revealing //////////////////////////////////////////
         $gl.css( 'opacity', 1 );
@@ -187,8 +238,7 @@ FA.StateExplore = function( app ) {
         menuView.show();
         //////////////////////////////////////////////////////
 
-        // testing sound
-        ion.sound.play( app.data.mainScreenSound.ambient );
+        playSound();
 
     }
 
@@ -206,12 +256,7 @@ FA.StateExplore = function( app ) {
 
     this.exit = function() {
 
-        // remove listeners
-        $(window).off( 'resize', onWindowResize );
-        $labels
-            .off( 'mousemove', onMouseMove )
-            .off( 'mousedown', onMouseDown )
-            .off( 'mouseup', onMouseUp );
+        removeListeners();
 
         // app.setOverLocation( null );
         // app.setActiveLocation( null );
@@ -222,9 +267,7 @@ FA.StateExplore = function( app ) {
 
         destroySlider();
 
-        // testing sound
-        // ion.sound.volume( app.data.mainScreenSound.ambient, {volume:0.5} );
-        ion.sound.pause( app.data.mainScreenSound.ambient );
+        pauseSound();
 
     }
 

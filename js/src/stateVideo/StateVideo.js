@@ -85,30 +85,6 @@ FA.StateVideo2 = function( app, videoData, direction ) {
         lastIndex = videos.length - 1;
         currIndex = videos.indexOf( videoData );
 
-        // // prev
-        // if ( currIndex > 0 ) {
-        //     var prevVideo = videos[ currIndex - 1 ];
-        //     $arrowLeft
-        //         .find( '.label' ).text( prevVideo.title ).end()
-        //         .css( 'visibility', 'visible' )
-        //         .attr( 'data-id', prevVideo.id );
-        // } else {
-        //     $arrowLeft
-        //         .css( 'visibility', 'hidden' );
-        // }
-        //
-        //
-        // if ( currIndex < lastIndex ) {
-        //     var nextVideo = videos[ currIndex + 1 ];
-        //     $arrowRight
-        //         .find( '.label' ).text( nextVideo.title ).end()
-        //         .css( 'visibility', 'visible' )
-        //         .attr( 'data-id', nextVideo.id );
-        // } else {
-        //     $arrowRight
-        //         .css( 'visibility', 'hidden' );
-        // }
-
         var leftVideo  = ( currIndex > 0 )         ? videos[ currIndex - 1 ] : null,
             rightVideo = ( currIndex < lastIndex ) ? videos[ currIndex + 1 ] : null;
 
@@ -242,6 +218,15 @@ FA.StateVideo2 = function( app, videoData, direction ) {
                 }
             } );
 
+        // action form
+        $( '#layer-video [data-action="cta"]' ).on( 'click', function() {
+            FA.ActionFormOverlay.open();
+            player.pause();
+        } );
+        FA.ActionFormOverlay.onClose( function() {
+            // player.play();
+        } );
+
     }
 
 
@@ -249,6 +234,10 @@ FA.StateVideo2 = function( app, videoData, direction ) {
 
         $btnExit.off();
         $layer.find( '.btn-prev, .btn-next' ).off();
+
+        // action form
+        $( '#layer-video [data-action="cta"]' ).off();
+        FA.ActionFormOverlay.onClose( null );
 
     }
 

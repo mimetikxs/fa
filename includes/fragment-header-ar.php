@@ -3,7 +3,7 @@
         <span class="ai"></span><span class="fa"></span>
     </div>
 
-    <div class="takeAction">
+    <div class="takeAction" data-action="cta">
         <span>Take Action</span><span>بادر بالتحرك</span>
     </div>
 

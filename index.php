@@ -8,7 +8,7 @@
 		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 
 		<link rel="stylesheet" href="js/lib/videojs/video-js.css">
-		<link href="https://fonts.googleapis.com/css?family=Oswald:300,400,700" rel="stylesheet">
+		<!-- <link href="https://fonts.googleapis.com/css?family=Oswald:300,400,700" rel="stylesheet"> -->
 		<link rel="stylesheet" href="css/app.css">
 		<script src="js/lib/videojs/video.min.js"></script>
 	</head>
@@ -120,7 +120,7 @@
 				<div class="btn-exit"></div>
 
 				<div class="bottom-bar">
-					<div class="takeAction">
+					<div class="takeAction" data-action="cta">
 				        <span>Take Action</span><span>بادر بالتحرك</span>
 				    </div>
 					<div class="share-social">
@@ -147,15 +147,15 @@
 
 				<div class="centered">
 
-					<div class="intro-title">
+					<div class="intro-title hidden">
 						<span>Saydnaya</span><span>صيدنايا</span>
 					</div>
 
-					<div class="intro-subtitle">
+					<div class="intro-subtitle hidden">
 						<span>Inside a Syrian Torture Prison</span>
 					</div>
 
-					<div class="intro-language">
+					<div class="intro-language hidden">
 						<div class="en">Content in english and arabic</div>
 						<div class="ar">المحتوى باللغتين العربية والإنجليزية</div>
 					</div>
@@ -181,7 +181,7 @@
 				<span class="ai"></span><span class="fa"></span>
 			</div>
 
-			<div class="takeAction">
+			<div class="takeAction" data-action="cta">
 				<span>Take Action</span>
 				<span>بادر بالتحرك</span>
 			</div>
@@ -198,11 +198,17 @@
 			</div>
 		</div>
 
+		<!-- footer -->
+
 		<div id="footer-desktop" class="share-social">
 			<span class="label">share</span>
 			<span class="facebook"></span>
 			<span class="twitter"></span>
 		</div>
+
+		<!-- cta -->
+
+		<?php include 'includes/fragment-action-form.php';?>
 
 		<!-- Scripts -->
 
@@ -218,6 +224,7 @@
 		<script src="js/lib/threejs/OBJLoader.js"></script>
         <script src="js/lib/threejs/OrbitControls.js"></script>
 		<script src="js/lib/ion.sound.js"></script>
+		<script src="js/lib/js.cookie.js"></script>
 
 		<script src="js/src/FA.js"></script>
 		<script src="js/src/Utils.js"></script>
@@ -236,7 +243,8 @@
 		<script src="js/src/StateExploreMobile.js"></script>
 		<script src="js/src/App.js"></script>
 		<script src="js/src/Router.js"></script>
-		<script src="js/responsive.js"></script>
+		<script src="js/src/action-form.js"></script>
+		<script src="js/src/responsive.js"></script>
 
 	</body>
 

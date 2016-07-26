@@ -12,10 +12,10 @@ FA.StatePreload = function( app ) {
         messageCompleted = false,
         manager,
 
+        MAX_SECONDS_WAIT = 5,
         isTimeUp = false,
         intervalId,
         secondsCounter = 0,
-        maxSeconds = 2,
 
         $btnSkip = $( '#layer-intro .btn-skip' ),
         $spinner = $( '#layer-intro .intro-spinner' ),
@@ -68,12 +68,9 @@ FA.StatePreload = function( app ) {
                     loop: true
                 },
             ],
-
-            // main config
             path: "sound/",
             preload: true,
             multiplay: true,
-            // volume: 0.9
             ready_callback: function() {
                 isSoundLoaded = true;
             }
@@ -94,7 +91,8 @@ FA.StatePreload = function( app ) {
         manager.onLoad = function() {
             is3Dloaded = true;
 
-            showSkip();
+            // showSkip();
+            //hideSpinner();
         }
 
         loadBuildingModel();
@@ -248,10 +246,6 @@ FA.StatePreload = function( app ) {
         // fadeout intro
         $( "#layer-intro" ).transition( { opacity: 0 }, 500, 'out',
             function() {
-                player.dispose();
-
-                this.remove();
-
                 FA.Router.processUrl()
             }
         );
@@ -266,7 +260,6 @@ FA.StatePreload = function( app ) {
               '<p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>' +
             '</video>'
         );
-        $player.css( { 'display': 'none', 'opacity': 0 } );
 
         // init videojs
         player = videojs(
@@ -302,7 +295,7 @@ FA.StatePreload = function( app ) {
 
         player.src( [
             { type: "video/mp4", src: app.data.introVideo.hd }
-            // { type: "video/mp4", src: app.data.introVideo.sd }
+            // ,{ type: "video/mp4", src: app.data.introVideo.sd }
         ] );
 
         player.play();
@@ -317,7 +310,7 @@ FA.StatePreload = function( app ) {
         intervalId = setInterval( function() {
             secondsCounter++;
 
-            if ( secondsCounter > maxSeconds ) {
+            if ( secondsCounter > MAX_SECONDS_WAIT ) {
                 clearInterval( intervalId );
                 isTimeUp = true;
             }
@@ -327,28 +320,15 @@ FA.StatePreload = function( app ) {
     }
 
 
-    function showSkip() {
-
-        $btnSkip
-            .css( { visibility: 'visible', opacity: 0 } )
-            .transition( { opacity: 1 }, 500, 'in')
-            .on( 'click', function( e ) {
-
-                goToNextState();
-
-            });
-
-        $spinner.transition( { opacity: 0 }, 200, 'out');
-        $spinner.transition( { height: 0, delay: 0 }, 300, 'out');
-
-    }
-
-
-
     function waitForLoading() {
 
-        // check if everything loaded every 500ms
         slowLoopIntervalId = setInterval( function() {
+
+            if ( !bSkipVideo  && $btnSkip.css('visibility') !== "visible") {
+                hideSpinner();
+                showSkip();
+            }
+
             if ( is3Dloaded  &&  isSoundLoaded  &&  isVideoReady  &&  isTimeUp ) { //  &&  !isVideoStarted   ) {
 
                 // console.log( is3Dloaded, isVideoReady, isVideoStarted, isTimeUp );
@@ -365,44 +345,82 @@ FA.StatePreload = function( app ) {
     }
 
 
+    function showSkip() {
+
+        $btnSkip
+            .css( { visibility: 'visible', opacity: 0 } )
+            .transition( { opacity: 1 }, 500, 'in')
+            .on( 'click', function( e ) {
+
+                goToNextState();
+
+            });
+
+    }
+
+
+    function hideSpinner() {
+
+        $spinner.transition( { opacity: 0 }, 200, 'out');
+        $spinner.transition( { height: 0, delay: 0 }, 300, 'out');
+
+    }
+
+
+    function showSplash() {
+
+        $( '#introMessage .centered' )
+            .find( '.hidden' ).removeClass( 'hidden' );
+
+        $( '#layer-intro .intro-logos' )
+            .css( { visibility : 'visible' } )
+            .transition( { opacity: 1 }, 900, 'in');
+    }
+
+
     //        //
     // Public //
     //        //
-
-
-    // info about this state
-    this.getName = function() {
-
-        return 'STATE_PRELOAD';
-
-    }
 
 
     this.enter = function() {
 
         // hide layers
         $( '#layer-prison, #layer-video' ).css( 'display', 'none' );
-
         $( '#layer-prison' ).css( 'opacity', 1 );
 
-        $( '#introMessage .centered' ).transition( { opacity: 1 }, 900, 'in');
+        // showSplash();
 
         // prepare the player
-        buidlVideo();
+        $player.css( { 'display': 'none', 'opacity': 0 } );
+        // buidlVideo();
 
-        // load json  resources
+        // show preloader message
+        $( '#introMessage .centered' ).transition( { opacity: 1 }, 900, 'in').end()
+
+        // load json and resources
         loadData( function() {
             // and then load 3d + sound
             loadResources();
             loadSound();
-            // // process the current url once we've got access to the data
-            // processUrl();
         } );
 
-        // whait at least two seconds before starting video
-        // this ensures that the user will see the intro text for at least maxSeconds
-        // before launching the video
-        startTimer();
+        // page already visited TODO: cookie
+        if ( true ) {
+            isTimeUp = true;     // bypass timer
+            isVideoReady = true; // bypass video
+            bSkipVideo = true;
+            $( '#introMessage' ).css( { 'background': 'transparent'} );
+        }
+        // first time visit
+        else {
+            isTimeUp = false;
+            isVideoReady = false;
+            bSkipVideo = false;
+            showSplash();
+            buidlVideo();
+            startTimer();   // wait for a few seconds before starting video or going to next state
+        }
 
         waitForLoading();
 
@@ -423,6 +441,23 @@ FA.StatePreload = function( app ) {
 
         $btnSkip.off();
 
+        if ( player ) {
+            player.dispose();
+        }
+
+        // remove from dom
+        $( '#layer-intro' ).remove();
+
+        hideSpinner();
+
     }
+
+
+    // info about this state
+    // this.getName = function() {
+    //
+    //     return 'STATE_PRELOAD';
+    //
+    // }
 
 }

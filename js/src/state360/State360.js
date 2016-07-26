@@ -71,6 +71,7 @@ FA.State360 = function( app, locationData ) {
 
     }
 
+
     function onBoxInfoMouseMove( e ) {
 
         if ( infoScrollLocked ) {
@@ -151,6 +152,15 @@ FA.State360 = function( app, locationData ) {
     }
 
 
+    function onShowInfoClick( e ) {
+
+        var targetLang = $( e.target ).hasClass( 'title-arabic' ) ? 'ar' : 'en';
+
+        showInfo( targetLang );
+
+    }
+
+
     function addListeners() {
 
         window.addEventListener( 'resize', onWindowResize, false );
@@ -177,18 +187,16 @@ FA.State360 = function( app, locationData ) {
             .on( 'mousemove', onBoxInfoMouseMove )
 
 
-        // $( '.label' ).on( 'click', function(){
-        //     app.changeState( new FA.StateVideo2( app, "cell", { title: "interactive item" } ) ); // back to cell after video
-        // });
-
-    }
-
-
-    function onShowInfoClick( e ) {
-
-        var targetLang = $( e.target ).hasClass( 'title-arabic' ) ? 'ar' : 'en';
-
-        showInfo( targetLang );
+        // action form
+        $( '#header [data-action="cta"]' ).on( 'click', function() {
+            FA.ActionFormOverlay.open();
+            pauseSound();
+            app.stopUpdate();
+        } );
+        FA.ActionFormOverlay.onClose( function() {
+            resumeSound();
+            app.startUpdate();
+        } );
 
     }
 
@@ -213,6 +221,10 @@ FA.State360 = function( app, locationData ) {
 
         $(document)
             .off( 'mouseup', onDocumentMouseUp );
+
+        // action form
+        $( '#header [data-action="cta"]' ).off();
+        FA.ActionFormOverlay.onClose( null );
 
     }
 
@@ -258,6 +270,13 @@ FA.State360 = function( app, locationData ) {
         });
 
         ion.sound.play( soundData.ambient );
+
+    }
+
+
+    function pauseSound() {
+
+        ion.sound.pause( locationData.sound.ambient );
 
     }
 
@@ -467,11 +486,11 @@ FA.State360 = function( app, locationData ) {
 
 
     // info about this state
-    this.getName = function() {
-
-        return 'STATE_LOCATION';
-
-    }
+    // this.getName = function() {
+    //
+    //     return 'STATE_LOCATION';
+    //
+    // }
 
 
     this.enter = function() {
