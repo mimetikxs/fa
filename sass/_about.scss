@@ -262,6 +262,8 @@ body:not([data-sub-section]) {
 #cta-form {
     border-top: 1px solid $c-grey--light;
 
+
+
     .fragment {
         max-width: 1000px;
         text-align: left;
@@ -271,19 +273,15 @@ body:not([data-sub-section]) {
         //max-width: $max-width;
         padding: 0;
 
-        // h2 {
-        //     margin: 0 0 10px 0;
-        // }
-        //
-        // p {
-        //     margin: 0 0 30px 0;;
-        //     font-size: em(14);
-        // }
-        //
-        // img {
-        //     width: 100%;
-        //     height: auto;
-        // }
+        h2 {
+            margin: 0 0 40px 0;
+            text-align: center;
+        }
+
+        p {
+            margin: 0 0 30px 0;;
+            font-size: em(14);
+        }
     }
 }
 

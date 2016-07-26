@@ -178,7 +178,7 @@
 
 		<div id="header">
 			<div class="logos">
-				<span class="ai"></span><span class="fa"></span>
+				<a class="ai" href="https://www.amnesty.org/en/" target="_blank"></a><a class="fa" href="http://www.forensic-architecture.org/" target="_blank"></a>
 			</div>
 
 			<div class="takeAction" data-action="cta">

@@ -1,10 +1,9 @@
 <div class="fragment-wrapper" id="cta-form">
     <div class="fragment">
         <div class="form-wrapper">
+            <h2>End the horror in Syrian prisons</h2>
             <div class="column-left">
                 <div class="copy">
-                    <h2>End the horror in Syrian prisons</h2>
-
                     <p class="strong">The Syrian government must let in independent monitors to investigate Syria’s brutal detention centres, now.</p>
 
                     <p>Since 2011, thousands of people have died in custody in Syria’s torture prisons. Tens of thousands more have experienced shocking torture. People have been brutally beaten, raped, given electric shocks and more, often to extract forced “confessions”. Anyone suspected of opposing the Syrian government is at risk. Conditions in these brutal detention centres are sub-human. People are dying from starvation. They’re not getting even the most basic health care, and are dying from infected cuts and ingrown fingernails. They suffer acute mental health problems because of the overcrowding and lack of sunlight.</p>

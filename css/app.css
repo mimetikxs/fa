@@ -985,7 +985,7 @@ body {
   #header .logos {
     height: 100%;
     display: inline-block; }
-    #header .logos > span {
+    #header .logos > a {
       height: 100%;
       display: inline-block;
       background-size: auto 100%;
@@ -1489,6 +1489,12 @@ body:not([data-sub-section]) .fragment {
     text-align: left; }
   #cta-form .form-wrapper {
     padding: 0; }
+    #cta-form .form-wrapper h2 {
+      margin: 0 0 40px 0;
+      text-align: center; }
+    #cta-form .form-wrapper p {
+      margin: 0 0 30px 0;
+      font-size: 0.875em; }
 
 #report {
   background-color: #363636;
@@ -1978,7 +1984,8 @@ body[data-lang="ar"] {
   #cta-form .column-right {
     float: none !important;
     width: 100% !important;
-    max-width: 500px !important; }
+    max-width: 500px !important;
+    height: initial !important; }
   #cta-overlay .column-left,
   #cta-form .column-left {
     padding: 0 !important;
