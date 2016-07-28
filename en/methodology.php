@@ -5,7 +5,9 @@
 		<title>Methodology</title>
 		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 		<meta charset="utf-8">
+		<link rel="stylesheet" href="../js/lib/videojs/video-js.css">
 		<link rel="stylesheet" href="../css/app.css">
+		<script src="../js/lib/videojs/video.min.js"></script>
 	</head>
 
 	<body data-section="about" data-sub-section="methodology">

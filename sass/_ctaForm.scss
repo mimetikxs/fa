@@ -5,6 +5,7 @@
     width: 100%;
     // text-align: center;
     overflow-y: auto;
+    overflow-x: hidden;
     background-color: rgba(0,0,0, 0.8);
     z-index: 10000;
     display: none;
@@ -131,9 +132,11 @@
 
                 h2 {
                     font-family: $f-title--rtl;
+                    margin-top: 5px;
                 }
 
                 p {
+                    font-family: $f-default--rtl;
                     &.strong {
                         font-family: $f-title--rtl;
                         font-size: 18px;

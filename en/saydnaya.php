@@ -5,7 +5,9 @@
 		<title>About Saydnaya</title>
 		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 		<meta charset="utf-8">
+		<link rel="stylesheet" href="../js/lib/videojs/video-js.css">
 		<link rel="stylesheet" href="../css/app.css">
+		<script src="../js/lib/videojs/video.min.js"></script>
 	</head>
 
 	<body data-section="about" data-sub-section="saydnaya">
@@ -41,6 +43,14 @@
 
                     <p>Since the beginning of the crisis in Syria in 2011, the prison has become the final destination for both peaceful opponents of the authorities as well as military personnel suspected of opposing the regime.</p>
 
+					<div class="video-box">
+						<video id="video_0" class="video-js vjs-default-skin vjs-fill" controls preload="none" width="640" height="264" poster="">
+							<source src="https://player.vimeo.com/external/175314910.sd.mp4?s=6f641f05a5b6e044d68ba8ae283f6cb42d90b072&profile_id=164" type="video/mp4" />
+							<p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>
+			            </video>
+						<div class="caption">Saydnaya intro video</div>
+					</div>
+
                     <blockquote>
                         <div class="text">In Saydnaya, it felt like the purpose [of torture and beatings] was death, some form of natural selection – to get rid of the weak as soon as they arrive</div>
                     </blockquote>
@@ -74,7 +84,6 @@
 		<!-- Scripts -->
 
 		<?php include '../includes/fragment-scripts.php';?>
-
 	</body>
 
 </html>

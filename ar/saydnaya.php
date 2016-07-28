@@ -5,7 +5,9 @@
 		<title>حول صيدنايا</title>
 		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 		<meta charset="utf-8">
+		<link rel="stylesheet" href="../js/lib/videojs/video-js.css">
 		<link rel="stylesheet" href="../css/app.css">
+		<script src="../js/lib/videojs/video.min.js"></script>
 	</head>
 
 	<body data-section="about" data-sub-section="saydnaya" data-lang="ar">
@@ -40,6 +42,14 @@
                     <p>يقع سجن صيدنايا العسكري على بعد 30 كيلومترا، شمالي دمشق، في سوريا. ويتبع السجن وزارة الدفاع السورية، وتديره الشرطة العسكرية. اكتسب سجن صيدنايا العسكري سمعة سيئة بسبب استخدام التعذيب والقوة المفرطة إثر أعمال شغب قام بها بعض نزلاء السجن في عام 2008. ويكون سجن صيدنايا العسكري من مبنيين، ويمكن أن يستوعبا فيما بينهما ما بين 10000 و20000 سجين.</p>
 
                     <p>منذ بداية الأزمة في سوريا في عام 2011، أصبح سجن صيدنايا الوجهة النهائية لمعارضي السلطة السلميين وأيضا لأفراد عسكريين اشتُبِه في أنهم عارضوا النظام.</p>
+
+					<div class="video-box">
+						<video id="video_0" class="video-js vjs-default-skin vjs-fill" controls preload="none" width="640" height="264" poster="">
+							<source src="https://player.vimeo.com/external/175314910.sd.mp4?s=6f641f05a5b6e044d68ba8ae283f6cb42d90b072&profile_id=164" type="video/mp4" />
+							<p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>
+			            </video>
+						<div class="caption">Saydnaya intro video</div>
+					</div>
 
                     <blockquote>
                         <div class="text">في صيدنايا، يبدو أن الهدف من (التعذيب والضرب) هو الموت، نوع من أنواع الانتقاء الطبيعي أي التخلص من الضعفاء بمجرد وصولهم إلى السجن.</div>

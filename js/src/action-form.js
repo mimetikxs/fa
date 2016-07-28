@@ -8,9 +8,12 @@ FA.ActionFormOverlay = ( function() {
 
 
     function showOverlay() {
-        // if ( app ) app.stopUpdate();
 
         addListeners();
+
+        // avoid scroll bars on body content
+        $( 'body' ).css( 'overflow', 'hidden' );
+
         $overlay
             .css({
                 'display': 'inline-block',
@@ -19,11 +22,16 @@ FA.ActionFormOverlay = ( function() {
             .transition({
                 opacity: 1
             }, 200, 'in');
+
     }
 
 
     function hideOverlay( onComplete ) {
+
         removeListeners();
+
+        $( 'body' ).css( 'overflow', '' );
+
         $overlay
             .transition({
                 opacity: 0
@@ -37,10 +45,12 @@ FA.ActionFormOverlay = ( function() {
                     onCloseCallback();
                 }
             });
+
     }
 
 
     function addListeners() {
+
         $overlay.on( 'click', function( e ) {
             var $el = $( e.target );
             if ( $el.hasClass( 'btn-close' ) ) {
@@ -50,15 +60,19 @@ FA.ActionFormOverlay = ( function() {
                 switchLang();
             }
         } );
+
     }
 
 
     function removeListeners() {
+
         $overlay.off();
+
     }
 
 
     function switchLang() {
+
         if ( $overlay.hasClass( 'ar' ) ) {
             $overlay.removeClass( 'ar' ); // note we are saving language state on #cta-overlay
             $formEnglish.css( 'display', 'inline-block' );
@@ -68,6 +82,7 @@ FA.ActionFormOverlay = ( function() {
             $formEnglish.css( 'display', 'none' );
             $formArabic.css( 'display', 'inline-block' );
         }
+
     }
 
 

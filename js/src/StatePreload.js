@@ -1,5 +1,5 @@
 /*
- * This is the first state when the page has been returned from the server
+ * This is the first state after the page has been served
  *
  * It checks the url and handles the routing
  *
@@ -8,26 +8,24 @@
 
 FA.StatePreload = function( app ) {
 
-    var is3Dloaded = false,
-        messageCompleted = false,
+    var $btnSkip = $( '#layer-intro .btn-skip' ),
+        $btnGoToIntro = $( '#layer-intro .btn-go-intro' ),
+        $btnGoToExplore = $( '#layer-intro .btn-go-explore' ),
+        $spinner = $( '#layer-intro .intro-spinner' ),
+        $player = $('#layer-intro .video-container'),
+
+        player,
+
         manager,
 
-        MAX_SECONDS_WAIT = 5,
-        isTimeUp = false,
-        intervalId,
-        secondsCounter = 0,
-
-        $btnSkip = $( '#layer-intro .btn-skip' ),
-        $spinner = $( '#layer-intro .intro-spinner' ),
-
-        $player = $('#layer-intro .video-container'),
-        player,
+        is3Dloaded = false,
         isVideoReady = false,
-        isVideoStarted = false,
         isSoundLoaded = false,
+        bSkipIntro = false,
 
-        // router
-        bSkipVideo = false,
+        MAX_SECONDS_WAIT = 20,
+        secondsCounter = 0,
+        timerIntervalId,
 
         slowLoopIntervalId;
 
@@ -285,6 +283,9 @@ FA.StatePreload = function( app ) {
 
     function startVideo() {
 
+        // show skip button
+        showSkip();
+
         $player
             .css('display', 'block')
             .transition( { opacity: 1 }, 500, 'in',
@@ -300,19 +301,18 @@ FA.StatePreload = function( app ) {
 
         player.play();
 
-        isVideoStarted = true;
-
     }
 
 
-    function startTimer() {
+    function startCountDown( onComplete ) {
 
-        intervalId = setInterval( function() {
+        timerIntervalId = setInterval( function() {
             secondsCounter++;
-
             if ( secondsCounter > MAX_SECONDS_WAIT ) {
-                clearInterval( intervalId );
-                isTimeUp = true;
+
+                onComplete();
+
+                clearInterval( timerIntervalId );
             }
 
         }, 1000 );
@@ -324,20 +324,20 @@ FA.StatePreload = function( app ) {
 
         slowLoopIntervalId = setInterval( function() {
 
-            if ( !bSkipVideo  && $btnSkip.css('visibility') !== "visible") {
-                hideSpinner();
-                showSkip();
-            }
+            if ( is3Dloaded  &&  isSoundLoaded  &&  isVideoReady ) {
 
-            if ( is3Dloaded  &&  isSoundLoaded  &&  isVideoReady  &&  isTimeUp ) { //  &&  !isVideoStarted   ) {
-
-                // console.log( is3Dloaded, isVideoReady, isVideoStarted, isTimeUp );
-
-                if ( bSkipVideo ) {
-                    goToNextState();
+                if ( !bSkipIntro ) {
+                    hideSpinner();
+                    showActionButtons();
+                    // is user doesn't interact, we trigger the intro video
+                    startCountDown( function() {
+                        startVideo();
+                    });
                 } else {
-                    startVideo();
+                    // note that spinner is hidden in this.exit()
+                    goToNextState();
                 }
+
                 clearInterval( slowLoopIntervalId );
             }
         }, 500 );
@@ -359,10 +359,33 @@ FA.StatePreload = function( app ) {
     }
 
 
+    function showActionButtons() {
+
+        $( '.intro-nextAction' ).transition( { height: 150 }, 500, 'out');
+        $( '.intro-nextAction' ).transition( { opacity: 1 }, 1000, 'out');
+
+        $btnGoToIntro
+            .on( 'click', function() {
+
+                startVideo();
+                clearInterval( timerIntervalId ); // stop countdown
+
+            } );
+
+        $btnGoToExplore
+            .on( 'click', function() {
+
+                goToNextState();
+
+            } );
+
+    }
+
+
     function hideSpinner() {
 
         $spinner.transition( { opacity: 0 }, 200, 'out');
-        $spinner.transition( { height: 0, delay: 0 }, 300, 'out');
+        $spinner.transition( { height: 0 }, 500, 'out');
 
     }
 
@@ -370,11 +393,12 @@ FA.StatePreload = function( app ) {
     function showSplash() {
 
         $( '#introMessage .centered' )
-            .find( '.hidden' ).removeClass( 'hidden' );
+            .find( '.hidden:not(.intro-nextAction)' ).removeClass( 'hidden' );
 
         $( '#layer-intro .intro-logos' )
             .css( { visibility : 'visible' } )
             .transition( { opacity: 1 }, 900, 'in');
+
     }
 
 
@@ -388,15 +412,14 @@ FA.StatePreload = function( app ) {
         // hide layers
         $( '#layer-prison, #layer-video' ).css( 'display', 'none' );
         $( '#layer-prison' ).css( 'opacity', 1 );
-
-        // showSplash();
-
         // prepare the player
         $player.css( { 'display': 'none', 'opacity': 0 } );
-        // buidlVideo();
-
         // show preloader message
-        $( '#introMessage .centered' ).transition( { opacity: 1 }, 900, 'in').end()
+        $( '#introMessage .centered' ).transition( { opacity: 1 }, 900, 'in');
+
+        //
+        // init loading
+        //
 
         // load json and resources
         loadData( function() {
@@ -405,21 +428,28 @@ FA.StatePreload = function( app ) {
             loadSound();
         } );
 
-        // page already visited TODO: cookie
-        if ( true ) {
-            isTimeUp = true;     // bypass timer
-            isVideoReady = true; // bypass video
-            bSkipVideo = true;
-            $( '#introMessage' ).css( { 'background': 'transparent'} );
-        }
-        // first time visit
-        else {
-            isTimeUp = false;
+        //
+        // routing logic
+        //
+
+        var urlVars = FA.Router.getUrlVars( History.getState().url ),
+            isTargetHome = urlVars.kind !== 'location' && urlVars.kind !== 'video',
+            isFirstVisit = Cookies.get( 'hasVisitedIntro' ) !== 'true';
+
+        if ( isFirstVisit && isTargetHome ) {
+
+            // show intro
             isVideoReady = false;
-            bSkipVideo = false;
+            bSkipIntro = false;
             showSplash();
             buidlVideo();
-            startTimer();   // wait for a few seconds before starting video or going to next state
+
+        } else {
+
+            // skip intro
+            isVideoReady = true; // bypass video
+            bSkipIntro = true;
+            $( '#introMessage' ).css( { 'background': 'transparent'} );
         }
 
         waitForLoading();
@@ -434,12 +464,14 @@ FA.StatePreload = function( app ) {
 
     this.exit = function() {
 
-        if ( intervalId ) {
-            clearInterval( intervalId );
+        if ( timerIntervalId ) {
+            clearInterval( timerIntervalId );
             clearInterval( slowLoopIntervalId );
         }
 
         $btnSkip.off();
+        $btnGoToIntro.off();
+        $btnGoToExplore.off();
 
         if ( player ) {
             player.dispose();
@@ -448,16 +480,18 @@ FA.StatePreload = function( app ) {
         // remove from dom
         $( '#layer-intro' ).remove();
 
+        // if not already hidden
         hideSpinner();
 
+        // create a cookie valid for an hour
+        // after an hour the intro will be displayed again
+        if ( Cookies.get( 'hasVisitedIntro' ) !== 'true' ) {
+            var now = new Date(),
+                oneHourLater = new Date( now.getTime() + (1000 * 60 * 60) );
+
+            Cookies.set( 'hasVisitedIntro', true, { expires: oneHourLater } );
+        }
+
     }
-
-
-    // info about this state
-    // this.getName = function() {
-    //
-    //     return 'STATE_PRELOAD';
-    //
-    // }
 
 }

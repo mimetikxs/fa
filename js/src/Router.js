@@ -9,7 +9,7 @@ FA.Router = ( function() {
     //
     // change App state based on the current url
     //
-    function processUrl( url ) {
+    function processUrl() {
 
         var urlVars = getUrlVars( History.getState().url ),
             kind = urlVars[ 'kind' ],
@@ -88,7 +88,9 @@ FA.Router = ( function() {
     return {
 
         pushState : pushState,
-        processUrl : processUrl
+        processUrl : processUrl,
+
+        getUrlVars : getUrlVars
 
     }
 

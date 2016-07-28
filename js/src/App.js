@@ -89,6 +89,11 @@ FA.App = (function() {
 
     function goToLocation( id ) {
 
+        // handle special case
+        if ( $( 'body' ).hasClass( 'mobile' ) ) {
+            return;
+        }
+
         var locationData = FA.App.data.locationBySlug[ id ];
 
         if ( !locationData ) {
@@ -105,6 +110,12 @@ FA.App = (function() {
 
 
     function goToHome() {
+
+        // handle special case
+        if ( $( 'body' ).hasClass( 'mobile' ) ) {
+            changeState( new FA.StateExploreMobile( FA.App ) );
+            return;
+        }
 
         // this operations are needed to clear
         // resources that have been kept in an idle/inactive state

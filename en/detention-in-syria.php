@@ -41,11 +41,6 @@
 
 					<p>Prisoners speak of an endless cycle of beatings. On the journey after arrest. In transit between detention centres. As part of a ‘welcome party’ of abuse on arrival at a prison, used to frighten new arrivals into submission. And then every day for every conceivable minor ‘breaking’ of rules, including talking or not cleaning their cells.</p>
 
-					<div class="image-box">
-						<img src="../assets/placeholder-700x370.jpg" alt="" />
-						<div class="caption">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque</div>
-					</div>
-
 					<p>Many of the people we spoke to said they had been beaten with plastic hose pipes, silicone bars and wooden sticks. Some had been scalded with hot water and burnt with cigarettes. Others were forced to stand in water and given electric shocks.</p>
 
 					<h2>Sub-human conditions</h2>

@@ -181,15 +181,12 @@ FA.StateExploreMobile = function( app ) {
             .removeClass( 'selected' )
             .find( 'ul' ).css( 'height', 0 );
 
-        // reset model active location
-        // app.setActiveLocation( null );
-
     }
 
 
-    function goToVideo( mediaData ) {
+    function goToVideo( id, direction ) {
 
-        app.changeState( new FA.StateVideo2( app, '', mediaData ) );
+        FA.Router.pushState( 'video', id, direction );
 
     }
 
@@ -205,7 +202,7 @@ FA.StateExploreMobile = function( app ) {
         // go to first video for arabic users
         $btnArabic.on( 'click', function() {
             var mediaData = app.data.medias[ 0 ]; // media by index (0 = first)
-            app.changeState( new FA.StateVideo2( app, '', mediaData ) );
+            goToVideo( mediaData.id, 'rtl' );
         } )
 
     }
@@ -276,24 +273,28 @@ FA.StateExploreMobile = function( app ) {
 
         } else if ( $target.hasClass( 'media' ) ) {
 
-            var id = $target.data( 'id' ),
-                mediaData = app.data.mediaById[ id ];
-
-            goToVideo( mediaData );
+            goToVideo( $target.data( 'id' ) );
 
         }
 
     }
 
 
-
-
-
-
     this.enter = function() {
 
         loadLayout( function() {
-            loadData( buildNavigation );
+
+            loadData( function() {
+                buildNavigation();
+
+                // re-route if not at home
+                var urlVars = FA.Router.getUrlVars( History.getState().url ),
+                    isHome = urlVars.kind !== 'location' && urlVars.kind !== 'video';
+                if ( !isHome ) {
+                    FA.Router.processUrl();
+                }
+            } );
+
         } );
 
     }

@@ -8,7 +8,6 @@
 		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 
 		<link rel="stylesheet" href="js/lib/videojs/video-js.css">
-		<!-- <link href="https://fonts.googleapis.com/css?family=Oswald:300,400,700" rel="stylesheet"> -->
 		<link rel="stylesheet" href="css/app.css">
 		<script src="js/lib/videojs/video.min.js"></script>
 	</head>
@@ -139,6 +138,10 @@
 		<!-- intro -->
 
 		<div id="layer-intro">
+
+			<!-- <div id="background-gl">
+			</div> -->
+
 			<div class="intro-logos">
 				<span class="ai"></span><span class="fa"></span>
 			</div>
@@ -155,6 +158,17 @@
 						<span>Inside a Syrian Torture Prison</span>
 					</div>
 
+					<div class="intro-nextAction">
+						<div class="btn-go-intro">
+							<span>View Intro</span>
+							<span>استكشف</span>
+						</div>
+						<div class="btn-go-explore">
+							<span>Explore</span>
+							<span>استكشف</span>
+						</div>
+					</div>
+
 					<div class="intro-language hidden">
 						<div class="en">Content in english and arabic</div>
 						<div class="ar">المحتوى باللغتين العربية والإنجليزية</div>
@@ -163,6 +177,8 @@
 					<div class="intro-spinner">
 						<div class="spinner"></div>
 					</div>
+
+
 				</div>
 			</div>
 
@@ -228,6 +244,7 @@
 
 		<script src="js/src/FA.js"></script>
 		<script src="js/src/Utils.js"></script>
+		<script src="js/src/Router.js"></script>
 		<script src="js/src/Data.js"></script>
 		<script src="js/src/Slider.js"></script>
 		<script src="js/src/InteractiveItem.js"></script>
@@ -237,12 +254,11 @@
 		<script src="js/src/stateExplore/StateExplore.js"></script>
 		<script src="js/src/state360/View360.js"></script>
 		<script src="js/src/state360/State360.js"></script>
-		<script src="js/src/statePreload/StatePreload.js"></script>
-		<script src="js/src/stateVideo/StateVideo.js"></script>
+		<script src="js/src/StatePreload.js"></script>
+		<script src="js/src/StateVideo.js"></script>
 		<script src="js/src/StateIdle.js"></script>
 		<script src="js/src/StateExploreMobile.js"></script>
 		<script src="js/src/App.js"></script>
-		<script src="js/src/Router.js"></script>
 		<script src="js/src/action-form.js"></script>
 		<script src="js/src/responsive.js"></script>
 

@@ -480,7 +480,10 @@ FA.MenuView = function( app ) {
     this.show = function() {
 
         //$('#layer-prison .navigation').transition( { opacity: 1 }, 500, 'out');
-        $('#layer-prison .navigation').css( { opacity: 1 } );
+        $('#layer-prison .navigation').css( {
+            opacity: 1,
+            'z-index': ''
+        } );
 
         // TODO: enable events on show
         // add listeners
@@ -502,7 +505,10 @@ FA.MenuView = function( app ) {
     this.hide = function() {
 
         //$('#left-bar').fadeOut(0);
-        $('#layer-prison .navigation').css( { opacity: 0 } );
+        $('#layer-prison .navigation').css( {
+            opacity: 0,
+            'z-index': 0
+        } );
 
         localMouseY = 0;
 

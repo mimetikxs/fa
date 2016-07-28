@@ -41,7 +41,7 @@ FA.InteractiveItem = function( mesh, name, slug ) {
             material.side = THREE.DoubleSide;
             material.emissive.setHex( emissiveDefault );
             material.polygonOffset = true;
-            material.polygonOffsetFactor = -1; // positive value pushes polygon further away
+            material.polygonOffsetFactor = -2; // positive value pushes polygon further away
             material.polygonOffsetUnits = 1;
             material.needsUpdate = true;
         }

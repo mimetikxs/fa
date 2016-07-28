@@ -20,18 +20,10 @@ FA.StateVideo2 = function( app, videoData, direction ) {
     function close() {
 
         if ( app.getOpenedLoactionId() ) {
-
             var locationId = app.getOpenedLoactionId();
             FA.Router.pushState( 'location', locationId );
-
-        } else if ( $( 'body' ).hasClass( 'mobile' ) ) {
-
-            //History.pushState( null, null, '?kind=explore&mobile=true' )
-
         } else {
-
             FA.Router.pushState( 'explore' );
-
         }
 
     }

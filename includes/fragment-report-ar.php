@@ -1,12 +1,9 @@
 <div class="fragment-wrapper" id="report">
     <div class="fragment">
-        <div class="column-right">
-            <img src="../assets/report.jpeg"/>
-        </div>
-        <div class="column-left">
-            <h2>Part of the detention report</h2>
-            <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
-            <a class="button" href="#">Download full report</a>
+        <div class="column">
+            <h2>"إنه يحطّم انسانيّتك": التعذيب والمرض والموت في سجون سوريا</h2>
+            <p>لقي آلاف الأشخاص حتفهم في السجون السورية منذ العام 2011. وتعرّض عشرات الآلاف من الأشخاص إلى تعذيب مروّع. التقت منظمة العفو الدولية بالناجين وتحدثت إليهم من أجل توثيق الظروف القاسية والمروعة التي مرّوا بها.</p>
+            <a class="button" href="#">تنزيل التقرير</a>
         </div>
     </div>
 </div>

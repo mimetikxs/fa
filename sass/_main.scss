@@ -262,6 +262,7 @@ body {
         color: white;
         overflow: hidden;
         opacity: 0;
+        // z-index: 10000; // avoid oclussion by labels
         @include noselect;
 
         .menu-type {
@@ -514,7 +515,7 @@ body {
         height: 100%;
         max-width: 350px;
         overflow-y: hidden;
-        background-color: rgba(0, 0, 0, 0.6);
+        background-color: rgba(0, 0, 0, 0.75);
         box-sizing: border-box;
         padding: 70px 30px 50px 30px;
         pointer-events: auto;
@@ -972,7 +973,7 @@ body {
 
             &.active,
             &:hover {
-                background-color: #ff0;
+                background-color: #b6b6b6; //#ff0;
             }
         }
     }
@@ -1199,7 +1200,7 @@ body {
 
     .intro-subtitle {
         line-height: 50px;
-        height: 70px;   // = 20px margin-bottom
+        height: 80px;   // = 20px margin-bottom
         font-size: 28px;
 
         span {
@@ -1209,7 +1210,7 @@ body {
     }
 
     .intro-language {
-        font-size: 16px;
+        font-size: 14px;
         line-height: 24px;
         height: 50px;
 
@@ -1221,6 +1222,45 @@ body {
     .intro-spinner {
         margin-top: 30px;
         height: 50px;
+    }
+
+    .intro-nextAction {
+        // height: 150px;
+        height: 0;
+        opacity: 0;
+
+        & > * {
+            display: inline-block;
+            width: 140px;
+            // height: 100px;
+            padding: 40px 0;
+            font-size: 18px;
+            border: 1px solid #000;
+            background-color: $c-grey--light;
+            margin: 0 10px;
+            transition: color 300ms, background-color 300ms;
+            cursor: pointer;
+
+            &:hover {
+                color: white;
+                background-color: #000;
+            }
+
+            & > * {
+                display: block;
+                line-height: 1;
+                text-transform: uppercase;
+
+                &:nth-child(1) {
+                    font-family: $f-title;
+                    margin-bottom: 5px;
+                }
+
+                &:nth-child(2) {
+                    font-family: $f-default--rtl;
+                }
+            }
+        }
     }
 }
 
@@ -1278,6 +1318,7 @@ body {
     top: 87px;
     right: 30px;
     overflow: hidden;
+    z-index: 10000; // avoid oclussion by labels
 }
 
 .control {

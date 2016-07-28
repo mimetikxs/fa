@@ -712,7 +712,7 @@ body {
     height: 100%;
     max-width: 350px;
     overflow-y: hidden;
-    background-color: rgba(0, 0, 0, 0.6);
+    background-color: rgba(0, 0, 0, 0.75);
     box-sizing: border-box;
     padding: 70px 30px 50px 30px;
     pointer-events: auto;
@@ -1058,7 +1058,7 @@ body {
       color: #000;
       border-color: #B6B6B6; }
       #header .subNav-menu .menuItem.active, #header .subNav-menu .menuItem:hover {
-        background-color: #ff0; }
+        background-color: #b6b6b6; }
 
 .takeAction {
   transition: border-color 300ms ease-out, background-color 300ms ease-out, color 300ms ease-out;
@@ -1221,13 +1221,13 @@ body {
       font-size: 45px; }
   #introMessage .intro-subtitle {
     line-height: 50px;
-    height: 70px;
+    height: 80px;
     font-size: 28px; }
     #introMessage .intro-subtitle span {
       background-color: #fff;
       color: #000; }
   #introMessage .intro-language {
-    font-size: 16px;
+    font-size: 14px;
     line-height: 24px;
     height: 50px; }
     #introMessage .intro-language .ar {
@@ -1235,6 +1235,31 @@ body {
   #introMessage .intro-spinner {
     margin-top: 30px;
     height: 50px; }
+  #introMessage .intro-nextAction {
+    height: 0;
+    opacity: 0; }
+    #introMessage .intro-nextAction > * {
+      display: inline-block;
+      width: 140px;
+      padding: 40px 0;
+      font-size: 18px;
+      border: 1px solid #000;
+      background-color: #DADADA;
+      margin: 0 10px;
+      transition: color 300ms, background-color 300ms;
+      cursor: pointer; }
+      #introMessage .intro-nextAction > *:hover {
+        color: white;
+        background-color: #000; }
+      #introMessage .intro-nextAction > * > * {
+        display: block;
+        line-height: 1;
+        text-transform: uppercase; }
+        #introMessage .intro-nextAction > * > *:nth-child(1) {
+          font-family: "AmnestyTradeGothic-BdCn20", sans-serif;
+          margin-bottom: 5px; }
+        #introMessage .intro-nextAction > * > *:nth-child(2) {
+          font-family: Tahoma, sans-serif; }
 
 .spinner {
   display: inline-block;
@@ -1268,7 +1293,8 @@ body {
   position: absolute;
   top: 87px;
   right: 30px;
-  overflow: hidden; }
+  overflow: hidden;
+  z-index: 10000; }
 
 .control .label {
   color: #ccc;
@@ -1384,12 +1410,12 @@ body.mobile {
       transition: color 300ms, background-color 300ms; }
 
 body[data-sub-section="saydnaya"] #page-header {
-  background-image: url("../assets/detention-syria.jpg");
-  background-position: initial; }
+  background-image: url("../assets/detention-syria.jpg"); }
 
 body[data-sub-section="detention"] #page-header {
-  background-image: url("../assets/detention-syria.jpg");
-  background-position: initial; }
+  background-image: url("../assets/corridor_wingA_01.jpg");
+  background-position: 50% 100px;
+  background-size: auto 300px; }
 
 body[data-sub-section="methodology"] #page-header {
   background-image: url("../assets/methodology.png");
@@ -1481,9 +1507,21 @@ body:not([data-sub-section]) .fragment {
     font-size: 0.75em;
     color: #363636;
     text-align: left; }
+#main .video-box {
+  padding: 20px 0; }
+  #main .video-box .video-js {
+    overflow: hidden; }
+  #main .video-box .caption {
+    font-size: 0.75em;
+    color: #363636;
+    text-align: left;
+    margin-top: 5px;
+    margin-bottom: 10px; }
 
 #cta-form {
-  border-top: 1px solid #DADADA; }
+  border-top: 1px solid #DADADA;
+  padding-top: 60px;
+  padding-bottom: 100px; }
   #cta-form .fragment {
     max-width: 1000px;
     text-align: left; }
@@ -1500,17 +1538,7 @@ body:not([data-sub-section]) .fragment {
   background-color: #363636;
   color: #fff; }
   #report .fragment {
-    max-width: 900px;
-    text-align: left; }
-  #report .column-left {
-    width: 400px;
-    float: left; }
-    #report .column-left:after {
-      content: "";
-      display: table;
-      clear: both; }
-  #report .column-right {
-    margin-left: 440px; }
+    max-width: 700px; }
   #report h2 {
     font-size: 2em;
     margin: 0 0 0.625em 0; }
@@ -1588,19 +1616,8 @@ body[data-lang="ar"] {
       color: #B6B6B6;
       padding-top: 20px;
       font-size: 0.875em; }
-  body[data-lang="ar"] #report .column-left {
-    width: auto;
-    margin-right: 440px;
-    text-align: right;
-    float: none; }
-  body[data-lang="ar"] #report .column-right {
-    width: 400px;
-    float: right;
-    margin: 0; }
-    body[data-lang="ar"] #report .column-right:after {
-      content: "";
-      display: table;
-      clear: both; }
+  body[data-lang="ar"] #main .video-box .caption {
+    text-align: right; }
 
 /*
   Player Skin Designer for Video.js
@@ -1735,7 +1752,7 @@ body[data-lang="ar"] {
     font-size: 2.5em;
     line-height: 1.3; }
 
-@media screen and (max-width: 710px) {
+@media screen and (max-width: 770px) {
   #header .mainNav-menu,
   #header .subNav-menu,
   #header .takeAction {
@@ -1964,7 +1981,6 @@ body[data-lang="ar"] {
       body.mobile[data-section="explore"] .navigation ul.menu-location > li.over:not(.selected) .folder {
         background-color: rgba(100, 6, 6, 0.65); }
     body.mobile[data-section="explore"] .navigation .ar-watch-videos {
-      padding-top: 20px;
       direction: rtl;
       font-family: "FrutigerLTArabic-77BlackCn", "HelveticaNeue-CondensedBold", "Franklin Gothic Medium", Tahoma, sans-serif; }
       body.mobile[data-section="explore"] .navigation .ar-watch-videos .folder {
@@ -1989,19 +2005,34 @@ body[data-lang="ar"] {
   #cta-overlay .column-left,
   #cta-form .column-left {
     padding: 0 !important;
-    margin-bottom: 40px; }
+    margin-bottom: 20px; }
+    #cta-overlay .column-left .copy,
+    #cta-form .column-left .copy {
+      padding: 0 !important; }
   #cta-overlay .column-right,
   #cta-form .column-right {
     padding: 0 !important; }
 
-  #cta-form .column-left,
-  #cta-form .column-right {
-    max-width: 600px !important; } }
+  #cta-form {
+    padding-top: 40px !important;
+    padding-bottom: 20px !important; }
+    #cta-form .form-wrapper > h2 {
+      font-size: 32px !important;
+      margin-bottom: 30px !important; }
+    #cta-form .fragment {
+      text-align: center !important; }
+    #cta-form .column-left,
+    #cta-form .column-right {
+      max-width: 600px !important;
+      display: inline-block !important; }
+    #cta-form .column-left .copy p {
+      margin-bottom: 14px; } }
 #cta-overlay {
   position: fixed;
   height: 100%;
   width: 100%;
   overflow-y: auto;
+  overflow-x: hidden;
   background-color: rgba(0, 0, 0, 0.8);
   z-index: 10000;
   display: none;
@@ -2103,13 +2134,19 @@ body[data-lang="ar"] {
     #cta-overlay .wrap.ar .column-left .copy h2,
     #cta-form .form-wrapper.ar .column-left .copy h2,
     #cta-form .wrap.ar .column-left .copy h2 {
-      font-family: "FrutigerLTArabic-77BlackCn", "HelveticaNeue-CondensedBold", "Franklin Gothic Medium", Tahoma, sans-serif; }
-    #cta-overlay .form-wrapper.ar .column-left .copy p.strong,
-    #cta-overlay .wrap.ar .column-left .copy p.strong,
-    #cta-form .form-wrapper.ar .column-left .copy p.strong,
-    #cta-form .wrap.ar .column-left .copy p.strong {
       font-family: "FrutigerLTArabic-77BlackCn", "HelveticaNeue-CondensedBold", "Franklin Gothic Medium", Tahoma, sans-serif;
-      font-size: 18px; }
+      margin-top: 5px; }
+    #cta-overlay .form-wrapper.ar .column-left .copy p,
+    #cta-overlay .wrap.ar .column-left .copy p,
+    #cta-form .form-wrapper.ar .column-left .copy p,
+    #cta-form .wrap.ar .column-left .copy p {
+      font-family: Tahoma, sans-serif; }
+      #cta-overlay .form-wrapper.ar .column-left .copy p.strong,
+      #cta-overlay .wrap.ar .column-left .copy p.strong,
+      #cta-form .form-wrapper.ar .column-left .copy p.strong,
+      #cta-form .wrap.ar .column-left .copy p.strong {
+        font-family: "FrutigerLTArabic-77BlackCn", "HelveticaNeue-CondensedBold", "Franklin Gothic Medium", Tahoma, sans-serif;
+        font-size: 18px; }
 #cta-overlay .form-wrapper.ar .language-switch,
 #cta-overlay .wrap.ar .language-switch,
 #cta-form .form-wrapper.ar .language-switch,

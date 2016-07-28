@@ -1,12 +1,9 @@
 <div class="fragment-wrapper" id="report">
     <div class="fragment">
-        <div class="column-left">
-            <img src="../assets/report.jpeg"/>
-        </div>
-        <div class="column-right">
-            <h2>Part of the detention report</h2>
-            <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
-            <a class="button" href="#">Download full report</a>
+        <div class="column">
+            <h2>"It breaks the human": Torture, disease and death in Syria's prisons</h2>
+            <p>Since 2011, thousands of people have died in custody in Syria’s prisons. Tens of thousands more have experienced shocking torture. Amnesty International spoke to survivors to document the brutal conditions.</p>
+            <a class="button" href="#">Download report</a>
         </div>
     </div>
 </div>

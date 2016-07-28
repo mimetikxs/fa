@@ -87,7 +87,6 @@ FA.utils.makePublisher = function( object ) {
 };
 
 
-
 // http://stackoverflow.com/questions/11381673/detecting-a-mobile-browser
 FA.utils.isMobile = function() {
   var check = false;

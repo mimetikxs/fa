@@ -1,4 +1,4 @@
-@media screen and ( max-width:710px ) {
+@media screen and ( max-width:770px ) {
 
     // -------------------------
     // top bar
@@ -204,7 +204,6 @@
             top: 50px;
         }
 
-
         #page-header {
             font-family: $f-title;
             background-image: none;
@@ -354,7 +353,7 @@
 
             .ar-watch-videos {
                 // border-top: 1px solid #999;
-                padding-top: 20px;
+                //padding-top: 20px;
                 direction: rtl;
                 font-family: $f-title--rtl;
 
@@ -391,7 +390,6 @@
 
     #cta-overlay,
     #cta-form {
-
         .column-left,
         .column-right {
             float: none !important;
@@ -402,7 +400,11 @@
 
         .column-left {
             padding: 0 !important;
-            margin-bottom: 40px;
+            margin-bottom: 20px;
+
+            .copy {
+                padding: 0 !important;
+            }
         }
 
         .column-right {
@@ -412,10 +414,26 @@
     }
 
     #cta-form {
+        padding-top: 40px !important;
+        padding-bottom: 20px !important;
+
+        .form-wrapper > h2 {
+            font-size: 32px !important;
+            margin-bottom: 30px !important;
+        }
+
+        .fragment {
+            text-align: center !important;
+        }
 
         .column-left,
         .column-right {
             max-width: 600px !important;
+            display: inline-block !important;
+        }
+
+        .column-left .copy p {
+            margin-bottom: 14px;
         }
     }
 

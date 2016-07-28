@@ -269,8 +269,7 @@
             "slug" : "solitary-2",
             "objRoom" : "obj/rooms/solitary-d.js",
             "obj360" : [
-                "isoCell02",
-                "outside"
+                "isoCell02"
             ],
             "light" : 3.5,
             "camera" : {
@@ -354,8 +353,7 @@
             "slug" : "solitary-3",
             "objRoom" : "obj/rooms/solitary-e.js",
             "obj360" : [
-                "isoCell03",
-                "outside"
+                "isoCell03"
             ],
             "light" : 3.5,
             "camera" : {
@@ -438,10 +436,9 @@
             "slug" : "group-cell-1",
             "objRoom" : "obj/rooms/groupcell-a-c.js",
             "obj360" : [
-                "groupCell01",
-                "outside"
+                "groupCell01"
             ],
-            "light" : 0.8,
+            "light" : 1,
             "camera" : {
                 "position" : {
                     "x": 3.87,
@@ -458,237 +455,229 @@
                 "maxPolar" : "PI"
             },
             "bodies": [
-        		{
+                {
         			"name": "bodyKneeA",
-        			"x": 7.66,
-        			"z": 1.50,
-        			"y": 0.41,
-        			"angle": -100
+        			"x": 5.98,
+        			"z": 3.09,
+        			"y": 0,
+        			"angle": -92
         		},
         		{
         			"name": "bodyKneeA",
-        			"x": 7.21,
-        			"z": 2.93,
-        			"y": 0.41,
-        			"angle": -90
+        			"x": 6.47,
+        			"z": 0.35,
+        			"y": 0,
+        			"angle": -91
         		},
         		{
         			"name": "bodyKneeA",
-        			"x": 6.87,
-        			"z": 3.32,
-        			"y": 0.41,
-        			"angle": -120
-        		},
-        		{
-        			"name": "bodyKneeA",
-        			"x": 7.00,
-        			"z": 3.82,
-        			"y": 0.41,
-        			"angle": -160
+        			"x": 7.62,
+        			"z": 0.83,
+        			"y": 0,
+        			"angle": -95
         		},
         		{
         			"name": "bodyKneeA",
         			"x": 7.18,
-        			"z": 1.85,
-        			"y": 0.41,
-        			"angle": -100
+        			"z": 1.90,
+        			"y": 0,
+        			"angle": -110
         		},
         		{
         			"name": "bodyKneeA",
-        			"x": 7.65,
-        			"z": 0.82,
-        			"y": 0.41,
-        			"angle": -90
-        		},
-        		{
-        			"name": "bodyKneeA",
-        			"x": 6.44,
-        			"z": 0.52,
-        			"y": 0.41,
-        			"angle": -10
-        		},
-        		{
-        			"name": "bodyKneeA",
-        			"x": 5.97,
-        			"z": 1.22,
-        			"y": 0.41,
-        			"angle": -35
-        		},
-        		{
-        			"name": "bodyKneeA",
-        			"x": 5.85,
-        			"z": 1.74,
-        			"y": 0.41,
-        			"angle": -90
-        		},
-        		{
-        			"name": "bodyKneeA",
-        			"x": 5.03,
-        			"z": 1.00,
-        			"y": 0.41,
-        			"angle": -20
-        		},
-        		{
-        			"name": "bodyKneeA",
-        			"x": 4.33,
-        			"z": 0.58,
-        			"y": 0.41,
-        			"angle": -8
-        		},
-        		{
-        			"name": "bodyKneeB",
-        			"x": 7.82,
-        			"z": 2.14,
-        			"y": 0.43,
+        			"x": 5.72,
+        			"z": 1.86,
+        			"y": 0,
         			"angle": -80
         		},
         		{
-        			"name": "bodyKneeB",
-        			"x": 5.62,
-        			"z": 1.00,
-        			"y": 0.43,
-        			"angle": -45
+        			"name": "bodyKneeA",
+        			"x": 5.5,
+        			"z": 3.27,
+        			"y": 0,
+        			"angle": -94
         		},
         		{
-        			"name": "bodyKneeB",
+        			"name": "bodyKneeA",
         			"x": 6.45,
-        			"z": 1.49,
-        			"y": 0.44,
-        			"angle": -60
+        			"z": 0.94,
+        			"y": 0,
+        			"angle": -91
         		},
         		{
-        			"name": "bodyKneeB",
-        			"x": 4.56,
-        			"z": 0.87,
-        			"y": 0.43,
-        			"angle": -25
-        		},
-        		{
-        			"name": "bodyKneeB",
-        			"x": 5.97,
-        			"z": 0.36,
-        			"y": 0.44,
-        			"angle": 5
-        		},
-
-        		{
-        			"name": "bodyKneeD",
+        			"name": "bodyKneeA",
         			"x": 7.15,
-        			"z": 0.41,
-        			"y": 0.35,
-        			"angle": -20
-        		},
-        		{
-        			"name": "bodyKneeD",
-        			"x": 6.75,
-        			"z": 2.72,
-        			"y": 0.35,
+        			"z": 2.90,
+        			"y": 0,
         			"angle": -95
         		},
         		{
-        			"name": "bodyKneeD",
-        			"x": 5.54,
-        			"z": 0.41,
-        			"y": 0.35,
-        			"angle": -5
+        			"name": "bodyKneeA",
+        			"x": 6.87,
+        			"z": 3.30,
+        			"y": 0,
+        			"angle": -110
         		},
         		{
-        			"name": "bodyKneeD",
-        			"x": 3.71,
-        			"z": 0.41,
-        			"y": 0.35,
-        			"angle": 2
+        			"name": "bodyKneeA",
+        			"x": 7.09,
+        			"z": 3.84,
+        			"y": 0,
+        			"angle": -97
         		},
         		{
-        			"name": "bodyKneeD",
-        			"x": 7.79,
-        			"z": 2.66,
-        			"y": 0.35,
+        			"name": "bodyKneeA",
+        			"x": 7.62,
+        			"z": 1.47,
+        			"y": 0,
+        			"angle": -100
+        		},
+        		{
+        			"name": "bodyKneeB",
+        			"x": 6.30,
+        			"z": 3.64,
+        			"y": 0,
+        			"angle": -82
+        		},
+        		{
+        			"name": "bodyKneeB",
+        			"x": 6.02,
+        			"z": 1.27,
+        			"y": 0,
+        			"angle": -88
+        		},
+        		{
+        			"name": "bodyKneeB",
+        			"x": 6.59,
+        			"z": 1.49,
+        			"y": 0,
+        			"angle": -77
+        		},
+        		{
+        			"name": "bodyKneeB",
+        			"x": 7.80,
+        			"z": 2.14,
+        			"y": 0,
+        			"angle": -75
+        		},
+        		{
+        			"name": "bodyKneeB",
+        			"x": 6.00,
+        			"z": 0.30,
+        			"y": 0,
+        			"angle": -80
+        		},
+        		{
+        			"name": "bodyKneeC",
+        			"x": 7.15,
+        			"z": 0.44,
+        			"y": 0,
         			"angle": -90
         		},
         		{
-        			"name": "bodyKneeD",
-        			"x": 6.31,
-        			"z": 3.06,
-        			"y": 0.35,
-        			"angle": -93
+        			"name": "bodyKneeC",
+        			"x": 6.08,
+        			"z": 0.78,
+        			"y": 0,
+        			"angle": -88
         		},
         		{
-        			"name": "bodyKneeD",
-        			"x": 7.77,
-        			"z": 3.27,
-        			"y": 0.35,
+        			"name": "bodyKneeC",
+        			"x": 7.75,
+        			"z": 2.66,
+        			"y": 0,
+        			"angle": -90
+        		},
+        		{
+        			"name": "bodyKneeC",
+        			"x": 6.57,
+        			"z": 2.72,
+        			"y": 0,
+        			"angle": -95
+        		},
+        		{
+        			"name": "bodyKneeC",
+        			"x": 6.69,
+        			"z": 3.90,
+        			"y": 0,
         			"angle": -105
         		},
         		{
         			"name": "bodyKneeD",
-        			"x": 6.59,
+        			"x": 5.73,
+        			"z": 2.60,
+        			"y": 0,
+        			"angle": -99
+        		},
+        		{
+        			"name": "bodyKneeD",
+        			"x": 6.52,
+        			"z": 3.29,
+        			"y": 0,
+        			"angle": -99
+        		},
+        		{
+        			"name": "bodyKneeD",
+        			"x": 7.07,
+        			"z": 1.00,
+        			"y": 0,
+        			"angle": -90
+        		},
+        		{
+        			"name": "bodyKneeD",
+        			"x": 6.50,
         			"z": 2.06,
-        			"y": 0.35,
+        			"y": 0,
         			"angle": -95
         		},
         		{
         			"name": "bodyKneeD",
-        			"x": 7.59,
+        			"x": 7.75,
+        			"z": 3.26,
+        			"y": 0,
+        			"angle": -105
+        		},
+        		{
+        			"name": "bodyKneeD",
+        			"x": 7.76,
         			"z": 3.86,
-        			"y": 0.35,
-        			"angle": -145
-        		},
-        		{
-        			"name": "bodyKneeD",
-        			"x": 6.56,
-        			"z": 1.00,
-        			"y": 0.35,
-        			"angle": -55
-        		},
-        		{
-        			"name": "bodyKneeD",
-        			"x": 3.05,
-        			"z": 0.41,
-        			"y": 0.35,
-        			"angle": -5
-        		},
-        		{
-        			"name": "bodyKneeD",
-        			"x": 4.05,
-        			"z": 1.06,
-        			"y": 0.35,
-        			"angle": -10
+        			"y": 0,
+        			"angle": -108
         		},
         		{
         			"name": "bodyKneeE",
-        			"x": 6.93,
-        			"z": 1.53,
-        			"y": 0.43,
+        			"x": 7.81,
+        			"z": 0.29,
+        			"y": 0,
+        			"angle": -77
+        		},
+        		{
+        			"name": "bodyKneeE",
+        			"x": 7.08,
+        			"z": 1.47,
+        			"y": 0,
         			"angle": -90
         		},
         		{
         			"name": "bodyKneeE",
-        			"x": 7.20,
-        			"z": 2.35,
-        			"y": 0.43,
-        			"angle": -80
-        		},
-        		{
-        			"name": "bodyKneeE",
-        			"x": 7.78,
-        			"z": 0.39,
-        			"y": 0.43,
-        			"angle": -55
-        		},
-        		{
-        			"name": "bodyKneeE",
-        			"x": 6.25,
-        			"z": 2.283,
-        			"y": 0.43,
+        			"x": 6.17,
+        			"z": 2.27,
+        			"y": 0,
         			"angle": -100
         		},
         		{
         			"name": "bodyKneeE",
-        			"x": 4.92,
-        			"z": 0.36,
-        			"y": 0.43,
-        			"angle": -5
+        			"x": 7.20,
+        			"z": 2.34,
+        			"y": 0,
+        			"angle": -80
+        		},
+        		{
+        			"name": "bodyKneeE",
+        			"x": 5.91,
+        			"z": 3.83,
+        			"y": 0,
+        			"angle": -83
         		}
         	],
             "objects": [
@@ -707,130 +696,143 @@
             "slug" : "group-cell-2",
             "objRoom" : "obj/rooms/groupcell-d.js",
             "obj360" : [
-                "groupCell02",
-                "outside"
+                "groupCell02"
             ],
-            "light" : 0.8,
+            "light" : 1,
             "camera" : {
                 "position" : {
-                    "x": 6.0,
+                    "x": 6.37,
             		"y": 1.0,
-            		"z": 1.46
+            		"z": 1.95
                 },
                 "lookAt": {
-                    "x": 5.73,
+                    "x": 6.0,
             		"y": 1.0,
-            		"z": 1.75
+            		"z": 1.85
                 },
                 "fov" : 35,
                 "minPolar" : 0,
                 "maxPolar" : "PI"
             },
             "bodies": [
-        		{
-        			"name": "bodyRestA",
-        			"x": 5.20,
-        			"z": 3.08,
-        			"y": 0.15,
-        			"angle": -90
+                {
+        			"name": "bodyCrouchB",
+        			"x": 7.91,
+        			"z": 3.22,
+        			"y": 0,
+        			"angle": 74
         		},
         		{
-        			"name": "bodyRestA",
-        			"x": 6.54,
+        			"name": "bodyCrouchB",
+        			"x": 4.79,
+        			"z": 3.40,
+        			"y": 0,
+        			"angle": -67
+        		},
+        		{
+        			"name": "bodyCrouchA",
+        			"x": 4.56,
+        			"z": 4.65,
+        			"y": 0,
+        			"angle": 40
+        		},
+        		{
+        			"name": "bodyCrouchA",
+        			"x": 3.70,
+        			"z": 3.77,
+        			"y": 0,
+        			"angle": -165
+        		},
+        		{
+        			"name": "bodyCrouchA",
+        			"x": 5.07,
+        			"z": 2.46,
+        			"y": 0,
+        			"angle": 20
+        		},
+        		{
+        			"name": "bodyCrouchA",
+        			"x": 7.90,
+        			"z": 2.37,
+        			"y": 0,
+        			"angle": -100
+        		},
+        		{
+        			"name": "bodyCrouchA",
+        			"x": 7.92,
+        			"z": 0.48,
+        			"y": 0,
+        			"angle": -100
+        		},
+        		{
+        			"name": "bodyCrouchA",
+        			"x": 7.03,
+        			"z": 0.23,
+        			"y": 0,
+        			"angle": -12
+        		},
+        		{
+        			"name": "bodyCrouchC",
+        			"x": 5.68,
         			"z": 3.07,
-        			"y": 0.15,
-        			"angle": -90
-        		},
-        		{
-        			"name": "bodyRestA",
-        			"x": 6.17,
-        			"z": 3.10,
-        			"y": 0.15,
-        			"angle": -90
-        		},
-        		{
-        			"name": "bodyRestA",
-        			"x": 4.09,
-        			"z": 2.82,
-        			"y": 0.15,
-        			"angle": 75
-        		},
-        		{
-        			"name": "bodyRestA",
-        			"x": 7.65,
-        			"z": 1.43,
-        			"y": 0.15,
-        			"angle": -90
-        		},
-        		{
-        			"name": "bodyRestB",
-        			"x": 4.55,
-        			"z": 3.34,
-        			"y": 0.26,
-        			"angle": -5
-        		},
-        		{
-        			"name": "bodyRestB",
-        			"x": 7.45,
-        			"z": 3.29,
-        			"y": 0.26,
+        			"y": 0.0,
         			"angle": 0
         		},
         		{
-        			"name": "bodyRestB",
-        			"x": 7.06,
-        			"z": 1.17,
-        			"y": 0.26,
+        			"name": "bodyCrouchC",
+        			"x": 3.01,
+        			"z": 3.17,
+        			"y": 0.0,
+        			"angle": -115
+        		},
+        		{
+        			"name": "bodyCrouchC",
+        			"x": 2.54,
+        			"z": 1.39,
+        			"y": 0.0,
+        			"angle": -95
+        		},
+        		{
+        			"name": "bodyCrouchC",
+        			"x": 3.91,
+        			"z": 2.91,
+        			"y": 0.0,
+        			"angle": 150
+        		},
+        		{
+        			"name": "bodyCrouchC",
+        			"x": 5.65,
+        			"z": 4.49,
+        			"y": 0.0,
+        			"angle": 95
+        		},
+        		{
+        			"name": "bodyCrouchC",
+        			"x": 3.80,
+        			"z": 1.80,
+        			"y": 0.0,
         			"angle": 0
         		},
         		{
-        			"name": "bodyRestB",
-        			"x": 5.76,
-        			"z": 1.21,
-        			"y": 0.26,
-        			"angle": 5
-        		},
-        		{
-        			"name": "bodyRestC",
-        			"x": 5.80,
-        			"z": 3.25,
-        			"y": 0.07,
-        			"angle": 15
-        		},
-        		{
-        			"name": "bodyRestC",
-        			"x": 6.33,
-        			"z": 1.28,
-        			"y": 0.07,
-        			"angle": 15
-        		},
-        		{
-        			"name": "bodyRestC",
-        			"x": 6.59,
-        			"z": 1.36,
-        			"y": 0.07,
-        			"angle": -29
-        		},
-        		{
-        			"name": "bodyRestC",
-        			"x": 7.00,
-        			"z": 3.20,
-        			"y": 0.07,
-        			"angle": 15
+        			"name": "bodyRestE",
+        			"x": 5.07,
+        			"z": 1.00,
+        			"y": 0.22,
+        			"angle": -175
         		},
         		{
         			"name": "bodySitA",
-        			"x": 3.67,
-        			"z": 1.55,
+        			"x": 4.14,
+        			"z": 1.35,
         			"y": 0.95,
         			"angle": 70
         		},
         		{
         			"name": "bodySitA",
-        			"x": 3.30,
-        			"z": 2.31,
+        			"x": 3.24,
+        			"z": 1.64,
         			"y": 0.95,
-        			"angle": -80
+        			"angle": -25
         		},
         		{
         			"name": "bodySitA",
@@ -841,150 +843,115 @@
         		},
         		{
         			"name": "bodySitA",
-        			"x": 1.74,
-        			"z": 6.02,
+        			"x": 7.04,
+        			"z": 1.04,
         			"y": 0.95,
-        			"angle": 0
-        		},
-        		{
-        			"name": "bodySitB",
-        			"x": 5.03,
-        			"z": 1.79,
-        			"y": 0,
-        			"angle": 0
-        		},
-        		{
-        			"name": "bodySitB",
-        			"x": 2.76,
-        			"z": 3.19,
-        			"y": 0,
-        			"angle": -105
-        		},
-        		{
-        			"name": "bodySitB",
-        			"x": 2.93,
-        			"z": 1.60,
-        			"y": 0,
-        			"angle": -95
-        		},
-        		{
-        			"name": "bodySitB",
-        			"x": 3.19,
-        			"z": 4.02,
-        			"y": 0,
-        			"angle": -180
-        		},
-        		{
-        			"name": "bodySitB",
-        			"x": 5.65,
-        			"z": 4.49,
-        			"y": 0,
-        			"angle": 55
+        			"angle": -50
         		},
         		{
         			"name": "bodySitC",
         			"x": 3.36,
-        			"z": 0.55,
-        			"y": 0.17,
-        			"angle": 165
+        			"z": 6.22,
+        			"y": 0.18,
+        			"angle": 0
         		},
         		{
         			"name": "bodySitC",
-        			"x": 4.12,
-        			"z": 0.52,
-        			"y": 0.17,
-        			"angle": 170
+        			"x": 5.57,
+        			"z": 5.35,
+        			"y": 0.18,
+        			"angle": 95
         		},
         		{
         			"name": "bodySitC",
-        			"x": 5.55,
-        			"z": 5.30,
-        			"y": 0.17,
-        			"angle": 85
+        			"x": 7.68,
+        			"z": 1.49,
+        			"y": 0.18,
+        			"angle": 95
         		},
         		{
         			"name": "bodySitC",
-        			"x": 2.10,
-        			"z": 5.14,
-        			"y": 0.17,
-        			"angle": -115
+        			"x": 3.92,
+        			"z": 0.50,
+        			"y": 0.18,
+        			"angle": -171
+        		},
+        		{
+        			"name": "bodySitC",
+        			"x": 3.12,
+        			"z": 0.50,
+        			"y": 0.18,
+        			"angle": 164
         		},
         		{
         			"name": "bodyStandA",
-        			"x": 2.03,
-        			"z": 3.38,
-        			"y": 0.78,
-        			"angle": -160
-        		},
-        		{
-        			"name": "bodyStandA",
-        			"x": 2.56,
-        			"z": 4.05,
-        			"y": 0.78,
-        			"angle": 35
-        		},
-        		{
-        			"name": "bodyStandA",
-        			"x": 2.66,
+        			"x": 2.57,
         			"z": 6.33,
-        			"y": 0.78,
-        			"angle": -5
+        			"y": 0.84,
+        			"angle": -30
         		},
         		{
         			"name": "bodyStandA",
-        			"x": 3.78,
-        			"z": 5.77,
-        			"y": 0.78,
-        			"angle": 60
+        			"x": 3.35,
+        			"z": 4.59,
+        			"y": 0.85,
+        			"angle": 68
         		},
         		{
         			"name": "bodyStandA",
-        			"x": 4.85,
-        			"z": 0.35,
-        			"y": 0.78,
-        			"angle": 165
+        			"x": 6.99,
+        			"z": 3.58,
+        			"y": 0.84,
+        			"angle": -153
         		},
         		{
         			"name": "bodyStandA",
-        			"x": 5.05,
-        			"z": 0.87,
-        			"y": 0.78,
-        			"angle": 115
+        			"x": 7.86,
+        			"z": 4.02,
+        			"y": 0.84,
+        			"angle": 82
+        		},
+        		{
+        			"name": "bodyStandA",
+        			"x": 6.24,
+        			"z": 0.67,
+        			"y": 0.84,
+        			"angle": 110
+        		},
+        		{
+        			"name": "bodyStandA",
+        			"x": 5.46,
+        			"z": 0.94,
+        			"y": 0.84,
+        			"angle": -57
         		},
         		{
         			"name": "bodyStandB",
-        			"x": 2.62,
+        			"x": 2.33,
         			"z": 0.32,
-        			"y": 0.90,
+        			"y": 0.92,
         			"angle": -165
         		},
         		{
         			"name": "bodyStandB",
-        			"x": 3.23,
-        			"z": 6.27,
-        			"y": 0.90,
-        			"angle": 50
+        			"x": 2.71,
+        			"z": 4.45,
+        			"y": 0.92,
+        			"angle": -88.36
         		},
         		{
         			"name": "bodyStandB",
-        			"x": 1.93,
-        			"z": 4.05,
-        			"y": 0.90,
-        			"angle": -40
+        			"x": 7.23,
+        			"z": 4.11,
+        			"y": 0.92,
+        			"angle": 0
         		},
         		{
         			"name": "bodyStandB",
-        			"x": 3.34,
-        			"z": 5.24,
-        			"y": 0.90,
-        			"angle": -155
-        		},
-        		{
-        			"name": "bodyStandB",
-        			"x": 4.50,
-        			"z": 4.68,
-        			"y": 0.90,
-        			"angle": 50
+        			"x": 5.68,
+        			"z": 0.32,
+        			"y": 0.92,
+        			"angle": 176
         		}
         	],
             "objects": [
@@ -1099,53 +1066,52 @@
             "slug" : "group-cell-3",
             "objRoom" : "obj/rooms/groupcell-e.js",
             "obj360" : [
-                "groupCell03",
-                "outside"
+                "groupCell03"
             ],
-            "light" : 0.8,
+            "light" : 1,
             "camera" : {
                 "position" : {
-                    "x": 1.9,
-            		"y": 1.1,
-            		"z": 4.80
+                    "x": 2.53,
+            		"y": 1.70,
+            		"z": 3.90
                 },
                 "lookAt": {
-                    "x": 2.32,
-            		"y": 1.2,
-            		"z": 4.66
+                    "x": 2.06,
+            		"y": 1.70,
+            		"z": 3.80
                 },
                 "fov" : 35,
                 "minPolar" : 0,
                 "maxPolar" : "PI"
             },
             "bodies": [
-        		{
+                {
         			"name": "bodyCrouchA",
         			"x": 5.71,
         			"z": 1.17,
         			"y": 0,
-        			"angle": 115
+        			"angle": -65
         		},
         		{
         			"name": "bodyCrouchA",
         			"x": 2.30,
         			"z": 0.28,
         			"y": 0,
-        			"angle": 10
+        			"angle": 15
         		},
         		{
         			"name": "bodyCrouchA",
         			"x": 2.96,
         			"z": 2.83,
         			"y": 0,
-        			"angle": -155
+        			"angle": 25
         		},
         		{
         			"name": "bodyCrouchA",
         			"x": 7.86,
         			"z": 3.93,
         			"y": 0,
-        			"angle": 95
+        			"angle": -85
         		},
         		{
         			"name": "bodyCrouchB",
@@ -1156,8 +1122,8 @@
         		},
         		{
         			"name": "bodyCrouchB",
-        			"x": 3.52,
-        			"z": 4.00,
+        			"x": 6.48,
+        			"z": 4.72,
         			"y": 0,
         			"angle": -150
         		},
@@ -1192,7 +1158,7 @@
         		{
         			"name": "bodySitA",
         			"x": 5.38,
-        			"z": 0.71,
+        			"z": 0.58,
         			"y": 1.00,
         			"angle": 160
         		},
@@ -1234,14 +1200,14 @@
         		{
         			"name": "bodySitC",
         			"x": 3.26,
-        			"z": 0.51,
+        			"z": 0.40,
         			"y": 0.17,
-        			"angle": 172
+        			"angle": -163
         		},
         		{
         			"name": "bodySitC",
         			"x": 4.61,
-        			"z": 0.56,
+        			"z": 0.45,
         			"y": 0.17,
         			"angle": 157
         		},
@@ -1254,7 +1220,14 @@
         		},
         		{
         			"name": "bodySitC",
-        			"x": 3.5,
+        			"x": 3.54,
+        			"z": 3.96,
+        			"y": 0.17,
+        			"angle": -13
+        		},
+        		{
+        			"name": "bodySitC",
+        			"x": 3.54,
         			"z": 6.18,
         			"y": 0.17,
         			"angle": -13
@@ -1263,35 +1236,35 @@
         			"name": "bodyStandA",
         			"x": 3.65,
         			"z": 1.41,
-        			"y": 0.79,
+        			"y": 0.83,
         			"angle": -15
         		},
         		{
         			"name": "bodyStandA",
         			"x": 5.59,
-        			"z": 2.012,
-        			"y": 0.79,
+        			"z": 2.0,
+        			"y": 0.83,
         			"angle": 50
         		},
         		{
         			"name": "bodyStandA",
         			"x": 5.23,
         			"z": 5.88,
-        			"y": 0.79,
+        			"y": 0.83,
         			"angle": 35
         		},
         		{
         			"name": "bodyStandA",
         			"x": 4.32,
         			"z": 1.57,
-        			"y": 0.79,
+        			"y": 0.83,
         			"angle": 155
         		},
         		{
         			"name": "bodyStandA",
-        			"x": 3.30,
-        			"z": 4.90,
-        			"y": 0.79,
+        			"x": 3.94,
+        			"z": 5.14,
+        			"y": 0.83,
         			"angle": -125
         		},
         		{

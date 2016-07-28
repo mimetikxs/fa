@@ -96,11 +96,13 @@ body.mobile, {
 // }
 body[data-sub-section="saydnaya"] #page-header {
     background-image: url("../assets/detention-syria.jpg");
-    background-position: initial;
+    // background-position: initial;
 }
 body[data-sub-section="detention"] #page-header {
-    background-image: url("../assets/detention-syria.jpg");
-    background-position: initial;
+    background-image: url("../assets/corridor_wingA_01.jpg");
+    // background-position: initial;
+    background-position: 50% 100px;
+    background-size: auto 300px;
 }
 body[data-sub-section="methodology"] #page-header {
     background-image: url("../assets/methodology.png");
@@ -253,6 +255,23 @@ body:not([data-sub-section]) {
             text-align: left;
         }
     }
+
+    .video-box {
+        padding: 20px 0;
+
+        .video-js {
+            overflow: hidden;
+        }
+
+        .caption {
+            font-size: em(12);
+            color: $c-grey--dark;
+            text-align: left;
+            margin-top: 5px;
+            margin-bottom: 10px;
+        }
+    }
+
 }
 
 // ------------------------------------------
@@ -261,8 +280,8 @@ body:not([data-sub-section]) {
 
 #cta-form {
     border-top: 1px solid $c-grey--light;
-
-
+    padding-top: 60px;
+    padding-bottom: 100px;
 
     .fragment {
         max-width: 1000px;
@@ -296,18 +315,8 @@ body:not([data-sub-section]) {
     color: #fff;
 
     .fragment {
-        max-width: 900px;
-        text-align: left;
-    }
-
-    .column-left {
-        width: $image-width;
-        float: left;
-        @include clearfix;
-    }
-
-    .column-right {
-        margin-left: $image-width + 40px;
+        max-width: 700px;
+        // text-align: left;
     }
 
     h2 {
@@ -450,21 +459,27 @@ body[data-lang="ar"] {
                 font-size: em(14);
             }
         }
+
+        .video-box {
+            .caption {
+                text-align: right;
+            }
+        }
     }
 
     #report {
-        .column-left {
-            width: auto;
-            margin-right: $image-width + 40px;
-            text-align: right;
-            float: none;
-        }
-
-        .column-right {
-            width: $image-width;
-            float: right;
-            margin: 0;
-            @include clearfix;
-        }
+        // .column-left {
+        //     width: auto;
+        //     margin-right: $image-width + 40px;
+        //     text-align: right;
+        //     float: none;
+        // }
+        //
+        // .column-right {
+        //     width: $image-width;
+        //     float: right;
+        //     margin: 0;
+        //     @include clearfix;
+        // }
     }
 }
