@@ -73,7 +73,7 @@ FA.App = (function() {
 
         if ( !videoData ) {
             console.log("[ WARNING ] Resource not found, setting default state");
-            goToHome();
+            goToExplore();
             return;
         }
 
@@ -98,7 +98,7 @@ FA.App = (function() {
 
         if ( !locationData ) {
             console.log("[ WARNING ] Resource not found, setting default state");
-            goToHome();
+            goToExplore();
             return;
         }
 
@@ -109,7 +109,7 @@ FA.App = (function() {
     }
 
 
-    function goToHome() {
+    function goToExplore() {
 
         // handle special case
         if ( $( 'body' ).hasClass( 'mobile' ) ) {
@@ -129,6 +129,23 @@ FA.App = (function() {
         changeState( new FA.StateExplore( FA.App ) );
 
         openedLocationId = null;
+
+    }
+
+
+    // intro aka preload
+    function goToIntro() {
+
+        // handle special case
+        if ( $( 'body' ).hasClass( 'mobile' ) ) {
+            changeState( new FA.StateExploreMobile( FA.App ) );
+            return;
+        }
+
+        // TODO:
+        // destroy all the sounds
+        // destroy or reset the main model view
+        // reset the app
 
     }
 
@@ -201,7 +218,8 @@ FA.App = (function() {
 
         goToLocation : goToLocation,
         goToVideo : goToVideo,
-        goToHome : goToHome,
+        goToExplore : goToExplore,
+        goToIntro : goToIntro,
 
         // this mathods are useful to freeze
         // the loop when form overlay is displayed

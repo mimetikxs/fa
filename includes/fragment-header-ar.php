@@ -11,7 +11,7 @@
         <a class="menuItem active" data-target="about" href="../ar/about.php">
             <span>About</span><span>حول</span>
         </a>
-        <a class="menuItem" data-target="explore" href="../">
+        <a class="menuItem" data-target="explore" href="../?kind=explore">
             <span>Explore</span><span>استكشف</span>
         </a>
     </div>

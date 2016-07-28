@@ -161,7 +161,7 @@
 					<div class="intro-nextAction">
 						<div class="btn-go-intro">
 							<span>View Intro</span>
-							<span>استكشف</span>
+							<span>المقدمة</span>
 						</div>
 						<div class="btn-go-explore">
 							<span>Explore</span>
@@ -240,7 +240,6 @@
 		<script src="js/lib/threejs/OBJLoader.js"></script>
         <script src="js/lib/threejs/OrbitControls.js"></script>
 		<script src="js/lib/ion.sound.js"></script>
-		<script src="js/lib/js.cookie.js"></script>
 
 		<script src="js/src/FA.js"></script>
 		<script src="js/src/Utils.js"></script>

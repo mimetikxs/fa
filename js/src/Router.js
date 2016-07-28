@@ -31,8 +31,8 @@ FA.Router = ( function() {
             return;
         }
 
-        // home (aka explore)
-        FA.App.goToHome();
+        // default: explore
+        FA.App.goToExplore();
 
     }
 

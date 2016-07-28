@@ -237,14 +237,28 @@ FA.StatePreload = function( app ) {
     function onError( xhr ) {};
 
 
-    function goToNextState() {
+    function processUrl() {
 
         $( '#layer-prison' ).css( 'display', 'block' );
 
         // fadeout intro
         $( "#layer-intro" ).transition( { opacity: 0 }, 500, 'out',
             function() {
-                FA.Router.processUrl()
+                FA.Router.processUrl();
+            }
+        );
+
+    }
+
+
+    function goToExploreState() {
+
+        $( '#layer-prison' ).css( 'display', 'block' );
+
+        // fadeout intro
+        $( "#layer-intro" ).transition( { opacity: 0 }, 500, 'out',
+            function() {
+                FA.Router.pushState( 'explore' );
             }
         );
 
@@ -275,7 +289,8 @@ FA.StatePreload = function( app ) {
         );
 
         player.on( 'ended', function() {
-            goToNextState();
+            //processUrl();
+            goToExploreState();
         } );
 
     }
@@ -335,7 +350,7 @@ FA.StatePreload = function( app ) {
                     });
                 } else {
                     // note that spinner is hidden in this.exit()
-                    goToNextState();
+                    processUrl();
                 }
 
                 clearInterval( slowLoopIntervalId );
@@ -352,7 +367,8 @@ FA.StatePreload = function( app ) {
             .transition( { opacity: 1 }, 500, 'in')
             .on( 'click', function( e ) {
 
-                goToNextState();
+                //processUrl();
+                goToExploreState();
 
             });
 
@@ -375,7 +391,8 @@ FA.StatePreload = function( app ) {
         $btnGoToExplore
             .on( 'click', function() {
 
-                goToNextState();
+                // processUrl();
+                goToExploreState();
 
             } );
 
@@ -433,10 +450,9 @@ FA.StatePreload = function( app ) {
         //
 
         var urlVars = FA.Router.getUrlVars( History.getState().url ),
-            isTargetHome = urlVars.kind !== 'location' && urlVars.kind !== 'video',
-            isFirstVisit = Cookies.get( 'hasVisitedIntro' ) !== 'true';
+            isTargetIntro = urlVars.kind !== 'location' && urlVars.kind !== 'video' && urlVars.kind !== 'explore';
 
-        if ( isFirstVisit && isTargetHome ) {
+        if ( isTargetIntro ) {
 
             // show intro
             isVideoReady = false;
@@ -482,15 +498,6 @@ FA.StatePreload = function( app ) {
 
         // if not already hidden
         hideSpinner();
-
-        // create a cookie valid for an hour
-        // after an hour the intro will be displayed again
-        if ( Cookies.get( 'hasVisitedIntro' ) !== 'true' ) {
-            var now = new Date(),
-                oneHourLater = new Date( now.getTime() + (1000 * 60 * 60) );
-
-            Cookies.set( 'hasVisitedIntro', true, { expires: oneHourLater } );
-        }
 
     }
 

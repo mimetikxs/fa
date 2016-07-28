@@ -1142,10 +1142,10 @@ body {
   #layer-intro .btn-skip {
     position: absolute;
     display: inline-block;
-    right: 20px;
+    left: 20px;
     top: 20px;
     text-transform: uppercase;
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: black;
     color: #fff;
     padding: 10px 15px;
     font-family: "AmnestyTradeGothic-BdCn20", sans-serif;
