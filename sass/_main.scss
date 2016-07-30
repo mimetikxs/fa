@@ -24,27 +24,42 @@
     user-select: auto;           // Non-prefixed version, currently
 }
 
-@mixin line-icon {
-    font-family: 'simple-line-icons';
-    speak: none;
-    font-style: normal;
-    font-weight: normal;
-    font-variant: normal;
-    text-transform: none;
-    line-height: 1;
-    /* Better Font Rendering =========== */
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+// @mixin line-icon {
+//     font-family: 'simple-line-icons';
+//     speak: none;
+//     font-style: normal;
+//     font-weight: normal;
+//     font-variant: normal;
+//     text-transform: none;
+//     line-height: 1;
+//     /* Better Font Rendering =========== */
+//     -webkit-font-smoothing: antialiased;
+//     -moz-osx-font-smoothing: grayscale;
+// }
+
+@mixin icomoon {
+    /* use !important to prevent issues with browser extensions that change fonts */
+   font-family: 'icomoon' !important;
+   speak: none;
+   font-style: normal;
+   font-weight: normal;
+   font-variant: normal;
+   text-transform: none;
+   line-height: 1;
+
+   /* Better Font Rendering =========== */
+   -webkit-font-smoothing: antialiased;
+   -moz-osx-font-smoothing: grayscale;
 }
 
-@mixin fa-icon {
-  display: inline-block;
-  font: normal normal normal 14px/1 FontAwesome;
-  font-size: inherit;
-  text-rendering: auto;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+// @mixin fa-icon {
+//   display: inline-block;
+//   font: normal normal normal 14px/1 FontAwesome;
+//   font-size: inherit;
+//   text-rendering: auto;
+//   -webkit-font-smoothing: antialiased;
+//   -moz-osx-font-smoothing: grayscale;
+// }
 
 .cross {
     position: relative;
@@ -128,6 +143,86 @@ body {
     // height: 100%; // dinamically set (see App.js)
 }
 
+.warning-browser,
+.info-popup {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 10000;
+    background-color: rgba(0,0,0,0.3);
+    text-align: center;
+    // default is hidden
+    display: none;
+    opacity: 0;
+
+    .box {
+        position: relative;
+        display: inline-block;
+        box-sizing: border-box;
+        padding: 35px 60px;
+        border: 1px solid $c-grey--mid;
+        background-color: rgba(0,0,0, 0.85);
+        color: $c-grey--light;
+        text-align: center;
+        white-space: initial;
+    }
+
+    .info-en {
+        font-family: $f-title;
+        font-size: 16px;
+    }
+
+    .info-ar {
+        margin-top: 25px;
+        font-family: $f-title--rtl;
+        font-size: 14px;
+        direction: rtl;
+    }
+
+    p {
+        margin: 5px 0;
+        line-height: 1.2;
+    }
+
+    .btn-close {
+        @extend .cross;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        height: 30px;
+        width: 30px;
+        background-color: rgba(0,0,0,0);
+
+        &::before,
+        &::after {
+            background: $c-grey--light;
+        }
+
+        &:hover {
+            background-color: $c-grey--light;
+        }
+    }
+}
+
+.info-popup {
+    .box {
+        margin-top: -80px;
+    }
+}
+
+.warning-browser {
+    background-color: rgba(90,90,90,0.8);
+    position: fixed;
+    box-sizing: border-box;
+    padding: 10px;
+    z-index: 0;
+
+    .box {
+        background-color: #000;
+        margin-left: 5px;
+    }
+}
+
 // ------------------------------------------
 // explore - common
 // ------------------------------------------
@@ -155,6 +250,7 @@ body {
     }
 
     .labels {
+        opacity: 0;
         transition: opacity 500ms ease-out;
 
         .label {
@@ -215,6 +311,8 @@ body {
         font-family: $f-title;
         color: #ddd;
         cursor: default;
+        opacity: 0;
+        transition: opacity 300ms;
 
         > div {
             display: inline-block;
@@ -267,8 +365,7 @@ body {
 
         .menu-type {
             padding: 20px 0;
-            // border-top: 1px solid #999;
-            border-bottom: 1px solid #ccc;
+            border-bottom: 1px solid #999;
 
             span {
                 display: inline-block;
@@ -386,7 +483,7 @@ body {
         }
 
         .ar-watch-videos {
-            border-top: 1px solid #ccc;
+            border-top: 1px solid #999;
             padding-top: 20px;
             direction: rtl;
             font-family: $f-title--rtl;
@@ -507,6 +604,10 @@ body {
         box-sizing: border-box;
         text-align: left;
         pointer-events: none;
+
+        // default is hidden
+        display: none;
+        opacity: 0;
     }
 
     .box-info {
@@ -635,6 +736,12 @@ body {
     font-family: $f-title;
     overflow: hidden;
 
+    // .controls {
+    //     width: 100%;
+    //     height: 100%;
+    //     position: absolute;
+    // }
+
     .player {
         position: absolute;
         width: 100%;
@@ -654,8 +761,11 @@ body {
             position: absolute;
             top: 0;
 
-            & > * {
-                padding: 2px 12px;
+            & > span {
+                display: inline-block;
+                padding: 0 12px;
+                line-height: 32px;
+                height: 32px;
                 text-transform: uppercase;
             }
         }
@@ -665,9 +775,11 @@ body {
             top: 32px;
             margin-top: 3px;
 
-            & > * {
+            & > span {
                 display: inline-block;
-                padding: 2px 12px;
+                padding: 0 12px;
+                line-height: 24px;
+                height: 24px;
             }
         }
     }
@@ -678,6 +790,11 @@ body {
         left: 30px;
         color: black;
 
+        .title > *,
+        .subtitle > * {
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+
         .title {
             font-size: 25px;
         }
@@ -685,19 +802,19 @@ body {
         .subtitle {
             font-size: 14px;
         }
-
-        .title > *,
-        .subtitle > * {
-            background-color: rgba(255, 255, 255, 0.8);
-        }
     }
 
     .info-arabic {
         position: absolute;
-        top: 95px;
+        top: 100px;
         left: 30px;
         font-family: $f-title--rtl;
         color: white;
+
+        .title > *,
+        .subtitle > * {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
 
         .title {
             font-size: 16px;
@@ -705,11 +822,6 @@ body {
 
         .subtitle {
             font-size: 11px;
-        }
-
-        .title > *,
-        .subtitle > * {
-            background-color: rgba(0, 0, 0, 0.8);
         }
     }
 
@@ -729,10 +841,10 @@ body {
         margin-top: -30px;
 
         .arrow {
-            @include line-icon;
+            @include icomoon;
             display: inline-block;
-            padding: 15px 12px;
-            font-size: 30px;
+            padding: 12px 8px;
+            font-size: 36px;
         }
 
         .label {
@@ -766,7 +878,7 @@ body {
         right: auto;
 
         .arrow:before {
-            content: "\e605";
+            content: "\e603";
         }
 
         .label {
@@ -779,7 +891,7 @@ body {
         text-align: right;
 
         .arrow:before {
-            content: "\e606";
+            content: "\e604";
         }
 
         .label {
@@ -807,15 +919,8 @@ body {
         }
 
         .takeAction {
-            line-height: 38px;
-            height: 40px;
-            box-sizing: border-box;
             float: left;
             margin-left: 30px;
-            color: $c-grey--mid;
-            background-color: rgba(0,0,0,0.8);
-            padding: 0 15px;
-            background-color: rgba(0,0,0,0.8);
             border: 1px solid $c-grey--mid;
 
             &:hover {
@@ -840,6 +945,7 @@ body {
       opacity: 0;
       transition: visibility 0s linear 1000ms, opacity 1000ms;
     }
+
     .active {
       visibility: visible;
       opacity: 1;
@@ -855,7 +961,54 @@ body {
         display: none;
     }
 
+    .takeAction {
+        line-height: 38px;
+        height: 40px;
+        box-sizing: border-box;
+        float: left;
+        color: $c-grey--mid;
+        background-color: rgba(0,0,0,0.8);
+        padding: 0 15px;
+        background-color: rgba(0,0,0,0.8);
+        border: 1px solid $c-grey--mid;
+
+        &.big {
+            position: absolute;
+            line-height: 62px;
+            height: 60px;
+            padding: 0 25px;
+            top: 50%;
+            left: 50%;
+            margin-left: -102px;
+            margin-top: -30px;
+            border: none;
+            background-color: #ff0;
+            color: #000;
+
+            visibility: hidden;
+
+            &:hover {
+                background-color: #ffd500;
+            }
+        }
+    }
 }
+
+// style for mobile
+
+// body.mobile #layer-video {
+//     .btn-next,
+//     .btn-prev {
+//         &:hover {
+//             .label,
+//             .arrow {
+//                 opacity: 1;
+//                 background-color: inherit;
+//                 color: inherit;
+//             }
+//         }
+//     }
+// }
 
 // ------------------------------------------
 // top bar
@@ -1034,24 +1187,25 @@ body {
     }
 
     .facebook {
-        @include fa-icon;
+        @include icomoon;
         &:before {
-            content: "\f082";
+            content: "\e90a";
         }
         margin-right: 10px;
-        font-size: 18px;
+        top: 3px;
     }
 
     .twitter {
-        @include fa-icon;
+        @include icomoon;
         &:before {
-            content: "\f099";
+            content: "\e60a";
         }
-        font-size: 18px;
+        top: 3px;
     }
 
     .facebook,
     .twitter {
+        position: relative;
         font-size: 20px;
         cursor: pointer;
         &:hover{
@@ -1092,6 +1246,8 @@ body {
     height: 100%;
     z-index: 1;
     transition: opacity 300ms;
+    //background-color: $c-grey--light; // set in StatePreload
+    overflow: hidden;
 
     .btn-skip {
         position: absolute;
@@ -1146,6 +1302,18 @@ body {
             width: 90px;
         }
     }
+
+    .gl {
+        display: inline-block;
+        position: absolute;
+        width: 800px;
+        height: 800px;
+        top: 50%;
+        left: 50%;
+        margin-left: -400px;
+        margin-top: -450px;
+        // background-color: $c-grey--light;
+    }
 }
 
 #introMessage {
@@ -1156,10 +1324,11 @@ body {
     @include noselect;
     font-family: $f-default;
     text-align: center;
-    background-color: $c-grey--light;
+    // background-color: $c-grey--light;
 
     .centered {
         opacity: 0;
+        z-index: 1;
     }
 
     .centered > * {
@@ -1236,7 +1405,7 @@ body {
             padding: 40px 0;
             font-size: 18px;
             border: 1px solid #000;
-            background-color: $c-grey--light;
+            background-color: rgba(218, 218, 218, 0.6);
             margin: 0 10px;
             transition: color 300ms, background-color 300ms;
             cursor: pointer;

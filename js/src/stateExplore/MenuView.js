@@ -479,11 +479,12 @@ FA.MenuView = function( app ) {
 
     this.show = function() {
 
-        //$('#layer-prison .navigation').transition( { opacity: 1 }, 500, 'out');
-        $('#layer-prison .navigation').css( {
-            opacity: 1,
-            'z-index': ''
-        } );
+        $('#layer-prison .navigation')
+            .css( {
+                'display': 'block',
+                'z-index': ''
+            } )
+            .transition( { 'opacity': 1 }, 400, 'in' );
 
         // TODO: enable events on show
         // add listeners
@@ -504,17 +505,17 @@ FA.MenuView = function( app ) {
 
     this.hide = function() {
 
-        //$('#left-bar').fadeOut(0);
-        $('#layer-prison .navigation').css( {
-            opacity: 0,
-            'z-index': 0
-        } );
+        $('#layer-prison .navigation')
+            .css( {
+                'z-index': 0
+            } )
+            .transition( { 'opacity': 1 }, 400, 'in', function() {
+                $(this).css( { 'display': 'none' } );
+            } );
 
         localMouseY = 0;
 
         // TODO: disable event on hide
-
-        // removeListeners
         // removeListeners();
 
     }

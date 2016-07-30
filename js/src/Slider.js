@@ -44,6 +44,12 @@ FA.Slider = function() {
 		$slider  = $html.find('.slider');
 		$bar     = $html.find('.bar');
 
+		// initially hidden
+		$slider.css( {
+			'display': 'none',
+			'opacity': 0
+		} );
+
 		// events
 		enable();
 
@@ -222,10 +228,26 @@ FA.Slider = function() {
 
 	}
 
-	/*
-	 * hack
-	 */
-	this.refreshWidth = function() {
+
+	this.show = function() {
+
+		enable();
+
+		$slider
+			.css( { 'display': 'block' } )
+			.transition( { 'opacity': 1 }, 400, 'in' );
+
+	}
+
+
+	this.hide = function() {
+
+		disable();
+
+		$slider
+			.transition( { 'opacity': 1 }, 400, 'in', function() {
+				$(this).css( { 'display': 'none' } );
+			} );
 
 	}
 

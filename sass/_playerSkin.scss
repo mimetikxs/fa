@@ -112,6 +112,10 @@ $center-big-play-button: true; // true default
 
 .video-js .vjs-progress-holder {
     // border: 10px solid black;
+
+    &.vjs-slider-horizontal {
+        background-color: #333;
+    }
 }
 
 // Make a slightly lighter version of the main background
@@ -140,7 +144,8 @@ $slider-bg-color: #444;
   /* For IE8 we'll lighten the color */
   //background: ligthen($slider-bg-color, 25%);
   /* Otherwise we'll rely on stacked opacities */
-  background: rgba($slider-bg-color, 1);
+  // background: rgba($slider-bg-color, 1);
+  background: #555;
 }
 
 /* The load progress bar also has internal divs that represent

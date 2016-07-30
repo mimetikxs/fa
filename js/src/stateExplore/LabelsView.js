@@ -4,8 +4,11 @@ FA.LabelsView = function( app ) {
 
         sceneWidth,
         sceneHeight,
+        // isHidden = true, // opacity is 0 initially
 
         scope = this;
+
+    var mainOpacity = 0;
 
 
     init();
@@ -145,7 +148,12 @@ FA.LabelsView = function( app ) {
 
     this.setOpacity = function( val ){
 
-        $dom.css( 'opacity', ( val < 0.6 ) ? 1 : 0 );
+        // if ( isHidden )
+        //     return;
+
+        mainOpacity = ( val < 0.6 ) ? 1 : 0;
+
+        $dom.css( 'opacity', mainOpacity );
 
     }
 
@@ -164,5 +172,23 @@ FA.LabelsView = function( app ) {
 
         $dom.empty();
 
+        $dom.css( 'opacity', 0 );
+
     }
+
+
+    // this.hide = function() {
+    //
+    //     isHidden = true;
+    //     $dom.css( 'opacity', 0 );
+    //
+    // }
+    //
+    //
+    // this.show = function() {
+    //
+    //     isHidden = false;
+    //     $dom.css( 'opacity', mainOpacity );
+    //
+    // }
 }

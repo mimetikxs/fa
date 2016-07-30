@@ -44,7 +44,7 @@
                     <p>منذ بداية الأزمة في سوريا في عام 2011، أصبح سجن صيدنايا الوجهة النهائية لمعارضي السلطة السلميين وأيضا لأفراد عسكريين اشتُبِه في أنهم عارضوا النظام.</p>
 
 					<div class="video-box">
-						<video id="video_0" class="video-js vjs-default-skin vjs-fill" controls preload="none" width="640" height="264" poster="">
+						<video id="video_0" class="video-js vjs-default-skin vjs-fill" controls preload="none" width="640" height="264" poster="https://i.vimeocdn.com/video/582395549.webp?mw=1920&mh=1080&q=70">
 							<source src="https://player.vimeo.com/external/175314910.sd.mp4?s=6f641f05a5b6e044d68ba8ae283f6cb42d90b072&profile_id=164" type="video/mp4" />
 							<p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>
 			            </video>

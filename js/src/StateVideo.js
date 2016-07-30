@@ -145,12 +145,14 @@ FA.StateVideo2 = function( app, videoData, direction ) {
 
         player.on( 'ended', function(){
             showControls();
+            showActionBig();
             $( '#layer-video .bottom-bar' ).css( 'bottom', 50 );
         } );
 
-        // player.on( 'seeking', function() {
-        //     console.log("seeking...");
-        // } );
+        player.on( 'seeking', function() {
+            console.log("seeking...");
+            hideActionBig();
+        } );
 
         player.on( 'stalled', function() {
             console.log("VIDEO STALLED");
@@ -165,6 +167,7 @@ FA.StateVideo2 = function( app, videoData, direction ) {
         } );
 
         player.on( 'play', function() {
+            hideActionBig();
             // hide spinner
             $layer.find( '.spinner-wrap' ).css( 'display', 'none' );
             // showControls();
@@ -278,6 +281,38 @@ FA.StateVideo2 = function( app, videoData, direction ) {
     }
 
 
+    function showActionBig() {
+
+        $('#layer-video .takeAction:not(.big)')
+            .transition( { opacity: 0 }, 300, 'out', function() {
+                $(this).css( { visibility: 'hidden' } )
+            } );
+
+        $('#layer-video .takeAction.big')
+            .css( { opacity: 0, visibility: 'visible' } )
+            .transition( { opacity: 1 }, 300, 'out' );
+
+    }
+
+    function hideActionBig() {
+
+
+        if ( $('.takeAction:not(.big)').css( 'opacity' ) < 1 ) {
+
+            $('.takeAction:not(.big)')
+                .css( { opacity: 0, visibility: 'visible' } )
+                .transition( { opacity: 1 }, 300, 'out' );
+
+        }
+
+        $('.takeAction.big')
+            .transition( { opacity: 0 }, 300, 'out', function() {
+                $(this).css( { visibility: 'hidden' } )
+            } );
+
+    }
+
+
     //        //
     // Public //
     //        //
@@ -310,6 +345,15 @@ FA.StateVideo2 = function( app, videoData, direction ) {
 
         // add video element
         $player.html( getVideoElementHtml( videoData ) );
+
+        // reset action buttons visibility
+        $( '.takeAction:not(.big)' ).css( { visibility: 'visible', opacity: 1 } )
+        $( '.takeAction.big' ).css( { visibility: 'hidden', opacity: 0 } );
+
+        // remove labels on touch devices
+        // if ( $('body').hasClass( 'mobile' ) ) {
+        //     $( '.btn-next, .btn-prev' ).find( '.label' ).remove();
+        // }
 
         // init videojs
         player = videojs(

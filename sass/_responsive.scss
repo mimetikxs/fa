@@ -12,7 +12,7 @@
         }
 
         .btn-stacked-menu {
-            @include line-icon;
+            @include icomoon;
             position: absolute;
             right: 0;
             top: 0;
@@ -22,11 +22,11 @@
 
             &:before {
                 display: inline-block;
-                content: "\e601";
+                content: "\e90b";
                 line-height: 50px;
                 width: 50px;
                 text-align: center;
-                font-size: 25px;
+                font-size: 35px;
             }
 
             &.active {
@@ -209,8 +209,29 @@
             background-image: none;
             background-color: $c-grey--mid;
 
-            h1 {
+            .title-home {
+                position: absolute;
                 bottom: 40px;
+                width: 100%;
+            }
+
+            h1 {
+                float: left;
+                position: static;
+                box-sizing: border-box;
+
+                &:nth-child(1) {
+                    // margin-right: 5px;
+                    // margin-bottom: 5px;
+                }
+
+                &:nth-child(2) {
+                    font-family: $f-title--rtl;
+                    font-size: 38px;
+                    line-height: 42px;
+                    height: 69px;
+
+                }
             }
             h3 {
                 position: absolute;

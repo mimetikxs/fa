@@ -23,11 +23,38 @@ FA.StatePreload = function( app ) {
         isSoundLoaded = false,
         bSkipIntro = false,
 
-        MAX_SECONDS_WAIT = 20,
+        MAX_SECONDS_WAIT = 30,
         secondsCounter = 0,
         timerIntervalId,
 
         slowLoopIntervalId;
+
+
+
+    // animated background
+    var rotatingBuilding;
+
+    function loadSimpleBuilding( onComplete ) {
+
+        var loader = new THREE.JSONLoader();
+        loader.load(
+            'obj/buildingSimple/buildingSimple.js',
+            function ( geometry, material ) {
+
+                // only create if not skipping
+                // TODO: do not load the model if skipping
+                if ( !bSkipIntro ) {
+                    rotatingBuilding = new FA.BuildingSimple( geometry );
+                }
+
+                onComplete();
+
+            }
+            //onProgress,
+            //onError
+        );
+
+    }
 
 
     function loadData( onComplete ) {
@@ -88,9 +115,6 @@ FA.StatePreload = function( app ) {
 
         manager.onLoad = function() {
             is3Dloaded = true;
-
-            // showSkip();
-            //hideSpinner();
         }
 
         loadBuildingModel();
@@ -242,6 +266,7 @@ FA.StatePreload = function( app ) {
         $( '#layer-prison' ).css( 'display', 'block' );
 
         // fadeout intro
+        $( "#layer-intro .gl" ).css( { opacity: 0 } );
         $( "#layer-intro" ).transition( { opacity: 0 }, 500, 'out',
             function() {
                 FA.Router.processUrl();
@@ -256,6 +281,7 @@ FA.StatePreload = function( app ) {
         $( '#layer-prison' ).css( 'display', 'block' );
 
         // fadeout intro
+        $( "#layer-intro .gl" ).css( { opacity: 0 } );
         $( "#layer-intro" ).transition( { opacity: 0 }, 500, 'out',
             function() {
                 FA.Router.pushState( 'explore' );
@@ -416,6 +442,8 @@ FA.StatePreload = function( app ) {
             .css( { visibility : 'visible' } )
             .transition( { opacity: 1 }, 900, 'in');
 
+        $( '#layer-intro' ).css( {'background-color': '#DADADA'})
+
     }
 
 
@@ -438,11 +466,15 @@ FA.StatePreload = function( app ) {
         // init loading
         //
 
-        // load json and resources
-        loadData( function() {
-            // and then load 3d + sound
-            loadResources();
-            loadSound();
+        loadSimpleBuilding( function() {
+
+            // load json and resources
+            loadData( function() {
+                // and then load 3d + sound
+                loadResources();
+                loadSound();
+            } );
+
         } );
 
         //
@@ -475,6 +507,9 @@ FA.StatePreload = function( app ) {
 
     this.update = function() {
 
+        if ( rotatingBuilding )
+            rotatingBuilding.update();
+
     }
 
 
@@ -498,6 +533,9 @@ FA.StatePreload = function( app ) {
 
         // if not already hidden
         hideSpinner();
+
+        if ( rotatingBuilding )
+            rotatingBuilding.destroy();
 
     }
 

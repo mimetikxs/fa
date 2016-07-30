@@ -25,8 +25,8 @@ FA.StateExplore = function( app ) {
     function buildSlider() {
 
         slider = new FA.Slider();
+        slider.setPercent( app.modelOpacity );
         slider.onChange( setOpacity );
-        slider.setPercent( app.modelOpacity ); // 30%
         $( 'body' ).append( slider.$dom );
 
     }
@@ -198,6 +198,56 @@ FA.StateExplore = function( app ) {
     }
 
 
+    function showHelpPopup() {
+
+        setOpacity( 1 );
+
+        $( '.info-popup' )
+            .css( { 'display': 'block' } )
+            .transition( { opacity: 1 }, 400, 'in', function() {
+                // add listener
+                $( '.info-popup' ).on( 'click', function( e ) {
+                    var t = $( e.target );
+                    if ( t.is( '.btn-close' ) || t.is( '.info-popup' ) ) {
+                        closeHelpPopup();
+                    }
+                } );
+            } );
+
+        // avoid showing popup again
+        $( '#content' ).addClass( 'noHelp' );
+
+    }
+
+
+    function closeHelpPopup() {
+
+        // show gui elements
+        menuView.show();
+        slider.show();
+        $( '#layer-prison .title').css('opacity', 1);
+
+        // hide help
+        $( '.info-popup' )
+            .transition( { opacity: 0 }, 200, 'in', function() {
+                $( '.info-popup' ).css( {'display': 'none' } )
+                // remove listener
+                $( '.info-popup' ).off();
+            } );
+
+        // animate building opacity
+        $( app ).animate( {
+            modelOpacity: 0.4
+        },{
+            duration: 1500,
+            easing: 'linear',
+            step: function ( val ) {
+                slider.setPercent( val )
+            }
+        });
+
+    }
+
 
     //        //
     // Public //
@@ -213,29 +263,34 @@ FA.StateExplore = function( app ) {
 
     this.enter = function() {
 
-        // app.setOverLocation( null );
-        // app.setActiveLocation( null );
-
         // initilise the objects only the first time
         app.buildingView = app.buildingView || new FA.BuildingView( app );
         app.menuView = app.menuView || new FA.MenuView( app )
 
+        menuView = app.menuView;
         buildingView =  app.buildingView;
         labelsView = new FA.LabelsView( app );
-        menuView = app.menuView;
-
         buildSlider();
-
-        buildingView.setOpacity( app.modelOpacity );
 
         onWindowResize();
         addListeners();
 
         // revealing //////////////////////////////////////////
         $gl.css( 'opacity', 1 );
-        $labels.css( 'opacity', 1 );
-        $( '#header' ).css( 'top', 0 );
-        menuView.show();
+
+        var noHelp = $( '#content' ).hasClass( 'noHelp' );
+
+        if ( noHelp ) {
+            menuView.show();
+            slider.show();
+            labelsView.setOpacity( app.modelOpacity );
+            buildingView.setOpacity( app.modelOpacity );
+            $( '#layer-prison .title').css('opacity', 1);
+        } else {
+            setTimeout( function() {
+                showHelpPopup();
+            }, 500 );
+        }
         //////////////////////////////////////////////////////
 
         playSound();
@@ -258,10 +313,6 @@ FA.StateExplore = function( app ) {
 
         removeListeners();
 
-        // app.setOverLocation( null );
-        // app.setActiveLocation( null );
-
-        //buildingView.destroy();
         menuView.hide();
         labelsView.destroy();
 

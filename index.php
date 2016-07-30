@@ -78,6 +78,21 @@
 				</div>
 			</div>
 
+			<!-- help popup -->
+
+			<div class="info-popup block">
+	            <div class="box centered">
+	                <div class="info-en">
+	                    <p>Click and Drag to move the camera.</p>
+	                    <p>Best experienced with headphones.</p>
+	                </div>
+	                <div class="info-ar">
+	                    <p>انقر واسحب على الساحة لتحريك الكاميرا.</p>
+	                    <p>أدر مكبرات الصوت.</p>
+	                </div>
+	                <div class="btn-close"></div>
+	            </div>
+	        </div>
 		</div>
 
 		<!-- video overlay -->
@@ -128,19 +143,23 @@
 						<span class="twitter"></span>
 					</div>
 				</div>
+
+				<div class="takeAction big" data-action="cta">
+					<span>Take Action</span><span>بادر بالتحرك</span>
+				</div>
 			</div>
 
 			<div class="spinner-wrap">
 				<div class="spinner"></div>
 			</div>
+
 		</div>
 
 		<!-- intro -->
 
 		<div id="layer-intro">
 
-			<!-- <div id="background-gl">
-			</div> -->
+			<div class="gl"></div>
 
 			<div class="intro-logos">
 				<span class="ai"></span><span class="fa"></span>
@@ -160,7 +179,7 @@
 
 					<div class="intro-nextAction">
 						<div class="btn-go-intro">
-							<span>View Intro</span>
+							<span>Intro</span>
 							<span>المقدمة</span>
 						</div>
 						<div class="btn-go-explore">
@@ -178,8 +197,8 @@
 						<div class="spinner"></div>
 					</div>
 
-
 				</div>
+
 			</div>
 
 			<div class="video-container"></div>
@@ -237,7 +256,7 @@
 		<script src="js/lib/player.min.js"></script>
 		<script src="js/lib/typed.js"></script>
 		<script src="js/lib/threejs/three.js"></script>
-		<script src="js/lib/threejs/OBJLoader.js"></script>
+		<!-- <script src="js/lib/threejs/OBJLoader.js"></script> -->
         <script src="js/lib/threejs/OrbitControls.js"></script>
 		<script src="js/lib/ion.sound.js"></script>
 
@@ -257,6 +276,7 @@
 		<script src="js/src/StateVideo.js"></script>
 		<script src="js/src/StateIdle.js"></script>
 		<script src="js/src/StateExploreMobile.js"></script>
+		<script src="js/src/BuildingSimple.js"></script>
 		<script src="js/src/App.js"></script>
 		<script src="js/src/action-form.js"></script>
 		<script src="js/src/responsive.js"></script>

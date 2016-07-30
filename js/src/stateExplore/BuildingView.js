@@ -61,6 +61,9 @@ FA.BuildingView = function( app ) {
         scene = new THREE.Scene();
 
         camera = new THREE.PerspectiveCamera( 40, sceneWidth / sceneHeight, 1, 300 );
+        // camera.position.x = -17;
+        // camera.position.y = 24.79;
+        // camera.position.z = 14.97;
         camera.position.x = -26;
         camera.position.y = 16;
         camera.position.z = 14;

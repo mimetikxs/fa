@@ -19,6 +19,13 @@ FA.App = (function() {
         isStoped;
 
 
+    // https://www.airtightinteractive.com/2015/01/building-a-60fps-webgl-game-on-mobile/
+    // http://threejs.org/docs/api/core/Clock.html
+    // var clock = new THREE.Clock( true ),
+    //     frameDuration = 1/50,
+    //     lastElapsed = 0;
+
+
     // start loop
     start();
 
@@ -48,7 +55,13 @@ FA.App = (function() {
 
     function update() {
 
-        currentState.update();
+        // var elapsed = clock.getElapsedTime()
+        // if ( elapsed - lastElapsed > frameDuration ) {
+        //     lastElapsed = elapsed;
+        //     currentState.update();
+        // }
+
+         currentState.update();
 
         requestId = requestAnimationFrame( update );
 
@@ -286,4 +299,41 @@ function initMobile() {
 
     FA.App.changeState( new FA.StateExploreMobile( FA.App ) );
 
+    var warning = $( browserWarningHtml );
+    $('body').append( warning );
+
 }
+
+
+var browserWarningHtml = [
+    '<div class="warning-browser">',
+        '<div class="box">',
+            '<div class="info-en">',
+                '<p>Click and Drag to move the camera</p>',
+                '<p>Best experienced with headphones</p>',
+            '</div>',
+            '<div class="info-ar">',
+                '<p>انقر واسحب على الساحة لتحريك الكاميرا</p>',
+                '<p>أدر مكبرات الصوت</p>',
+            '</div>',
+            '<div class="btn-close"></div>',
+        '</div>',
+    '</div>'
+].join('');
+
+
+var mobileWarningHtml = [
+    '<div class="warning-browser">',
+        '<div class="box">',
+            '<div class="info-en">',
+                '<p>Click and Drag to move the camera</p>',
+                '<p>Best experienced with headphones</p>',
+            '</div>',
+            '<div class="info-ar">',
+                '<p>انقر واسحب على الساحة لتحريك الكاميرا</p>',
+                '<p>أدر مكبرات الصوت</p>',
+            '</div>',
+            '<div class="btn-close"></div>',
+        '</div>',
+    '</div>'
+].join('');

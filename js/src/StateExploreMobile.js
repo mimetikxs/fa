@@ -8,7 +8,10 @@ FA.StateExploreMobile = function( app ) {
         $witnessMenu,
         $currentMenu,
 
-        navMode = null;
+        navMode = null,
+
+        $browserWarning;
+
 
 
     function loadData( onComplete ) {
@@ -48,6 +51,7 @@ FA.StateExploreMobile = function( app ) {
                     opacity: 0,
                     display: 'none'
                 } );
+
                 onComplete();
             },
             error : function( jqXHR, status, errorThrown ) {
@@ -87,13 +91,16 @@ FA.StateExploreMobile = function( app ) {
         for ( var i = 0; i < locations.length; i++ ) {
             location = locations[ i ];
             medias = data.mediasByLocation[ location.slug ];
-            html +=
-            '<li data-location="' + location.slug + '">' +
-                '<div class="folder">' + '<span class="icon"></span><span>' + location.name + '</span></div>' +
-                '<ul>' +
-                    getMediasHtml( medias ) +
-                '</ul>' +
-            '</li>';
+
+            if ( medias.length > 0 ) {
+                html +=
+                '<li data-location="' + location.slug + '">' +
+                    '<div class="folder">' + '<span class="icon"></span><span>' + location.name + '</span></div>' +
+                    '<ul>' +
+                        getMediasHtml( medias ) +
+                    '</ul>' +
+                '</li>';
+            }
         }
 
         $menu.append( html );
@@ -124,13 +131,16 @@ FA.StateExploreMobile = function( app ) {
         for ( var i = 0; i < witnesses.length; i++ ) {
             witness = witnesses[ i ];
             medias = data.mediasByWitness[ witness.slug ];
-            html +=
-            '<li data-witness="' + witness.slug + '">' +
-                '<div class="folder">' + '<span class="icon"></span><span>' + witness.name + '</span></div>' +
-                '<ul>' +
-                    getMediasHtml( medias ) +
-                '</ul>' +
-            '</li>';
+
+            if ( medias.length > 0 ) {
+                html +=
+                '<li data-witness="' + witness.slug + '">' +
+                    '<div class="folder">' + '<span class="icon"></span><span>' + witness.name + '</span></div>' +
+                    '<ul>' +
+                        getMediasHtml( medias ) +
+                    '</ul>' +
+                '</li>';
+            }
         }
 
         $menu.append( html );
@@ -280,12 +290,83 @@ FA.StateExploreMobile = function( app ) {
     }
 
 
+    function showWarning() {
+
+        var noWarning = $( 'body' ).hasClass( 'noWarning' );
+
+        if ( noWarning ) {
+            return;
+        }
+
+        $browserWarning = $([
+            '<div class="warning-browser block">',
+                '<div class="box centered">',
+                    '<div class="info-en">',
+                        '<p>Visit this site on a desktop for the full 3D experience</p>',
+                    '</div>',
+                    '<div class="info-ar">',
+                        '<p>انقر واسحب على الساحة لتحريك الكاميرا</p>',
+                    '</div>',
+                    '<div class="btn-close"></div>',
+                '</div>',
+            '</div>'
+        ].join(''));
+
+        $('body').append( $browserWarning );
+
+        // reveal
+        $browserWarning
+            .css( { 'display': 'block' } )
+            .transition( { opacity: 1 }, 400, 'in', function() {
+
+                $browserWarning.on( 'click', function( e ) {
+                    var t = $( e.target );
+                    if ( t.is( '.btn-close' ) || t.is( $browserWarning ) ) {
+                        closeWarning();
+                    }
+                } );
+            } );
+
+        // avoid showing popup again
+        $( 'body' ).addClass( 'noWarning' );
+
+    }
+
+
+    function closeWarning() {
+
+        // hide help
+        $browserWarning
+            .transition( { opacity: 0 }, 200, 'in', function() {
+                $browserWarning.css( { 'display': 'none' } )
+                $browserWarning.off();
+            } );
+
+    }
+
+
+    //
+    // Public
+    //
+
+
     this.enter = function() {
 
+        // only create the first time
+        var isReady = $( 'body' ).hasClass( 'isReady' );
+
+        if ( isReady ){
+            return;
+        }
+
         loadLayout( function() {
+            showWarning();
 
             loadData( function() {
                 buildNavigation();
+
+                //
+                $( 'body' ).addClass( 'isReady' )
 
                 // re-route if not at home
                 var urlVars = FA.Router.getUrlVars( History.getState().url ),
