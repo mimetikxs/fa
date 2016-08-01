@@ -10,11 +10,9 @@ FA.StateVideo2 = function( app, videoData, direction ) {
         player,
 
         isArrowHover,
-        isUserActive,
-
         isReady; // testing: avoid stalled state due fast clicks on arrows
 
-    var timeoutId; // testing
+    var isTouchDevice = $('body').hasClass( 'mobile' ) || $('body').hasClass( 'tablet' );
 
 
     function close() {
@@ -91,7 +89,7 @@ FA.StateVideo2 = function( app, videoData, direction ) {
         if ( leftVideo ) {
             $arrowLeft
                 .find( '.label' ).text( leftVideo.title ).end()
-                .css( 'visibility', 'visible' )
+                .css( 'visibility', '' )
                 .attr( 'data-id', leftVideo.id );
         } else {
             $arrowLeft
@@ -102,7 +100,7 @@ FA.StateVideo2 = function( app, videoData, direction ) {
         if ( rightVideo ) {
             $arrowRight
                 .find( '.label' ).text( rightVideo.title ).end()
-                .css( 'visibility', 'visible' )
+                .css( 'visibility', '' )
                 .attr( 'data-id', rightVideo.id );
         } else {
             $arrowRight
@@ -119,8 +117,18 @@ FA.StateVideo2 = function( app, videoData, direction ) {
 
         // events
 
+        // player.on('tap', function(){
+        //     console.log("tap");
+        //     if (player.userActive() === true) {
+        //         player.userActive(false);
+        //     } else {
+        //         player.userActive(true);
+        //         player.pause();
+        //     }
+        // });
+
         player.on( 'userinactive', function(){
-            isUserActive = false;
+            // isUserActive = false;
             if( !player.paused()  &&  !isArrowHover ) {
                 hideControls();
             }
@@ -130,7 +138,7 @@ FA.StateVideo2 = function( app, videoData, direction ) {
         } );
 
         player.on( 'useractive', function(){
-            isUserActive = true;
+            // isUserActive = true;
             if( !player.paused() ) {
                 showControls();
             }
@@ -155,22 +163,36 @@ FA.StateVideo2 = function( app, videoData, direction ) {
         } );
 
         player.on( 'stalled', function() {
-            console.log("VIDEO STALLED");
-            console.log("-------------");
-            //showSpinner
-            $layer.find( '.spinner-wrap' ).css( 'display', 'block' );
+            console.log("stalled");
+            showSpinner();
         } );
 
-        player.on( 'playing', function() {
-            // hide spinner
-            $layer.find( '.spinner-wrap' ).css( 'display', 'none' );
+        // detect stalled
+        player.on( 'progress', function() {
+            // console.log("progress");
+            hideSpinner();
         } );
+        player.on( 'playing', function() {
+            // console.log("playing");
+            hideSpinner();
+        } );
+        player.on( 'loadeddata', function() {
+            // console.log("loadeddata");
+            hideSpinner();
+        } );
+        player.on( 'canplay', function() {
+            // console.log("canplay");
+            hideSpinner();
+        } );
+        player.on( 'canplaythrough', function() {
+            // console.log("canplaythrough");
+            hideSpinner();
+        } );
+
 
         player.on( 'play', function() {
             hideActionBig();
-            // hide spinner
-            $layer.find( '.spinner-wrap' ).css( 'display', 'none' );
-            // showControls();
+            hideSpinner();
         } );
 
         // testing
@@ -180,37 +202,61 @@ FA.StateVideo2 = function( app, videoData, direction ) {
     }
 
 
+    function hideSpinner() {
+        $layer.find( '.spinner-wrap' ).css( 'display', 'none' );
+    }
+
+
+    function showSpinner() {
+        $layer.find( '.spinner-wrap' ).css( 'display', 'block' );
+    }
+
+
     function addListeners() {
 
+        if ( isTouchDevice ) {
+            addTouchListeners();
+        } else {
+            addMouseListeners();
+        }
+
+    }
+
+
+    function addMouseListeners() {
+
+        // close
         $btnExit.on( 'click', function() {
             close();
         } );
 
+        // arrows
         $layer.find( '.btn-prev, .btn-next' )
             .on( 'click', function() {
-
                 goToVideo( $( this ).attr( 'data-id' ) );
-
-                // hide controls
-                // isArrowHover = false;
-                // isUserActive = false;
-                // hideControls();
-                var label = $(this).find('.label');
-                label.css('visibility', 'hidden');
-                //
-                timeoutId = setTimeout( function(){
-                    label.css('visibility', 'visible');
-                    // showControls();
-                }, 1000);
             } )
+
             .on( 'mouseenter', function() {
+                $( this )
+                    .find( '.arrow' ).css( { color: '#000', 'background-color': 'rgba(255,255,255,0.8)' } ).end()
+                    .find( '.label' ).css( { opacity: 1 } );
+
+                // labels could be hidden after click, show them now
+                showLabels();
+
                 isArrowHover = true;
             } )
+
             .on( 'mouseleave', function() {
-                isArrowHover = false;
-                if ( !isUserActive ) {
+                $( this )
+                    .find( '.arrow' ).css( { color: '', 'background-color': '' } ).end()
+                    .find( '.label' ).css( { opacity: 0 } );
+
+                if ( player.userActive() !== true  &&  !player.ended() ) {
                     hideControls();
                 }
+
+                isArrowHover = false;
             } );
 
         // action form
@@ -218,8 +264,30 @@ FA.StateVideo2 = function( app, videoData, direction ) {
             FA.ActionFormOverlay.open();
             player.pause();
         } );
-        FA.ActionFormOverlay.onClose( function() {
-            // player.play();
+        // FA.ActionFormOverlay.onClose( function() {
+        //     player.play();
+        // } );
+
+    }
+
+
+    function addTouchListeners() {
+
+        // close
+        $btnExit.on( 'click', function() {
+            close();
+        } );
+
+        // arrows
+        $layer.find( '.btn-prev, .btn-next' )
+            .on( 'click', function() {
+                goToVideo( $( this ).attr( 'data-id' ) );
+            } );
+
+        // action form
+        $( '#layer-video [data-action="cta"]' ).on( 'click', function() {
+            FA.ActionFormOverlay.open();
+            player.pause();
         } );
 
     }
@@ -242,7 +310,6 @@ FA.StateVideo2 = function( app, videoData, direction ) {
         if ( $('#layer-video .controls').hasClass( 'inactive' ) ){
             $( '#layer-video .controls' ).removeClass( 'inactive' ).addClass( 'active' );
         }
-        // $controls.css( 'pointer-events', 'auto' );
 
     }
 
@@ -252,7 +319,25 @@ FA.StateVideo2 = function( app, videoData, direction ) {
         if ( $('#layer-video .controls').hasClass( 'active' ) ){
             $('#layer-video .controls').removeClass( 'active' ).addClass('inactive');
         }
-        // $controls.css( 'pointer-events', 'none' );
+
+    }
+
+
+    function showLabels() {
+
+        if ( isTouchDevice ) {
+            return;
+        }
+
+        $controls.find( '.label' ).css( 'visibility', 'visible' );
+
+    }
+
+
+    function hideLabels() {
+
+        // NOTE: this hides "share" on the social menu
+        $controls.find('.label').css('visibility', 'hidden');
 
     }
 
@@ -267,11 +352,11 @@ FA.StateVideo2 = function( app, videoData, direction ) {
     function getVideoElementHtml( videoData ) {
 
         // add video element
-        var isMobile = false,                // TODO: actual mobile check (read body data attr)
-            poster = ( isMobile ) ? '' : '', // TODO: add poster on mobile devices?
+        var isMobile = $( 'body' ).hasClass( 'mobile' ) || $('body').hasClass( 'tablet' ),
+            poster = ( isMobile ) ? 'poster="' + videoData.poster + '"' : '',
             html = '';
-        html += '<video id="video_1" class="video-js vjs-default-skin vjs-fill" controls preload="none" width="640" height="264" poster="' + poster + '">';
-        html += ( isMobile ) ? '' : '<source src="' + videoData.video.hd + '" type="video/mp4">'; // do not add hd source if this is a mobile device
+        html += '<video id="video_1" class="video-js vjs-default-skin vjs-fill" controls preload="none" width="640" height="264"' + poster + '>';
+        html += ( isMobile ) ? '' : '<source src="' + videoData.video.hd + '" type="video/mp4">';
         html += '<source src="' + videoData.video.sd + '" type="video/mp4">';
         html += '<p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>';
         html += '</video>';
@@ -293,6 +378,7 @@ FA.StateVideo2 = function( app, videoData, direction ) {
             .transition( { opacity: 1 }, 300, 'out' );
 
     }
+
 
     function hideActionBig() {
 
@@ -340,6 +426,9 @@ FA.StateVideo2 = function( app, videoData, direction ) {
         // show controls
         $controls.removeClass('inactive').addClass('active');
 
+        // labels hidden by default
+        hideLabels();
+
         // player is hidden until ready
         $player.css('opacity', 0);
 
@@ -349,11 +438,6 @@ FA.StateVideo2 = function( app, videoData, direction ) {
         // reset action buttons visibility
         $( '.takeAction:not(.big)' ).css( { visibility: 'visible', opacity: 1 } )
         $( '.takeAction.big' ).css( { visibility: 'hidden', opacity: 0 } );
-
-        // remove labels on touch devices
-        // if ( $('body').hasClass( 'mobile' ) ) {
-        //     $( '.btn-next, .btn-prev' ).find( '.label' ).remove();
-        // }
 
         // init videojs
         player = videojs(

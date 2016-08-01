@@ -30,6 +30,9 @@ FA.State360 = function( app, locationData ) {
         timeoutShowInfo;
 
 
+    var isTouchDevice = $('body').hasClass( 'mobile' ) || $('body').hasClass( 'tablet' );
+
+
 
     function onMouseMove( e ) {
 
@@ -197,9 +200,10 @@ FA.State360 = function( app, locationData ) {
             .on( 'mouseup', onDocumentMouseUp );
 
         // auto scroll
-        $('.box-info')
-            .on( 'mousemove', onBoxInfoMouseMove )
-
+        if ( !isTouchDevice ) {
+            $('.box-info')
+                .on( 'mousemove', onBoxInfoMouseMove )
+        }
 
         // action form
         $( '#header [data-action="cta"]' ).on( 'click', function() {
@@ -261,7 +265,7 @@ FA.State360 = function( app, locationData ) {
 
     function goToVideo( id ) {
 
-        // // DO NOT clear the View360 so the scene is available when back from video
+        // // DO NOT clear the View360 so the scene is available when we are back from a video
         //
         // // DO NOT clear the sounds, only pause
         // pauseSound();
@@ -279,7 +283,7 @@ FA.State360 = function( app, locationData ) {
             sounds: [
                 {
                     name: soundData.ambient,
-                    loop: false
+                    loop: true
                 },
             ],
             path: "sound/",
@@ -475,6 +479,8 @@ FA.State360 = function( app, locationData ) {
             .css( { display: 'block' } )
             .transition( { opacity: 1 }, 250, 'in');
 
+        $layer.find( '.box-info .content-wrap' ).scrollTop( 0 );
+
     }
 
 
@@ -494,11 +500,8 @@ FA.State360 = function( app, locationData ) {
 
         $layer.find( '.box-info-wrap' )
             .transition( { opacity: 0 }, 250, 'in', function() {
-                $(this).css( { display: 'none' } );
+                $( this ).css( { display: 'none' } );
             } );
-
-        // reset scroll
-        $layer.find( '.box-info .content' ).scrollTop(0);
 
     }
 
@@ -583,6 +586,13 @@ FA.State360 = function( app, locationData ) {
             'opacity': 1
         } );
 
+        // info auto scroll
+        if ( isTouchDevice ) {
+            $layer.find( '.box-info .content-wrap' )
+                .css( { 'overflow-y': "auto" } );
+        }
+
+
         addListeners();
 
         onWindowResize();
@@ -594,7 +604,9 @@ FA.State360 = function( app, locationData ) {
 
         view360.update();
 
-        updateInfoScroll();
+        if ( !isTouchDevice ) {
+            updateInfoScroll();
+        }
 
     }
 
@@ -613,6 +625,8 @@ FA.State360 = function( app, locationData ) {
         //     visibility: 'hidden',
         //     opacity: 0
         // } );
+
+        $layer.find( '.box-info .content-wrap' ).scrollTop( 0 );
 
 
         clearTimeout( timeoutShowInfo );

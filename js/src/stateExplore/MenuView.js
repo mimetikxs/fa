@@ -21,6 +21,9 @@ FA.MenuView = function( app ) {
         navMode = null;
 
 
+    var isTouchDevice = $('body').hasClass( 'mobile' ) || $('body').hasClass( 'tablet' );
+
+
     init();
 
 
@@ -42,7 +45,11 @@ FA.MenuView = function( app ) {
         var data = app.data;
 
         $locationMenu = getLocationMenu( app.data );
-        $witnessMenu = getWitnessMenu( app.data )
+        $witnessMenu = getWitnessMenu( app.data );
+
+        if ( isTouchDevice ) {
+            $container.css( 'overflow-y', 'auto' );
+        }
 
     }
 
@@ -158,19 +165,22 @@ FA.MenuView = function( app ) {
         // reset model active location
         app.setActiveLocation( null );
 
-        // add / remove listeners based on mode
-        if ( mode === 'location' ) {
-            $container
-                .off( 'mouseenter', '.media', onMouseenterMedia )
-                .off( 'mouseleave', '.media', onMouseleaveMedia )
-                .on( 'mouseenter', '.folder', onMouseenterFolder )
-                .on( 'mouseleave', '.folder', onMouseleaveFolder );
-        } else if ( mode === 'witness' ) {
-            $container
-                .off( 'mouseenter', '.folder', onMouseenterFolder )
-                .off( 'mouseleave', '.folder', onMouseleaveFolder )
-                .on( 'mouseenter', '.media', onMouseenterMedia )
-                .on( 'mouseleave', '.media', onMouseleaveMedia );
+        // only on desktop
+        var isTouchDevice = $('body').hasClass( 'mobile' ) || $('body').hasClass( 'tablet' );
+        if ( !isTouchDevice ) {
+            if ( mode === 'location' ) {
+                $container
+                    .off( 'mouseenter', '.media', onMouseenterMedia )
+                    .off( 'mouseleave', '.media', onMouseleaveMedia )
+                    .on( 'mouseenter', '.folder', onMouseenterFolder )
+                    .on( 'mouseleave', '.folder', onMouseleaveFolder );
+            } else if ( mode === 'witness' ) {
+                $container
+                    .off( 'mouseenter', '.folder', onMouseenterFolder )
+                    .off( 'mouseleave', '.folder', onMouseleaveFolder )
+                    .on( 'mouseenter', '.media', onMouseenterMedia )
+                    .on( 'mouseleave', '.media', onMouseleaveMedia );
+            }
         }
 
     }
@@ -209,10 +219,18 @@ FA.MenuView = function( app ) {
     }
 
 
-
-
-
     function addListeners() {
+
+        if ( isTouchDevice ) {
+            addTouchListeners();
+        } else {
+            addMouseListeners();
+        }
+
+    }
+
+
+    function addMouseListeners() {
 
         $(window)
             .on( 'resize', onWindowResize )
@@ -222,12 +240,10 @@ FA.MenuView = function( app ) {
         // type switcher
         $menuType.on( 'click', onTypeClick );
 
+        // items
         $container
             .on( 'click', onClick )
             .on( 'mousemove', onMouseMove );
-
-        app.on( 'overLocationChange', onModelOverLocationChange );
-        app.on( 'activeLocationChange', onModelActiveLocationChange );
 
         // go to first video for arabic users
         $btnArabic.on( 'click', function() {
@@ -235,6 +251,34 @@ FA.MenuView = function( app ) {
 
             goToVideo( mediaData.id, 'rtl' );
         } )
+
+        // app listeners
+        app.on( 'overLocationChange', onModelOverLocationChange );
+        app.on( 'activeLocationChange', onModelActiveLocationChange );
+
+    }
+
+
+    function addTouchListeners() {
+
+        $(window)
+            .on( 'resize', onWindowResize );
+
+        // type switcher
+        $menuType.on( 'click', onTypeClick );
+
+        // items
+        $container
+            .on( 'click', onClick );
+
+        // go to first video for arabic users
+        $btnArabic.on( 'click', function() {
+            var mediaData = app.data.medias[ 0 ]; // media by index (0 = first)
+
+            goToVideo( mediaData.id, 'rtl' );
+        } );
+
+        app.on( 'activeLocationChange', onModelActiveLocationChange );
 
     }
 

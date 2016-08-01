@@ -73,6 +73,8 @@
             $( '#header' ).append( get_menuStaked_html( lang ) );
         }
 
+        $( '#header' ).css( { 'z-index': 10002 } );
+
         highlightCurrentItem();
 
     }
@@ -81,6 +83,8 @@
     function hideStakedMenu() {
 
         $( '#header .staked-nav' ).remove();
+
+        $( '#header' ).css( { 'z-index': '' } );
 
     }
 

@@ -7,12 +7,36 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 
+		<meta property="og:url"         content="https://saydnaya.amnesty.org/" />
+		<meta property="og:title"       content="Saydnaya, Inside a Syrian Torture Prison" />
+		<meta property="og:description" content="For the first time ever you can see inside Saydnaya, one of the world’s most terrifying prisons." />
+		<meta property="og:image"       content="https://saydnaya.amnesty.org/assets/share-cover.jpg" />
+
 		<link rel="stylesheet" href="js/lib/videojs/video-js.css">
 		<link rel="stylesheet" href="css/app.css">
 		<script src="js/lib/videojs/video.min.js"></script>
+		<script src="//wurfl.io/wurfl.js"></script>
 	</head>
 
 	<body data-section="explore">
+
+		<script>
+		  window.fbAsyncInit = function() {
+		    FB.init({
+		      appId      : 'your-app-id',
+		      xfbml      : true,
+		      version    : 'v2.7'
+		    });
+		  };
+
+		  (function(d, s, id){
+		     var js, fjs = d.getElementsByTagName(s)[0];
+		     if (d.getElementById(id)) {return;}
+		     js = d.createElement(s); js.id = id;
+		     js.src = "//connect.facebook.net/en_US/sdk.js";
+		     fjs.parentNode.insertBefore(js, fjs);
+		   }(document, 'script', 'facebook-jssdk'));
+		</script>
 
 		<!-- Google Tag Manager -->
 		<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-MH9W89"
@@ -238,7 +262,7 @@
 		<div id="footer-desktop" class="share-social">
 			<span class="label">share</span>
 			<span class="facebook"></span>
-			<span class="twitter"></span>
+			<a class="twitter"></a>
 		</div>
 
 		<!-- cta -->
@@ -250,13 +274,9 @@
 		<script src="js/lib/jquery-3.0.0.min.js"></script>
 		<script src="js/lib/jquery.easing.1.3.js"></script>
 		<script src="js/lib/jquery.transit.min.js"></script>
-		<!-- <script src="js/lib/dat.gui.js"></script> -->
-		<!-- <script src="js/lib/Stats.js"></script> -->
 		<script src="js/lib/jquery.history.js"></script>
-		<script src="js/lib/player.min.js"></script>
 		<script src="js/lib/typed.js"></script>
 		<script src="js/lib/threejs/three.js"></script>
-		<!-- <script src="js/lib/threejs/OBJLoader.js"></script> -->
         <script src="js/lib/threejs/OrbitControls.js"></script>
 		<script src="js/lib/ion.sound.js"></script>
 
@@ -280,6 +300,7 @@
 		<script src="js/src/App.js"></script>
 		<script src="js/src/action-form.js"></script>
 		<script src="js/src/responsive.js"></script>
+		<script src="js/src/share.js"></script>
 
 	</body>
 

@@ -419,10 +419,12 @@ body {
                         line-height: 15px;
                         text-align: center;
                         font-family: 'Arial', 'Helvetica', sans-serif;
-                        font-size: 18px;
+                        font-size: 15px;
+                        @include icomoon;
 
                         &:before {
-                            content: '+';
+                            //content: '+';
+                            content: '\e901';
                             top: 1px;
                             position: relative;
                         }
@@ -468,8 +470,8 @@ body {
                         background-color: rgba(224,6,6,0.65);
 
                         .icon:before {
-                            content: '-';
-                            top: 0;
+                            // content: '-';
+                            content: '\e900';
                         }
                     }
                 }
@@ -711,9 +713,11 @@ body {
 
     .spinner-wrap {
         position: absolute;
-        width: 100%;
-        text-align: center;
+        // width: 100%;
+        // text-align: center;
+        left: 50%;
         top: 50%;
+        margin-left: -25px;
         margin-top: -25px;
         display: none;
     }
@@ -796,7 +800,7 @@ body {
         }
 
         .title {
-            font-size: 25px;
+            font-size: 24px;
         }
 
         .subtitle {
@@ -845,6 +849,7 @@ body {
             display: inline-block;
             padding: 12px 8px;
             font-size: 36px;
+            background-color: rgba(0,0,0,0.8);
         }
 
         .label {
@@ -855,22 +860,27 @@ body {
             opacity: 0;
             pointer-events: none;
             min-height: 40px;
+            line-height: 1.2;
+            background-color: rgba(255,255,255,0.8);
+            color: black;
         }
 
         .arrow,
         .label {
             transition: background-color 300ms, opacity 300ms, color 300ms;
-            background-color: rgba(0,0,0,0.8);
+            // background-color: rgba(0,0,0,0.8);
         }
 
-        &:hover {
-            .label,
-            .arrow {
-                opacity: 1;
-                background-color: rgba(255,255,255,0.8);
-                color: black;
-            }
-        }
+        // needs to be handled through js to avoid unwanted
+        // behaviour on touch devices
+        // &:hover {
+        //     .label,
+        //     .arrow {
+        //         opacity: 1;
+        //         background-color: rgba(255,255,255,0.8);
+        //         color: black;
+        //     }
+        // }
     }
 
     .btn-prev {
@@ -919,9 +929,11 @@ body {
         }
 
         .takeAction {
-            float: left;
-            margin-left: 30px;
+            position: absolute;
+            left: 30px;
+            bottom: 0;
             border: 1px solid $c-grey--mid;
+            z-index: 1;
 
             &:hover {
                 border-color: $c-yellow;
@@ -954,9 +966,11 @@ body {
 
     .spinner-wrap {
         position: absolute;
-        width: 100%;
-        text-align: center;
+        // width: 100%;
+        // text-align: center;
         top: 50%;
+        left: 50%;
+        margin-left: -24px;
         margin-top: -25px;
         display: none;
     }
@@ -1174,8 +1188,9 @@ body {
     text-transform: uppercase;
     @include noselect;
 
-    & > span {
+    & > * {
         color: #ccc;
+        text-decoration: none;
     }
 
     .label {
@@ -1510,12 +1525,33 @@ body {
     .slider {
         float: left;
         position: relative;
-        width: 180px;
+        width: 220px;
         height: 35px;
-        padding: 10px;
+        padding: 10px 30px;
         box-sizing: border-box;
         border: 1px solid #ccc;
         cursor: ew-resize;
+
+        &:before,
+        &:after {
+            display: inline-block;
+            position: absolute;
+            color: #ccc;
+            font-size: 16px;
+            @include icomoon;
+        }
+
+        &:before {
+            content: '\e900';
+            left: 7px;
+            top: 9px;
+        }
+
+        &:after {
+            content: '\e901';
+            right: 7px;
+            top: 9px;
+        }
 
         .guide {
             position: absolute;

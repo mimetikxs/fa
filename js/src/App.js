@@ -213,7 +213,7 @@ FA.App = (function() {
         buildingRoofMesh : null,
         terrainMesh      : null,
         // prison view
-        rooms : [ ],                    // FA.InteractiveItem
+        rooms : [ ],   // FA.InteractiveItem
         buildingView : null,
         modelOpacity : 0.4,
 
@@ -227,7 +227,7 @@ FA.App = (function() {
         setActiveLocation : setActiveLocation,
         getOverLocation : getOverLocation,
         setOverLocation : setOverLocation,
-        getOpenedLoactionId : getOpenedLoactionId,  // an open location can be the current screen or be awaiting for user to come back from video
+        getOpenedLoactionId : getOpenedLoactionId,
 
         goToLocation : goToLocation,
         goToVideo : goToVideo,
@@ -252,12 +252,27 @@ FA.App = (function() {
 FA.utils.makePublisher( FA.App );
 
 //
-// is this mobile?
+// device detection
+// https://web.wurfl.io/#wurfl-js
 //
+// console.log(WURFL);
+if ( WURFL.is_mobile === true ) {
 
-if ( FA.utils.isMobile() ) {
+    var formFactor = WURFL.form_factor,
+        deviceName =  WURFL.complete_device_name
 
-    $( 'body' ).addClass( 'mobile' );
+    if ( formFactor === 'Smartphone' ) {
+        $( 'body' ).addClass( 'mobile' );
+    }
+    else if ( formFactor === 'Tablet' ) {
+        $( 'body' ).addClass( 'tablet' );
+    }
+
+    if ( deviceName.indexOf( 'iPad' ) !== -1
+        || deviceName.indexOf( 'iPhone' ) !== -1
+        || deviceName.indexOf( 'iPod' ) !== -1 ) {
+            $( 'body' ).addClass( 'ios' );
+    }
 
 }
 
@@ -299,41 +314,41 @@ function initMobile() {
 
     FA.App.changeState( new FA.StateExploreMobile( FA.App ) );
 
-    var warning = $( browserWarningHtml );
-    $('body').append( warning );
+    // var warning = $( browserWarningHtml );
+    // $('body').append( warning );
 
 }
 
 
-var browserWarningHtml = [
-    '<div class="warning-browser">',
-        '<div class="box">',
-            '<div class="info-en">',
-                '<p>Click and Drag to move the camera</p>',
-                '<p>Best experienced with headphones</p>',
-            '</div>',
-            '<div class="info-ar">',
-                '<p>انقر واسحب على الساحة لتحريك الكاميرا</p>',
-                '<p>أدر مكبرات الصوت</p>',
-            '</div>',
-            '<div class="btn-close"></div>',
-        '</div>',
-    '</div>'
-].join('');
-
-
-var mobileWarningHtml = [
-    '<div class="warning-browser">',
-        '<div class="box">',
-            '<div class="info-en">',
-                '<p>Click and Drag to move the camera</p>',
-                '<p>Best experienced with headphones</p>',
-            '</div>',
-            '<div class="info-ar">',
-                '<p>انقر واسحب على الساحة لتحريك الكاميرا</p>',
-                '<p>أدر مكبرات الصوت</p>',
-            '</div>',
-            '<div class="btn-close"></div>',
-        '</div>',
-    '</div>'
-].join('');
+// var browserWarningHtml = [
+//     '<div class="warning-browser">',
+//         '<div class="box">',
+//             '<div class="info-en">',
+//                 '<p>Click and Drag to move the camera</p>',
+//                 '<p>Best experienced with headphones</p>',
+//             '</div>',
+//             '<div class="info-ar">',
+//                 '<p>انقر واسحب على الساحة لتحريك الكاميرا</p>',
+//                 '<p>أدر مكبرات الصوت</p>',
+//             '</div>',
+//             '<div class="btn-close"></div>',
+//         '</div>',
+//     '</div>'
+// ].join('');
+//
+//
+// var mobileWarningHtml = [
+//     '<div class="warning-browser">',
+//         '<div class="box">',
+//             '<div class="info-en">',
+//                 '<p>Click and Drag to move the camera</p>',
+//                 '<p>Best experienced with headphones</p>',
+//             '</div>',
+//             '<div class="info-ar">',
+//                 '<p>انقر واسحب على الساحة لتحريك الكاميرا</p>',
+//                 '<p>أدر مكبرات الصوت</p>',
+//             '</div>',
+//             '<div class="btn-close"></div>',
+//         '</div>',
+//     '</div>'
+// ].join('');

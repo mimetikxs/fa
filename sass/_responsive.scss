@@ -206,8 +206,11 @@
 
         #page-header {
             font-family: $f-title;
-            background-image: none;
-            background-color: $c-grey--mid;
+            background-image: url("../assets/sat-image-crop-4.png");
+            background-attachment: fixed;
+            background-size: auto;
+            background-position: 50% 100px;
+            background-repeat: no-repeat;
 
             .title-home {
                 position: absolute;

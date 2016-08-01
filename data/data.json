@@ -1504,6 +1504,7 @@
                 "hd": "https://player.vimeo.com/external/175314487.hd.mp4?s=25e3b50f5a1512739105f998474fd38050bc4ba4&profile_id=174",
                 "sd": "https://player.vimeo.com/external/175314487.sd.mp4?s=99e228a836c68ef4400a7f07fb894f6b358a51a9&profile_id=164"
             },
+            "poster" : "",
             "witness" : "d",
             "location" : "reception"
         },
@@ -1515,6 +1516,7 @@
                 "hd": "https://player.vimeo.com/external/175313326.hd.mp4?s=21cef6228fc2d65a2c80d2eb085bdce7b9fa7cfe&profile_id=174",
                 "sd": "https://player.vimeo.com/external/175313326.sd.mp4?s=27f65bd9993ccb48ebd87f3f7192712dad40b1a2&profile_id=164"
             },
+            "poster" : "",
             "witness" : "a",
             "location" : "solitary-1"
         },
@@ -1526,6 +1528,7 @@
                 "hd": "https://player.vimeo.com/external/175316856.hd.mp4?s=9e7fe2c0a8a1c9207dc19b12eeab636886dbede2&profile_id=174",
                 "sd": "https://player.vimeo.com/external/175316856.sd.mp4?s=122fb9fd675d13edcc4133f2fbadc35deba4f4f7&profile_id=164"
             },
+            "poster" : "",
             "witness" : "c",
             "location" : "solitary-1"
         },
@@ -1537,6 +1540,7 @@
                 "hd": "https://player.vimeo.com/external/175314166.hd.mp4?s=ca1cdb2d02eeeb199008bbe1da9646175d6fb07f&profile_id=174",
                 "sd": "https://player.vimeo.com/external/175314166.sd.mp4?s=607accd3ef0a2b65645cec933e109bbdf282d2bc&profile_id=164"
             },
+            "poster" : "",
             "witness" : "d",
             "location" : "solitary-2"
         },
@@ -1548,6 +1552,7 @@
                 "hd": "https://player.vimeo.com/external/175315153.hd.mp4?s=a16fc8f31ade0fd68adb64b78dfdd135d3c873fe&profile_id=174",
                 "sd": "https://player.vimeo.com/external/175315153.sd.mp4?s=d942c4af79ff0ddad99f167a8ab4b2ad52716ecf&profile_id=164"
             },
+            "poster" : "",
             "witness" : "e",
             "location" : "solitary-3"
         },
@@ -1559,6 +1564,7 @@
                 "hd": "https://player.vimeo.com/external/175317106.hd.mp4?s=bfa310e8c46967ae8863ad94937084b0bfc9136c&profile_id=174",
                 "sd": "https://player.vimeo.com/external/175317106.sd.mp4?s=8c81bd77411175d38dcd72ec27acc8f839b93a7c&profile_id=164"
             },
+            "poster" : "",
             "witness" : "e",
             "location" : "group-cell-3"
         },
@@ -1570,6 +1576,7 @@
                 "hd": "https://player.vimeo.com/external/175315554.hd.mp4?s=3b60d1d70221fd32710524da72da3a79a3cb0267&profile_id=174",
                 "sd": "https://player.vimeo.com/external/175315554.sd.mp4?s=d04f7c9c7f58b70240b06f6c48ac712a30b79550&profile_id=164"
             },
+            "poster" : "",
             "witness" : "d",
             "location" : "group-cell-2"
         }
@@ -1577,7 +1584,8 @@
 
     "introVideo" : {
         "hd": "https://player.vimeo.com/external/175314910.hd.mp4?s=2bee0b314be50f68a55c0c06ce2578952c361666&profile_id=174",
-        "sd": "https://player.vimeo.com/external/175314910.sd.mp4?s=6f641f05a5b6e044d68ba8ae283f6cb42d90b072&profile_id=164"
+        "sd": "https://player.vimeo.com/external/175314910.sd.mp4?s=6f641f05a5b6e044d68ba8ae283f6cb42d90b072&profile_id=164",
+        "poster" : ""
     },
 
     "mainScreenSound" : {

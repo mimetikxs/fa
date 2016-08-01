@@ -646,10 +646,21 @@ body {
         line-height: 15px;
         text-align: center;
         font-family: 'Arial', 'Helvetica', sans-serif;
-        font-size: 18px; }
+        font-size: 15px;
+        /* use !important to prevent issues with browser extensions that change fonts */
+        font-family: 'icomoon' !important;
+        speak: none;
+        font-style: normal;
+        font-weight: normal;
+        font-variant: normal;
+        text-transform: none;
+        line-height: 1;
+        /* Better Font Rendering =========== */
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale; }
         #layer-prison .navigation ul.menu-witness > li > .folder .icon:before,
         #layer-prison .navigation ul.menu-location > li > .folder .icon:before {
-          content: '+';
+          content: '\e901';
           top: 1px;
           position: relative; }
       #layer-prison .navigation ul.menu-witness > li > .folder:hover,
@@ -681,8 +692,7 @@ body {
       background-color: rgba(224, 6, 6, 0.65); }
       #layer-prison .navigation ul.menu-witness > li.selected .folder .icon:before,
       #layer-prison .navigation ul.menu-location > li.selected .folder .icon:before {
-        content: '-';
-        top: 0; }
+        content: '\e900'; }
     #layer-prison .navigation ul.menu-witness > li.over:not(.selected) .folder,
     #layer-prison .navigation ul.menu-location > li.over:not(.selected) .folder {
       background-color: rgba(100, 6, 6, 0.65); }
@@ -853,9 +863,9 @@ body {
       transition: color 300ms, background-color 300ms; }
   #layer-360 .spinner-wrap {
     position: absolute;
-    width: 100%;
-    text-align: center;
+    left: 50%;
     top: 50%;
+    margin-left: -25px;
     margin-top: -25px;
     display: none; }
 
@@ -913,7 +923,7 @@ body {
     #layer-video .info .subtitle > * {
       background-color: rgba(255, 255, 255, 0.8); }
     #layer-video .info .title {
-      font-size: 25px; }
+      font-size: 24px; }
     #layer-video .info .subtitle {
       font-size: 14px; }
   #layer-video .info-arabic {
@@ -956,7 +966,8 @@ body {
       -moz-osx-font-smoothing: grayscale;
       display: inline-block;
       padding: 12px 8px;
-      font-size: 36px; }
+      font-size: 36px;
+      background-color: rgba(0, 0, 0, 0.8); }
     #layer-video .btn-prev .label,
     #layer-video .btn-next .label {
       position: absolute;
@@ -965,20 +976,15 @@ body {
       padding: 10px 15px;
       opacity: 0;
       pointer-events: none;
-      min-height: 40px; }
+      min-height: 40px;
+      line-height: 1.2;
+      background-color: rgba(255, 255, 255, 0.8);
+      color: black; }
     #layer-video .btn-prev .arrow,
     #layer-video .btn-prev .label,
     #layer-video .btn-next .arrow,
     #layer-video .btn-next .label {
-      transition: background-color 300ms, opacity 300ms, color 300ms;
-      background-color: rgba(0, 0, 0, 0.8); }
-    #layer-video .btn-prev:hover .label,
-    #layer-video .btn-prev:hover .arrow,
-    #layer-video .btn-next:hover .label,
-    #layer-video .btn-next:hover .arrow {
-      opacity: 1;
-      background-color: rgba(255, 255, 255, 0.8);
-      color: black; }
+      transition: background-color 300ms, opacity 300ms, color 300ms; }
   #layer-video .btn-prev {
     left: 20px;
     right: auto; }
@@ -1007,9 +1013,11 @@ body {
       display: inline-block;
       pointer-events: auto; }
     #layer-video .bottom-bar .takeAction {
-      float: left;
-      margin-left: 30px;
-      border: 1px solid #B6B6B6; }
+      position: absolute;
+      left: 30px;
+      bottom: 0;
+      border: 1px solid #B6B6B6;
+      z-index: 1; }
       #layer-video .bottom-bar .takeAction:hover {
         border-color: #FF0;
         background-color: #FF0;
@@ -1031,9 +1039,9 @@ body {
     transition: visibility 0s linear 0s, opacity 1000ms; }
   #layer-video .spinner-wrap {
     position: absolute;
-    width: 100%;
-    text-align: center;
     top: 50%;
+    left: 50%;
+    margin-left: -24px;
     margin-top: -25px;
     display: none; }
   #layer-video .takeAction {
@@ -1179,8 +1187,9 @@ body {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none; }
-  .share-social > span {
-    color: #ccc; }
+  .share-social > * {
+    color: #ccc;
+    text-decoration: none; }
   .share-social .label:after {
     content: "";
     border-right: 1px solid #999;
@@ -1434,12 +1443,36 @@ body {
 .control .slider {
   float: left;
   position: relative;
-  width: 180px;
+  width: 220px;
   height: 35px;
-  padding: 10px;
+  padding: 10px 30px;
   box-sizing: border-box;
   border: 1px solid #ccc;
   cursor: ew-resize; }
+  .control .slider:before, .control .slider:after {
+    display: inline-block;
+    position: absolute;
+    color: #ccc;
+    font-size: 16px;
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'icomoon' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale; }
+  .control .slider:before {
+    content: '\e900';
+    left: 7px;
+    top: 9px; }
+  .control .slider:after {
+    content: '\e901';
+    right: 7px;
+    top: 9px; }
   .control .slider .guide {
     position: absolute;
     top: 16px;
@@ -1860,15 +1893,16 @@ body[data-lang="ar"] {
 .video-js .vjs-progress-control:hover .vjs-play-progress:after {
   font-family: 'AmnestyTradeGothic-BdCn20', sans-serif !important;
   font-size: 0.7em;
-  padding: 8px 8px 7px 8px; }
+  padding: 8px 8px 7px 8px;
+  display: none; }
 
 .video-js {
   font-family: 'AmnestyTradeGothic-BdCn20', sans-serif !important; }
   .video-js .vjs-remaining-time {
-    font-size: 1.5em;
+    font-size: 15px;
     line-height: 1.9em; }
   .video-js .vjs-play-control:before {
-    font-size: 2.5em;
+    font-size: 24px;
     line-height: 1.3; }
 
 @media screen and (max-width: 770px) {
@@ -2003,8 +2037,11 @@ body[data-lang="ar"] {
     top: 50px; }
   body.mobile[data-section="explore"] #page-header {
     font-family: "AmnestyTradeGothic-BdCn20", sans-serif;
-    background-image: none;
-    background-color: #B6B6B6; }
+    background-image: url("../assets/sat-image-crop-4.png");
+    background-attachment: fixed;
+    background-size: auto;
+    background-position: 50% 100px;
+    background-repeat: no-repeat; }
     body.mobile[data-section="explore"] #page-header .title-home {
       position: absolute;
       bottom: 40px;
@@ -2165,7 +2202,7 @@ body[data-lang="ar"] {
   overflow-y: auto;
   overflow-x: hidden;
   background-color: rgba(0, 0, 0, 0.8);
-  z-index: 10000;
+  z-index: 10001;
   display: none;
   display: none; }
   #cta-overlay .wrap {

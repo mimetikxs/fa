@@ -32,6 +32,7 @@ FA.View360 = function( app ) {
 
     var intersecting = null;
 
+    var isTouchDevice = $( 'body' ).hasClass( 'mobile' ) || $('body').hasClass( 'tablet' );
 
 
     function init( cameraData, lightIntensity ) {
@@ -76,6 +77,10 @@ FA.View360 = function( app ) {
         controls.minPolarAngle = cameraData.minPolar;
         controls.maxPolarAngle = ( cameraData.maxPolar === "PI" ) ? Math.PI : cameraData.maxPolar;
         controls.target = orbitCenter;
+
+        if ( isTouchDevice ) {
+            controls.rotateSpeed = 0.1;
+        }
 
         scope.setSize( $dom.width(), $dom.height() );
 

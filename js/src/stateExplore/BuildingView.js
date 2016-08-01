@@ -27,6 +27,9 @@ FA.BuildingView = function( app ) {
         raycaster;
 
 
+    var isTouchDevice = $( 'body' ).hasClass( 'mobile' ) || $('body').hasClass( 'tablet' );
+
+
     init();
 
 
@@ -149,6 +152,10 @@ FA.BuildingView = function( app ) {
         controls.enableKeys = false;
         controls.minDistance = 22;
     	controls.maxDistance = 40;
+
+        if ( isTouchDevice ) {
+            controls.rotateSpeed = 0.1;
+        }
 
     }
 

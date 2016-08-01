@@ -7,14 +7,13 @@ FA.Slider = function() {
 	var scope = this,
 		percent,
 		$slider,
+		$guide,
 		$bar,
 
-		isDisabled,
-
-		isMouseDown = false,
-		isMouseOut = false,
-
 		onChangeCallback = function( value ) {};
+
+
+	var isTouchDevice = $('body').hasClass( 'mobile' ) || $('body').hasClass( 'tablet' );
 
 
 	init();
@@ -41,8 +40,9 @@ FA.Slider = function() {
 		scope.$dom = $html;
 
 		// shortcuts
-		$slider  = $html.find('.slider');
-		$bar     = $html.find('.bar');
+		$slider  = $html.find( '.slider' );
+		$bar     = $html.find( '.bar' );
+		$guide   = $html.find( '.guide' );
 
 		// initially hidden
 		$slider.css( {
@@ -51,52 +51,121 @@ FA.Slider = function() {
 		} );
 
 		// events
-		enable();
+		addListeners();
 
 	}
 
 
-	function enable() {
+	function addListeners() {
 
-		if ( isDisabled )
-			isDisabled = false;
+		if ( isTouchDevice ) {
+            addTouchListeners();
+        } else {
+            addMouseListeners();
+        }
+
+	}
+
+
+	function removeListeners() {
+
+		if ( isTouchDevice ) {
+            removeTouchListeners();
+        } else {
+            removeMouseListeners();
+        }
+
+	}
+
+
+	function addMouseListeners() {
 
 		$slider
 			.on( 'mousedown', onMousedown );
+
 		$(document)
 			.on( 'mouseup', onMouseup )
 			.on( 'mouseout', onMouseout );
-		// fold / unfold
-		scope.$dom
-			.on( 'mouseenter', onMouseenter )
-			.on( 'mouseleave', onMouseleave );
 
 	}
 
 
-	function disable() {
-
-		isDisabled = true;
+	function removeMouseListeners() {
 
 		$slider
 			.off( 'mousedown', onMousedown );
+
 		$(document)
 			.off( 'mouseup', onMouseup )
 			.off( 'mouseout', onMouseout )
 			.off( 'mousemove', onMousemove );
-		// fold / unfold
-		scope.$dom
-			.off( 'mouseenter', onMouseenter )
-			.off( 'mouseleave', onMouseleave );
+
 	}
 
 
-	// subscribers
+	function addTouchListeners() {
+
+		$slider
+			.on( 'touchstart', onTouchStart );
+
+		$(document)
+			.on( 'touchend', onTouchEnd );
+
+	}
+
+
+	function removeTouchListeners() {
+
+		$slider
+			.off( 'touchstart', onTouchStart );
+
+		$(document)
+			.off( 'touchend', onTouchEnd )
+			.off( 'touchmove', onTouchMove );
+
+	}
+
+
+	// subscribers:
+
+
+	// begin touch /////////////////////////
+	// http://www.gianlucaguarini.com/blog/detecting-the-tap-event-on-a-mobile-touch-device-using-javascript/
+
+	function onTouchStart( e ) {
+
+		$( document ).on( 'touchmove', onTouchMove );
+
+		onTouchMove( e ); // trigger
+
+	}
+
+
+	function onTouchEnd( e ) {
+
+		$( document ).off( 'touchmove', onTouchMove );
+
+	}
+
+
+	function onTouchMove( e ) {
+
+		var pointerEvent = e.originalEvent.targetTouches[0];
+
+		var sliderWidth = $guide.width(),
+			mouseX = event.pageX - $bar.offset().left;  // local mouse x
+
+		percent = mouseX / sliderWidth;
+		percent = (percent > 1) ? 1 : (percent < 0) ? 0 : percent;	// clamp [0..1]
+
+		updatePercent();
+
+	}
+
+	// end touch /////////////////////////
 
 
 	function onMousedown( event ) {
-
-		isMouseDown = true;
 
 		$(document).on( 'mousemove', onMousemove );
 
@@ -110,8 +179,6 @@ FA.Slider = function() {
 
 	function onMouseup( event ) {
 
-		isMouseDown = false;
-
 		$(document).off( 'mousemove', onMousemove );
 
 	}
@@ -119,8 +186,8 @@ FA.Slider = function() {
 
 	function onMousemove( event ) {
 
-		var sliderWidth = $slider.width(),
-			mouseX = event.pageX - $slider.offset().left;  // local mouse x
+		var sliderWidth = $guide.width(),
+			mouseX = event.pageX - $bar.offset().left;  // local mouse x
 
 		percent = mouseX / sliderWidth;
 		percent = (percent > 1) ? 1 : (percent < 0) ? 0 : percent;	// clamp [0..1]
@@ -135,24 +202,7 @@ FA.Slider = function() {
 		// detect mouse out of browser
 		if ( event.relatedTarget === null ) {
 			$(document).off( 'mousemove', onMousemove );
-
-			// close
-			isMouseOut = true;
 		}
-
-	}
-
-
-	function onMouseenter( e ) {
-
-		isMouseOut = false;
-
-	}
-
-
-	function onMouseleave( e ) {
-
-		isMouseOut = true;
 
 	}
 
@@ -198,7 +248,7 @@ FA.Slider = function() {
 
     this.destroy = function() {
 
-        disable();
+        removeListeners();
 
     }
 
@@ -231,7 +281,7 @@ FA.Slider = function() {
 
 	this.show = function() {
 
-		enable();
+		addListeners();
 
 		$slider
 			.css( { 'display': 'block' } )
@@ -242,7 +292,7 @@ FA.Slider = function() {
 
 	this.hide = function() {
 
-		disable();
+		removeListeners();
 
 		$slider
 			.transition( { 'opacity': 1 }, 400, 'in', function() {
