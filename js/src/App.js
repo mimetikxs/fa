@@ -320,6 +320,23 @@ function initMobile() {
 }
 
 
+
+// remove address bar on mobile devices
+//http://stackoverflow.com/questions/4068559/removing-address-bar-from-browser-to-view-on-android
+// function hideAddressBar(){
+//   if(document.documentElement.scrollHeight<window.outerHeight/window.devicePixelRatio)
+//     document.documentElement.style.height=(window.outerHeight/window.devicePixelRatio)+'px';
+//   setTimeout( function(){
+//       window.scrollTo(1,1)
+//   },0);
+// }
+// window.addEventListener("load",function(){hideAddressBar();});
+// window.addEventListener("orientationchange",function(){hideAddressBar();});
+
+
+
+
+
 // var browserWarningHtml = [
 //     '<div class="warning-browser">',
 //         '<div class="box">',

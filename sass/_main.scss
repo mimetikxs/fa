@@ -584,7 +584,7 @@ body {
         top: 30px;
         height: 45px;
         padding: 0 20px;
-        line-height: 43px;
+        line-height: 45px;
         font-size: 28px;
         font-family: $f-title;
     }
@@ -801,6 +801,9 @@ body {
 
         .title {
             font-size: 24px;
+            & > span {
+                line-height: 33px;
+            }
         }
 
         .subtitle {

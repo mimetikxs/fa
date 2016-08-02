@@ -153,7 +153,7 @@ FA.Slider = function() {
 		var pointerEvent = e.originalEvent.targetTouches[0];
 
 		var sliderWidth = $guide.width(),
-			mouseX = event.pageX - $bar.offset().left;  // local mouse x
+			mouseX = pointerEvent.pageX - $bar.offset().left;  // local mouse x
 
 		percent = mouseX / sliderWidth;
 		percent = (percent > 1) ? 1 : (percent < 0) ? 0 : percent;	// clamp [0..1]

@@ -206,11 +206,11 @@
 
         #page-header {
             font-family: $f-title;
-            background-image: url("../assets/sat-image-crop-4.png");
+            background-image: url("../assets/prison-full-opacity.jpg");
             background-attachment: fixed;
-            background-size: auto;
-            background-position: 50% 100px;
-            background-repeat: no-repeat;
+            background-size: auto 300px;
+            background-position: 50% 50px;
+            background-repeat: repeat;
 
             .title-home {
                 position: absolute;
@@ -247,6 +247,13 @@
         // video
         #layer-video {
             position: fixed;
+        }
+
+        #explore {
+            text-align: center;
+            .fragment {
+                max-width: 500px;
+            }
         }
 
         .navigation {

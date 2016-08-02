@@ -1,18 +1,4 @@
-// @font-face {
-//   font-family: 'FontAwesome';
-//   src: url('fonts/fontawesome-webfont.eot?v=4.6.3');
-//   src: url('fonts/fontawesome-webfont.eot?#iefix&v=4.6.3') format('embedded-opentype'), url('fonts/fontawesome-webfont.woff2?v=4.6.3') format('woff2'), url('fonts/fontawesome-webfont.woff?v=4.6.3') format('woff'), url('fonts/fontawesome-webfont.ttf?v=4.6.3') format('truetype'), url('fonts/fontawesome-webfont.svg?v=4.6.3#fontawesomeregular') format('svg');
-//   font-weight: normal;
-//   font-style: normal;
-// }
-//
-// @font-face {
-//   font-family: 'simple-line-icons';
-//   src: url('fonts/Simple-Line-Icons.eot?v=2.3.2');
-//   src: url('fonts/Simple-Line-Icons.eot?v=2.3.2#iefix') format('embedded-opentype'), url('fonts/Simple-Line-Icons.woff2?v=2.3.2') format('woff2'), url('fonts/Simple-Line-Icons.ttf?v=2.3.2') format('truetype'), url('fonts/Simple-Line-Icons.woff?v=2.3.2') format('woff'), url('fonts/Simple-Line-Icons.svg?v=2.3.2#simple-line-icons') format('svg');
-//   font-weight: normal;
-//   font-style: normal;
-// }
+
 @font-face {
     font-family: 'icomoon';
     src:    url('fonts/icomoon.eot?savnfm');
@@ -24,30 +10,70 @@
     font-style: normal;
 }
 
+// @font-face {
+//     font-family: 'AmnestyTradeGothic-BdCn20';
+//     src: url('fonts/AmnestyTradeGothic-BdCn20.ttf') format('truetype');
+//     font-weight: normal;
+//     font-style: normal;
+// }
 @font-face {
     font-family: 'AmnestyTradeGothic-BdCn20';
-    src: url('fonts/AmnestyTradeGothic-BdCn20.ttf') format('truetype');
+    src: url('fonts/AmnestyTradeGothicW01BdCnNo-20.eot');
+    src: url('fonts/AmnestyTradeGothicW01BdCnNo-20.eot?#iefix') format('embedded-opentype'),
+         url('fonts/AmnestyTradeGothicW01BdCnNo-20.woff') format('woff'),
+         url('fonts/AmnestyTradeGothicW01BdCnNo-20.ttf')  format('truetype'),
+         url('fonts/AmnestyTradeGothicW01BdCnNo-20.svg#svgFontName') format('svg');
     font-weight: normal;
     font-style: normal;
 }
 
+// @font-face {
+//     font-family: 'AmnestyTradeGothic-Cn18';
+//     src: url('fonts/AmnestyTradeGothic-Cn18.ttf') format('truetype');
+//     font-weight: normal;
+//     font-style: normal;
+// }
 @font-face {
     font-family: 'AmnestyTradeGothic-Cn18';
-    src: url('fonts/AmnestyTradeGothic-Cn18.ttf') format('truetype');
+    src: url('fonts/AmnestyTradeGothicW01CnNo-18.eot');
+    src: url('fonts/AmnestyTradeGothicW01CnNo-18.eot?#iefix') format('embedded-opentype'),
+         url('fonts/AmnestyTradeGothicW01CnNo-18.woff') format('woff'),
+         url('fonts/AmnestyTradeGothicW01CnNo-18.ttf')  format('truetype'),
+         url('fonts/AmnestyTradeGothicW01CnNo-18.svg#svgFontName') format('svg');
     font-weight: normal;
     font-style: normal;
 }
 
+// @font-face {
+//     font-family: 'FrutigerLTArabic-77BlackCn';
+//     src: url('fonts/FrutigerLTArabic-77BlackCn.ttf') format('truetype');
+//     font-weight: normal;
+//     font-style: normal;
+// }
 @font-face {
     font-family: 'FrutigerLTArabic-77BlackCn';
-    src: url('fonts/FrutigerLTArabic-77BlackCn.ttf') format('truetype');
+    src: url('fonts/FrutigerLTW20-77BlackCn.eot');
+    src: url('fonts/FrutigerLTW20-77BlackCn.eot?#iefix') format('embedded-opentype'),
+         url('fonts/FrutigerLTW20-77BlackCn.woff') format('woff'),
+         url('fonts/FrutigerLTW20-77BlackCn.ttf')  format('truetype'),
+         url('fonts/FrutigerLTW20-77BlackCn.svg#svgFontName') format('svg');
     font-weight: normal;
     font-style: normal;
 }
 
+// @font-face {
+//     font-family: 'Oswald';
+//     src: url('fonts/Oswald-Regular.ttf') format('truetype');
+//     font-weight: normal;
+//     font-style: normal;
+// }
 @font-face {
     font-family: 'Oswald';
-    src: url('fonts/Oswald-Regular.ttf') format('truetype');
+    src: url('fonts/Oswald-Regular.eot');
+    src: url('fonts/Oswald-Regular.eot?#iefix') format('embedded-opentype'),
+         url('fonts/Oswald-Regular.woff') format('woff'),
+         url('fonts/Oswald-Regular.ttf')  format('truetype'),
+         url('fonts/Oswald-Regular.svg#svgFontName') format('svg');
     font-weight: normal;
     font-style: normal;
 }

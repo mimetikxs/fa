@@ -121,21 +121,28 @@
 
     function get_menuStaked_html( lang ) {
 
+        var ext;
+        if ( location.hostname === 'localhost' ) {
+            ext = 'php';
+        } else {
+            ext = 'html';
+        }
+
         return [
             '<div class="staked-nav">',
                 '<a class="item" href="../">',
                     '<span>Explore</span><span>استكشف</span>',
                 '</a>',
-                '<a class="item" href="../' + lang + '/about.php">',
+                '<a class="item" href="../' + lang + '/about.' + ext + '">',
                     '<span>About</span><span>حول</span>',
                 '</a>',
-                '<a class="item" href="../' + lang + '/saydnaya.php">',
+                '<a class="item" href="../' + lang + '/saydnaya.' + ext + '">',
                     '<span>Saydnaya</span><span>صيدنايا</span>',
                 '</a>',
-                '<a class="item" href="../' + lang + '/detention-in-syria.php">',
+                '<a class="item" href="../' + lang + '/detention-in-syria.' + ext + '">',
                     '<span>Detention in Syria</span><span>الاعتقال في سوريا</span>',
                 '</a>',
-                '<a class="item" href="../' + lang + '/methodology.php">',
+                '<a class="item" href="../' + lang + '/methodology.' + ext + '">',
                     '<span>Methodology</span><span>صيدنايا</span>',
                 '</a>',
             '</div>'
@@ -145,24 +152,33 @@
 
 
     function getHomeStackedMenu() {
+
+        var ext;
+        if ( location.hostname === 'localhost' ) {
+            ext = 'php';
+        } else {
+            ext = 'html';
+        }
+
         return [
             '<div class="staked-nav">',
                 '<a class="item" href="./">',
                     '<span>Explore</span><span>استكشف</span>',
                 '</a>',
-                '<a class="item" href="en/about.php">',
+                '<a class="item" href="en/about.' + ext + '">',
                     '<span>About</span><span>حول</span>',
                 '</a>',
-                '<a class="item" href="en/saydnaya.php">',
+                '<a class="item" href="en/saydnaya.' + ext + '">',
                     '<span>Saydnaya</span><span>صيدنايا</span>',
                 '</a>',
-                '<a class="item" href="en/detention-in-syria.php">',
+                '<a class="item" href="en/detention-in-syria.' + ext + '">',
                     '<span>Detention in Syria</span><span>الاعتقال في سوريا</span>',
                 '</a>',
-                '<a class="item" href="en/methodology.php">',
+                '<a class="item" href="en/methodology.' + ext + '">',
                     '<span>Methodology</span><span>صيدنايا</span>',
                 '</a>',
             '</div>'
         ].join('');
+
     }
 })();
