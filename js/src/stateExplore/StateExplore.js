@@ -254,11 +254,11 @@ FA.StateExplore = function( app ) {
     //        //
 
 
-    // this.getName = function() {
-    //
-    //     return 'STATE_EXPLORE';
-    //
-    // }
+    this.getName = function() {
+
+        return 'STATE_EXPLORE';
+
+    }
 
 
     this.enter = function() {

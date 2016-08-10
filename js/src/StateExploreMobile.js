@@ -350,6 +350,13 @@ FA.StateExploreMobile = function( app ) {
     //
 
 
+    this.getName = function() {
+
+        return 'STATE_EXPLORE';
+
+    }
+
+
     this.enter = function() {
 
         // only create the first time

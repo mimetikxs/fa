@@ -7,6 +7,7 @@ FA.State360 = function( app, locationData ) {
         $btnCloseInfo = $layer.find( '.btn-close' ),
         $btnsShowInfo = $layer.find( '.title, .title-arabic' ), // these two elements trigger the info
         $btnSwitchLang = $layer.find( '.language-switch' ),
+
         view360,
 
         sceneWidth,
@@ -27,7 +28,10 @@ FA.State360 = function( app, locationData ) {
         $infoContent = $layer.find( '.box-info .content' ),
         infoScrollLocked = false,
 
-        timeoutShowInfo;
+        timeoutShowInfo,
+
+        isSoundLoaded = false,
+        waitForSound_interval = null;
 
 
     var isTouchDevice = $('body').hasClass( 'mobile' ) || $('body').hasClass( 'tablet' );
@@ -277,21 +281,44 @@ FA.State360 = function( app, locationData ) {
 
     function loadSound() {
 
-        var soundData = locationData.sound;
-
-        ion.sound({
+        ion.sound( {
             sounds: [
                 {
-                    name: soundData.ambient,
+                    name: locationData.sound.ambient,
                     loop: true
                 },
             ],
             path: "sound/",
             preload: true,
-            multiplay: false
-        });
+            multiplay: false,
+            ready_callback: function( sound ) {
+                isSoundLoaded = true;
+            }
+        } );
 
-        ion.sound.play( soundData.ambient );
+        // NOTE:
+        // We only play the sound after load is completed.
+        // As ion.sound doesn't have a way to abort the loading
+        // we use an interval (see waitForSound) to check when loading
+        // has completed and then start playback.
+        // This solution allows to abort playing if the aplication has
+        // left this state.
+        //ion.sound.play( locationData.sound.ambient ); // <- this will play the sound as soon as it's ready. We won't wan't that is we've left this state.
+
+        waitForSound();
+
+    }
+
+
+    function waitForSound() {
+
+        waitForSound_interval = setInterval( function() {
+            if ( isSoundLoaded ) {
+                ion.sound.play( locationData.sound.ambient );
+
+                clearInterval( waitForSound_interval );
+            }
+        }, 500 );
 
     }
 
@@ -534,12 +561,11 @@ FA.State360 = function( app, locationData ) {
     //        //
 
 
-    // info about this state
-    // this.getName = function() {
-    //
-    //     return 'STATE_LOCATION';
-    //
-    // }
+    this.getName = function() {
+
+        return 'STATE_LOCATION';
+
+    }
 
 
     this.enter = function() {
@@ -559,11 +585,7 @@ FA.State360 = function( app, locationData ) {
 
             resumeSound();
 
-            // show buttons and labels
-            // $layer.find( '.btn-exit' ).css( { visibility: 'visible', opacity: 1 } );
-            // $labels.css( 'display', 'block' );
-
-            // showGui();
+            // buttons and labels are already shown
 
         } else {
 
@@ -583,7 +605,8 @@ FA.State360 = function( app, locationData ) {
         $( '#header' ).css( 'top', 0 );
         $layer.css( {
             'visibility': 'visible',
-            'opacity': 1
+            'display' : 'block',
+            'opacity' : 1
         } );
 
         // info auto scroll
@@ -618,6 +641,7 @@ FA.State360 = function( app, locationData ) {
         // hide layer
         $layer.css( {
             'opacity': 0,
+            'display' : 'none',
             'visibility': 'hidden'
         } );
         // hide buttons
@@ -628,8 +652,9 @@ FA.State360 = function( app, locationData ) {
 
         $layer.find( '.box-info .content-wrap' ).scrollTop( 0 );
 
-
         clearTimeout( timeoutShowInfo );
+
+        clearInterval( waitForSound_interval );
 
     }
 

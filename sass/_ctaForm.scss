@@ -23,7 +23,7 @@
     }
 
     .btn-close {
-        @extend .cross;
+        @extend .crossButton;
         position: absolute;
         top: 20px;
         right: 20px;
@@ -31,19 +31,20 @@
         width: 40px;
         background-color: #fff;
 
-        &::before,
-        &::after {
-            background: #000;
+        &:before {
+            line-height: 40px;
+            width: 40px;
+            font-size: 32px;
+            color: #000;
         }
 
         &:hover {
             background-color: #000;
-            &::before,
-            &::after {
-                background: #fff;
+            &:before {
+                color: #fff;
             }
         }
-    }display: none; // initially hidden
+    }//display: none; // initially hidden
 
     .language-switch {
         position: absolute;

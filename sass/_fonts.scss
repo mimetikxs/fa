@@ -10,12 +10,16 @@
     font-style: normal;
 }
 
-// @font-face {
-//     font-family: 'AmnestyTradeGothic-BdCn20';
-//     src: url('fonts/AmnestyTradeGothic-BdCn20.ttf') format('truetype');
-//     font-weight: normal;
-//     font-style: normal;
-// }
+@font-face {
+	font-family: 'line-icon';
+    src: url('fonts/Linearicons.eot');
+    src: url('fonts/Linearicons.eot?#iefix') format('embedded-opentype'),
+         url('fonts/Linearicons.ttf') format('truetype'),
+         url('fonts/Linearicons.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
 @font-face {
     font-family: 'AmnestyTradeGothic-BdCn20';
     src: url('fonts/AmnestyTradeGothicW01BdCnNo-20.eot');
@@ -27,12 +31,6 @@
     font-style: normal;
 }
 
-// @font-face {
-//     font-family: 'AmnestyTradeGothic-Cn18';
-//     src: url('fonts/AmnestyTradeGothic-Cn18.ttf') format('truetype');
-//     font-weight: normal;
-//     font-style: normal;
-// }
 @font-face {
     font-family: 'AmnestyTradeGothic-Cn18';
     src: url('fonts/AmnestyTradeGothicW01CnNo-18.eot');
@@ -44,12 +42,6 @@
     font-style: normal;
 }
 
-// @font-face {
-//     font-family: 'FrutigerLTArabic-77BlackCn';
-//     src: url('fonts/FrutigerLTArabic-77BlackCn.ttf') format('truetype');
-//     font-weight: normal;
-//     font-style: normal;
-// }
 @font-face {
     font-family: 'FrutigerLTArabic-77BlackCn';
     src: url('fonts/FrutigerLTW20-77BlackCn.eot');
@@ -61,12 +53,7 @@
     font-style: normal;
 }
 
-// @font-face {
-//     font-family: 'Oswald';
-//     src: url('fonts/Oswald-Regular.ttf') format('truetype');
-//     font-weight: normal;
-//     font-style: normal;
-// }
+
 @font-face {
     font-family: 'Oswald';
     src: url('fonts/Oswald-Regular.eot');

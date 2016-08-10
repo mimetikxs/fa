@@ -95,7 +95,7 @@ FA.StatePreload = function( app ) {
             ],
             path: "sound/",
             preload: true,
-            multiplay: true,
+            multiplay: false,
             ready_callback: function() {
                 isSoundLoaded = true;
             }
@@ -450,6 +450,12 @@ FA.StatePreload = function( app ) {
     //        //
     // Public //
     //        //
+
+    this.getName = function() {
+
+        return 'STATE_PRELOAD';
+
+    }
 
 
     this.enter = function() {

@@ -193,6 +193,10 @@ FA.StateVideo2 = function( app, videoData, direction ) {
         player.on( 'play', function() {
             hideActionBig();
             hideSpinner();
+
+            if ( isTouchDevice ) {
+                $layer.find( '.touch-overlay' ).css( 'display', 'block' );
+            }
         } );
 
         // testing
@@ -290,6 +294,12 @@ FA.StateVideo2 = function( app, videoData, direction ) {
             player.pause();
         } );
 
+        // overlay
+        $layer.find( '.touch-overlay' ).on( 'click', function() {
+            $( this ).css( 'display', 'none' );
+            player.pause();
+        } );
+
     }
 
 
@@ -301,6 +311,9 @@ FA.StateVideo2 = function( app, videoData, direction ) {
         // action form
         $( '#layer-video [data-action="cta"]' ).off();
         FA.ActionFormOverlay.onClose( null );
+
+        // only on touch devices
+        $layer.find( '.touch-overlay' ).off();
 
     }
 
@@ -404,7 +417,7 @@ FA.StateVideo2 = function( app, videoData, direction ) {
     //        //
 
 
-     // info about this state
+
      this.getName = function() {
 
          return 'STATE_VIDEO';
@@ -474,6 +487,8 @@ FA.StateVideo2 = function( app, videoData, direction ) {
             opacity: 0,
             display: 'none'
         } );
+
+        $layer.find( '.touch-overlay' ).css( 'display', 'none' );
 
     }
 

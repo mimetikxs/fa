@@ -4,6 +4,25 @@
 	<head>
 		<title>Explore Saydnaya</title>
 
+		<link rel="apple-touch-icon" sizes="57x57" href="https://www.amnesty.org/cdn/images/favicons/apple-touch-icon-57x57.png" />
+		<link rel="apple-touch-icon" sizes="72x72"href="https://www.amnesty.org/cdn/images/favicons/apple-touch-icon-72x72.png" />
+		<link rel="apple-touch-icon" sizes="76x76"href="https://www.amnesty.org/cdn/images/favicons/apple-touch-icon-76x76.png" />
+		<link rel="apple-touch-icon" sizes="114x114"href="https://www.amnesty.org/cdn/images/favicons/apple-touch-icon-114x114.png" />
+		<link rel="apple-touch-icon" sizes="120x120"href="https://www.amnesty.org/cdn/images/favicons/apple-touch-icon-120x120.png" />
+		<link rel="apple-touch-icon" sizes="144x144"href="https://www.amnesty.org/cdn/images/favicons/apple-touch-icon-144x144.png" />
+		<link rel="apple-touch-icon" sizes="152x152"href="https://www.amnesty.org/cdn/images/favicons/apple-touch-icon-152x152.png" />
+		<link rel="apple-touch-icon" sizes="180x180"href="https://www.amnesty.org/cdn/images/favicons/apple-touch-icon-180x180.png" />
+		<link rel="icon" type="image/png"href="https://www.amnesty.org/cdn/images/favicons/favicon-32x32.png" sizes="32x32" />
+		<link rel="icon" type="image/png"href="https://www.amnesty.org/cdn/images/favicons/android-chrome-192x192.png" sizes="192x192" />
+		<link rel="icon" type="image/png"href="https://www.amnesty.org/cdn/images/favicons/favicon-96x96.png" sizes="96x96" />
+		<link rel="icon" type="image/png"href="https://www.amnesty.org/cdn/images/favicons/favicon-16x16.png" sizes="16x16" />
+		<link rel="manifest"href="https://www.amnesty.org/cdn/images/favicons/manifest.json" />
+		<link rel="shortcut icon" type="image/x-icon"href="https://www.amnesty.org/cdn/images/favicons/favicon.ico" />
+		<meta name="msapplication-TileColor" content="#ffff00" />
+		<meta name="msapplication-TileImage"content="/cdn/images/favicons/mstile-144x144.png" />
+		<meta name="msapplication-config"content="https://www.amnesty.org/cdn/images/favicons/browserconfig.xml" />
+		<meta name="theme-color" content="#ffffff" />
+
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 
@@ -13,7 +32,7 @@
 		<meta property="og:image"       content="https://saydnaya.amnesty.org/assets/share-cover.jpg" />
 
 		<link rel="stylesheet" href="js/lib/videojs/video-js.css">
-		<link rel="stylesheet" href="css/app.css">
+		<link rel="stylesheet" href="css/app.css?v=001">
 		<script src="js/lib/videojs/video.min.js"></script>
 		<script src="//wurfl.io/wurfl.js"></script>
 	</head>
@@ -95,8 +114,8 @@
 	                    <p>Best experienced with headphones.</p>
 	                </div>
 	                <div class="info-ar">
-	                    <p>انقر واسحب على الساحة لتحريك الكاميرا.</p>
-	                    <p>أدر مكبرات الصوت.</p>
+	                    <p>أنقر و اسحب لتحريك الكاميرا.</p>
+	                    <p>لجودة عالية استخدم سماعات الرأس.</p>
 	                </div>
 	                <div class="btn-close"></div>
 	            </div>
@@ -160,6 +179,8 @@
 			<div class="spinner-wrap">
 				<div class="spinner"></div>
 			</div>
+
+			<div class="touch-overlay"></div>
 
 		</div>
 
@@ -344,7 +365,7 @@
 		<script src="js/src/state360/View360.js"></script>
 		<script src="js/src/state360/State360.js"></script>
 		<script src="js/src/StatePreload.js"></script>
-		<script src="js/src/StateVideo.js"></script>
+		<script src="js/src/StateVideo.js?v=001"></script>
 		<script src="js/src/StateIdle.js"></script>
 		<script src="js/src/StateExploreMobile.js"></script>
 		<script src="js/src/BuildingSimple.js"></script>

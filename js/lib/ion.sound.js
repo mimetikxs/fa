@@ -254,8 +254,9 @@
         },
 
         createUrl: function () {
-            var no_cache = new Date().valueOf();
-            this.url = this.options.path + encodeURIComponent(this.options.name) + "." + this.options.supported[this.ext] + "?" + no_cache;
+            // mimetikxs: disable cache killer
+            var no_cache = (true) ? '' : "?" + new Date().valueOf();
+            this.url = this.options.path + encodeURIComponent(this.options.name) + "." + this.options.supported[this.ext] + no_cache;
         },
 
         load: function () {

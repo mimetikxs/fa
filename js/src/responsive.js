@@ -121,12 +121,14 @@
 
     function get_menuStaked_html( lang ) {
 
-        var ext;
-        if ( location.hostname === 'localhost' ) {
-            ext = 'php';
-        } else {
-            ext = 'html';
-        }
+        // var ext;
+        // if ( location.hostname === 'localhost' ) {
+        //     ext = 'php';
+        // } else {
+        //     ext = 'html';
+        // }
+
+        var ext = 'html';
 
         return [
             '<div class="staked-nav">',
@@ -153,16 +155,18 @@
 
     function getHomeStackedMenu() {
 
-        var ext;
-        if ( location.hostname === 'localhost' ) {
-            ext = 'php';
-        } else {
-            ext = 'html';
-        }
+        // var ext;
+        // if ( location.hostname === 'localhost' ) {
+        //     ext = 'php';
+        // } else {
+        //     ext = 'html';
+        // }
+
+        var ext = 'html';
 
         return [
             '<div class="staked-nav">',
-                '<a class="item" href="./">',
+                '<a class="item active" href="./">',
                     '<span>Explore</span><span>استكشف</span>',
                 '</a>',
                 '<a class="item" href="en/about.' + ext + '">',

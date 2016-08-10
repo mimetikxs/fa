@@ -61,7 +61,7 @@ FA.App = (function() {
         //     currentState.update();
         // }
 
-         currentState.update();
+        currentState.update();
 
         requestId = requestAnimationFrame( update );
 
@@ -92,7 +92,11 @@ FA.App = (function() {
 
         if ( openedLocationId ) {
             var locationData = FA.App.data.locationBySlug[ openedLocationId ];
-            ion.sound.pause( locationData.sound.ambient );
+            try {
+                ion.sound.pause( locationData.sound.ambient );
+            } catch( err ) {
+                console.log( err );
+            }
         }
 
         changeState( new FA.StateVideo2( FA.App, videoData, direction ) );
@@ -124,6 +128,11 @@ FA.App = (function() {
 
     function goToExplore() {
 
+        // abort if current state is already "explore"
+        if ( currentState.getName() === 'STATE_EXPLORE' ) {
+            return;
+        }
+
         // handle special case
         if ( $( 'body' ).hasClass( 'mobile' ) ) {
             changeState( new FA.StateExploreMobile( FA.App ) );
@@ -136,7 +145,11 @@ FA.App = (function() {
             FA.App.view360.clear();
 
             var locationData = FA.App.data.locationBySlug[ openedLocationId ];
-            ion.sound.destroy( locationData.sound.ambient );
+            try {
+                ion.sound.destroy( locationData.sound.ambient );
+            } catch( err ) {
+                console.log( err );
+            }
         }
 
         changeState( new FA.StateExplore( FA.App ) );
@@ -147,20 +160,20 @@ FA.App = (function() {
 
 
     // intro aka preload
-    function goToIntro() {
-
-        // handle special case
-        if ( $( 'body' ).hasClass( 'mobile' ) ) {
-            changeState( new FA.StateExploreMobile( FA.App ) );
-            return;
-        }
-
-        // TODO:
-        // destroy all the sounds
-        // destroy or reset the main model view
-        // reset the app
-
-    }
+    // function goToIntro() {
+    //
+    //     // handle special case
+    //     if ( $( 'body' ).hasClass( 'mobile' ) ) {
+    //         changeState( new FA.StateExploreMobile( FA.App ) );
+    //         return;
+    //     }
+    //
+    //     // TODO:
+    //     // destroy all the sounds
+    //     // destroy or reset the main model view
+    //     // reset the app
+    //
+    // }
 
 
     function getActiveLocation() { return activeLocation; }
@@ -232,7 +245,7 @@ FA.App = (function() {
         goToLocation : goToLocation,
         goToVideo : goToVideo,
         goToExplore : goToExplore,
-        goToIntro : goToIntro,
+        // goToIntro : goToIntro,
 
         // this mathods are useful to freeze
         // the loop when form overlay is displayed
