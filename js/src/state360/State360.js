@@ -314,7 +314,12 @@ FA.State360 = function( app, locationData ) {
 
         waitForSound_interval = setInterval( function() {
             if ( isSoundLoaded ) {
-                ion.sound.play( locationData.sound.ambient );
+
+                try {
+                    ion.sound.play( locationData.sound.ambient );
+                } catch( err ) {
+                    console.log( err );
+                }
 
                 clearInterval( waitForSound_interval );
             }
@@ -325,14 +330,22 @@ FA.State360 = function( app, locationData ) {
 
     function pauseSound() {
 
-        ion.sound.pause( locationData.sound.ambient );
+        try {
+            ion.sound.pause( locationData.sound.ambient );
+        } catch( err ) {
+            console.log( err );
+        }
 
     }
 
 
     function resumeSound() {
 
-        ion.sound.play( locationData.sound.ambient );
+        try {
+            ion.sound.play( locationData.sound.ambient );
+        } catch( err ) {
+            console.log( err );
+        }
 
     }
 

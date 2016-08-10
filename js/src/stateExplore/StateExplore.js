@@ -145,14 +145,22 @@ FA.StateExplore = function( app ) {
 
     function playSound() {
 
-        ion.sound.play( app.data.mainScreenSound.ambient );
+        try {
+            ion.sound.play( app.data.mainScreenSound.ambient );
+        } catch( err ) {
+            console.log( err );
+        }
 
     }
 
 
     function pauseSound() {
 
-        ion.sound.pause( app.data.mainScreenSound.ambient );
+        try {
+            ion.sound.pause( app.data.mainScreenSound.ambient );
+        } catch( err ) {
+            console.log( err );
+        }
 
     }
 
