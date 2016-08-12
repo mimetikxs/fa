@@ -1891,17 +1891,18 @@ body:not([data-sub-section]) .fragment {
 #credits {
   border-top: 1px solid #DADADA;
   padding-bottom: 80px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003185}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003184}}
   #credits .fragment {
     max-width: 600px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003189}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003188}}
   #credits h2 {
     margin-top: 0;
     margin-bottom: 20px;
     display: inline-block;
-    padding: 20px 40px;
-    background-color: black;
-    color: white; }
+    font-size: 32px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003195}}
+  #credits h3 {
+    text-align: left; }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003199}}
   #credits p {
     text-align: left;

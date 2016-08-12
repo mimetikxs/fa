@@ -1,4 +1,4 @@
-FA.InteractiveItem = function( mesh, name, slug ) {
+FA.InteractiveItem = function( mesh, name, slug, labelOffset ) {
 
     var object3D = null,
         center = null,
@@ -54,6 +54,13 @@ FA.InteractiveItem = function( mesh, name, slug ) {
             '<div class="line"></div>' +
             '<div class="tag">' + name + '</div>' +
         '</div>' );
+
+        if (labelOffset) {
+            $label.css({
+                'margin-left': labelOffset.x,
+                'margin-top': labelOffset.y,
+            })
+        }
 
     }
 

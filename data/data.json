@@ -126,13 +126,7 @@
         			"y": 0.94,
         			"angle":-90
         		},
-        		{
-        			"name": "bodySitB",
-        			"x": -51.18,
-        			"z": 47.15,
-        			"y": 0.94,
-        			"angle": 45
-        		},
+
         		{
         			"name": "bodySitA",
         			"x": -51.78,
@@ -152,11 +146,11 @@
             ],
             "interactiveObjects": [
                 {
-                    "fileName" : "truck_butBody",
+                    "fileName" : "truck_roadtosaydnaya_button",
                     "mediaId" : "00",
                     "opacity": 0.8,
                     "doubleSide": false,
-                    "opacityHighLight": 0.8,
+                    "opacityHighLight": 0.5,
                     "colorHighlight" : "#ff00ff"
                 }
             ],
@@ -679,6 +673,11 @@
             "objects": [
             ],
             "interactiveObjects": [
+                {
+                    "fileName" : "groupcell01_tellingtime_button",
+                    "mediaId" : "03",
+                    "opacity": 0.5
+                }
             ],
             "sound" : {
                 "ambient" : "jamal_and_samer_group"
@@ -1312,18 +1311,12 @@
         			"y": 0.6,
         			"angle": -115
         		},
+
         		{
         			"name": "blanket",
         			"x": 0.76,
         			"z": 0.63,
-        			"y": 0.7,
-        			"angle": -80
-        		},
-        		{
-        			"name": "blanket",
-        			"x": 0.76,
-        			"z": 0.63,
-        			"y": 0.8,
+        			"y": 0.86,
         			"angle": 30
         		},
         		{
@@ -1381,6 +1374,13 @@
                     "fileName" : "groupCell03_toilette_button",
                     "mediaId" : "06",
                     "opacity" : 0.3
+                },
+                {
+                    "fileName" : "groupcell03_tileblanket_button",
+                    "mediaId" : "04",
+                    "opacity" : 0.5,
+                    "doubleSide": false,
+                    "opacityHighLight": 0.8
                 }
             ],
             "sound" : {
@@ -1457,8 +1457,60 @@
         		}
             ],
             "objects": [
+                {
+        			"name": "corridor_torture_tools",
+        			"x": 0,
+        			"z": 0,
+        			"y": 0,
+        			"angle": 0
+        		}
             ],
             "interactiveObjects": [
+                {
+                    "fileName" : "corridor_welcomepartybrahimi_button",
+                    "mediaId" : "01",
+                    "opacity": 0.8,
+                    "doubleSide": false,
+                    "opacityHighLight": 0.8,
+                    "colorHighlight" : "#ff00ff",
+                    "labelOffset": {
+                        "x" : 0,
+                        "y" : -50
+                    }
+                },
+                {
+                    "fileName" : "corridor_soundsilence_button",
+                    "mediaId" : "02",
+                    "opacity": 0.001,
+                    "opacityHighLight": 0.4,
+                    "colorHighlight" : "#ff00ff",
+                    "labelOffset": {
+                        "x" : 20,
+                        "y" : -30
+                    }
+                },
+                {
+                    "fileName" : "corridor_walkthroughdulab_button",
+                    "mediaId" : "03",
+                    "opacity": 0.8,
+                    "doubleSide": false,
+                    "opacityHighLight": 0.8,
+                    "colorHighlight" : "#ff00ff",
+                    "labelOffset": {
+                        "x" : 0,
+                        "y" : 20
+                    }
+                },
+                {
+                    "fileName" : "corridor_butApex",
+                    "mediaId" : "04",
+                    "opacity" : 1.0,
+                    "opacityHighLight" : 0.4,
+                    "labelOffset": {
+                        "x" : -170,
+                        "y" : 10
+                    }
+                }
             ],
             "sound" : {
                 "ambient" : "corridor"

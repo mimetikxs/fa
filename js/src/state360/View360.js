@@ -50,7 +50,7 @@ FA.View360 = function( app ) {
             cameraData.lookAt.z
         );
 
-        camera = new THREE.PerspectiveCamera( cameraData.fov, sceneWidth / sceneHeight, 0.01, 500 );
+        camera = new THREE.PerspectiveCamera( cameraData.fov, sceneWidth / sceneHeight, 0.01, 1000 );
         camera.position.set(
             cameraData.position.x,
             cameraData.position.y,
@@ -152,6 +152,8 @@ FA.View360 = function( app ) {
 
     function loadInteractiveObject( data ) {
 
+        //console.log(data);
+
         var name = data.fileName,
             mediaId = data.mediaId,
             mediaData = app.data.mediaById[ mediaId ],
@@ -183,7 +185,7 @@ FA.View360 = function( app ) {
                 } );
 
                 var mesh = new THREE.Mesh( geometry, material );
-                var item = new FA.InteractiveItem( mesh, mediaData.title, mediaId );
+                var item = new FA.InteractiveItem( mesh, mediaData.title, mediaId, data.labelOffset );
 
                 // TODO: more consistent material storage in the json
                 item.setEmissiveDefault( 0x000000 );
