@@ -43,17 +43,32 @@ FA.StateVideo2 = function( app, videoData, direction ) {
     function initControls() {
 
         // set the info
-        var witnessData = app.data.witnessBySlug[ videoData.witness ],
-            locationData = app.data.locationBySlug[ videoData.location ];
+        // var witnessData = app.data.witnessBySlug[ videoData.witness ],
+        var locationData = app.data.locationBySlug[ videoData.location ];
+
+        // testing (several witness names)
+        var witnesses = videoData.witness,
+            witnessData,
+            witnessNames = [],
+            witnessNamesAr = [];
+        for (var i = 0; i < witnesses.length; i++) {
+            witnessData = app.data.witnessBySlug[ witnesses[ i ] ],
+            witnessNames.push( witnessData.name );
+            witnessNamesAr.push( witnessData.nameAr );
+        }
+        var names = witnessNames.join(', '),
+            namesAr = witnessNamesAr.join(', ');
 
         $layer.find( '.info' )
             .find('.title span').text( videoData.title ).end()
-            .find('.witness').text( witnessData.name ).end()
+            //.find('.witness').text( witnessData.name ).end()
+            .find('.witness').text( names ).end()
             .find('.location').text( locationData.name );
 
         $layer.find( '.info-arabic' )
             .find('.title span').text( videoData.titleAr ).end()
-            .find('.witness').text( witnessData.nameAr ).end()
+            //.find('.witness').text( witnessData.nameAr ).end()
+            .find('.witness').text( namesAr ).end()
             .find('.location').text( locationData.nameAr );
 
         // set arrows
@@ -350,7 +365,7 @@ FA.StateVideo2 = function( app, videoData, direction ) {
     function hideLabels() {
 
         // NOTE: this hides "share" on the social menu
-        $controls.find('.label').css('visibility', 'hidden');
+        $controls.find('btn-prev.label, btn-next.label').css('visibility', 'hidden');
 
     }
 

@@ -34,6 +34,11 @@ FA.State360 = function( app, locationData ) {
         waitForSound_interval = null;
 
 
+    // auto close
+    var timeoutHideInfo;
+    var hideInfoWaitTime = 5000;
+
+
     var isTouchDevice = $('body').hasClass( 'mobile' ) || $('body').hasClass( 'tablet' );
 
 
@@ -166,6 +171,8 @@ FA.State360 = function( app, locationData ) {
 
         showInfo( targetLang );
 
+        clearTimeout( timeoutHideInfo );
+
     }
 
 
@@ -175,6 +182,9 @@ FA.State360 = function( app, locationData ) {
             targetLang = currLang === 'en' ? 'ar' : 'en';
 
         showInfo( targetLang );
+
+        // testing
+        clearTimeout( timeoutHideInfo );
 
     }
 
@@ -374,6 +384,11 @@ FA.State360 = function( app, locationData ) {
             if ( noHelp ) {
                 showGui();
                 showInfo( 'en' );
+
+                // testing: auto close
+                timeoutHideInfo = setTimeout( function() {
+                    hideInfo();
+                }, hideInfoWaitTime );
             } else {
                 showHelpPopup();
             }
@@ -442,6 +457,12 @@ FA.State360 = function( app, locationData ) {
                 $( '.info-popup .btn-close' ).off();
             } );
 
+
+        // testing: auto close
+        timeoutHideInfo = setTimeout( function() {
+            hideInfo();
+        }, hideInfoWaitTime );
+
     }
 
 
@@ -451,9 +472,28 @@ FA.State360 = function( app, locationData ) {
             .find( '.title' ).text( locationData.name ).end()
             .find( '.title-arabic' ).text( locationData.nameAr );
 
-        // parse and display
+        // // parse and display
+        // // http://juristr.com/blog/2010/05/n-will-break-your-json-jquery-wcf/
+        // var html = convertToHTMLParagraph( locationData.info );
+        // $layer.find( '.box-info .content' ).html( '<p>' + html + '</p>' );
+        // $layer.find( '.box-info .content p:last-child' ).before( '<span class="separator"></span>' );
+        //
+        // function convertToHTMLParagraph(value) {
+        //     if (value != null && value != "") {
+        //         return value.replace(/\n\n/g, "</p><p>");
+        //     } else {
+        //         return value;
+        //     }
+        // }
+
+    }
+
+
+    function showInfo( lang ) {
+
+        // parse and display the languaje
         // http://juristr.com/blog/2010/05/n-will-break-your-json-jquery-wcf/
-        var html = convertToHTMLParagraph( locationData.info );
+        var html = convertToHTMLParagraph( (lang === 'en') ? locationData.info : locationData.infoAr );
         $layer.find( '.box-info .content' ).html( '<p>' + html + '</p>' );
         $layer.find( '.box-info .content p:last-child' ).before( '<span class="separator"></span>' );
 
@@ -465,10 +505,7 @@ FA.State360 = function( app, locationData ) {
             }
         }
 
-    }
-
-
-    function showInfo( lang ) {
+        // dom operations
 
         var styleAcive = {
                 'visibility': 'visible',
@@ -543,6 +580,8 @@ FA.State360 = function( app, locationData ) {
                 $( this ).css( { display: 'none' } );
             } );
 
+        // testing
+        clearTimeout( timeoutHideInfo );
     }
 
 
@@ -668,6 +707,8 @@ FA.State360 = function( app, locationData ) {
         clearTimeout( timeoutShowInfo );
 
         clearInterval( waitForSound_interval );
+
+        clearTimeout( timeoutHideInfo );
 
     }
 

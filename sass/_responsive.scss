@@ -246,9 +246,20 @@
             }
         }
 
-        // video
+        // video hides witness and location titles
         #layer-video {
             position: fixed;
+
+            .info,
+            .info-arabic {
+                .subtitle {
+                    display: none;
+                }
+            }
+
+            .info-arabic {
+                top: 68px;
+            }
         }
 
         #explore {
@@ -412,6 +423,13 @@
                     // }
                 }
             }
+        }
+    }
+
+    #credits {
+
+        li {
+            white-space: normal;
         }
     }
 

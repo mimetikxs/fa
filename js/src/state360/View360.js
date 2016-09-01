@@ -434,7 +434,7 @@ FA.View360 = function( app ) {
     this.getItemBySlug = function( slug ) {
 
         for ( var i = 0, max = interactiveItems.length; i < max; i++ ) {
-            if ( interactiveItems[ i ].getSlug() === slug ) {
+            if ( interactiveItems[ i ].getSlug() == slug ) {
                 return interactiveItems[ i ];
             }
         }

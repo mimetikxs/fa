@@ -32,9 +32,14 @@ FA.Data = function( data ) {
 		mediasByWitness[ witness ] = [];
 		for ( j = 0; j < medias.length; j++ ) {
 			media = medias[ j ];
-			if ( media.witness === witness ) {
-				mediasByWitness[ witness ].push( media );
+			// iterate the list of witnesses associated to this video
+			var witnessList = media.witness;
+			for (var k = 0; k < witnessList.length; k++) {
+				if ( witnessList[ k ] === witness ) {
+					mediasByWitness[ witness ].push( media );
+				}
 			}
+
 		}
 	}
 

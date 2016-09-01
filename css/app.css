@@ -1893,7 +1893,7 @@ body:not([data-sub-section]) .fragment {
   padding-bottom: 80px; }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003184}}
   #credits .fragment {
-    max-width: 600px; }
+    max-width: 700px; }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003188}}
   #credits h2 {
     margin-top: 0;
@@ -1910,83 +1910,89 @@ body:not([data-sub-section]) .fragment {
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003204}}
   #credits ul {
     list-style: none;
-    padding: 0; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003208}}
+    padding: 0;
+    text-align: left; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003209}}
   #credits li {
+    display: inline;
+    white-space: nowrap;
     text-align: left;
     font-size: 14px;
     text-align: left;
     margin: 7px 0; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003217}}
+    #credits li.wrap {
+      white-space: initial; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003222}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003229}}
 #main .fragment {
   text-align: left; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003226}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003233}}
 #main p {
   font-size: 0.875em; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003230}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003237}}
 #main h2 {
   margin: 1em 0 0.5em 0; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003235}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003242}}
 #main ol li {
   margin-bottom: 10px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003240}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003247}}
 #main blockquote {
   border-left: 15px solid #000;
   padding-left: 40px;
   margin: 50px 0; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003245}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003252}}
   #main blockquote:first-child {
     margin-top: 0; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003249}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003256}}
   #main blockquote .text {
     position: relative;
     font-family: "AmnestyTradeGothic-BdCn20", sans-serif;
     line-height: 1;
     font-size: 1.875em; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003255}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003262}}
     #main blockquote .text:before {
       position: absolute;
       left: -.6em;
       content: '\201C'; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003261}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003268}}
     #main blockquote .text:after {
       position: relative;
       left: .15em;
       content: '\201D'; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003268}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003275}}
   #main blockquote .source {
     color: #B6B6B6;
     padding-top: 20px;
     font-size: 0.875em; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003275}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003282}}
 #main .intro {
   font-family: "AmnestyTradeGothic-BdCn20", sans-serif;
   font-size: 1.625em;
   line-height: 1;
   margin-bottom: 60px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003282}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003289}}
 #main .image-box {
   width: 100%;
   padding: 20px 0;
   box-sizing: border-box;
   text-align: center; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003288}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003295}}
   #main .image-box img {
     width: 100%;
     height: auto; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003293}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003300}}
   #main .image-box .caption {
     font-size: 0.75em;
     color: #363636;
     text-align: left; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003300}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003307}}
 #main .video-box {
   padding: 20px 0; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003303}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003310}}
   #main .video-box .video-js {
     overflow: hidden; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003307}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003314}}
   #main .video-box .caption {
     font-size: 0.75em;
     color: #363636;
@@ -1994,47 +2000,47 @@ body:not([data-sub-section]) .fragment {
     margin-top: 5px;
     margin-bottom: 10px; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003322}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003329}}
 #cta-form {
   border-top: 1px solid #DADADA;
   padding-top: 60px;
   padding-bottom: 100px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003327}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003334}}
   #cta-form .fragment {
     max-width: 1000px;
     text-align: left; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003332}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003339}}
   #cta-form .form-wrapper {
     padding: 0; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003336}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003343}}
     #cta-form .form-wrapper h2 {
       margin: 0 0 40px 0;
       text-align: center; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003341}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003348}}
     #cta-form .form-wrapper p {
       margin: 0 0 30px 0;
       font-size: 0.875em; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003352}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003359}}
 #report {
   background-color: #363636;
   color: #fff; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003358}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003365}}
   #report .fragment {
     max-width: 700px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003363}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003370}}
   #report h2 {
     font-size: 2em;
     margin: 0 0 0.625em 0; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003368}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003375}}
   #report img {
     width: 100%;
     height: auto; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003373}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003380}}
   #report p {
     margin: 0 0 1.5625em 0;
     font-size: 0.875em; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003378}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003385}}
   #report .button {
     display: inline-block;
     padding: 15px 25px;
@@ -2044,95 +2050,95 @@ body:not([data-sub-section]) .fragment {
     font-family: "AmnestyTradeGothic-BdCn20", sans-serif;
     text-transform: uppercase;
     transition: background-color 300ms; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003388}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003395}}
     #report .button:hover {
       background-color: #ffd500; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003399}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003406}}
 #page-footer {
   padding: 20px 50px;
   background-color: #000; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003403}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003410}}
   #page-footer .fragment {
     width: 100%;
     max-width: 100%; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003408}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003415}}
   #page-footer .share-social {
     text-align: right; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003418}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003425}}
 body[data-lang="ar"] {
   font-family: Tahoma, sans-serif; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003423}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003430}}
   body[data-lang="ar"] h1, body[data-lang="ar"] h2 {
     font-family: "FrutigerLTArabic-77BlackCn", "HelveticaNeue-CondensedBold", "Franklin Gothic Medium", Tahoma, sans-serif; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003427}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003434}}
   body[data-lang="ar"] #content {
     direction: rtl; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003430}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003437}}
     body[data-lang="ar"] #content blockquote .text {
       font-family: "FrutigerLTArabic-77BlackCn", "HelveticaNeue-CondensedBold", "Franklin Gothic Medium", Tahoma, sans-serif; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003436}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003443}}
   body[data-lang="ar"] #page-header h1 {
     left: auto;
     right: 0;
     padding: 20px 20px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003442}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003449}}
   body[data-lang="ar"] #page-header .language-switch {
     font-family: "AmnestyTradeGothic-BdCn20", sans-serif;
     right: auto;
     left: 0; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003450}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003457}}
   body[data-lang="ar"] #boxes .box {
     text-align: right; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003456}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003463}}
   body[data-lang="ar"] #main .intro {
     font-family: "FrutigerLTArabic-77BlackCn", "HelveticaNeue-CondensedBold", "Franklin Gothic Medium", Tahoma, sans-serif; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003460}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003467}}
   body[data-lang="ar"] #main .fragment {
     text-align: right; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003464}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003471}}
   body[data-lang="ar"] #main p {
     font-size: 1em; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003468}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003475}}
   body[data-lang="ar"] #main blockquote {
     border-left: none;
     padding-left: 0;
     border-right: 15px solid #000;
     padding-right: 40px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003474}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003481}}
     body[data-lang="ar"] #main blockquote:first-child {
       margin-top: 0; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003478}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003485}}
     body[data-lang="ar"] #main blockquote .text {
       line-height: 1;
       font-size: 1.875em; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003482}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003489}}
       body[data-lang="ar"] #main blockquote .text:before {
         position: absolute;
         right: -.6em;
         content: '\201D'; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003489}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003496}}
       body[data-lang="ar"] #main blockquote .text:after {
         position: relative;
         left: auto;
         right: .15em;
         content: '\201C'; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003497}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003504}}
     body[data-lang="ar"] #main blockquote .source {
       color: #B6B6B6;
       padding-top: 20px;
       font-size: 0.875em; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003505}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003512}}
   body[data-lang="ar"] #main .video-box .caption {
     text-align: right; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003527}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003534}}
   body[data-lang="ar"] #credits {
     direction: ltr; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003530}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003537}}
     body[data-lang="ar"] #credits h2 {
       font-family: "AmnestyTradeGothic-BdCn20", sans-serif; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003534}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_about\.scss}line{font-family:\00003541}}
     body[data-lang="ar"] #credits p, body[data-lang="ar"] #credits li {
       font-size: 14px;
       font-family: sans-serif; }
@@ -2489,48 +2495,55 @@ body[data-lang="ar"] {
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_responsive\.scss}line{font-family:\00003250}}
   body.mobile[data-section="explore"] #layer-video {
     position: fixed; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_responsive\.scss}line{font-family:\00003254}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_responsive\.scss}line{font-family:\00003255}}
+    body.mobile[data-section="explore"] #layer-video .info .subtitle,
+    body.mobile[data-section="explore"] #layer-video .info-arabic .subtitle {
+      display: none; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_responsive\.scss}line{font-family:\00003260}}
+    body.mobile[data-section="explore"] #layer-video .info-arabic {
+      top: 68px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_responsive\.scss}line{font-family:\00003265}}
   body.mobile[data-section="explore"] #explore {
     text-align: center; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_responsive\.scss}line{font-family:\00003256}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_responsive\.scss}line{font-family:\00003267}}
     body.mobile[data-section="explore"] #explore .fragment {
       max-width: 500px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_responsive\.scss}line{font-family:\00003261}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_responsive\.scss}line{font-family:\00003272}}
   body.mobile[data-section="explore"] .navigation {
     font-family: "AmnestyTradeGothic-BdCn20", sans-serif; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_responsive\.scss}line{font-family:\00003264}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_responsive\.scss}line{font-family:\00003275}}
     body.mobile[data-section="explore"] .navigation .menu-type {
       padding: 10px 0;
       text-transform: uppercase;
       font-size: 14px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_responsive\.scss}line{font-family:\00003269}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_responsive\.scss}line{font-family:\00003280}}
       body.mobile[data-section="explore"] .navigation .menu-type span {
         display: inline-block;
         padding: 11px;
         cursor: pointer;
         border: solid 1px #B6B6B6;
         color: #999; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_responsive\.scss}line{font-family:\00003276}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_responsive\.scss}line{font-family:\00003287}}
         body.mobile[data-section="explore"] .navigation .menu-type span.selected {
           color: white;
           background-color: #B6B6B6; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_responsive\.scss}line{font-family:\00003282}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_responsive\.scss}line{font-family:\00003293}}
         body.mobile[data-section="explore"] .navigation .menu-type span:first-child {
           margin-right: 5px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_responsive\.scss}line{font-family:\00003288}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_responsive\.scss}line{font-family:\00003299}}
     body.mobile[data-section="explore"] .navigation .container {
       margin: 20px 0 20px 0;
       overflow: hidden; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_responsive\.scss}line{font-family:\00003293}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_responsive\.scss}line{font-family:\00003304}}
     body.mobile[data-section="explore"] .navigation ul, body.mobile[data-section="explore"] .navigation li {
       list-style: none;
       padding: 0;
       margin: 0; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_responsive\.scss}line{font-family:\00003299}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_responsive\.scss}line{font-family:\00003310}}
     body.mobile[data-section="explore"] .navigation ul.menu-witness,
     body.mobile[data-section="explore"] .navigation ul.menu-location {
       cursor: pointer; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_responsive\.scss}line{font-family:\00003306}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_responsive\.scss}line{font-family:\00003317}}
       body.mobile[data-section="explore"] .navigation ul.menu-witness > li > .folder,
       body.mobile[data-section="explore"] .navigation ul.menu-location > li > .folder {
         display: block;
@@ -2541,7 +2554,7 @@ body[data-lang="ar"] {
         text-transform: uppercase;
         text-align: left;
         transition: background-color 200ms ease-out; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_responsive\.scss}line{font-family:\00003316}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_responsive\.scss}line{font-family:\00003327}}
         body.mobile[data-section="explore"] .navigation ul.menu-witness > li > .folder .icon,
         body.mobile[data-section="explore"] .navigation ul.menu-location > li > .folder .icon {
           display: inline-block;
@@ -2552,31 +2565,31 @@ body[data-lang="ar"] {
           text-align: center;
           font-family: 'Arial', 'Helvetica', sans-serif;
           font-size: 18px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_responsive\.scss}line{font-family:\00003326}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_responsive\.scss}line{font-family:\00003337}}
           body.mobile[data-section="explore"] .navigation ul.menu-witness > li > .folder .icon:before,
           body.mobile[data-section="explore"] .navigation ul.menu-location > li > .folder .icon:before {
             content: '+';
             top: 1px;
             position: relative; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_responsive\.scss}line{font-family:\00003333}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_responsive\.scss}line{font-family:\00003344}}
         body.mobile[data-section="explore"] .navigation ul.menu-witness > li > .folder:hover,
         body.mobile[data-section="explore"] .navigation ul.menu-location > li > .folder:hover {
           background-color: #c80000; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_responsive\.scss}line{font-family:\00003339}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_responsive\.scss}line{font-family:\00003350}}
       body.mobile[data-section="explore"] .navigation ul.menu-witness > li:last-child > .folder,
       body.mobile[data-section="explore"] .navigation ul.menu-location > li:last-child > .folder {
         margin-bottom: 0; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_responsive\.scss}line{font-family:\00003343}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_responsive\.scss}line{font-family:\00003354}}
       body.mobile[data-section="explore"] .navigation ul.menu-witness > li:last-child li:first-child,
       body.mobile[data-section="explore"] .navigation ul.menu-location > li:last-child li:first-child {
         margin-top: 10px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_responsive\.scss}line{font-family:\00003349}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_responsive\.scss}line{font-family:\00003360}}
       body.mobile[data-section="explore"] .navigation ul.menu-witness > li > ul,
       body.mobile[data-section="explore"] .navigation ul.menu-location > li > ul {
         overflow: hidden;
         height: 0;
         transition: height 500ms; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_responsive\.scss}line{font-family:\00003355}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_responsive\.scss}line{font-family:\00003366}}
         body.mobile[data-section="explore"] .navigation ul.menu-witness > li > ul > li,
         body.mobile[data-section="explore"] .navigation ul.menu-location > li > ul > li {
           display: block;
@@ -2584,28 +2597,28 @@ body[data-lang="ar"] {
           margin: 0 7px 10px 7px;
           background-color: #DADADA;
           transition: background-color 300ms ease-out; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_responsive\.scss}line{font-family:\00003362}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_responsive\.scss}line{font-family:\00003373}}
           body.mobile[data-section="explore"] .navigation ul.menu-witness > li > ul > li:hover,
           body.mobile[data-section="explore"] .navigation ul.menu-location > li > ul > li:hover {
             background-color: #999999; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_responsive\.scss}line{font-family:\00003369}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_responsive\.scss}line{font-family:\00003380}}
       body.mobile[data-section="explore"] .navigation ul.menu-witness > li.selected .folder,
       body.mobile[data-section="explore"] .navigation ul.menu-location > li.selected .folder {
         background-color: #e10000; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_responsive\.scss}line{font-family:\00003372}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_responsive\.scss}line{font-family:\00003383}}
         body.mobile[data-section="explore"] .navigation ul.menu-witness > li.selected .folder .icon:before,
         body.mobile[data-section="explore"] .navigation ul.menu-location > li.selected .folder .icon:before {
           content: '-';
           top: 0; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_responsive\.scss}line{font-family:\00003380}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_responsive\.scss}line{font-family:\00003391}}
       body.mobile[data-section="explore"] .navigation ul.menu-witness > li.over:not(.selected) .folder,
       body.mobile[data-section="explore"] .navigation ul.menu-location > li.over:not(.selected) .folder {
         background-color: rgba(100, 6, 6, 0.65); }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_responsive\.scss}line{font-family:\00003387}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_responsive\.scss}line{font-family:\00003398}}
     body.mobile[data-section="explore"] .navigation .ar-watch-videos {
       direction: rtl;
       font-family: "FrutigerLTArabic-77BlackCn", "HelveticaNeue-CondensedBold", "Franklin Gothic Medium", Tahoma, sans-serif; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_responsive\.scss}line{font-family:\00003393}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_responsive\.scss}line{font-family:\00003404}}
       body.mobile[data-section="explore"] .navigation .ar-watch-videos .folder {
         padding: 0 13px;
         margin-bottom: 20px;
@@ -2615,9 +2628,13 @@ body[data-lang="ar"] {
         color: #999;
         font-size: 18px;
         transition: background-color 200ms ease-out, color 200ms ease-out, border-color 200ms ease-out;
-        cursor: pointer; } }
+        cursor: pointer; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_responsive\.scss}line{font-family:\00003431}}
+  #credits li {
+    white-space: normal; } }
 @media screen and (max-width: 800px) {
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_responsive\.scss}line{font-family:\00003426}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_responsive\.scss}line{font-family:\00003444}}
   #cta-overlay .column-left,
   #cta-overlay .column-right,
   #cta-form .column-left,
@@ -2626,37 +2643,37 @@ body[data-lang="ar"] {
     width: 100% !important;
     max-width: 500px !important;
     height: initial !important; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_responsive\.scss}line{font-family:\00003434}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_responsive\.scss}line{font-family:\00003452}}
   #cta-overlay .column-left,
   #cta-form .column-left {
     padding: 0 !important;
     margin-bottom: 20px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_responsive\.scss}line{font-family:\00003438}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_responsive\.scss}line{font-family:\00003456}}
     #cta-overlay .column-left .copy,
     #cta-form .column-left .copy {
       padding: 0 !important; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_responsive\.scss}line{font-family:\00003443}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_responsive\.scss}line{font-family:\00003461}}
   #cta-overlay .column-right,
   #cta-form .column-right {
     padding: 0 !important; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_responsive\.scss}line{font-family:\00003449}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_responsive\.scss}line{font-family:\00003467}}
   #cta-form {
     padding-top: 40px !important;
     padding-bottom: 20px !important; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_responsive\.scss}line{font-family:\00003453}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_responsive\.scss}line{font-family:\00003471}}
     #cta-form .form-wrapper > h2 {
       font-size: 32px !important;
       margin-bottom: 30px !important; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_responsive\.scss}line{font-family:\00003458}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_responsive\.scss}line{font-family:\00003476}}
     #cta-form .fragment {
       text-align: center !important; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_responsive\.scss}line{font-family:\00003462}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_responsive\.scss}line{font-family:\00003480}}
     #cta-form .column-left,
     #cta-form .column-right {
       max-width: 600px !important;
       display: inline-block !important; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_responsive\.scss}line{font-family:\00003468}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_responsive\.scss}line{font-family:\00003486}}
     #cta-form .column-left .copy p {
       margin-bottom: 14px; } }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/saydnaya\/sass\/_ctaForm\.scss}line{font-family:\000031}}
